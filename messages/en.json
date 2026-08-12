@@ -1,0 +1,66 @@
+{
+  "Navbar": {
+    "brand": "Profesia",
+    "home": "Home",
+    "professions": "Professions Catalog",
+    "mbti": "MBTI Test",
+    "compare": "Compare",
+    "about": "About Us",
+    "login": "Sign In",
+    "register": "Sign Up",
+    "profile": "My Profile",
+    "admin": "Admin Panel",
+    "logout": "Sign Out"
+  },
+  "Hero": {
+    "badge": "#1 Career Navigation & MBTI Platform",
+    "title": "Discover Your Dream Career Matching Your Personality",
+    "subtitle": "Explore comprehensive data on hundreds of professions including salary ranges, career paths, and free interactive MBTI tests.",
+    "ctaTest": "Start MBTI Test (Free)",
+    "ctaExplore": "Explore Professions"
+  },
+  "Stats": {
+    "professions": "Professions Listed",
+    "mbtiTypes": "Personality Types",
+    "users": "Active Users",
+    "accuracy": "Matching Accuracy"
+  },
+  "Featured": {
+    "title": "Trending Professions",
+    "subtitle": "Top career choices with bright prospects and competitive compensation.",
+    "viewAll": "View All Professions"
+  },
+  "Steps": {
+    "title": "3 Simple Steps to Your Ideal Career",
+    "step1Title": "1. Take the MBTI Quiz",
+    "step1Desc": "Answer 40 psychometric questions in 5-7 minutes.",
+    "step2Title": "2. Personality Analysis",
+    "step2Desc": "Get a precise breakdown chart of your 4 personality dimensions.",
+    "step3Title": "3. Get Recommendations",
+    "step3Desc": "Discover careers that match your natural working style."
+  },
+  "Profession": {
+    "salaryRange": "Salary Range",
+    "education": "Required Education",
+    "prospects": "Career Prospects",
+    "workLifeBalance": "Work-Life Balance",
+    "skills": "Key Skills Required",
+    "careerPath": "Career Progression Timeline",
+    "matchedMbti": "Matching MBTI Types",
+    "bookmark": "Bookmark",
+    "bookmarked": "Bookmarked",
+    "compare": "Compare",
+    "searchPlaceholder": "Search profession (e.g., Software Engineer, Doctor)...",
+    "filterCategory": "All Categories",
+    "filterProspects": "All Prospects",
+    "highProspects": "High Prospects",
+    "mediumProspects": "Medium Prospects",
+    "lowProspects": "Low Prospects"
+  },
+  "Footer": {
+    "tagline": "Leading Career Navigation & Personality Psychometry Platform.",
+    "quickLinks": "Quick Links",
+    "legal": "Legal & Privacy",
+    "rights": "All Rights Reserved."
+  }
+}

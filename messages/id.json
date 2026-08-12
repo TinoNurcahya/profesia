@@ -1,0 +1,66 @@
+{
+  "Navbar": {
+    "brand": "Profesia",
+    "home": "Beranda",
+    "professions": "Katalog Profesi",
+    "mbti": "Tes MBTI",
+    "compare": "Perbandingan",
+    "about": "Tentang Kami",
+    "login": "Masuk",
+    "register": "Daftar",
+    "profile": "Profil Saya",
+    "admin": "Admin Panel",
+    "logout": "Keluar"
+  },
+  "Hero": {
+    "badge": "Platform Karir & Psikometri MBTI No. 1",
+    "title": "Temukan Karir Impian Sesuai Kepribadianmu",
+    "subtitle": "Jelajahi data lengkap ratusan profesi di Indonesia beserta gaji, jenjang karir, dan tes MBTI interaktif gratis.",
+    "ctaTest": "Mulai Tes MBTI (Gratis)",
+    "ctaExplore": "Jelajahi Profesi"
+  },
+  "Stats": {
+    "professions": "Profesi Terdaftar",
+    "mbtiTypes": "Tipe Kepribadian",
+    "users": "Pengguna Aktif",
+    "accuracy": "Akurasi Pencocokan"
+  },
+  "Featured": {
+    "title": "Profesi Populer Saat Ini",
+    "subtitle": "Pilihan karir dengan prospek cerah dan gaji menarik di industri modern.",
+    "viewAll": "Lihat Semua Profesi"
+  },
+  "Steps": {
+    "title": "3 Langkah Mudah Menemukan Karirmu",
+    "step1Title": "1. Ambil Kuis MBTI",
+    "step1Desc": "Jawab 40 pertanyaan psikometri interaktif dalam 5-7 menit.",
+    "step2Title": "2. Analisis Kepribadian",
+    "step2Desc": "Dapatkan peta breakdown 4 dimensi kepribadianmu secara presisi.",
+    "step3Title": "3. Dapatkan Rekomendasi",
+    "step3Desc": "Temukan daftar pekerjaan yang paling cocok dengan gaya kerjamu."
+  },
+  "Profession": {
+    "salaryRange": "Estimasi Gaji",
+    "education": "Pendidikan Minimum",
+    "prospects": "Prospek Karir",
+    "workLifeBalance": "Work-Life Balance",
+    "skills": "Keahlian Utama",
+    "careerPath": "Jalur Karir",
+    "matchedMbti": "Tipe MBTI yang Cocok",
+    "bookmark": "Simpan",
+    "bookmarked": "Tersimpan",
+    "compare": "Bandingkan",
+    "searchPlaceholder": "Cari profesi (contoh: Programmer, Dokter)...",
+    "filterCategory": "Semua Kategori",
+    "filterProspects": "Semua Prospek",
+    "highProspects": "Prospek Tinggi",
+    "mediumProspects": "Prospek Sedang",
+    "lowProspects": "Prospek Rendah"
+  },
+  "Footer": {
+    "tagline": "Platform Navigasi Karir & Psikometri Kepribadian Terdepan.",
+    "quickLinks": "Tautan Cepat",
+    "legal": "Hukum & Privasi",
+    "rights": "Hak Cipta Dilindungi Undang-Undang."
+  }
+}
