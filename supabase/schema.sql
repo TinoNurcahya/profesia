@@ -1,21 +1,18 @@
 -- ============================================================================
--- PROFESIA DATABASE SCHEMA & RLS POLICIES
+-- PROFESIA DATABASE SCHEMA & RLS POLICIES (ENHANCED WITH MBTI + ZODIAC FEATURE)
 -- PostgreSQL + Supabase Auth & Storage Integration
 -- ============================================================================
 
--- Enable UUID Extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- ----------------------------------------------------------------------------
 -- 1. TABLE: profiles
--- Extends Supabase auth.users for public profile data
--- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.profiles (
   id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
   name TEXT NOT NULL,
   username TEXT UNIQUE NOT NULL,
   avatar_url TEXT,
-  mbti_type TEXT,
+  mbti_type TEXT, -- e.g. "INTJ-A"
+  zodiac_sign TEXT, -- e.g. "leo"
   mbti_taken_at TIMESTAMPTZ,
   bio TEXT,
   role TEXT DEFAULT 'user' CHECK (role IN ('user', 'admin')),
@@ -23,10 +20,7 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- ----------------------------------------------------------------------------
 -- 2. TABLE: private_profiles
--- Contains private user information readable ONLY by the owner
--- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.private_profiles (
   id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
   email TEXT NOT NULL,
@@ -34,10 +28,7 @@ CREATE TABLE IF NOT EXISTS public.private_profiles (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- ----------------------------------------------------------------------------
 -- 3. TABLE: profession_categories
--- Master data for profession categories
--- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.profession_categories (
   id SERIAL PRIMARY KEY,
   name_id TEXT NOT NULL,
@@ -50,10 +41,7 @@ CREATE TABLE IF NOT EXISTS public.profession_categories (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- ----------------------------------------------------------------------------
 -- 4. TABLE: professions
--- Core profession records with bilingual details
--- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.professions (
   id SERIAL PRIMARY KEY,
   category_id INTEGER REFERENCES public.profession_categories(id) ON DELETE SET NULL,
@@ -80,15 +68,16 @@ CREATE TABLE IF NOT EXISTS public.professions (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- ----------------------------------------------------------------------------
--- 5. TABLE: mbti_types
--- Master data for the 16 MBTI personality types
--- ----------------------------------------------------------------------------
+-- 5. TABLE: mbti_types (16Personalities Standard with 4 Role Groups)
 CREATE TABLE IF NOT EXISTS public.mbti_types (
   id SERIAL PRIMARY KEY,
-  code TEXT UNIQUE NOT NULL,
-  name_id TEXT NOT NULL,
-  name_en TEXT NOT NULL,
+  code TEXT UNIQUE NOT NULL,        -- e.g. "INTJ"
+  group_id TEXT NOT NULL,           -- e.g. "Analis" (Analysts, Diplomats, Sentinels, Explorers)
+  group_en TEXT NOT NULL,           -- e.g. "Analysts"
+  name_id TEXT NOT NULL,            -- e.g. "Arsitek"
+  name_en TEXT NOT NULL,            -- e.g. "Architect"
+  title_id TEXT NOT NULL,
+  title_en TEXT NOT NULL,
   description_id TEXT NOT NULL,
   description_en TEXT NOT NULL,
   strengths_id TEXT[] NOT NULL DEFAULT '{}',
@@ -97,14 +86,12 @@ CREATE TABLE IF NOT EXISTS public.mbti_types (
   weaknesses_en TEXT[] NOT NULL DEFAULT '{}',
   work_style_id TEXT,
   work_style_en TEXT,
-  color TEXT NOT NULL,
+  color TEXT NOT NULL,               -- "purple", "emerald", "sky", "amber"
+  badge_gradient TEXT NOT NULL,
   icon TEXT NOT NULL
 );
 
--- ----------------------------------------------------------------------------
 -- 6. TABLE: mbti_profession_matches
--- Many-to-many relationship linking MBTI types with matching professions
--- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.mbti_profession_matches (
   mbti_type_id INTEGER REFERENCES public.mbti_types(id) ON DELETE CASCADE,
   profession_id INTEGER REFERENCES public.professions(id) ON DELETE CASCADE,
@@ -114,44 +101,33 @@ CREATE TABLE IF NOT EXISTS public.mbti_profession_matches (
   PRIMARY KEY (mbti_type_id, profession_id)
 );
 
--- ----------------------------------------------------------------------------
--- 7. TABLE: mbti_questions
--- Bank of 40 psychometric questions (10 per dimension)
--- ----------------------------------------------------------------------------
+-- 7. TABLE: mbti_questions (Likert Scale Model)
 CREATE TABLE IF NOT EXISTS public.mbti_questions (
   id SERIAL PRIMARY KEY,
-  dimension TEXT NOT NULL CHECK (dimension IN ('EI', 'SN', 'TF', 'JP')),
-  question_id TEXT NOT NULL,
-  question_en TEXT NOT NULL,
-  option_a_id TEXT NOT NULL,
-  option_a_en TEXT NOT NULL,
-  option_b_id TEXT NOT NULL,
-  option_b_en TEXT NOT NULL,
-  option_a_value TEXT NOT NULL CHECK (option_a_value IN ('E', 'S', 'T', 'J')),
-  option_b_value TEXT NOT NULL CHECK (option_b_value IN ('I', 'N', 'F', 'P')),
+  dimension TEXT NOT NULL CHECK (dimension IN ('EI', 'SN', 'TF', 'JP', 'AT')),
+  statement_id TEXT NOT NULL,
+  statement_en TEXT NOT NULL,
+  direction TEXT NOT NULL CHECK (direction IN ('E', 'I', 'S', 'N', 'T', 'F', 'J', 'P', 'A', 'T')),
   sort_order INTEGER DEFAULT 0
 );
 
--- ----------------------------------------------------------------------------
--- 8. TABLE: mbti_results
--- User's history of MBTI test results
--- ----------------------------------------------------------------------------
+-- 8. TABLE: mbti_results (Includes 5th Identity Dimension: Assertive -A vs Turbulent -T)
 CREATE TABLE IF NOT EXISTS public.mbti_results (
   id SERIAL PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE,
-  result_type TEXT NOT NULL,
+  result_type TEXT NOT NULL,        -- e.g. "INTJ-A" or "INTJ-T"
+  base_code TEXT NOT NULL,          -- e.g. "INTJ"
+  variant_code TEXT NOT NULL,       -- e.g. "A" or "T"
   answers JSONB NOT NULL,
-  ei_score INTEGER NOT NULL,
-  sn_score INTEGER NOT NULL,
-  tf_score INTEGER NOT NULL,
-  jp_score INTEGER NOT NULL,
+  ei_score INTEGER NOT NULL,        -- Percentage E vs I
+  sn_score INTEGER NOT NULL,        -- Percentage S vs N
+  tf_score INTEGER NOT NULL,        -- Percentage T vs F
+  jp_score INTEGER NOT NULL,        -- Percentage J vs P
+  at_score INTEGER NOT NULL,        -- Percentage A vs T
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- ----------------------------------------------------------------------------
 -- 9. TABLE: bookmarks
--- User's saved professions
--- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.bookmarks (
   id SERIAL PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE,
@@ -160,19 +136,40 @@ CREATE TABLE IF NOT EXISTS public.bookmarks (
   UNIQUE (user_id, profession_id)
 );
 
--- ============================================================================
--- INDEXES FOR OPTIMAL QUERY PERFORMANCE
--- ============================================================================
+-- 10. TABLE: zodiacs (Optional Career Zodiac Module)
+CREATE TABLE IF NOT EXISTS public.zodiacs (
+  id SERIAL PRIMARY KEY,
+  slug TEXT UNIQUE NOT NULL,        -- e.g. "leo"
+  name_id TEXT NOT NULL,
+  name_en TEXT NOT NULL,
+  symbol TEXT NOT NULL,
+  dates_id TEXT NOT NULL,
+  dates_en TEXT NOT NULL,
+  element_id TEXT NOT NULL,
+  element_en TEXT NOT NULL,
+  element_color TEXT NOT NULL,
+  traits_id TEXT[] NOT NULL DEFAULT '{}',
+  traits_en TEXT[] NOT NULL DEFAULT '{}',
+  career_summary_id TEXT NOT NULL,
+  career_summary_en TEXT NOT NULL
+);
+
+-- 11. TABLE: zodiac_profession_matches
+CREATE TABLE IF NOT EXISTS public.zodiac_profession_matches (
+  zodiac_id INTEGER REFERENCES public.zodiacs(id) ON DELETE CASCADE,
+  profession_id INTEGER REFERENCES public.professions(id) ON DELETE CASCADE,
+  PRIMARY KEY (zodiac_id, profession_id)
+);
+
+-- INDEXES
 CREATE INDEX IF NOT EXISTS idx_professions_category ON public.professions(category_id);
 CREATE INDEX IF NOT EXISTS idx_professions_slug ON public.professions(slug);
 CREATE INDEX IF NOT EXISTS idx_professions_featured ON public.professions(is_featured);
 CREATE INDEX IF NOT EXISTS idx_mbti_results_user ON public.mbti_results(user_id);
 CREATE INDEX IF NOT EXISTS idx_bookmarks_user ON public.bookmarks(user_id);
+CREATE INDEX IF NOT EXISTS idx_zodiacs_slug ON public.zodiacs(slug);
 
--- ============================================================================
--- SECURITY FUNCTION: is_admin()
--- Centralized helper for checking admin role without infinite RLS recursion
--- ============================================================================
+-- SECURITY FUNCTION FOR ADMIN ROLE CHECK
 CREATE OR REPLACE FUNCTION public.is_admin()
 RETURNS BOOLEAN AS $$
 BEGIN
@@ -183,10 +180,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- ============================================================================
 -- AUTOMATIC USER SIGNUP TRIGGER
--- Creates public and private profile rows on new auth user insertion
--- ============================================================================
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -218,9 +212,7 @@ CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
--- ============================================================================
 -- ROW LEVEL SECURITY (RLS) POLICIES
--- ============================================================================
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.private_profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.profession_categories ENABLE ROW LEVEL SECURITY;
@@ -230,8 +222,9 @@ ALTER TABLE public.mbti_profession_matches ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.mbti_questions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.mbti_results ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.bookmarks ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.zodiacs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.zodiac_profession_matches ENABLE ROW LEVEL SECURITY;
 
--- POLICIES
 CREATE POLICY "Profiles readable by everyone" ON public.profiles FOR SELECT USING (true);
 CREATE POLICY "Users update own profile" ON public.profiles FOR UPDATE USING (auth.uid() = id);
 
@@ -261,9 +254,12 @@ CREATE POLICY "Bookmarks read own" ON public.bookmarks FOR SELECT USING (auth.ui
 CREATE POLICY "Bookmarks insert own" ON public.bookmarks FOR INSERT WITH CHECK (auth.uid() = user_id);
 CREATE POLICY "Bookmarks delete own" ON public.bookmarks FOR DELETE USING (auth.uid() = user_id);
 
--- ============================================================================
+CREATE POLICY "Zodiacs readable by everyone" ON public.zodiacs FOR SELECT USING (true);
+CREATE POLICY "Zodiacs admin write" ON public.zodiacs FOR ALL USING (public.is_admin());
+CREATE POLICY "Zodiac matches readable by everyone" ON public.zodiac_profession_matches FOR SELECT USING (true);
+CREATE POLICY "Zodiac matches admin write" ON public.zodiac_profession_matches FOR ALL USING (public.is_admin());
+
 -- SUPABASE STORAGE BUCKETS SETUP
--- ============================================================================
 INSERT INTO storage.buckets (id, name, public)
 VALUES ('avatars', 'avatars', true), ('professions', 'professions', true)
 ON CONFLICT (id) DO NOTHING;
