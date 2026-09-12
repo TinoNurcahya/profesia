@@ -1,0 +1,8 @@
+import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Stars } from "lucide-react";
+
+export default async function FinalCTA({ locale }: { locale: string }) {
+  const t = await getTranslations("Landing.finalCta");
+  return <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 text-white p-8 sm:p-12 lg:p-16 space-y-8 shadow-2xl"><div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/20 blur-3xl rounded-full pointer-events-none" /><div className="max-w-2xl space-y-4 relative z-10"><span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/30 text-purple-300 text-xs font-bold border border-purple-400/30"><Stars className="w-3.5 h-3.5" />{t("badge")}</span><h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">{t("title")}</h2><p className="text-sm sm:text-base text-slate-300 leading-relaxed">{t("description")}</p></div><div className="flex flex-wrap items-center gap-4 relative z-10 pt-2"><Link href={`/${locale}/mbti`} className="px-8 py-4 rounded-full font-bold bg-white text-slate-900 hover:bg-slate-100 shadow-lg hover:scale-105 transition-all text-sm">{t("primaryCta")}</Link><Link href={`/${locale}/zodiac`} className="px-8 py-4 rounded-full font-bold bg-purple-800/60 hover:bg-purple-800 text-white border border-purple-400/40 transition-all text-sm flex items-center gap-2"><Stars className="w-4 h-4 text-amber-400" />{t("secondaryCta")}</Link></div></div></section>;
+}

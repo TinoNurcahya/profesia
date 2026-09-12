@@ -21,11 +21,11 @@ Daftar ~50+ jenis pekerjaan (dokter, programmer, desainer, data scientist, dll) 
 
 ### 2. Kuis MBTI Interaktif Gaya 16Personalities (50 Pernyataan Likert Scale)
 Kuis psikometri kepribadian dengan 50 pernyataan berbasis **Skala Likert 5-Poin** (*Sangat Setuju* hingga *Sangat Tidak Setuju*) yang mengukur 5 dimensi kepribadian:
-- **Mind ($E / I$)** — *Extraverted vs Introverted* (Sifat pikiran & energi sosial)
+- **Mind ($E / I$)** — *Extraverted vs Introverted* (Fokus sosial & sumber energi)
 - **Energy ($S / N$)** — *Observant/Sensing vs Intuitive* (Cara mengolah informasi & realitas)
-- **Nature ($T / F$)** — *Thinking vs Feeling* (Pengambilan keputusan & evaluasi emosional)
-- **Tactics ($J / P$)** — *Judging vs Prospecting/Perceiving* (Pendekatan kerja & perencanaan)
-- **Identity ($-A / -T$)** — *Assertive vs Turbulent* (Tingkat kepercayaan diri & toleransi stres)
+- **Nature ($T / F$)** — *Thinking vs Feeling* (Dasar pengambilan keputusan & evaluasi emosional)
+- **Tactics ($J / P$)** — *Judging vs Prospecting/Perceiving* (Gaya kerja & pendekatan perencanaan)
+- **Identity ($-A / -T$)** — *Assertive vs Turbulent* (Ketahanan diri & toleransi terhadap stres)
 
 ### 3. 4 Rumpun Kepribadian (Role Groups) & Visual Styling
 Menyajikan 16 tipe MBTI dalam 4 kelompok resmi bergaya 16Personalities:
@@ -61,13 +61,22 @@ Fitur untuk membandingkan 2 profesi secara berdampingan dalam tabel komparatif l
 Dukungan penuh dua bahasa (Bahasa Indonesia & English) pada seluruh interface UI dan database konten profesi dengan toggle switcher yang mulus tanpa *full page reload*.
 
 ### 9. Shareable MBTI Result Card (Viral Story Card)
-Kartu visual ringkasan hasil MBTI dan profesi rekomendasi yang dirancang estetik bergaya 16Personalities (*Instagram Story & LinkedIn ready*), memungkinkan pengguna mengunduh atau membagikan hasil tes ke media sosial.
+Kartu visual ringkasan hasil MBTI dan profesi rekomendasi yang dirancang estetik dengan identitas visual modern khas Profesia (*Instagram Story & LinkedIn ready*), memungkinkan pengguna mengunduh atau membagikan hasil tes ke media sosial.
 
 ### 10. Auto-Save Progress Kuis MBTI (Draf Kuis Persistent)
 Sistem penyimpanan otomatis draf jawaban kuis 50 soal di *Local Storage*. Pengguna tidak perlu khawatir kehilangan progres kuis jika terjadi gangguan koneksi atau refresh halaman secara tidak sengaja.
 
 ### 11. Navigasi Karir Berdasarkan Zodiak (Zodiac Career Explorer)
 Halaman modul khusus (`/zodiac`) yang menampilkan 12 tanda Zodiak (Aries hingga Pisces) lengkap dengan elemen (Api, Tanah, Udara, Air), karakter dominan, dan daftar profesi rekomendasi yang cocok dengan energi zodiak tersebut.
+
+### 12. Modul Jurusan Kuliah (Majors & Study Programs Explorer)
+Halaman katalog jurusan kuliah (`/majors`) lengkap dengan mata kuliah inti, durasi, jenjang pendidikan, prospek industri, serta relasi *cross-link* ke katalog profesi yang relevan dan tingkat kecocokan MBTI/RIASEC.
+
+### 13. Integrasi Psikometri RIASEC (Holland Code 6 Dimensions)
+Modul tes psikometri vokasional terpisah (36 pernyataan Likert) yang mengukur 6 dimensi Holland (*Realistic, Investigative, Artistic, Social, Enterprising, Conventional*) untuk kalkulasi rekomendasi karir yang presisi.
+
+### 14. Engine Rekomendasi Karir Berbasis AI (2-Layer Hybrid Gemini Free Tier)
+Engine rekomendasi 2-layer yang menggabungkan kalkulasi deterministik ($\text{RIASEC} \times 0.6 + \text{MBTI} \times 0.4$) dengan personalisasi AI terintegrasi **Google Gemini Flash Free Tier** untuk menghasilkan penalaran psikologis terpersonalisasi, dilengkapi validasi skema JSON dan *zero-cost fallback engine* otomatis jika API key tidak tersedia.
 
 ---
 
@@ -79,7 +88,7 @@ Halaman modul khusus (`/zodiac`) yang menampilkan 12 tanda Zodiak (Aries hingga 
 | **UI Library** | React / React DOM | `19.x` |
 | **Styling** | Tailwind CSS (PostCSS) | `v4` |
 | **Bahasa** | TypeScript | `^5` (strict) |
-| **Database & Auth** | Supabase (PostgreSQL + Auth + RLS) | Latest |
+| **Database & Auth** | Supabase PostgreSQL + Supabase Auth | `@supabase/ssr` / `@supabase/supabase-js` |
 | **Internationalization** | `next-intl` | `^3.x` |
 | **Icons** | Lucide React | Latest |
 | **Charts** | Recharts | Latest |
@@ -92,7 +101,7 @@ Halaman modul khusus (`/zodiac`) yang menampilkan 12 tanda Zodiak (Aries hingga 
 ### 1. Prasyarat
 - **Node.js**: versi `20.x` atau lebih baru
 - **npm** (atau `pnpm` / `bun`)
-- Project Supabase aktif (URL & Anon Key)
+- Project Supabase aktif dengan URL, anon key, dan service role key server-only
 
 ### 2. Instalasi & Setup Lokal
 
@@ -106,6 +115,8 @@ npm install
 
 # 3. Buat file lingkungan (.env.local)
 cp .env.example .env.local
+
+# 4. Jalankan supabase/schema.sql melalui Supabase SQL Editor atau migration workflow
 ```
 
 ### 3. Menjalankan Perintah Utama
@@ -134,28 +145,58 @@ npm run start
 ```text
 profesia/
 ├── app/
-│   └── [locale]/                  # Dynamic Locale Routing (/id, /en)
-│       ├── (auth)/                # Route Group: Auth (login, register)
-│       ├── professions/           # Katalog, detail [slug], & compare
-│       ├── mbti/                  # Landing MBTI, kuis /test, & hasil /result/[type]
-│       ├── zodiac/                # Landing Zodiak & detail /zodiac/[slug]
-│       ├── profile/               # Dashboard profil user & bookmark
-│       ├── admin/                 # Admin Panel CMS (protected)
-│       ├── globals.css            # Tailwind v4 theme & global styles
-│       ├── layout.tsx             # Root layout with fonts & providers
-│       └── page.tsx               # Landing Page utama
+│   ├── api/
+│   │   └── recommendations/
+│   │       └── generate/
+│   │           └── route.ts          # API Route: 2-Layer AI Recommendation Handler
+│   └── [locale]/                     # Dynamic Locale Routing (/id, /en)
+│       ├── (auth)/                   # Route Group: Auth (login, register)
+│       ├── professions/              # Katalog Profesi & Multi-Filter
+│       │   ├── compare/              # Tool Komparasi Side-by-Side
+│       │   └── [slug]/               # Halaman Detail Profesi
+│       ├── mbti/                     # Landing MBTI & Grid 4 Rumpun
+│       │   ├── test/                 # Kuis Likert Scale 50 Soal
+│       │   └── result/[type]/        # Halaman Hasil & Dimensi MBTI
+│       ├── riasec/                   # Landing RIASEC Holland Code
+│       │   ├── test/                 # Kuis Likert Scale 36 Soal
+│       │   └── result/               # Halaman Hasil & Kode Holland
+│       ├── zodiac/                   # Landing 12 Zodiak
+│       │   └── [slug]/               # Detail Zodiak & Profesi Cocok
+│       ├── majors/                   # Katalog Jurusan Kuliah
+│       │   └── [slug]/               # Detail Jurusan & Cross-Link Profesi
+│       ├── profile/                  # Dashboard Profil User & Bookmark
+│       ├── admin/                    # Admin Panel CMS (protected is_admin())
+│       ├── globals.css               # Tailwind v4 theme & global styles
+│       ├── layout.tsx                # Root layout with fonts & providers
+│       └── page.tsx                  # Landing Page utama
 ├── components/
-│   ├── layout/                    # Navbar, Footer, LanguageSwitcher, Sidebar
-│   ├── profession/                # ProfessionCard, FilterBar, SalaryChart, CareerPath
-│   ├── mbti/                      # QuizCard (Likert Scale), ProgressBar, ResultCard, DimensionChart, ShareCard
-│   ├── zodiac/                    # ZodiacCard, ZodiacGrid, ZodiacDetail
-│   └── ui/                        # Button, Modal, Skeleton, Toast, Badge primitives
-├── services/                      # Supabase Data Fetching Layer (Client & Server)
-├── data/                          # Static seed JSON (professions, mbti-questions, mbti-types, zodiacs)
-├── messages/                      # Translation files (id.json, en.json)
-├── supabase/                      # Database Schema DDL & RLS Policies (schema.sql)
-├── PRD.md                         # Spesifikasi Teknis & Kode Lengkap (Technical PRD)
-└── README.md                      # Panduan Pengembang & Informasi Fitur (File ini)
+│   ├── layout/                       # Navbar, Footer, LanguageSwitcher
+│   ├── profession/                   # ProfessionCard, FilterBar, SalaryChart, CareerPathTimeline
+│   ├── mbti/                         # ShareCard, DimensionChart, QuizCard, ProgressBar, ResultCard
+│   ├── zodiac/                       # ZodiacCard, ZodiacGrid, ZodiacDetail
+│   └── ui/                           # Button, Modal, Skeleton, Toast, Badge primitives
+├── services/                         # Data access and business logic
+│   ├── professions.ts                # Profession queries & filters
+│   ├── riasecService.ts              # RIASEC scoring & Holland Code
+│   ├── majorService.ts               # Majors catalog queries
+│   ├── recommendationService.ts      # Layer 1 deterministic scoring
+│   └── aiService.ts                  # Layer 2 Gemini LLM personalizer
+├── data/                             # Static seed JSON (fallback & dev)
+│   ├── professions-seed.json
+│   ├── mbti-questions.json
+│   ├── mbti-types.json
+│   ├── riasec-questions.json
+│   ├── zodiacs.json
+│   └── majors.json
+├── messages/                         # Translation files (id.json, en.json)
+├── lib/
+│   └── supabase/                     # Supabase server and middleware clients
+├── app/api/auth/                     # Login, register, logout API routes
+├── supabase/
+│   └── schema.sql                    # PostgreSQL schema, RLS, dan auth trigger
+├── i18n/                             # next-intl request handler
+├── PRD.md                            # Technical PRD & SQL Schema Spec
+└── README.md                         # Developer Guide & Feature Info (file ini)
 ```
 
 ---

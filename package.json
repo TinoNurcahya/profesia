@@ -6,11 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "node scripts/check-i18n.mjs",
+    "smoke": "node scripts/smoke-routes.mjs"
   },
   "dependencies": {
-    "@supabase/ssr": "^0.5.2",
-    "@supabase/supabase-js": "^2.49.1",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.116.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.475.0",
     "next": "15.1.7",

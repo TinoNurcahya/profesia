@@ -1,0 +1,223 @@
+[
+  {
+    "id": 1,
+    "dimension": "R",
+    "statement_id": "Saya senang merakit, memperbaiki perangkat keras, atau bekerja dengan mesin.",
+    "statement_en": "I enjoy assembling, repairing hardware, or working with machinery."
+  },
+  {
+    "id": 2,
+    "dimension": "R",
+    "statement_id": "Saya lebih menyukai pekerjaan fisik di luar ruangan daripada duduk di belakang meja.",
+    "statement_en": "I prefer physical outdoor work rather than sitting behind a desk."
+  },
+  {
+    "id": 3,
+    "dimension": "R",
+    "statement_id": "Saya mahir menggunakan peralatan teknis, pertukangan, atau instrumen presisi.",
+    "statement_en": "I am skilled at using technical equipment, tools, or precision instruments."
+  },
+  {
+    "id": 4,
+    "dimension": "R",
+    "statement_id": "Saya tertarik memahami cara kerja sistem mekanik, otomotif, atau elektronik.",
+    "statement_en": "I am interested in understanding how mechanical, automotive, or electronic systems work."
+  },
+  {
+    "id": 5,
+    "dimension": "R",
+    "statement_id": "Saya merasa puas ketika berhasil menyelesaikan masalah praktis yang berwujud nyata.",
+    "statement_en": "I feel satisfied when I successfully solve practical, tangible problems."
+  },
+  {
+    "id": 6,
+    "dimension": "R",
+    "statement_id": "Saya senang mengikuti petunjuk teknis atau cetak biru bangunan/skema.",
+    "statement_en": "I enjoy following technical instructions, blueprints, or schematics."
+  },
+
+  {
+    "id": 7,
+    "dimension": "I",
+    "statement_id": "Saya senang menganalisis data, statistik, dan pola kompleks untuk mencari solusi.",
+    "statement_en": "I enjoy analyzing data, statistics, and complex patterns to find solutions."
+  },
+  {
+    "id": 8,
+    "dimension": "I",
+    "statement_id": "Saya terdorong untuk meneliti dan memahami teori ilmiah atau ide abstrak secara mendalam.",
+    "statement_en": "I am driven to research and deeply understand scientific theories or abstract ideas."
+  },
+  {
+    "id": 9,
+    "dimension": "I",
+    "statement_id": "Saya menikmati tantangan memecahkan teka-teki logika atau matematika yang rumit.",
+    "statement_en": "I enjoy the challenge of solving complex logical or mathematical puzzles."
+  },
+  {
+    "id": 10,
+    "dimension": "I",
+    "statement_id": "Saya lebih mengutamakan bukti empiris dan fakta sebelum mengambil kesimpulan.",
+    "statement_en": "I prioritize empirical evidence and facts before reaching a conclusion."
+  },
+  {
+    "id": 11,
+    "dimension": "I",
+    "statement_id": "Saya sering penasaran tentang bagaimana fenomena alam atau teknologi berkembang.",
+    "statement_en": "I am often curious about how natural phenomena or technology evolve."
+  },
+  {
+    "id": 12,
+    "dimension": "I",
+    "statement_id": "Saya senang menghabiskan waktu berjam-jam untuk eksperimen atau riset independen.",
+    "statement_en": "I enjoy spending hours on experiments or independent research."
+  },
+
+  {
+    "id": 13,
+    "dimension": "A",
+    "statement_id": "Saya senang mengekspresikan diri melalui seni, desain visual, musik, atau tulisan kreatif.",
+    "statement_en": "I enjoy expressing myself through art, visual design, music, or creative writing."
+  },
+  {
+    "id": 14,
+    "dimension": "A",
+    "statement_id": "Saya lebih menyukai lingkungan kerja yang fleksibel tanpa aturan prosedural yang kaku.",
+    "statement_en": "I prefer a flexible work environment without rigid procedural rules."
+  },
+  {
+    "id": 15,
+    "dimension": "A",
+    "statement_id": "Saya memiliki imajinasi kuat dan suka menciptakan ide-ide orisinal baru.",
+    "statement_en": "I have a strong imagination and love generating novel, original ideas."
+  },
+  {
+    "id": 16,
+    "dimension": "A",
+    "statement_id": "Saya sangat peka terhadap estetika, komposisi warna, dan harmoni karya seni.",
+    "statement_en": "I am highly sensitive to aesthetics, color composition, and artistic harmony."
+  },
+  {
+    "id": 17,
+    "dimension": "A",
+    "statement_id": "Saya merasa bosan pada pekerjaan rutin yang berulang dan kurang inovasi.",
+    "statement_en": "I get bored with repetitive routine work that lacks innovation."
+  },
+  {
+    "id": 18,
+    "dimension": "A",
+    "statement_id": "Saya menikmati merancang pengalaman visual atau bercerita secara kreatif.",
+    "statement_en": "I enjoy designing visual experiences or storytelling creatively."
+  },
+
+  {
+    "id": 19,
+    "dimension": "S",
+    "statement_id": "Saya merasa gembira ketika dapat membantu, mendengarkan, atau membimbing orang lain.",
+    "statement_en": "I feel fulfilled when I can help, listen to, or guide others."
+  },
+  {
+    "id": 20,
+    "dimension": "S",
+    "statement_id": "Saya tertarik pada bidang konseling, pengajaran, atau pengembangan masyarakat.",
+    "statement_en": "I am interested in counseling, teaching, or community development."
+  },
+  {
+    "id": 21,
+    "dimension": "S",
+    "statement_id": "Saya mudah empati dan mampu memahami perasaan serta kebutuhan emosional orang lain.",
+    "statement_en": "I easily empathize and understand the feelings and emotional needs of others."
+  },
+  {
+    "id": 22,
+    "dimension": "S",
+    "statement_id": "Saya senang menyelesaikan konflik antarindividu melalui komunikasi yang damai.",
+    "statement_en": "I enjoy resolving interpersonal conflicts through peaceful communication."
+  },
+  {
+    "id": 23,
+    "dimension": "S",
+    "statement_id": "Saya lebih menyukai bekerja dalam tim yang saling mendukung daripada bekerja sendirian.",
+    "statement_en": "I prefer working in supportive teams rather than working in isolation."
+  },
+  {
+    "id": 24,
+    "dimension": "S",
+    "statement_id": "Saya sering menjadi tempat berkonsultasi bagi teman atau kolega yang membutuhkan saran.",
+    "statement_en": "I am frequently the go-to person for friends or colleagues seeking advice."
+  },
+
+  {
+    "id": 25,
+    "dimension": "E",
+    "statement_id": "Saya percaya diri untuk memimpin tim, mengambil keputusan, dan mengarahkan strategi.",
+    "statement_en": "I am confident leading teams, making decisions, and directing strategy."
+  },
+  {
+    "id": 26,
+    "dimension": "E",
+    "statement_id": "Saya senang bernegosiasi, memengaruhi ide orang lain, atau menjual gagasan bisnis.",
+    "statement_en": "I enjoy negotiating, influencing others, or pitching business ideas."
+  },
+  {
+    "id": 27,
+    "dimension": "E",
+    "statement_id": "Saya berani mengambil risiko yang terukur demi mencapai target finansial atau organisasi.",
+    "statement_en": "I am willing to take calculated risks to achieve financial or organizational targets."
+  },
+  {
+    "id": 28,
+    "dimension": "E",
+    "statement_id": "Saya berambisi untuk mendirikan usaha sendiri atau memegang posisi kepemimpinan puncak.",
+    "statement_en": "I aspire to build my own business or reach top executive positions."
+  },
+  {
+    "id": 29,
+    "dimension": "E",
+    "statement_id": "Saya pandai membangun jejaring profesional (networking) dan melakukan presentasi.",
+    "statement_en": "I am adept at professional networking and delivering presentations."
+  },
+  {
+    "id": 30,
+    "dimension": "E",
+    "statement_id": "Saya menyukai kompetisi sehat yang memacu prestasi dan pertumbuhan karir.",
+    "statement_en": "I enjoy healthy competition that drives achievement and career growth."
+  },
+
+  {
+    "id": 31,
+    "dimension": "C",
+    "statement_id": "Saya sangat teliti dengan detail, angka, data, dan dokumen administrasi.",
+    "statement_en": "I am highly meticulous with details, numbers, data, and administrative documents."
+  },
+  {
+    "id": 32,
+    "dimension": "C",
+    "statement_id": "Saya menyukai aturan kerja yang jelas, Standar Operasional (SOP), dan jadwal terstruktur.",
+    "statement_en": "I appreciate clear work rules, Standard Operating Procedures (SOPs), and structured schedules."
+  },
+  {
+    "id": 33,
+    "dimension": "C",
+    "statement_id": "Saya senang mengorganisasi file, menyusun anggaran, atau mengelola basis data.",
+    "statement_en": "I enjoy organizing files, preparing budgets, or managing databases."
+  },
+  {
+    "id": 34,
+    "dimension": "C",
+    "statement_id": "Saya mengutamakan akurasi, kepatuhan, dan ketertiban dalam menyelesaikan setiap tugas.",
+    "statement_en": "I prioritize accuracy, compliance, and orderliness when completing tasks."
+  },
+  {
+    "id": 35,
+    "dimension": "C",
+    "statement_id": "Saya merasa nyaman bekerja dengan formula lembar kerja (spreadsheet) dan laporan keuangan.",
+    "statement_en": "I am comfortable working with spreadsheet formulas and financial reports."
+  },
+  {
+    "id": 36,
+    "dimension": "C",
+    "statement_id": "Saya lebih menyukai tugas yang memiliki ekspektasi dan kriteria keberhasilan yang terdefinisi.",
+    "statement_en": "I prefer tasks with clearly defined expectations and success criteria."
+  }
+]

@@ -1,0 +1,53 @@
+name: Quality Gate
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Production build
+        run: npm run build
+
+      - name: Start production server
+        run: npm run start > next.log 2>&1 & echo $! > next.pid
+
+      - name: Wait for production server
+        run: |
+          for i in {1..30}; do
+            if curl --fail --silent http://localhost:3000/id > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat next.log
+          exit 1
+
+      - name: Route smoke tests
+        run: npm run smoke
+
+      - name: Stop production server
+        if: always()
+        run: kill $(cat next.pid) 2>/dev/null || true
