@@ -11,8 +11,8 @@
 | **Nama Proyek** | Profesia (Platform Informasi Karir, Psikometri MBTI & Zodiak) |
 | **Document Type** | Technical & Code Specifications PRD |
 | **Model Psikometri** | Standard 16Personalities Model (5 Dimensi: E/I, S/N, T/F, J/P, A/T) + Zodiac Explorer |
-| **Status** | Production Technical Spec v2.1.0 |
-| **Framework Web** | Next.js 16.x / 15.x (App Router, React Server Components / RSC) |
+| **Status** | Production-readiness implementation in progress (repository verified; external rollout pending) |
+| **Framework Web** | Next.js 16.3.5 (App Router, React Server Components / RSC) |
 | **UI & Style System** | Tailwind CSS v4 (`@theme inline`), PostCSS, Lucide React, Recharts |
 | **Backend & DB** | Supabase (PostgreSQL 15+, Auth Service, Storage, Row Level Security) |
 | **Internasionalisasi** | `next-intl` (Locale Prefix Routing `/id` dan `/en`) |
@@ -22,7 +22,7 @@
 
 ## 2. Model Psikometri & 4 Rumpun Kepribadian (16Personalities Standard)
 
-Platform Profesia menerapkan pengelompokan 16 tipe MBTI ke dalam **4 Rumpun Utama (Role Groups)** sesuai standar populer **16personalities.com**:
+Platform Profesia memakai pengelompokan populer 16 tipe ke dalam **4 Rumpun Utama (Role Groups)** sebagai alat refleksi eksploratif, bukan diagnosis atau prediksi keberhasilan:
 
 ### 2.1 4 Rumpun Utama (Role Groups) & Palet Warna UI
 1. **Analis (Analysts)** — *Purple Theme (`#88619A` / `from-purple-600 to-indigo-700`)*:

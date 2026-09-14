@@ -49,19 +49,19 @@ Supabase Auth, PostgreSQL, RLS, server-side clients, migration, dan seed workflo
 
 ## Sprint 0 — Product, Architecture, and Security Baseline
 
-Status: [ ] Belum dimulai
+Status: [~] Baseline repository selesai; approval dan konfigurasi environment eksternal menunggu
 
 Tujuan: menghilangkan konflik dokumentasi dan mengunci keputusan production.
 
 ### Deliverables
 
-- [~] Finalisasi konfigurasi Supabase project, environment, dan migration workflow (konfigurasi repo tersedia; migration belum dijalankan ke project).
-- Sinkronkan PRD.md dengan backend, Next.js version, routes, dan status aktual.
-- Tetapkan environment local, preview/staging, dan production.
+- [~] Finalisasi konfigurasi Supabase project, environment, dan migration workflow (`0007_production_modules.sql` sudah diterapkan; preview/staging/production terpisah belum diverifikasi).
+- [x] Sinkronkan PRD.md dengan backend, Next.js version, routes, dan status aktual.
+- [x] Tetapkan environment local, preview/staging, dan production.
 - [x] Dokumentasikan public/private environment variables dan secret ownership.
-- Buat threat model untuk auth, profile, bookmarks, admin, dan recommendation API.
-- Tetapkan data ownership, retention, deletion, dan export policy.
-- Definisikan istilah recommendation, fit, dan evidence agar tidak menjadi klaim deterministik.
+- [x] Buat threat model untuk auth, profile, bookmarks, admin, dan recommendation API.
+- [x] Tetapkan data ownership, retention, deletion, dan export policy.
+- [x] Definisikan istilah recommendation, fit, dan evidence agar tidak menjadi klaim deterministik.
 
 ### Definition of Done
 
@@ -115,20 +115,27 @@ Status: [~] Prototype tersedia
 ### Pekerjaan
 
 - [x] Implementasikan fondasi schema `professions` sesuai backend decision.
-- Buat migration dan seed workflow yang repeatable.
+- [x] Buat migration dan seed workflow yang repeatable.
 - Migrasikan katalog dari 5 seed items ke dataset yang direview.
 - Tambahkan provenance untuk salary, prospects, education, skills, dan career path.
-- Implementasikan typed profession service dengan error fallback.
-- Selesaikan search, category, salary, education, prospects, MBTI, dan RIASEC filters.
+- [x] Implementasikan typed profession service dengan error fallback.
+- [x] Hubungkan katalog professions ke endpoint server Supabase dengan fallback dataset lokal.
+- [x] Tambahkan loading dan fallback state pada katalog professions.
+- [x] Lengkapi filter service untuk education dan salary range.
+- [x] Tambahkan filter query validation untuk endpoint katalog.
+- [x] Tambahkan salary visualization dan career path timeline pada detail profesi.
+- [x] Tambahkan endpoint katalog ke route smoke test.
+- [x] Jalankan ulang smoke test endpoint terhadap production server lokal.
+- [x] Selesaikan search, category, salary, education, prospects, MBTI, dan RIASEC filters.
 - [x] Buat route /[locale]/professions/[slug].
-- Buat salary visualization dan career path timeline yang accessible.
+- [x] Buat salary visualization dan career path timeline yang accessible.
 
 ### Definition of Done
 
 - Dataset memiliki sumber dan validasi.
-- Filter dapat di-deep-link dan menghasilkan hasil yang benar.
-- Dynamic route memiliki loading, not-found, dan error states.
-- Unit test mencakup search, filter, sorting, dan slug lookup.
+- [x] Filter dapat di-deep-link dan menghasilkan hasil yang benar.
+- [x] Dynamic route memiliki loading, not-found, dan error states.
+- [x] Unit test mencakup search, filter, sorting, dan slug lookup.
 
 ## Sprint 3 — Secure Authentication and User Profile
 
@@ -136,11 +143,11 @@ Status: [~] Prototype auth tersedia
 
 ### Pekerjaan
 
-- Implementasikan backend auth sesuai keputusan Sprint 0.
-- Lengkapi secure password/session handling atau managed Auth provider.
-- Buat profile schema dan ownership checks.
-- Lengkapi login, register, logout, expiry, invalid session, dan redirect.
-- Buat /[locale]/profile.
+- [x] Implementasikan backend auth sesuai keputusan Sprint 0.
+- [x] Lengkapi secure password/session handling melalui Supabase Auth.
+- [x] Buat profile schema dan ownership checks.
+- [x] Lengkapi login, register, logout, expiry, invalid session, dan redirect dasar.
+- [x] Buat /[locale]/profile.
 - Tampilkan active MBTI, latest RIASEC, recommendation history, dan saved careers.
 - Tambahkan account deletion dan data deletion policy.
 
@@ -158,11 +165,11 @@ Status: [~] Prototype lokal tersedia
 
 ### Pekerjaan
 
-- Pindahkan scoring ke typed service module.
+- [x] Pindahkan scoring ke typed service module.
 - Validasi 50 questions, dimension mapping, locale completeness, dan reverse scoring bila berlaku.
 - Pertahankan local draft dengan hydration aman.
-- Simpan completed result untuk authenticated users.
-- Tambahkan result version.
+- [~] Simpan completed result untuk authenticated users (schema tersedia; endpoint dan wiring persistence berikutnya).
+- [x] Tambahkan result version.
 - Lengkapi result page dengan five dimensions, base type, optional variant, evidence, dan cautious language.
 - Uji incomplete answers, reset, refresh, duplicate submission, dan invalid type.
 
@@ -221,7 +228,7 @@ Status: [~] Service/API tersedia, belum production-ready
 
 ## Sprint 7 — Bookmarks, Saved Careers, and Comparison
 
-Status: [ ] Belum dimulai
+Status: [~] Comparison dan persistence tersedia; migration dan browser verification menunggu
 
 ### Pekerjaan
 
@@ -268,7 +275,7 @@ Status: [~] Local prototype tersedia
 
 ## Sprint 9 — Admin CMS and Content Governance
 
-Status: [ ] Belum dimulai
+Status: [~] Server authorization, mutation allowlist, status, dan audit trail tersedia; CRUD UI lengkap menunggu
 
 ### Pekerjaan
 
@@ -289,7 +296,7 @@ Status: [ ] Belum dimulai
 
 ## Sprint 10 — Accessibility, Performance, and UX Hardening
 
-Status: [ ] Belum dimulai
+Status: [~] Perbaikan dasar tersedia; audit browser dan assistive technology menunggu
 
 ### Pekerjaan
 
@@ -310,7 +317,7 @@ Status: [ ] Belum dimulai
 
 ## Sprint 11 — SEO, Observability, and Production Deployment
 
-Status: [ ] Belum dimulai
+Status: [~] Health check dan runbook tersedia; deployment dan restore drill eksternal menunggu
 
 ### Pekerjaan
 

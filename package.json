@@ -8,21 +8,24 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "test": "node scripts/check-i18n.mjs",
-    "smoke": "node scripts/smoke-routes.mjs"
+    "test": "node scripts/check-i18n.mjs && node scripts/domain-tests.mjs && tsx --test tests/*.test.ts",
+    "verify": "npm run typecheck && npm run lint && npm run test && npm run build",
+    "smoke": "node scripts/smoke-routes.mjs",
+    "seed:professions": "node scripts/generate-profession-seed.mjs > supabase/migrations/0003_seed_professions.sql"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.116.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.475.0",
-    "next": "15.1.7",
-    "next-intl": "^3.26.3",
+    "next": "^16.3.5",
+    "next-intl": "^4.14.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recharts": "^2.15.1",
     "sonner": "^2.0.1",
-    "tailwind-merge": "^3.0.1"
+    "tailwind-merge": "^3.0.1",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.7",
@@ -30,9 +33,10 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "eslint": "^9.20.1",
-    "eslint-config-next": "15.1.7",
+    "eslint-config-next": "^16.3.5",
     "postcss": "^8.5.2",
     "tailwindcss": "^4.0.7",
+    "tsx": "^4.23.13",
     "typescript": "^5.7.3"
   }
 }

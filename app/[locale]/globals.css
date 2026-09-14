@@ -1,15 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap');
 @import "tailwindcss";
 
 /* ============================================================
    PROFESIA DESIGN SYSTEM — Tailwind CSS v4
-   16Personalities 4 Role Group Palette + Global Utilities
+   Deep Teal Brand + 4 MBTI Role Group Semantic Palette
    ============================================================ */
 
 @theme inline {
   /* Typography */
   --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
 
-  /* 4 Role Group Colors */
+  /* 4 Role Group Colors (semantic data accents only) */
   --color-analyst-50:  #f3eef8;
   --color-analyst-100: #e0d0ed;
   --color-analyst-400: #a87dc0;
@@ -74,17 +75,11 @@
   :root {
     --font-plus-jakarta: "Plus Jakarta Sans", sans-serif;
 
-    /* 16Personalities 4 Role Group CSS vars */
+    /* 4 Role Group CSS vars (semantic data only) */
     --color-analyst-primary:   #88619a;
     --color-diplomat-primary:  #33a474;
     --color-sentinel-primary:  #4298b4;
     --color-explorer-primary:  #e4a42c;
-
-    /* Gradient presets */
-    --color-analyst-gradient:  linear-gradient(135deg, #7b1fa2 0%, #4a148c 100%);
-    --color-diplomat-gradient: linear-gradient(135deg, #10b981 0%, #047857 100%);
-    --color-sentinel-gradient: linear-gradient(135deg, #0284c7 0%, #1e40af 100%);
-    --color-explorer-gradient: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
   }
 
   *, *::before, *::after {
@@ -102,14 +97,14 @@
     font-family: var(--font-plus-jakarta), system-ui, -apple-system, sans-serif;
     @apply bg-[#F8FAFC] text-slate-900;
     @apply antialiased;
-    @apply selection:bg-indigo-500 selection:text-white;
+    @apply selection:bg-teal-600 selection:text-white;
     @apply transition-colors duration-200;
     min-height: 100vh;
   }
 
   /* Improved focus styles for accessibility */
   :focus-visible {
-    @apply outline-none ring-2 ring-indigo-500 ring-offset-2 ring-offset-white dark:ring-offset-slate-950;
+    @apply outline-none ring-2 ring-teal-600 ring-offset-2 ring-offset-white;
   }
 
   /* Scrollbar styling */
@@ -121,10 +116,10 @@
     @apply bg-transparent;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+    @apply bg-slate-300 rounded-full;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-400 dark:bg-slate-600;
+    @apply bg-slate-400;
   }
 }
 
@@ -132,7 +127,7 @@
    COMPONENT UTILITIES
    ============================================================ */
 
-/* Glassmorphism panels */
+/* Light surface panels */
 .glass-panel {
   @apply bg-white border border-slate-200 shadow-sm;
 }
@@ -140,45 +135,6 @@
 .glass-card {
   @apply bg-white border border-slate-200;
   @apply transition-shadow duration-200 hover:shadow-sm;
-}
-
-.glass-card-dark {
-  @apply bg-slate-900/80 dark:bg-slate-950/80 backdrop-blur-xl;
-  @apply border border-slate-800/80;
-  @apply transition-all duration-300;
-}
-
-/* ============================================================
-   GRADIENT TEXT UTILITIES
-   ============================================================ */
-.text-gradient-primary {
-  @apply bg-clip-text text-transparent;
-  @apply bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600;
-  @apply dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400;
-}
-
-.text-gradient-analyst {
-  @apply bg-clip-text text-transparent;
-  @apply bg-gradient-to-r from-purple-600 to-indigo-600;
-  @apply dark:from-purple-400 dark:to-indigo-400;
-}
-
-.text-gradient-diplomat {
-  @apply bg-clip-text text-transparent;
-  @apply bg-gradient-to-r from-emerald-600 to-teal-600;
-  @apply dark:from-emerald-400 dark:to-teal-400;
-}
-
-.text-gradient-sentinel {
-  @apply bg-clip-text text-transparent;
-  @apply bg-gradient-to-r from-sky-600 to-blue-600;
-  @apply dark:from-sky-400 dark:to-blue-400;
-}
-
-.text-gradient-explorer {
-  @apply bg-clip-text text-transparent;
-  @apply bg-gradient-to-r from-amber-500 to-orange-600;
-  @apply dark:from-amber-400 dark:to-orange-400;
 }
 
 /* ============================================================
@@ -205,63 +161,59 @@
 }
 
 /* ============================================================
-   ROLE GROUP BADGE UTILITIES
+   ROLE GROUP BADGE UTILITIES (semantic data accents only)
    ============================================================ */
 .badge-analyst {
-  @apply bg-purple-100 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300;
-  @apply border border-purple-200 dark:border-purple-800;
+  @apply bg-purple-100 text-purple-700;
+  @apply border border-purple-200;
 }
 
 .badge-diplomat {
-  @apply bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300;
-  @apply border border-emerald-200 dark:border-emerald-800;
+  @apply bg-emerald-100 text-emerald-700;
+  @apply border border-emerald-200;
 }
 
 .badge-sentinel {
-  @apply bg-sky-100 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300;
-  @apply border border-sky-200 dark:border-sky-800;
+  @apply bg-sky-100 text-sky-700;
+  @apply border border-sky-200;
 }
 
 .badge-explorer {
-  @apply bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300;
-  @apply border border-amber-200 dark:border-amber-800;
+  @apply bg-amber-100 text-amber-700;
+  @apply border border-amber-200;
 }
 
 /* ============================================================
    BUTTON UTILITIES
    ============================================================ */
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl;
+  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-[10px];
   @apply text-sm font-semibold text-white;
-  @apply bg-gradient-to-r from-indigo-600 to-purple-600;
-  @apply hover:from-indigo-500 hover:to-purple-500;
-  @apply shadow-md shadow-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/30;
-  @apply hover:scale-[1.02] active:scale-[0.98];
-  @apply transition-all duration-200;
-  @apply focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2;
-  @apply disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100;
+  @apply bg-teal-700 hover:bg-teal-800;
+  @apply transition-colors duration-200;
+  @apply focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2;
+  @apply disabled:opacity-60 disabled:cursor-not-allowed;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl;
+  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-[10px];
   @apply text-sm font-semibold;
-  @apply bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200;
-  @apply border border-slate-200 dark:border-slate-700;
-  @apply hover:bg-slate-200 dark:hover:bg-slate-700;
-  @apply hover:scale-[1.02] active:scale-[0.98];
-  @apply transition-all duration-200;
+  @apply bg-white text-slate-700;
+  @apply border border-slate-200;
+  @apply hover:bg-slate-50;
+  @apply transition-colors duration-200;
 }
 
 /* ============================================================
    INPUT UTILITIES
    ============================================================ */
 .input-field {
-  @apply w-full px-4 py-3 rounded-xl text-sm;
-  @apply bg-white dark:bg-slate-800/60;
-  @apply border border-slate-200 dark:border-slate-700;
-  @apply text-slate-900 dark:text-white;
-  @apply placeholder-slate-400 dark:placeholder-slate-500;
-  @apply focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20;
+  @apply w-full px-4 py-3 rounded-[10px] text-sm;
+  @apply bg-white;
+  @apply border border-slate-200;
+  @apply text-slate-900;
+  @apply placeholder-slate-400;
+  @apply focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20;
   @apply transition-all duration-200;
 }
 
@@ -277,29 +229,28 @@
 }
 
 .card-hover {
-  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  @apply transition-shadow duration-300 hover:shadow-md;
 }
 
 /* Skeleton loader */
 .skeleton {
-  @apply bg-slate-200 dark:bg-slate-800 rounded-lg animate-pulse;
+  @apply bg-slate-200 rounded-lg animate-pulse;
 }
 
 /* ============================================================
    PROSPECT BADGE COLORS
    ============================================================ */
 .prospect-high {
-  @apply bg-emerald-100 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300;
-  @apply border border-emerald-200 dark:border-emerald-800;
+  @apply bg-emerald-100 text-emerald-700;
+  @apply border border-emerald-200;
 }
 
 .prospect-medium {
-  @apply bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300;
-  @apply border border-amber-200 dark:border-amber-800;
+  @apply bg-amber-100 text-amber-700;
+  @apply border border-amber-200;
 }
 
 .prospect-low {
-  @apply bg-red-100 text-red-700 dark:bg-red-950/50 dark:text-red-300;
-  @apply border border-red-200 dark:border-red-800;
+  @apply bg-red-100 text-red-700;
+  @apply border border-red-200;
 }
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap');

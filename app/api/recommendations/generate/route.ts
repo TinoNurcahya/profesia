@@ -1,23 +1,19 @@
 import { NextResponse } from "next/server";
-import { calculateTopCandidates, MbtiResultInput } from "@/services/recommendationService";
+import { calculateTopCandidates } from "@/services/recommendationService";
 import { generatePersonalizedRecommendations } from "@/services/aiService";
-import { RiasecScores } from "@/services/riasecService";
+import { recommendationRequestSchema } from "@/lib/validation";
+import { checkRateLimit } from "@/lib/rateLimit";
+import { createClient } from "@/lib/supabase/server";
+import { createHash } from "node:crypto";
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { mbtiResult, riasecResult, locale } = body as {
-      mbtiResult: MbtiResultInput;
-      riasecResult?: RiasecScores | null;
-      locale?: string;
-    };
-
-    if (!mbtiResult || !mbtiResult.base_code) {
-      return NextResponse.json(
-        { error: "Hasil MBTI (base_code) wajib disertakan." },
-        { status: 400 }
-      );
-    }
+    const forwardedFor = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "anonymous";
+    const rateLimit = checkRateLimit(forwardedFor);
+    if (!rateLimit.allowed) return NextResponse.json({ error: "rate_limited" }, { status: 429, headers: { "Retry-After": String(rateLimit.retryAfter) } });
+    const parsed = recommendationRequestSchema.safeParse(await req.json().catch(() => null));
+    if (!parsed.success) return NextResponse.json({ error: "invalid_request", details: parsed.error.flatten() }, { status: 400 });
+    const { mbtiResult, riasecResult, locale, mbtiResultId, riasecResultId } = parsed.data;
 
     // Layer 1: Deterministic candidate calculation (Top 20)
     const topCandidates = await calculateTopCandidates(mbtiResult, riasecResult, 20);
@@ -27,8 +23,19 @@ export async function POST(req: Request) {
       mbtiResult,
       riasecResult || null,
       topCandidates,
-      locale || "id"
+      locale
     );
+
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      const requestHash = createHash("sha256").update(JSON.stringify({ userId: user.id, mbtiResultId, riasecResultId, mbtiResult, riasecResult, locale })).digest("hex");
+      await supabase.from("recommendations").upsert({
+        user_id: user.id, mbti_result_id: mbtiResultId, riasec_result_id: riasecResultId, locale,
+        provider: aiOutput.generated_by, model: aiOutput.generated_by === "gemini_free_tier" ? "gemini-2.5-flash" : "deterministic-v1",
+        version: "recommendation-v1", request_hash: requestHash, result: aiOutput,
+      }, { onConflict: "user_id,request_hash", ignoreDuplicates: true });
+    }
 
     return NextResponse.json({
       success: true,
@@ -36,7 +43,7 @@ export async function POST(req: Request) {
       ...aiOutput,
     });
   } catch (error) {
-    console.error("Error in /api/recommendations/generate route:", error);
+    console.error("Recommendation request failed", { name: error instanceof Error ? error.name : "unknown" });
     return NextResponse.json(
       { error: "Gagal memproses rekomendasi karir berbasis AI." },
       { status: 500 }

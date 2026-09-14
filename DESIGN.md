@@ -149,8 +149,15 @@ Controls: 8–10px
 Inputs: 8–10px
 Normal surfaces: 12–16px
 Feature containers: maximum 20px
-Pills: tags, filters, statuses, and compact metadata only
+Metadata tags and chips: 4–6px (rounded-md, NOT rounded-full)
 ```
+
+- **Strictly Prohibited**: Do NOT use floating pill/capsule badges (`rounded-full` container + border + pastel background + dot/pulsing dot) as section eyebrows or hero tags. This styling (often called "SaaS capsule pill" or "template eyebrow pill") looks like generic AI-generated template slop.
+- **Pure Editorial Eyebrow Standard**: All section eyebrows, categories, and hero tags must use unboxed editorial typography:
+  - Clean text without capsule container or background pill.
+  - Styling: `text-xs font-semibold uppercase tracking-[0.16em] text-teal-700` or `font-mono text-[11px] tracking-wider`.
+  - No decorative status dots or pulsing indicators next to title eyebrows.
+  - Metadata chips (MBTI, RIASEC, skills) must use structured rectangles (`rounded-md` 4–6px), never rounded-full pills.
 
 ### Elevation
 
@@ -219,11 +226,16 @@ Do not wrap every section in a card.
 
 ### Icons
 
-- Use Lucide or one equivalent consistent SVG icon family.
+- **Zero-Emoji Policy**: Never use emojis (such as 🔮, 🌿, 🛡️, ⚡, 🚀, etc.) in the user interface, cards, data structures, or code. Emojis look amateurish and violate the editorial typography standard.
+- Use **Lucide** as the sole, consistent SVG icon family across the entire application.
 - Decorative icons must use `aria-hidden="true"`.
-- Icon-only controls must have an accessible name.
-- Keep icon size and stroke treatment consistent.
-- Do not use emoji as structural interface icons.
+- Icon-only controls must have an accessible name (`aria-label`).
+- Keep icon size and stroke treatment consistent (typically `w-4 h-4` or `w-5 h-5`, stroke width 1.75–2px).
+- **MBTI Role Group Standard Icons**:
+  - **Analysts**: `Sparkles` or `BrainCircuit` (Purple semantic accent)
+  - **Diplomats**: `Users` or `HeartHandshake` (Emerald semantic accent)
+  - **Sentinels**: `ShieldCheck` (Sky semantic accent)
+  - **Explorers**: `Compass` (Amber semantic accent)
 
 ## 8. Landing Page Composition
 
@@ -342,20 +354,86 @@ Required across the product:
 - focused elements must not be obscured by sticky UI
 - screen-reader reading order must match visual order
 
-## 12. Responsive Standards
+## 12. Responsive and Mobile-First Standards
 
-All major screens must be checked at 375px, 768px, 1024px, 1440px, and mobile landscape.
+Profesia didesain dengan filosofi **mobile-first**. Pengalaman pada layar ponsel (viewport 375px–430px) bukan sekadar versi desktop yang diperkecil, melainkan layout yang diadaptasi secara ergonomis untuk interaksi sentuh, area jangkauan satu tangan (thumb zone), dan keterbacaan cepat.
 
-Responsive implementations must:
+### 12.1 Viewport Breakpoints and Target Devices
 
-- start mobile-first
-- prioritize core content on small screens
-- allow natural copy wrapping
-- avoid fixed widths that create horizontal scrolling
-- adapt composition, not only scale sizes down
-- preserve readable line lengths
-- keep touch targets comfortable
-- maintain focus visibility at every breakpoint
+| Breakpoint | Prefix Tailwind | Min Width | Target Device Utama |
+|---|---|---|---|
+| Compact Mobile | (default) | 320px–375px | iPhone SE, small Android |
+| Standard Mobile | `sm:` | 640px | Large phone, phablet |
+| Tablet / Foldable | `md:` | 768px | iPad Mini, standard tablet portrait |
+| Small Desktop / Laptop | `lg:` | 1024px | iPad Pro landscape, MacBook Air |
+| Large Desktop | `xl:` | 1280px | Widescreen monitor, iMac |
+
+Wajib divalidasi pada:
+- **375px** (baseline mobile minimum)
+- **768px** (tablet portrait)
+- **1024px** (tablet landscape / laptop)
+- **1440px** (desktop monitor)
+- **Mobile landscape** (tinggi viewport sempit < 500px)
+
+### 12.2 Touch Ergonomics and Thumb Zone
+
+- **Minimum Hit Area**: Semua kontrol interaktif (tombol, link, toggle, chip filter, opsi kuis) harus memiliki area sentuh minimal **44×44px** (sesuai standar WCAG 2.5.5 dan iOS Human Interface Guidelines).
+- **Touch Target Spacing**: Berikan jarak minimal 8px antar elemen interaktif yang berdekatan untuk mencegah salah tekan (accidental tap).
+- **Thumb Zone Placement**: Tempatkan tombol tindakan utama (seperti CTA kuis "Lanjutkan", "Lihat Hasil", "Simpan") di area yang mudah dijangkau ibu jari, preferensial di bagian bawah layar (sticky bottom bar pada mobile).
+- **Active State Feedback**: Berikan feedback visual instan saat disentuh (`active:scale-[0.98]` atau `active:bg-teal-800`), bukan hanya bergantung pada `hover:` yang tidak ada di layar sentuh.
+
+### 12.3 Viewport Budget and Zero Horizontal Overflow
+
+- **No Horizontal Scroll**: Layar pada 375px tidak boleh memiliki horizontal scrolling yang tidak disengaja. Selalu gunakan `w-full max-w-full` dan hindari lebar piksel statis (`w-[400px]`).
+- **Gutter Margins**:
+  - Mobile (`< 640px`): padding horizontal `px-4` (16px) atau `px-5` (20px).
+  - Tablet (`md:`): padding horizontal `px-6` (24px).
+  - Desktop (`lg:`): padding horizontal `px-8` (32px).
+- **Table and Matrix Reflow**: Tabel data atau matriks yang lebar harus diubah menjadi kartu vertikal terpisah pada mobile, atau dibungkus dalam container horizontal scroll yang eksplisit dengan indikator visual fade.
+
+### 12.4 Layout and Bento Grid Reflow
+
+- **Linear Stacking**: Semua layout multi-kolom desktop (split hero, bento 7/5 kolom, grid 3/4 kolom) harus melipat menjadi 1 kolom (`grid-cols-1`) secara linear pada mobile.
+- **Hero Composition**:
+  - Desktop: Teks intro di sebelah kiri (7 kolom), live interactive recommendation preview di sebelah kanan (5 kolom).
+  - Mobile: Headline dan deskripsi tampil pertama, diikuti CTA utama, lalu preview card di bawahnya tanpa terpotong.
+- **Bento Hierarchy on Small Screens**: Elemen terpenting pada bento grid harus berada di urutan DOM pertama, bukan tersembunyi atau terdorong terlalu jauh ke bawah.
+- **Timeline and Steppers**: Komponen alur horisontal (seperti career progression timeline atau How It Works) harus otomatis berubah menjadi vertikal step line pada layar di bawah `md:`.
+
+### 12.5 Mobile Typography and Fluid Scaling
+
+- **Headline Hierarchy**: Jangan gunakan ukuran font desktop raksasa di mobile yang menyebabkan satu kata terpotong ke baris baru sendirian (orphan words).
+  - Hero `h1`: `text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight`
+  - Section `h2`: `text-2xl sm:text-3xl font-bold tracking-tight`
+  - Card `h3`: `text-lg sm:text-xl font-semibold`
+- **Body Text Minimum**: Teks paragraf utama minimal **16px** (`text-base`) pada mobile untuk mencegah browser iOS Safari melakukan auto-zoom yang mengganggu saat pengguna fokus pada input form.
+- **Line Length**: Pertahankan panjang baris baca nyaman (sekitar 45–60 karakter per baris pada mobile, 60–75 pada desktop).
+
+### 12.6 Assessment, Quiz and Form UX on Mobile
+
+- **Likert Scale Optimization**:
+  - Pada layar sempit (< 640px), jangan menjejalkan 5 atau 7 bulatan opsi skala secara horisontal jika label teksnya menjadi tidak terbaca atau target sentuh terlalu kecil.
+  - Opsi kuis harus memiliki area sentuh lebar dan jelas dengan label teks yang dapat dibaca tanpa terpotong.
+- **Sticky Progress and Floating Actions**:
+  - Indikator progres kuis (misal: "Pertanyaan 4 dari 20") ditempatkan di header atau top bar ringkas yang tidak memakan lebih dari 48px tinggi layar.
+  - Tombol aksi navigasi ("Kembali", "Selanjutnya") disematkan secara sticky di bagian bawah (`fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-md border-t border-slate-200`) dengan memperhatikan `safe-area-inset-bottom`.
+- **Virtual Keyboard Adaptation**: Form input harus menyisakan ruang yang cukup saat keyboard virtual muncul. Hindari meletakkan input penting di bawah elemen sticky yang menutupi pandangan pengguna.
+
+### 12.7 Mobile Navigation and Sheets
+
+- **Compact Header**: Tinggi navbar mobile dibatasi antara 56px–64px untuk memaksimalkan area konten.
+- **Full-Bleed Mobile Menu**: Menu navigasi mobile harus menggunakan drawer/modal slide-over yang bersih dengan:
+  - Accessible attributes (`aria-expanded`, `aria-controls`, `aria-label`).
+  - Lock scroll pada `document.body` saat menu terbuka.
+  - Tombol close yang jelas dengan target sentuh minimal 44×44px.
+  - Tautan navigasi dengan jarak vertikal yang lapang (`py-3` hingga `py-4`).
+
+### 12.8 Safe Areas and Mobile Browser Chrome
+
+- **Safe Area Insets**: Selalu perhitungkan notch, home indicator pill, dan dynamic island pada perangkat modern:
+  - Gunakan `pb-[calc(1rem+env(safe-area-inset-bottom))]` untuk sticky footer atau bottom bar.
+  - Gunakan `pt-[calc(1rem+env(safe-area-inset-top))]` untuk modal full-screen.
+- **Dynamic Viewport Units**: Gunakan `dvh` (`min-h-dvh` atau `h-dvh`) daripada `vh` murni untuk menghindari layout jump saat baris URL browser mobile muncul atau tersembunyi saat di-scroll.
 
 ## 13. Content and Trust Language
 

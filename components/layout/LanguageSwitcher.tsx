@@ -19,14 +19,14 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div className="inline-flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold">
-      <Globe className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 ml-1.5" />
+    <div className="inline-flex items-center gap-1 bg-slate-100 p-1 rounded-full border border-slate-200 text-xs font-semibold">
+      <Globe className="w-3.5 h-3.5 text-slate-500 ml-1.5" />
       <button
         onClick={() => toggleLocale("id")}
         className={`px-2.5 py-1 rounded-full transition-all duration-200 ${
           locale === "id"
-            ? "bg-indigo-600 text-white shadow-sm font-bold"
-            : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+            ? "bg-teal-700 text-white shadow-sm font-bold"
+            : "text-slate-600 hover:text-slate-900"
         }`}
         aria-label={t("languageIndonesian")}
       >
@@ -36,8 +36,8 @@ export default function LanguageSwitcher() {
         onClick={() => toggleLocale("en")}
         className={`px-2.5 py-1 rounded-full transition-all duration-200 ${
           locale === "en"
-            ? "bg-indigo-600 text-white shadow-sm font-bold"
-            : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+            ? "bg-teal-700 text-white shadow-sm font-bold"
+            : "text-slate-600 hover:text-slate-900"
         }`}
         aria-label={t("languageEnglish")}
       >

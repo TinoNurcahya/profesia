@@ -29,44 +29,56 @@ export default function ProfessionCard({ profession }: ProfessionCardProps) {
   const t = useTranslations("Profession");
   const [isBookmarked, setIsBookmarked] = useState(false);
 
-  const toggleBookmark = (e: React.MouseEvent) => {
+  const [isSaving, setIsSaving] = useState(false);
+
+  const toggleBookmark = async (e: React.MouseEvent) => {
     e.preventDefault();
-    setIsBookmarked(!isBookmarked);
-    if (!isBookmarked) {
-      toast.success(
-          t("bookmarkSuccess")
-      );
-    } else {
-      toast.info(
-        t("bookmarkRemoved")
-      );
+    if (isSaving) return;
+    const nextValue = !isBookmarked;
+    setIsBookmarked(nextValue);
+    setIsSaving(true);
+    try {
+      const response = await fetch("/api/bookmarks", {
+        method: nextValue ? "POST" : "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ professionId: profession.id }),
+      });
+      if (response.status === 401) throw new Error("unauthorized");
+      if (!response.ok) throw new Error("request_failed");
+      toast.success(nextValue ? t("bookmarkSuccess") : t("bookmarkRemoved"));
+    } catch (error) {
+      setIsBookmarked(!nextValue);
+      toast.error(error instanceof Error && error.message === "unauthorized" ? t("bookmarkLogin") : t("bookmarkError"));
+    } finally {
+      setIsSaving(false);
     }
   };
 
   return (
-    <div className="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-4 group">
+    <div className="bg-white border border-slate-200 hover:border-teal-500 transition-colors rounded-2xl p-6 flex flex-col justify-between space-y-4 group shadow-sm">
       <div className="space-y-3">
         {/* Header Badges */}
         <div className="flex items-center justify-between">
-          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">
+          <span className="px-3 py-1 rounded-md text-xs font-semibold bg-teal-50 text-teal-700 border border-teal-100">
             {locale === "id" ? profession.category_name_id : profession.category_name_en}
           </span>
           
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded-full">
+            <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">
               <TrendingUp className="w-3.5 h-3.5" />
               {profession.prospects === "high" ? t("highProspects") : profession.prospects}
             </span>
             <button
               onClick={toggleBookmark}
-              className="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              disabled={isSaving}
+              className="p-1.5 rounded-full hover:bg-slate-100 transition-colors disabled:opacity-50"
               aria-label={t("bookmarkLabel")}
             >
               <Heart
                 className={`w-4 h-4 transition-colors ${
                   isBookmarked
                     ? "text-rose-500 fill-rose-500"
-                    : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                    : "text-slate-400 hover:text-slate-600"
                 }`}
               />
             </button>
@@ -75,20 +87,20 @@ export default function ProfessionCard({ profession }: ProfessionCardProps) {
 
         {/* Title */}
         <Link href={`/${locale}/professions/${profession.slug}`}>
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+          <h3 className="text-xl font-bold text-slate-900 group-hover:text-teal-700 transition-colors">
             {locale === "id" ? profession.name_id : profession.name_en}
           </h3>
         </Link>
 
         {/* Description */}
-        <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
+        <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
           {locale === "id" ? profession.description_id : profession.description_en}
         </p>
 
         {/* Salary */}
-        <div className="p-3 rounded-2xl bg-slate-100/80 dark:bg-slate-800/80 flex items-center justify-between text-xs">
-          <span className="text-slate-500 dark:text-slate-400 font-medium">{t("salaryLabel")}</span>
-          <span className="font-extrabold text-slate-900 dark:text-white flex items-center gap-1">
+        <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between text-xs">
+          <span className="text-slate-500 font-medium">{t("salaryLabel")}</span>
+          <span className="font-extrabold text-slate-900 flex items-center gap-1">
             <DollarSign className="w-3.5 h-3.5 text-emerald-500" />
             Rp {(profession.salary_min / 1000000).toFixed(0)} - {(profession.salary_max / 1000000).toFixed(0)} {t("salaryUnit")}
           </span>
@@ -96,14 +108,14 @@ export default function ProfessionCard({ profession }: ProfessionCardProps) {
       </div>
 
       {/* Footer Details */}
-      <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+      <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
         <div className="flex items-center gap-1 text-xs">
           <span className="font-semibold text-slate-500">{t("matchedMbti")}:</span>
           <div className="flex gap-1">
             {profession.matched_mbti.slice(0, 3).map((m) => (
               <span
                 key={m.code}
-                className="px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 font-bold text-[10px]"
+                className="px-1.5 py-0.5 rounded bg-purple-100 text-purple-700 font-bold text-[10px]"
               >
                 {m.code}
               </span>
@@ -113,7 +125,7 @@ export default function ProfessionCard({ profession }: ProfessionCardProps) {
 
         <Link
           href={`/${locale}/professions/${profession.slug}`}
-          className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300"
+          className="inline-flex items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-800"
         >
           {t("detail")}
           <ArrowRight className="w-3.5 h-3.5" />

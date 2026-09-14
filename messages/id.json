@@ -112,6 +112,21 @@
     "categoryLabel": "Kategori Industri",
     "mbtiFilterLabel": "Cocok Tipe MBTI",
     "allMbti": "Semua Tipe MBTI (16 Tipe)",
+    "riasecFilterLabel": "Minat RIASEC",
+    "allRiasec": "Semua Minat RIASEC",
+    "riasecR": "Realistik",
+    "riasecI": "Investigatif",
+    "riasecA": "Artistik",
+    "riasecS": "Sosial",
+    "riasecE": "Enterprising",
+    "riasecC": "Konvensional",
+    "educationFilterLabel": "Pendidikan",
+    "educationFilterPlaceholder": "mis. S1, sertifikasi",
+    "salaryFilterLabel": "Rentang gaji bulanan",
+    "salaryMinPlaceholder": "Minimum",
+    "salaryMaxPlaceholder": "Maksimum",
+    "salaryMinLabel": "Gaji bulanan minimum",
+    "salaryMaxLabel": "Gaji bulanan maksimum",
     "prospectsLabel": "Prospek Masa Depan",
     "highProspectsLong": "Prospek Tinggi (High Growth)",
     "mediumProspectsLong": "Prospek Sedang (Stable)",
@@ -119,6 +134,8 @@
     "bookmarkLabel": "Bookmark",
     "bookmarkSuccess": "Profesi berhasil disimpan ke bookmark!",
     "bookmarkRemoved": "Bookmark dihapus.",
+    "bookmarkLogin": "Masuk untuk menyimpan profesi.",
+    "bookmarkError": "Bookmark tidak dapat diperbarui. Silakan coba lagi.",
     "salaryLabel": "Estimasi Gaji:",
     "salaryUnit": "Jt/bln",
     "detail": "Detail",
@@ -128,7 +145,9 @@
     "showing": "Menampilkan {shown} dari {total} Profesi",
     "activeMbti": "Filter MBTI Aktif: {value}",
     "notFound": "Profesi Tidak Ditemukan",
-    "notFoundDescription": "Tidak ada pekerjaan yang cocok dengan kriteria filter Anda. Coba ubah kata kunci atau reset filter."
+    "notFoundDescription": "Tidak ada pekerjaan yang cocok dengan kriteria filter Anda. Coba ubah kata kunci atau reset filter.",
+    "catalogLoading": "Memuat katalog profesi...",
+    "catalogError": "Katalog online tidak tersedia. Menampilkan data lokal."
   },
   "Majors": {
     "title": "Katalog Jurusan Kuliah",
@@ -211,6 +230,7 @@
     "weaknesses": "Kelemahan (Weaknesses)"
   },
   "Footer": {
+    "brand": "Profesia",
     "tagline": "Platform Navigasi Karir & Psikometri Kepribadian Terdepan.",
     "quickLinks": "Tautan Cepat",
     "legal": "Hukum & Privasi",
@@ -271,5 +291,19 @@
     "home": "Kembali ke beranda",
     "notFoundTitle": "Halaman tidak ditemukan",
     "notFoundDescription": "Halaman yang kamu cari tidak tersedia atau sudah dipindahkan."
+  },
+  "Profile": {
+    "eyebrow": "Ruang perjalananmu",
+    "title": "Profil Saya",
+    "subtitle": "Kelola informasi akun dan lanjutkan eksplorasi kariermu.",
+    "account": "Informasi Akun",
+    "name": "Nama",
+    "username": "Username",
+    "email": "Email",
+    "notAvailable": "Belum tersedia",
+    "assessmentTitle": "Eksplorasi Karier",
+    "assessmentPending": "Riwayat hasil dan rekomendasi akan muncul di sini setelah fitur penyimpanan selesai.",
+    "mbtiAction": "Mulai MBTI",
+    "riasecAction": "Mulai RIASEC"
   }
 }

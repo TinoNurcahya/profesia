@@ -15,7 +15,7 @@ const PROTECTED_ROUTES = ["/profile", "/admin"];
 // Routes that redirect authenticated users (auth pages)
 const AUTH_ROUTES = ["/login", "/register"];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const response = intlMiddleware(request);
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

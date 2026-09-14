@@ -34,34 +34,34 @@ export default async function MajorDetailPage({
       </Link>
 
       {/* Hero Header */}
-      <div className="glass-card rounded-3xl p-8 sm:p-12 space-y-6 bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/60 border border-emerald-500/20 text-white">
+      <div className="bg-white border border-slate-200 rounded-2xl p-8 sm:p-12 space-y-6 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+          <span className="px-3.5 py-1.5 rounded-md text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
             Kelompok: {major.category}
           </span>
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300">
-            <TrendingUp className="w-4 h-4 text-emerald-400" />
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600">
+            <TrendingUp className="w-4 h-4 text-emerald-600" />
             Prospek Karir: {major.career_prospect}
           </span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
+        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
           {locale === "id" ? major.name_id : major.name_en}
         </h1>
 
-        <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl">
+        <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">
           {locale === "id" ? major.description_id : major.description_en}
         </p>
 
         {/* Quick Meta */}
-        <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-slate-800 text-xs font-medium text-slate-300">
+        <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-slate-100 text-xs font-medium text-slate-500">
           <span className="inline-flex items-center gap-2">
-            <BookOpen className="w-4 h-4 text-emerald-400" />
-            Jenjang Minimum: <strong className="text-white">{major.min_education_level}</strong>
+            <BookOpen className="w-4 h-4 text-emerald-600" />
+            Jenjang Minimum: <strong className="text-slate-900">{major.min_education_level}</strong>
           </span>
           <span className="inline-flex items-center gap-2">
-            <Clock className="w-4 h-4 text-amber-400" />
-            Estimasi Studi: <strong className="text-white">{major.avg_duration_years} Tahun</strong>
+            <Clock className="w-4 h-4 text-amber-500" />
+            Estimasi Studi: <strong className="text-slate-900">{major.avg_duration_years} Tahun</strong>
           </span>
         </div>
       </div>
@@ -69,8 +69,8 @@ export default async function MajorDetailPage({
       {/* Subjects & MBTI Fit */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Core Subjects */}
-        <div className="glass-panel p-8 rounded-3xl space-y-4">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+        <div className="bg-white border border-slate-200 p-8 rounded-2xl space-y-4 shadow-sm">
+          <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-emerald-500" />
             {locale === "id" ? "Mata Kuliah Inti" : "Core Subjects"}
           </h2>
@@ -79,7 +79,7 @@ export default async function MajorDetailPage({
               (subj, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                  className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200"
                 >
                   {subj}
                 </span>
@@ -89,16 +89,16 @@ export default async function MajorDetailPage({
         </div>
 
         {/* Compatible MBTI Types */}
-        <div className="glass-panel p-8 rounded-3xl space-y-4">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-purple-500" />
+        <div className="bg-white border border-slate-200 p-8 rounded-2xl space-y-4 shadow-sm">
+          <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-teal-600" />
             {locale === "id" ? "Tipe MBTI Paling Cocok" : "Compatible MBTI Types"}
           </h2>
           <div className="flex flex-wrap gap-2 pt-2">
             {major.matched_mbti.map((mbtiCode) => (
               <span
                 key={mbtiCode}
-                className="px-3.5 py-1.5 rounded-xl text-xs font-extrabold bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800"
+                className="px-3.5 py-1.5 rounded-xl text-xs font-extrabold bg-purple-100 text-purple-700 border border-purple-200"
               >
                 {mbtiCode}
               </span>
@@ -110,7 +110,7 @@ export default async function MajorDetailPage({
       {/* Linked Professions Section */}
       <div className="space-y-6">
         <div className="space-y-1">
-          <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
+          <h2 className="text-2xl font-extrabold text-slate-900">
             {locale === "id"
               ? "Prospek Karir & Profesi Terkait"
               : "Related Careers & Professions"}

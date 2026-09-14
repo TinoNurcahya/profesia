@@ -76,7 +76,7 @@ export default function ShareCard({
       <div className="flex items-center gap-3">
         <button
           onClick={handleShare}
-          className="flex-1 py-3 px-4 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md shadow-indigo-500/20"
+          className="flex-1 py-3 px-4 rounded-2xl bg-teal-700 hover:bg-teal-800 text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors"
         >
           <Share2 className="w-4 h-4" />
           Bagikan Hasil Kuis

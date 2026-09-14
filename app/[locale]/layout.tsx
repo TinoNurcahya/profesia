@@ -16,6 +16,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEnglish ? "Explore careers through your interests, personality, and skills." : "Jelajahi pilihan karier melalui minat, kepribadian, dan kemampuanmu.",
     alternates: { canonical: `/${locale}`, languages: { id: "/id", en: "/en" } },
     openGraph: { type: "website", siteName: "Profesia", locale: isEnglish ? "en_US" : "id_ID", url: `/${locale}`, title: isEnglish ? "Profesia - Career Discovery Platform" : "Profesia - Platform Eksplorasi Karier", description: isEnglish ? "Explore careers through your interests, personality, and skills." : "Jelajahi pilihan karier melalui minat, kepribadian, dan kemampuanmu." },
+    icons: {
+      icon: [
+        { url: "/favicon.svg", type: "image/svg+xml" },
+        { url: "/favicon.ico", sizes: "32x32" },
+        { url: "/icon.png", type: "image/png", sizes: "32x32" },
+      ],
+      apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+    },
     twitter: { card: "summary", title: isEnglish ? "Profesia - Career Discovery Platform" : "Profesia - Platform Eksplorasi Karier", description: isEnglish ? "Explore careers through your interests, personality, and skills." : "Jelajahi pilihan karier melalui minat, kepribadian, dan kemampuanmu." },
   };
 }

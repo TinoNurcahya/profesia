@@ -16,9 +16,9 @@ export default function Footer() {
           {/* Brand Col */}
           <div className="md:col-span-1 space-y-4">
             <Link href={`/${locale}`} className="flex items-center gap-2">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 p-0.5 shadow-md">
+              <div className="w-9 h-9 rounded-xl bg-teal-700 p-0.5">
                 <div className="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center">
-                  <Compass className="w-5 h-5 text-indigo-400" />
+                  <Compass className="w-5 h-5 text-teal-300" />
                 </div>
               </div>
               <span className="font-bold text-xl text-white tracking-tight">{t("brand")}</span>
@@ -44,22 +44,22 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">{t("quickLinks")}</h3>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href={`/${locale}/professions`} className="hover:text-indigo-400 transition-colors">
+                <Link href={`/${locale}/professions`} className="hover:text-teal-400 transition-colors">
                   {t("professionCatalog")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/mbti`} className="hover:text-indigo-400 transition-colors">
+                <Link href={`/${locale}/mbti`} className="hover:text-teal-400 transition-colors">
                   {t("mbtiTest")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/zodiac`} className="hover:text-indigo-400 transition-colors">
+                <Link href={`/${locale}/zodiac`} className="hover:text-teal-400 transition-colors">
                   {t("zodiacExploration")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/professions/compare`} className="hover:text-indigo-400 transition-colors">
+                <Link href={`/${locale}/professions/compare`} className="hover:text-teal-400 transition-colors">
                   {t("professionComparison")}
                 </Link>
               </li>
@@ -93,9 +93,9 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">{t("legal")}</h3>
             <ul className="space-y-2.5 text-sm">
-              <li><a href="#" className="hover:text-indigo-400 transition-colors">{t("privacy")}</a></li>
-              <li><a href="#" className="hover:text-indigo-400 transition-colors">{t("terms")}</a></li>
-              <li><a href="#" className="hover:text-indigo-400 transition-colors">{t("methodology")}</a></li>
+              <li><a href="#" className="hover:text-teal-400 transition-colors">{t("privacy")}</a></li>
+              <li><a href="#" className="hover:text-teal-400 transition-colors">{t("terms")}</a></li>
+              <li><a href="#" className="hover:text-teal-400 transition-colors">{t("methodology")}</a></li>
             </ul>
           </div>
 

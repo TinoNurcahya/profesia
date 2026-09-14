@@ -1,5 +1,6 @@
 import { CandidateItem, MbtiResultInput } from "./recommendationService";
 import { RiasecScores } from "./riasecService";
+import { recommendationOutputSchema } from "@/lib/validation";
 
 export interface RecommendationItemOutput {
   id: string | number;
@@ -63,6 +64,7 @@ ATURAN KETAT:
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
       {
         method: "POST",
+        signal: AbortSignal.timeout(8_000),
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [
@@ -91,13 +93,19 @@ ATURAN KETAT:
       return generateFallbackRecommendations(mbtiResult, riasecResult, candidates);
     }
 
-    const parsed = JSON.parse(rawText);
+    const parsed = recommendationOutputSchema.parse(JSON.parse(rawText));
+    const allowedCandidates = new Map(candidates.map((candidate) => [`${candidate.type}:${candidate.id}`, candidate]));
+    const recommendations = parsed.recommendations.filter((item) => {
+      const candidate = allowedCandidates.get(`${item.type}:${item.id}`);
+      return candidate?.slug === item.slug && item.match_score <= 100;
+    });
+    if (recommendations.length === 0) return generateFallbackRecommendations(mbtiResult, riasecResult, candidates);
     return {
-      recommendations: parsed.recommendations || [],
+      recommendations,
       generated_by: "gemini_free_tier",
     };
   } catch (error) {
-    console.error("Error calling Gemini API, falling back to deterministic engine:", error);
+    console.error("Gemini provider failed; deterministic fallback used", { name: error instanceof Error ? error.name : "unknown" });
     return generateFallbackRecommendations(mbtiResult, riasecResult, candidates);
   }
 }

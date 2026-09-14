@@ -10,10 +10,10 @@ import LandingStats from "@/components/landing/LandingStats";
 export default async function LandingPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const groups = [
-    { key: "analysts" as const, icon: "🔮", codes: mbtiTypes.filter((type) => type.group_en === "Analysts") },
-    { key: "diplomats" as const, icon: "🌿", codes: mbtiTypes.filter((type) => type.group_en === "Diplomats") },
-    { key: "sentinels" as const, icon: "🛡️", codes: mbtiTypes.filter((type) => type.group_en === "Sentinels") },
-    { key: "explorers" as const, icon: "⚡", codes: mbtiTypes.filter((type) => type.group_en === "Explorers") },
+    { key: "analysts" as const, codes: mbtiTypes.filter((type) => type.group_en === "Analysts") },
+    { key: "diplomats" as const, codes: mbtiTypes.filter((type) => type.group_en === "Diplomats") },
+    { key: "sentinels" as const, codes: mbtiTypes.filter((type) => type.group_en === "Sentinels") },
+    { key: "explorers" as const, codes: mbtiTypes.filter((type) => type.group_en === "Explorers") },
   ];
 
   return (
