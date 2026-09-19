@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Sparkles, Compass } from "lucide-react";
 import StoryLabel from "./StoryLabel";
-import TextReveal from "../../motion/TextReveal";
+import KineticSplitText from "@/components/motion/KineticSplitText";
+import MagneticButton from "@/components/motion/MagneticButton";
+import CardTilt3D from "@/components/motion/CardTilt3D";
 
 export interface MbtiTypeItem {
   code: string;
@@ -69,32 +71,36 @@ export default function Chapter00Hero({ types, locale, labels }: Chapter00HeroPr
 
           {/* Left: Editorial Headline and CTAs */}
           <div className="min-w-0 lg:col-span-7 space-y-7">
-            <TextReveal
+            <KineticSplitText
               as="h1"
               id="mbti-hero-title"
               className="atlas-heading"
             >
               {labels.title}
-            </TextReveal>
+            </KineticSplitText>
 
             <p className="atlas-body max-w-lg">{labels.description}</p>
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-1">
-              <Link
-                href={`/${locale}/mbti/test`}
-                className="btn-primary min-h-12"
-              >
-                <Sparkles aria-hidden="true" className="h-4 w-4" />
-                {labels.start}
-                <ArrowRight aria-hidden="true" className="h-4 w-4" />
-              </Link>
-              <Link
-                href={`/${locale}/majors`}
-                className="atlas-text-link"
-              >
-                <Compass aria-hidden="true" className="h-4 w-4" />
-                {labels.majors}
-              </Link>
+              <MagneticButton strength={0.35}>
+                <Link
+                  href={`/${locale}/mbti/test`}
+                  className="btn-primary min-h-12 inline-flex items-center gap-2"
+                >
+                  <Sparkles aria-hidden="true" className="h-4 w-4" />
+                  {labels.start}
+                  <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                </Link>
+              </MagneticButton>
+              <MagneticButton strength={0.25}>
+                <Link
+                  href={`/${locale}/majors`}
+                  className="atlas-text-link"
+                >
+                  <Compass aria-hidden="true" className="h-4 w-4" />
+                  {labels.majors}
+                </Link>
+              </MagneticButton>
             </div>
 
             <div className="atlas-caption flex flex-wrap gap-x-6 gap-y-2 border-t border-[var(--color-line)] pt-5">
@@ -105,10 +111,9 @@ export default function Chapter00Hero({ types, locale, labels }: Chapter00HeroPr
 
           {/* Right: Character Stage */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-[420px]">
-
+            <CardTilt3D className="relative w-full max-w-[420px] rounded-2xl overflow-hidden shadow-xl border border-[var(--color-line)]" maxAngle={8}>
               {/* Top meta bar */}
-              <div className="flex items-center justify-between gap-4 border-b border-[var(--color-line)] pb-4 mb-0">
+              <div className="flex items-center justify-between gap-4 border-b border-[var(--color-line)] p-4 bg-[var(--color-surface)]">
                 <div className="flex items-center gap-2">
                   <span className="atlas-caption font-mono">01 / 16</span>
                   <span className={`inline-flex px-2 py-0.5 rounded-md text-[11px] font-semibold border ${colorScheme.badge}`}>
@@ -125,7 +130,7 @@ export default function Chapter00Hero({ types, locale, labels }: Chapter00HeroPr
               </div>
 
               {/* Character illustration */}
-              <div className="relative h-[440px] sm:h-[500px] lg:h-[520px] border-x border-b border-[var(--color-line)] bg-[var(--color-surface)]">
+              <div className="relative h-[400px] sm:h-[460px] lg:h-[480px] bg-[var(--color-surface)]">
                 <Image
                   key={activeType.code}
                   src={`/images/mbti/${activeType.code.toLowerCase()}.png`}
@@ -133,12 +138,12 @@ export default function Chapter00Hero({ types, locale, labels }: Chapter00HeroPr
                   fill
                   sizes="(min-width: 1024px) 420px, 360px"
                   priority
-                  className="object-contain object-bottom"
+                  className="object-contain object-bottom p-4"
                 />
               </div>
 
               {/* Character dossier */}
-              <div className="border border-[var(--color-line)] bg-[var(--color-surface)] p-4 mt-0">
+              <div className="border-t border-[var(--color-line)] bg-[var(--color-surface)] p-5">
                 <div className="flex items-baseline justify-between gap-2 mb-2">
                   <div>
                     <span className="font-mono text-2xl font-bold tracking-tight text-[var(--color-ink)]">
@@ -169,8 +174,7 @@ export default function Chapter00Hero({ types, locale, labels }: Chapter00HeroPr
                   </div>
                 )}
               </div>
-
-            </div>
+            </CardTilt3D>
           </div>
 
         </div>

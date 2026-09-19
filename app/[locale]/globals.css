@@ -69,6 +69,18 @@
   to { transform: rotate(360deg); }
 }
 
+@keyframes orb-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(12px, -18px) scale(1.05); }
+  50% { transform: translate(-8px, -32px) scale(0.97); }
+  75% { transform: translate(16px, -14px) scale(1.03); }
+}
+
+@keyframes gradient-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.08); }
+}
+
 /* ============================================================
    BASE STYLES
    ============================================================ */
@@ -330,11 +342,21 @@
   }
 }
 
-/* Career Atlas: shared semantic surfaces and editorial composition. */
-:root { color-scheme: light; }
+:root {
+  color-scheme: light;
+  --color-canvas: #f6f7f3;
+  --color-ink: #0b172a;
+  --color-muted: #5f6f7d;
+  --color-line: #dce3df;
+  --color-brand: #0f766e;
+  --color-surface: #ffffff;
+  --color-soft: #edf1eb;
+  --color-brand-hover: #115e59;
+  --color-on-brand: #ffffff;
+}
 :where(section[id], h2[id], main[id]) { scroll-margin-top: 88px; }
-.atlas-display, .atlas-heading, .atlas-index-title { overflow-wrap: anywhere; }
-.atlas-display { font-size: clamp(2.75rem, 6.5vw, 6rem); line-height: 1.04; font-weight: 650; letter-spacing: -0.045em; text-wrap: balance; }
+.atlas-display, .atlas-heading, .atlas-index-title { overflow-wrap: break-word; word-break: normal; }
+.atlas-display { font-size: clamp(2.5rem, 5.2vw, 5.25rem); line-height: 1.08; font-weight: 650; letter-spacing: -0.045em; text-wrap: balance; }
 .atlas-heading { font-size: clamp(2rem, 4vw, 3.75rem); line-height: 1.09; font-weight: 600; letter-spacing: -0.04em; text-wrap: balance; }
 .atlas-serif { font-family: var(--font-serif); font-style: italic; font-weight: 450; color: var(--color-brand); }
 .atlas-body { color: var(--color-muted); font-size: 1.0625rem; line-height: 1.75; }
@@ -345,13 +367,14 @@
 .atlas-hero .atlas-chapter-line { border-top: 0; padding-top: 0; }
 .atlas-text-link { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; font-weight: 600; color: var(--color-brand); text-underline-offset: 5px; }
 .atlas-text-link:hover { text-decoration: underline; }
-.atlas-index-row { display: grid; grid-template-columns: 38px minmax(0, 1fr) 20px; align-items: center; gap: 16px; padding: 30px 0; border-bottom: 1px solid var(--color-line); }
+.atlas-index-row { display: grid; grid-template-columns: 38px minmax(0, 1fr) 20px; align-items: center; gap: 16px; padding: 30px 0; border-bottom: 1px solid var(--color-line); transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms ease; }
+.atlas-index-row:hover { transform: translateX(6px); }
 .atlas-index-number { font-size: 1.5rem; font-weight: 400; font-variant-numeric: tabular-nums; color: var(--color-muted); }
 .atlas-index-title { display: block; font-size: clamp(1.3rem, 2vw, 1.8rem); line-height: 1.2; letter-spacing: -.03em; font-weight: 500; transition: color 200ms; }
 .atlas-index-row:hover .atlas-index-title { color: var(--color-brand); }
-.atlas-story-section { background: var(--color-soft); }
+.atlas-story-section { position: relative; background: var(--color-soft); background-image: radial-gradient(circle at 10% 50%, rgba(13, 148, 136, 0.04) 0%, transparent 50%); }
 .atlas-story-layout { display: grid; gap: 48px; }
-.atlas-story-step { padding: 32px 0; border-top: 1px solid var(--color-line); }
+.atlas-story-step { padding: 32px; background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 1.25rem; box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04); }
 .atlas-story-step-heading { display: flex; align-items: center; gap: 24px; }
 .atlas-step-number { color: var(--color-brand); font-size: 4rem; line-height: 1; letter-spacing: -.06em; font-variant-numeric: tabular-nums; font-weight: 400; }
 .atlas-evidence { margin-top: 28px; border-left: 2px solid var(--color-brand); padding: 20px 0 20px 24px; }
@@ -389,10 +412,9 @@
   .atlas-story-layout { grid-template-columns: 5fr 7fr; gap: 72px; align-items: start; }
   .atlas-featured { padding: 40px; }
   .atlas-role { grid-template-columns: minmax(0, 1fr) 160px; gap: 24px; padding-block: 48px; }
-  .atlas-role-image { height: 216px; }
-  [data-pinned="true"] .atlas-story-layout { min-height: calc(100svh - 64px); align-items: center; padding-block: 36px; }
-  [data-pinned="true"] .atlas-story-steps { display: grid; }
-  [data-pinned="true"] .atlas-story-step { grid-area: 1 / 1; }
+  [data-pinned="true"] .atlas-story-layout { min-height: calc(100svh - 72px); align-items: center; padding-block: 48px; }
+  [data-pinned="true"] .atlas-story-steps { display: grid; position: relative; isolation: isolate; overflow: hidden; border-radius: 1.5rem; }
+  [data-pinned="true"] .atlas-story-step { grid-area: 1 / 1; background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.04); backdrop-filter: blur(8px); will-change: transform, opacity; }
 }
 :root.dark, html.dark {
   color-scheme: dark;
@@ -438,3 +460,46 @@
 [data-scene="true"] .mbti-desktop-scene { display: block; }
 .mbti-group-scene { display: grid; min-height: calc(100svh - 64px); padding-block: 32px; }
 .mbti-group-frame { grid-area: 1 / 1; display: grid; grid-template-columns: 5fr 7fr; align-items: center; gap: 64px; }
+
+/* ============================================================
+   MOTION UTILITIES — Awwwards Animation System
+   ============================================================ */
+
+.orb-float {
+  animation: orb-float 8s ease-in-out infinite;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.orb-float-delay {
+  animation: orb-float 10s ease-in-out infinite;
+  animation-delay: -3s;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.gradient-pulse {
+  animation: gradient-pulse 5s ease-in-out infinite;
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+
+.hero-shrink-target {
+  will-change: transform, opacity;
+}
+
+.section-glow {
+  position: relative;
+}
+
+.section-glow::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-brand), transparent);
+  opacity: 0.3;
+}
+

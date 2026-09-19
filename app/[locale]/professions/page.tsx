@@ -1,13 +1,22 @@
 "use client";
 
-import { useState, useMemo, use, useEffect } from "react";
+import { useState, useMemo, use, useEffect, useRef, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import ProfessionCard from "@/components/profession/ProfessionCard";
 import FilterBar from "@/components/profession/FilterBar";
 import professionsSeed from "@/data/professions-seed.json";
 import { SearchX } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
+import KineticSplitText from "@/components/motion/KineticSplitText";
 import TextReveal from "@/components/motion/TextReveal";
+import ScrollProgressBar from "@/components/motion/ScrollProgressBar";
+import SectionReveal from "@/components/motion/SectionReveal";
+import gsap from "gsap";
+import { Flip } from "gsap/Flip";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(Flip);
+}
 
 export default function ProfessionsPage({
   searchParams,
@@ -30,6 +39,9 @@ export default function ProfessionsPage({
   const [sort, setSort] = useState(initialParams.sort || "default");
   const [professions, setProfessions] = useState(professionsSeed);
   const [catalogState, setCatalogState] = useState<"loading" | "ready" | "fallback">("loading");
+
+  const gridRef = useRef<HTMLDivElement>(null);
+  const flipStateRef = useRef<Flip.FlipState | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -62,6 +74,28 @@ export default function ProfessionsPage({
     setSalaryMax("");
     setSort("default");
   };
+
+  // Capture GSAP Flip state BEFORE filter changes
+  const captureFlipState = useCallback(() => {
+    if (gridRef.current) {
+      const items = gridRef.current.querySelectorAll("[data-flip-id]");
+      if (items.length > 0) {
+        flipStateRef.current = Flip.getState(items);
+      }
+    }
+  }, []);
+
+  // Wrapper setters that capture flip state before updating
+  const setSearchWithFlip = useCallback((v: string) => { captureFlipState(); setSearch(v); }, [captureFlipState]);
+  const setCategoryWithFlip = useCallback((v: string) => { captureFlipState(); setCategory(v); }, [captureFlipState]);
+  const setMbtiWithFlip = useCallback((v: string) => { captureFlipState(); setMbti(v); }, [captureFlipState]);
+  const setRiasecWithFlip = useCallback((v: string) => { captureFlipState(); setRiasec(v); }, [captureFlipState]);
+  const setProspectsWithFlip = useCallback((v: string) => { captureFlipState(); setProspects(v); }, [captureFlipState]);
+  const setSortWithFlip = useCallback((v: string) => { captureFlipState(); setSort(v); }, [captureFlipState]);
+  const setEducationWithFlip = useCallback((v: string) => { captureFlipState(); setEducation(v); }, [captureFlipState]);
+  const setSalaryMinWithFlip = useCallback((v: string) => { captureFlipState(); setSalaryMin(v); }, [captureFlipState]);
+  const setSalaryMaxWithFlip = useCallback((v: string) => { captureFlipState(); setSalaryMax(v); }, [captureFlipState]);
+  const handleResetWithFlip = useCallback(() => { captureFlipState(); handleReset(); }, [captureFlipState]);
 
   const filteredProfessions = useMemo(() => {
     let list = [...professions];
@@ -119,21 +153,49 @@ export default function ProfessionsPage({
     return list;
   }, [search, category, mbti, riasec, prospects, education, salaryMin, salaryMax, sort, professions]);
 
+  // Apply GSAP Flip animation AFTER render with new filtered results
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
+    if (flipStateRef.current && gridRef.current) {
+      const items = gridRef.current.querySelectorAll("[data-flip-id]");
+      if (items.length > 0) {
+        Flip.from(flipStateRef.current, {
+          targets: items,
+          duration: 0.5,
+          ease: "power2.inOut",
+          stagger: 0.04,
+          absolute: true,
+          scale: true,
+          fade: true,
+          onComplete: () => {
+            gsap.set(items, { clearProps: "transform,opacity" });
+          },
+        });
+      }
+      flipStateRef.current = null;
+    }
+  }, [filteredProfessions]);
+
   return (
     <div className="page-shell space-y-10 py-12 sm:py-16">
-      
+      <ScrollProgressBar />
+
       {/* Header Page */}
-      <div className="page-intro">
-        <p className="eyebrow">
-          {t("catalogBadge")}
-        </p>
-        <TextReveal as="h1" className="page-title">
-          {t("catalogTitle")}
-        </TextReveal>
-        <TextReveal as="p" delay={0.1} className="max-w-2xl text-base leading-relaxed text-[var(--color-muted)] sm:text-lg">
-          {t("catalogSubtitle")}
-        </TextReveal>
-      </div>
+      <SectionReveal direction="up">
+        <div className="page-intro">
+          <p className="eyebrow">
+            {t("catalogBadge")}
+          </p>
+          <KineticSplitText as="h1" className="page-title">
+            {t("catalogTitle")}
+          </KineticSplitText>
+          <TextReveal as="p" delay={0.1} className="max-w-2xl text-base leading-relaxed text-[var(--color-muted)] sm:text-lg">
+            {t("catalogSubtitle")}
+          </TextReveal>
+        </div>
+      </SectionReveal>
 
       {catalogState === "loading" && <p className="text-xs text-[var(--color-muted)]" role="status">{t("catalogLoading")}</p>}
       {catalogState === "fallback" && <p className="text-xs text-amber-700" role="status">{t("catalogError")}</p>}
@@ -141,24 +203,24 @@ export default function ProfessionsPage({
       {/* Filter Component */}
       <FilterBar
         search={search}
-        setSearch={setSearch}
+        setSearch={setSearchWithFlip}
         category={category}
-        setCategory={setCategory}
+        setCategory={setCategoryWithFlip}
         mbti={mbti}
-        setMbti={setMbti}
+        setMbti={setMbtiWithFlip}
         riasec={riasec}
-        setRiasec={setRiasec}
+        setRiasec={setRiasecWithFlip}
         prospects={prospects}
-        setProspects={setProspects}
+        setProspects={setProspectsWithFlip}
         sort={sort}
-        setSort={setSort}
+        setSort={setSortWithFlip}
         education={education}
-        setEducation={setEducation}
+        setEducation={setEducationWithFlip}
         salaryMin={salaryMin}
-        setSalaryMin={setSalaryMin}
+        setSalaryMin={setSalaryMinWithFlip}
         salaryMax={salaryMax}
-        setSalaryMax={setSalaryMax}
-        onReset={handleReset}
+        setSalaryMax={setSalaryMaxWithFlip}
+        onReset={handleResetWithFlip}
       />
 
       {/* Results Header */}
@@ -171,9 +233,9 @@ export default function ProfessionsPage({
         )}
       </div>
 
-      {/* Professions Grid */}
+      {/* Professions Grid with GSAP Flip */}
       {filteredProfessions.length > 0 ? (
-        <div className="grid grid-cols-1 gap-x-10 md:grid-cols-2 lg:grid-cols-3">
+        <div ref={gridRef} className="grid grid-cols-1 gap-x-10 md:grid-cols-2 lg:grid-cols-3">
           {filteredProfessions.map((prof) => (
             <ProfessionCard key={prof.id} profession={prof} />
           ))}
@@ -188,7 +250,7 @@ export default function ProfessionsPage({
             {t("notFoundDescription")}
           </p>
           <button
-            onClick={handleReset}
+            onClick={handleResetWithFlip}
             className="px-4 py-2 rounded-xl text-xs font-bold bg-teal-700 text-white hover:bg-teal-800 transition-colors"
           >
             {t("resetFilter")}

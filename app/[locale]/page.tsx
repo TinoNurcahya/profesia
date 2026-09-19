@@ -6,6 +6,7 @@ import LandingHero from "@/components/landing/LandingHero";
 import LandingProfessions from "@/components/landing/LandingProfessions";
 import LandingRoleGroups from "@/components/landing/LandingRoleGroups";
 import LandingStats from "@/components/landing/LandingStats";
+import ScrollProgressBar from "@/components/motion/ScrollProgressBar";
 
 export default async function LandingPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -18,6 +19,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
 
   return (
     <div className="career-atlas">
+      <ScrollProgressBar />
       <LandingHero locale={locale} professions={professionsSeed} />
       <HowItWorks locale={locale} profession={professionsSeed[0]} />
       <LandingProfessions locale={locale} professions={professionsSeed} />

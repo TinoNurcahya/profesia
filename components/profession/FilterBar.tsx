@@ -3,6 +3,8 @@
 import { Search, Filter, SlidersHorizontal, RotateCcw } from "lucide-react";
 import mbtiTypes from "@/data/mbti-types.json";
 import { useTranslations } from "next-intl";
+import GsapScrollStagger from "@/components/motion/GsapScrollStagger";
+import MagneticButton from "@/components/motion/MagneticButton";
 
 export interface FilterBarProps {
   search: string;
@@ -48,10 +50,19 @@ export default function FilterBar({
   onReset,
 }: FilterBarProps) {
   const t = useTranslations("Profession");
+
+  const hasActiveFilters =
+    category !== "all" || mbti !== "all" || riasec !== "all" || prospects !== "all" || education.trim() !== "" || salaryMin !== "" || salaryMax !== "";
+
   return (
-    <section className="surface space-y-6 p-4 sm:p-6" aria-label={t("catalogBadge")}>
+    <section
+      className={`surface space-y-6 p-4 sm:p-6 transition-all duration-300 ${
+        hasActiveFilters ? "border-[var(--color-brand)]/30 shadow-[0_0_20px_rgba(13,148,136,0.06)]" : ""
+      }`}
+      aria-label={t("catalogBadge")}
+    >
       
-      {/* Top Bar: Search Input & Sort */}
+      {/* Top Bar: Search Input and Sort */}
       <div className="flex flex-col gap-3 md:flex-row">
         
         {/* Search Bar */}
@@ -83,98 +94,102 @@ export default function FilterBar({
 
       </div>
 
-      {/* Filter Controls Row */}
-      <div className="grid grid-cols-1 gap-4 border-t border-[var(--color-line)] pt-5 sm:grid-cols-2 lg:grid-cols-4">
-        
-        {/* Category Filter */}
-        <div className="space-y-1.5">
-          <label className="text-xs font-bold text-[var(--color-muted)] flex items-center gap-1.5">
-            <Filter className="w-3.5 h-3.5 text-teal-600" />
-            {t("categoryLabel")}
-          </label>
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="field-control text-xs font-semibold"
-          >
-            <option value="all">{t("filterCategory")}</option>
-            <option value="teknologi">Teknologi</option>
-            <option value="kesehatan">Kesehatan</option>
-            <option value="seni-desain">Seni & Desain</option>
-            <option value="pemasaran">Pemasaran</option>
-            <option value="pendidikan">Pendidikan</option>
-          </select>
-        </div>
-
-        <div className="space-y-1.5">
-          <label className="text-xs font-bold text-[var(--color-muted)]">{t("riasecFilterLabel")}</label>
-          <select value={riasec} onChange={(event) => setRiasec(event.target.value)} className="field-control text-xs font-semibold">
-            <option value="all">{t("allRiasec")}</option>
-            {"RIASEC".split("").map((code) => <option value={code} key={code}>{code} — {t(`riasec${code}`)}</option>)}
-          </select>
-        </div>
-
-        {/* MBTI Quick Filter */}
-        <div className="space-y-1.5">
-          <label className="text-xs font-bold text-purple-600 flex items-center gap-1.5">
-            <SlidersHorizontal className="w-3.5 h-3.5 text-purple-500" />
-            {t("mbtiFilterLabel")}
-          </label>
-          <select
-            value={mbti}
-            onChange={(e) => setMbti(e.target.value)}
-            className="field-control border-purple-200 bg-purple-50 text-xs font-bold text-purple-900 focus:border-purple-600 focus:ring-purple-600/15"
-          >
-            <option value="all">{t("allMbti")}</option>
-            {mbtiTypes.map((t) => (
-              <option key={t.code} value={t.code}>
-                {t.code} - {t.name_id} ({t.group_id})
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="space-y-1.5">
-          <label className="text-xs font-bold text-[var(--color-muted)]" htmlFor="education-filter">{t("educationFilterLabel")}</label>
-          <input id="education-filter" value={education} onChange={(event) => setEducation(event.target.value)} placeholder={t("educationFilterPlaceholder")} className="field-control text-xs" />
-        </div>
-
-        <div className="space-y-1.5">
-          <label className="text-xs font-bold text-[var(--color-muted)]">{t("salaryFilterLabel")}</label>
-          <div className="grid grid-cols-2 gap-2">
-            <input type="number" min="0" inputMode="numeric" value={salaryMin} onChange={(event) => setSalaryMin(event.target.value)} placeholder={t("salaryMinPlaceholder")} aria-label={t("salaryMinLabel")} className="field-control min-w-0 text-xs" />
-            <input type="number" min="0" inputMode="numeric" value={salaryMax} onChange={(event) => setSalaryMax(event.target.value)} placeholder={t("salaryMaxPlaceholder")} aria-label={t("salaryMaxLabel")} className="field-control min-w-0 text-xs" />
+      {/* Filter Controls Row with stagger entrance */}
+      <GsapScrollStagger selector="[data-gsap='filter']" stagger={0.08} yOffset={20} triggerHook="top 95%">
+        <div className="grid grid-cols-1 gap-4 border-t border-[var(--color-line)] pt-5 sm:grid-cols-2 lg:grid-cols-4">
+          
+          {/* Category Filter */}
+          <div data-gsap="filter" className="space-y-1.5">
+            <label className="text-xs font-bold text-[var(--color-muted)] flex items-center gap-1.5">
+              <Filter className="w-3.5 h-3.5 text-teal-600" />
+              {t("categoryLabel")}
+            </label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="field-control text-xs font-semibold"
+            >
+              <option value="all">{t("filterCategory")}</option>
+              <option value="teknologi">Teknologi</option>
+              <option value="kesehatan">Kesehatan</option>
+              <option value="seni-desain">Seni &amp; Desain</option>
+              <option value="pemasaran">Pemasaran</option>
+              <option value="pendidikan">Pendidikan</option>
+            </select>
           </div>
-        </div>
 
-        {/* Prospects Filter */}
-        <div className="space-y-1.5">
-          <label className="text-xs font-bold text-[var(--color-muted)]">
-            {t("prospectsLabel")}
-          </label>
-          <select
-            value={prospects}
-            onChange={(e) => setProspects(e.target.value)}
-            className="field-control text-xs font-semibold"
-          >
-            <option value="all">{t("filterProspects")}</option>
-            <option value="high">{t("highProspectsLong")}</option>
-            <option value="medium">{t("mediumProspectsLong")}</option>
-          </select>
-        </div>
+          <div data-gsap="filter" className="space-y-1.5">
+            <label className="text-xs font-bold text-[var(--color-muted)]">{t("riasecFilterLabel")}</label>
+            <select value={riasec} onChange={(event) => setRiasec(event.target.value)} className="field-control text-xs font-semibold">
+              <option value="all">{t("allRiasec")}</option>
+              {"RIASEC".split("").map((code) => <option value={code} key={code}>{code} — {t(`riasec${code}`)}</option>)}
+            </select>
+          </div>
 
-        {/* Reset Button */}
-        <div className="flex items-end">
-          <button
-            onClick={onReset}
-            className="flex min-h-11 w-full items-center justify-center gap-2 rounded-[10px] border border-[var(--color-line)] px-4 text-xs font-bold text-[var(--color-ink)] transition-colors hover:bg-[var(--color-soft)]"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            {t("resetFilter")}
-          </button>
-        </div>
+          {/* MBTI Quick Filter */}
+          <div data-gsap="filter" className="space-y-1.5">
+            <label className="text-xs font-bold text-purple-600 flex items-center gap-1.5">
+              <SlidersHorizontal className="w-3.5 h-3.5 text-purple-500" />
+              {t("mbtiFilterLabel")}
+            </label>
+            <select
+              value={mbti}
+              onChange={(e) => setMbti(e.target.value)}
+              className="field-control border-purple-200 bg-purple-50 text-xs font-bold text-purple-900 focus:border-purple-600 focus:ring-purple-600/15"
+            >
+              <option value="all">{t("allMbti")}</option>
+              {mbtiTypes.map((t) => (
+                <option key={t.code} value={t.code}>
+                  {t.code} - {t.name_id} ({t.group_id})
+                </option>
+              ))}
+            </select>
+          </div>
 
-      </div>
+          <div data-gsap="filter" className="space-y-1.5">
+            <label className="text-xs font-bold text-[var(--color-muted)]" htmlFor="education-filter">{t("educationFilterLabel")}</label>
+            <input id="education-filter" value={education} onChange={(event) => setEducation(event.target.value)} placeholder={t("educationFilterPlaceholder")} className="field-control text-xs" />
+          </div>
+
+          <div data-gsap="filter" className="space-y-1.5">
+            <label className="text-xs font-bold text-[var(--color-muted)]">{t("salaryFilterLabel")}</label>
+            <div className="grid grid-cols-2 gap-2">
+              <input type="number" min="0" inputMode="numeric" value={salaryMin} onChange={(event) => setSalaryMin(event.target.value)} placeholder={t("salaryMinPlaceholder")} aria-label={t("salaryMinLabel")} className="field-control min-w-0 text-xs" />
+              <input type="number" min="0" inputMode="numeric" value={salaryMax} onChange={(event) => setSalaryMax(event.target.value)} placeholder={t("salaryMaxPlaceholder")} aria-label={t("salaryMaxLabel")} className="field-control min-w-0 text-xs" />
+            </div>
+          </div>
+
+          {/* Prospects Filter */}
+          <div data-gsap="filter" className="space-y-1.5">
+            <label className="text-xs font-bold text-[var(--color-muted)]">
+              {t("prospectsLabel")}
+            </label>
+            <select
+              value={prospects}
+              onChange={(e) => setProspects(e.target.value)}
+              className="field-control text-xs font-semibold"
+            >
+              <option value="all">{t("filterProspects")}</option>
+              <option value="high">{t("highProspectsLong")}</option>
+              <option value="medium">{t("mediumProspectsLong")}</option>
+            </select>
+          </div>
+
+          {/* Reset Button with MagneticButton */}
+          <div data-gsap="filter" className="flex items-end">
+            <MagneticButton strength={0.3} className="w-full">
+              <button
+                onClick={onReset}
+                className="flex min-h-11 w-full items-center justify-center gap-2 rounded-[10px] border border-[var(--color-line)] px-4 text-xs font-bold text-[var(--color-ink)] transition-colors hover:bg-[var(--color-soft)]"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                {t("resetFilter")}
+              </button>
+            </MagneticButton>
+          </div>
+
+        </div>
+      </GsapScrollStagger>
     </section>
   );
 }

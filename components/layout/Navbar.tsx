@@ -13,12 +13,52 @@ const focusableSelector = "a[href], button:not([disabled]), [tabindex]:not([tabi
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [exploreOpen, setExploreOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const lastScrollY = useRef(0);
   const drawerRef = useRef<HTMLDivElement>(null);
   const exploreRef = useRef<HTMLDivElement>(null);
   const exploreButtonRef = useRef<HTMLButtonElement>(null);
   const locale = useLocale();
   const pathname = usePathname();
   const t = useTranslations("Navbar");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY <= 15) {
+        setIsVisible(true);
+        setIsScrolled(false);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      setIsScrolled(true);
+
+      if (isOpen) {
+        setIsVisible(true);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      const diff = currentScrollY - lastScrollY.current;
+
+      if (Math.abs(diff) < 6) return;
+
+      if (diff > 0 && currentScrollY > 70) {
+        setIsVisible(false);
+        setExploreOpen(false);
+      } else if (diff < 0) {
+        setIsVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isOpen]);
   const primaryLinks = [
     { href: `/${locale}`, label: t("home"), icon: Compass },
     { href: `/${locale}/professions`, label: t("professions"), icon: BriefcaseBusiness },
@@ -74,9 +114,17 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--color-line)] bg-[var(--color-canvas)]">
+    <header
+      className={`sticky top-0 z-50 border-b transition-all duration-300 ease-in-out ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      } ${
+        isScrolled
+          ? "border-[var(--color-line)]/60 bg-[var(--color-canvas)]/85 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.06)]"
+          : "border-[var(--color-line)] bg-[var(--color-canvas)]"
+      }`}
+    >
       <div className="page-shell flex h-16 items-center justify-between gap-3 sm:gap-6">
-        <Link href={`/${locale}`} onClick={closeMenus} className="group flex min-h-11 shrink-0 items-center gap-2.5" aria-label={`${t("brand")} — ${t("home")}`}>
+        <Link href={`/${locale}`} onClick={closeMenus} className={`group flex min-h-11 shrink-0 items-center gap-2.5 transition-transform duration-300 ${isScrolled ? "scale-[0.94]" : "scale-100"}`} aria-label={`${t("brand")} — ${t("home")}`}>
           <span className="grid h-10 w-10 place-items-center rounded-[10px] bg-teal-700 text-white transition-colors group-hover:bg-teal-800"><Compass aria-hidden="true" className="h-5 w-5" /></span>
           <span className="leading-none"><span className="block text-lg font-bold tracking-[-0.03em] text-[var(--color-ink)]">{t("brand")}</span><span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--color-muted)]">{t("tagline")}</span></span>
         </Link>

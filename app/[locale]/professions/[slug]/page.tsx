@@ -13,6 +13,15 @@ import {
   Sparkles,
   TrendingUp,
 } from "lucide-react";
+import KineticSplitText from "@/components/motion/KineticSplitText";
+import ScrollTextReveal from "@/components/motion/ScrollTextReveal";
+import BentoMotion from "@/components/motion/BentoMotion";
+import CounterScrub from "@/components/motion/CounterScrub";
+import GsapScrollStagger from "@/components/motion/GsapScrollStagger";
+import SectionReveal from "@/components/motion/SectionReveal";
+import MagneticButton from "@/components/motion/MagneticButton";
+import ScrollProgressBar from "@/components/motion/ScrollProgressBar";
+import CareerPathTimeline from "@/components/profession/CareerPathTimeline";
 
 export default async function ProfessionDetailPage({
   params,
@@ -39,9 +48,12 @@ export default async function ProfessionDetailPage({
 
   const careerSteps = careerPath.split(" -> ").map((step) => step.trim());
 
+  const salaryBarPercent = Math.min(100, Math.max(15, (profession.salary_max / 35000000) * 100));
+
   return (
     <div className="page-shell max-w-6xl space-y-14 py-12 sm:py-16">
-      
+      <ScrollProgressBar />
+
       {/* 1. Breadcrumbs Navigation */}
       <nav aria-label="Breadcrumb">
         <Link
@@ -53,260 +65,259 @@ export default async function ProfessionDetailPage({
         </Link>
       </nav>
 
-      {/* 2. Hero Editorial Header */}
-      <header className="space-y-4 border-b border-[var(--color-line)] pb-8">
-        <div className="flex flex-wrap items-center gap-2.5">
-          <p className="text-xs font-mono font-semibold uppercase tracking-[0.16em] text-teal-700">
-            {categoryName}
-          </p>
-          <span className="text-[var(--color-muted)]" aria-hidden="true">·</span>
-          <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-md">
-            <TrendingUp className="w-3.5 h-3.5" aria-hidden="true" />
-            {profession.prospects === "high"
-              ? isEnglish ? "High Growth" : "Prospek Tinggi"
-              : profession.prospects === "medium"
-              ? isEnglish ? "Stable Demand" : "Prospek Sedang"
-              : isEnglish ? "Niche Demand" : "Prospek Khusus"}
-          </span>
-        </div>
+      {/* 2. Hero Editorial Header with KineticSplitText */}
+      <SectionReveal direction="up">
+        <header className="space-y-4 border-b border-[var(--color-line)] pb-8">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <p className="text-xs font-mono font-semibold uppercase tracking-[0.16em] text-teal-700">
+              {categoryName}
+            </p>
+            <span className="text-[var(--color-muted)]" aria-hidden="true">·</span>
+            <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-md">
+              <TrendingUp className="w-3.5 h-3.5" aria-hidden="true" />
+              {profession.prospects === "high"
+                ? isEnglish ? "High Growth" : "Prospek Tinggi"
+                : profession.prospects === "medium"
+                ? isEnglish ? "Stable Demand" : "Prospek Sedang"
+                : isEnglish ? "Niche Demand" : "Prospek Khusus"}
+            </span>
+          </div>
 
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.1] text-[var(--color-ink)]">
-          {name}
-        </h1>
+          <KineticSplitText as="h1" className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.1] text-[var(--color-ink)]">
+            {name}
+          </KineticSplitText>
 
-        <p className="max-w-3xl text-base sm:text-lg text-[var(--color-muted)] leading-relaxed">
-          {description}
-        </p>
-      </header>
+          <ScrollTextReveal className="max-w-3xl text-base sm:text-lg text-[var(--color-muted)] leading-relaxed" dimOpacity={0.2}>
+            {description}
+          </ScrollTextReveal>
+        </header>
+      </SectionReveal>
 
-      {/* 3. Bento Intelligence Specs */}
-      <section aria-labelledby="specs-heading" className="space-y-6">
-        <h2 id="specs-heading" className="sr-only">
-          {isEnglish ? "Profession Specifications" : "Spesifikasi Profesi"}
-        </h2>
+      {/* 3. Bento Intelligence Specs with BentoMotion */}
+      <BentoMotion>
+        <section aria-labelledby="specs-heading" className="space-y-6">
+          <h2 id="specs-heading" className="sr-only">
+            {isEnglish ? "Profession Specifications" : "Spesifikasi Profesi"}
+          </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-          
-          {/* Tile 1: Salary Benchmark (6 cols) */}
-          <article className="space-y-4 border-t-2 border-teal-700 py-6 md:col-span-6">
-            <div className="flex items-center justify-between">
-              <div className="w-9 h-9 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-700">
-                <DollarSign className="w-5 h-5" aria-hidden="true" />
-              </div>
-            </div>
-
-            <div className="space-y-1">
-              <div className="text-xs font-medium text-[var(--color-muted)]">{t("salaryRange")}</div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-[var(--color-ink)] tracking-tight">
-                Rp {(profession.salary_min / 1000000).toFixed(0)}–{(profession.salary_max / 1000000).toFixed(0)}{" "}
-                <span className="text-base sm:text-lg font-medium text-[var(--color-muted)] font-sans">
-                  {isEnglish ? "mil / month" : "jt / bulan"}
-                </span>
-              </div>
-            </div>
-
-            {/* Visual Bar Indicator */}
-            <div className="space-y-1.5 pt-2">
-              <div
-                className="h-2 w-full bg-[var(--color-soft)] rounded-full overflow-hidden"
-                role="meter"
-                aria-label={t("salaryRange")}
-                aria-valuemin={0}
-                aria-valuemax={35_000_000}
-                aria-valuenow={profession.salary_max}
-                aria-valuetext={`Rp ${profession.salary_min.toLocaleString(locale)}–${profession.salary_max.toLocaleString(locale)}`}
-              >
-                <div
-                  className="h-full bg-teal-700 rounded-full"
-                  style={{ width: `${Math.min(100, Math.max(15, (profession.salary_max / 35000000) * 100))}%` }}
-                />
-              </div>
-              <div className="flex justify-between text-[11px] font-mono text-[var(--color-muted)]">
-                <span>Entry Level (Min)</span>
-                <span>Lead / Executive (Max)</span>
-              </div>
-            </div>
-          </article>
-
-          {/* Tile 2: Education Minimum (6 cols) */}
-          <article className="flex flex-col justify-between space-y-4 border-t-2 border-[var(--color-line)] py-6 md:col-span-6">
-            <div className="space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+            
+            {/* Tile 1: Salary Benchmark (6 cols) */}
+            <article data-bento-card className="space-y-4 border-t-2 border-teal-700 py-6 md:col-span-6">
               <div className="flex items-center justify-between">
-                <div className="w-9 h-9 rounded-xl bg-[var(--color-soft)] border border-[var(--color-line)] flex items-center justify-center text-[var(--color-ink)]">
-                  <GraduationCap className="w-5 h-5" aria-hidden="true" />
+                <div className="w-9 h-9 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-700">
+                  <DollarSign className="w-5 h-5" aria-hidden="true" />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <div className="text-xs font-medium text-[var(--color-muted)]">{t("education")}</div>
-                <div className="text-lg font-bold text-[var(--color-ink)] leading-snug">
-                  {education}
+                <div className="text-xs font-medium text-[var(--color-muted)]">{t("salaryRange")}</div>
+                <div className="text-2xl sm:text-3xl font-extrabold text-[var(--color-ink)] tracking-tight">
+                  Rp <CounterScrub value={profession.salary_min / 1000000} suffix="" />–<CounterScrub value={profession.salary_max / 1000000} suffix="" />{" "}
+                  <span className="text-base sm:text-lg font-medium text-[var(--color-muted)] font-sans">
+                    {isEnglish ? "mil / month" : "jt / bulan"}
+                  </span>
                 </div>
               </div>
-            </div>
 
-            {workEnv && (
-              <p className="text-xs text-[var(--color-muted)] pt-2 border-t border-[var(--color-line)]">
-                <span className="font-semibold text-[var(--color-ink)]">{isEnglish ? "Environment: " : "Lingkungan Kerja: "}</span>
-                {workEnv}
-              </p>
-            )}
-          </article>
-
-          {/* Tile 3: Work-Life Balance (6 cols) */}
-          <article className="space-y-3 border-t-2 border-[var(--color-line)] py-6 md:col-span-6">
-            <div className="flex items-center justify-between">
-              <div className="w-9 h-9 rounded-xl bg-[var(--color-soft)] border border-[var(--color-line)] flex items-center justify-center text-[var(--color-ink)]">
-                <Clock className="w-5 h-5" aria-hidden="true" />
-              </div>
-            </div>
-
-            <div className="flex items-baseline justify-between">
-              <div className="text-xs font-medium text-[var(--color-muted)]">{t("workLifeBalance")}</div>
-              <div className="text-xl font-extrabold text-[var(--color-ink)]">
-                {profession.work_life_balance} <span className="text-xs font-normal text-[var(--color-muted)]">/ 5</span>
-              </div>
-            </div>
-
-            {/* 5-bar rating meter */}
-            <div className="grid grid-cols-5 gap-1.5 pt-1">
-              {[1, 2, 3, 4, 5].map((index) => (
+              {/* Visual Bar Indicator with gauge animation */}
+              <div className="space-y-1.5 pt-2">
                 <div
-                  key={index}
-                  className={`h-2 rounded-full ${
-                    index <= profession.work_life_balance
-                      ? "bg-teal-700"
-                      : "bg-[var(--color-soft)]"
-                  }`}
-                />
-              ))}
-            </div>
-          </article>
-
-          {/* Tile 4: Matching Personality & MBTI Alignment (6 cols) */}
-          <article className="space-y-3 border-t-2 border-teal-700 py-6 md:col-span-6">
-            <div className="flex items-center justify-between">
-              <div className="w-9 h-9 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-700">
-                <Sparkles className="w-5 h-5" aria-hidden="true" />
+                  className="h-2 w-full bg-[var(--color-soft)] rounded-full overflow-hidden"
+                  role="meter"
+                  aria-label={t("salaryRange")}
+                  aria-valuemin={0}
+                  aria-valuemax={35_000_000}
+                  aria-valuenow={profession.salary_max}
+                  aria-valuetext={`Rp ${profession.salary_min.toLocaleString(locale)}–${profession.salary_max.toLocaleString(locale)}`}
+                >
+                  <div
+                    className="h-full bg-teal-700 rounded-full"
+                    data-gauge-target={`${salaryBarPercent}%`}
+                  />
+                </div>
+                <div className="flex justify-between text-[11px] font-mono text-[var(--color-muted)]">
+                  <span>Entry Level (Min)</span>
+                  <span>Lead / Executive (Max)</span>
+                </div>
               </div>
-            </div>
+            </article>
 
-            <div className="space-y-1">
-              <div className="text-xs font-medium text-[var(--color-muted)]">{t("matchedMbti")}</div>
-              <div className="flex flex-wrap gap-2 pt-1">
-                {profession.matched_mbti.map((m) => (
-                  <Link
-                    key={m.code}
-                    href={`/${locale}/mbti/result/${m.code}`}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-purple-200 bg-purple-50/70 hover:bg-teal-700 hover:text-white hover:border-teal-700 text-purple-700 text-xs font-mono font-bold transition-colors"
-                  >
-                    <span>{m.code}</span>
-                    <ArrowRight className="w-3 h-3 opacity-60" aria-hidden="true" />
-                  </Link>
+            {/* Tile 2: Education Minimum (6 cols) */}
+            <article data-bento-card className="flex flex-col justify-between space-y-4 border-t-2 border-[var(--color-line)] py-6 md:col-span-6">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="w-9 h-9 rounded-xl bg-[var(--color-soft)] border border-[var(--color-line)] flex items-center justify-center text-[var(--color-ink)]">
+                    <GraduationCap className="w-5 h-5" aria-hidden="true" />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <div className="text-xs font-medium text-[var(--color-muted)]">{t("education")}</div>
+                  <div className="text-lg font-bold text-[var(--color-ink)] leading-snug">
+                    {education}
+                  </div>
+                </div>
+              </div>
+
+              {workEnv && (
+                <p className="text-xs text-[var(--color-muted)] pt-2 border-t border-[var(--color-line)]">
+                  <span className="font-semibold text-[var(--color-ink)]">{isEnglish ? "Environment: " : "Lingkungan Kerja: "}</span>
+                  {workEnv}
+                </p>
+              )}
+            </article>
+
+            {/* Tile 3: Work-Life Balance (6 cols) */}
+            <article data-bento-card className="space-y-3 border-t-2 border-[var(--color-line)] py-6 md:col-span-6">
+              <div className="flex items-center justify-between">
+                <div className="w-9 h-9 rounded-xl bg-[var(--color-soft)] border border-[var(--color-line)] flex items-center justify-center text-[var(--color-ink)]">
+                  <Clock className="w-5 h-5" aria-hidden="true" />
+                </div>
+              </div>
+
+              <div className="flex items-baseline justify-between">
+                <div className="text-xs font-medium text-[var(--color-muted)]">{t("workLifeBalance")}</div>
+                <div className="text-xl font-extrabold text-[var(--color-ink)]">
+                  <CounterScrub value={profession.work_life_balance} suffix="" /> <span className="text-xs font-normal text-[var(--color-muted)]">/ 5</span>
+                </div>
+              </div>
+
+              {/* 5-bar rating meter with gauge animation */}
+              <div className="grid grid-cols-5 gap-1.5 pt-1">
+                {[1, 2, 3, 4, 5].map((index) => (
+                  <div
+                    key={index}
+                    className={`h-2 rounded-full ${
+                      index <= profession.work_life_balance
+                        ? "bg-teal-700"
+                        : "bg-[var(--color-soft)]"
+                    }`}
+                    data-gauge-target={index <= profession.work_life_balance ? "100%" : undefined}
+                  />
                 ))}
               </div>
-            </div>
-          </article>
+            </article>
 
-        </div>
-      </section>
-
-      {/* 4. Key Skills Matrix */}
-      <section aria-labelledby="skills-heading" className="space-y-5 border-y border-[var(--color-line)] py-8">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-teal-700" aria-hidden="true" />
-            <h2 id="skills-heading" className="text-xl font-bold text-[var(--color-ink)]">
-              {t("skills")}
-            </h2>
-          </div>
-          <p className="text-xs text-[var(--color-muted)]">
-            {isEnglish
-              ? "Competencies and tools commonly expected by industry recruiters."
-              : "Kompetensi teknis dan alat kerja yang paling dicari perusahaan pada posisi ini."}
-          </p>
-        </div>
-
-        <div className="flex flex-wrap gap-2 pt-1">
-          {skills.map((skill) => (
-            <span
-              key={skill}
-              className="px-3.5 py-2 rounded-md border border-[var(--color-line)] bg-[var(--color-soft)] text-[var(--color-ink)] text-xs sm:text-sm font-semibold hover:border-[var(--color-line)] transition-colors"
-            >
-              {skill}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      {/* 5. Architectural Career Progression Timeline */}
-      <section aria-labelledby="career-ladder-heading" className="space-y-6 border-y border-[var(--color-line)] py-8">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <Briefcase className="w-5 h-5 text-teal-700" aria-hidden="true" />
-            <h2 id="career-ladder-heading" className="text-xl font-bold text-[var(--color-ink)]">
-              {t("careerPath")}
-            </h2>
-          </div>
-          <p className="text-xs text-[var(--color-muted)]">
-            {isEnglish
-              ? "Typical milestone trajectories from junior stages to senior leadership."
-              : "Tahapan jenjang karier dari pemula hingga posisi pimpinan spesialis/manajemen."}
-          </p>
-        </div>
-
-        <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {careerSteps.map((step, index) => (
-            <li
-              key={step}
-              className="rounded-xl border border-[var(--color-line)] bg-[var(--color-soft)] p-4 space-y-2 relative group hover:border-teal-300 transition-colors"
-            >
-              <div className="flex items-center justify-between text-xs font-mono font-bold text-teal-700">
-                <span>STAGE 0{index + 1}</span>
-                {index < careerSteps.length - 1 && (
-                  <ArrowRight className="w-3.5 h-3.5 text-[var(--color-muted)] hidden lg:block" aria-hidden="true" />
-                )}
+            {/* Tile 4: Matching Personality and MBTI Alignment (6 cols) */}
+            <article data-bento-card className="space-y-3 border-t-2 border-teal-700 py-6 md:col-span-6">
+              <div className="flex items-center justify-between">
+                <div className="w-9 h-9 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-700">
+                  <Sparkles className="w-5 h-5" aria-hidden="true" />
+                </div>
               </div>
-              <h3 className="text-sm font-bold text-[var(--color-ink)] leading-snug">
-                {step}
-              </h3>
-            </li>
-          ))}
-        </ol>
-      </section>
 
-      {/* 6. Action Strip */}
-      <section
-        aria-label="Next Actions"
-        className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-soft)] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4"
-      >
-        <div className="space-y-1 text-center sm:text-left">
-          <h3 className="text-base font-bold text-[var(--color-ink)]">
-            {isEnglish ? "Want to see if this career suits you?" : "Ingin tahu apakah karier ini cocok untukmu?"}
-          </h3>
-          <p className="text-xs text-[var(--color-muted)]">
-            {isEnglish
-              ? "Take the 5-minute personality assessment to measure your psychological compatibility."
-              : "Ambil tes kepribadian 5 menit untuk mengukur kecocokan karakter dan minat kerjamu."}
-          </p>
-        </div>
+              <div className="space-y-1">
+                <div className="text-xs font-medium text-[var(--color-muted)]">{t("matchedMbti")}</div>
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {profession.matched_mbti.map((m) => (
+                    <Link
+                      key={m.code}
+                      href={`/${locale}/mbti/result/${m.code}`}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-purple-200 bg-purple-50/70 hover:bg-teal-700 hover:text-white hover:border-teal-700 text-purple-700 text-xs font-mono font-bold transition-colors"
+                    >
+                      <span>{m.code}</span>
+                      <ArrowRight className="w-3 h-3 opacity-60" aria-hidden="true" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </article>
 
-        <div className="flex flex-wrap items-center gap-3">
-          <Link
-            href={`/${locale}/mbti`}
-            className="px-5 py-3 rounded-lg text-xs font-bold bg-teal-700 hover:bg-teal-800 text-white transition-colors inline-flex items-center gap-2 shadow-sm"
-          >
-            <span>{isEnglish ? "Take MBTI Test" : "Mulai Tes MBTI"}</span>
-            <ArrowRight className="w-4 h-4" aria-hidden="true" />
-          </Link>
-          <Link
-            href={`/${locale}/majors`}
-            className="px-5 py-3 rounded-lg text-xs font-semibold bg-[var(--color-surface)] border border-[var(--color-line)] hover:bg-[var(--color-soft)] text-[var(--color-ink)] transition-colors"
-          >
-            {isEnglish ? "Explore Relevant Majors" : "Lihat Jurusan Terkait"}
-          </Link>
-        </div>
-      </section>
+          </div>
+        </section>
+      </BentoMotion>
+
+      {/* 4. Key Skills Matrix with stagger */}
+      <GsapScrollStagger selector="[data-gsap='skill']" stagger={0.05} yOffset={16}>
+        <section aria-labelledby="skills-heading" className="space-y-5 border-y border-[var(--color-line)] py-8">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-5 h-5 text-teal-700" aria-hidden="true" />
+              <h2 id="skills-heading" className="text-xl font-bold text-[var(--color-ink)]">
+                {t("skills")}
+              </h2>
+            </div>
+            <p className="text-xs text-[var(--color-muted)]">
+              {isEnglish
+                ? "Competencies and tools commonly expected by industry recruiters."
+                : "Kompetensi teknis dan alat kerja yang paling dicari perusahaan pada posisi ini."}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 pt-1">
+            {skills.map((skill) => (
+              <span
+                key={skill}
+                data-gsap="skill"
+                className="px-3.5 py-2 rounded-md border border-[var(--color-line)] bg-[var(--color-soft)] text-[var(--color-ink)] text-xs sm:text-sm font-semibold hover:border-teal-300 hover:bg-teal-50/50 transition-colors"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </section>
+      </GsapScrollStagger>
+
+      {/* 5. Career Progression Timeline with DrawSVG */}
+      <SectionReveal direction="up">
+        <section aria-labelledby="career-ladder-heading" className="space-y-6 border-y border-[var(--color-line)] py-8">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <Briefcase className="w-5 h-5 text-teal-700" aria-hidden="true" />
+              <h2 id="career-ladder-heading" className="text-xl font-bold text-[var(--color-ink)]">
+                {t("careerPath")}
+              </h2>
+            </div>
+            <p className="text-xs text-[var(--color-muted)]">
+              {isEnglish
+                ? "Typical milestone trajectories from junior stages to senior leadership."
+                : "Tahapan jenjang karier dari pemula hingga posisi pimpinan spesialis/manajemen."}
+            </p>
+          </div>
+
+          <CareerPathTimeline steps={careerSteps} />
+        </section>
+      </SectionReveal>
+
+      {/* 6. Action Strip with MagneticButton */}
+      <SectionReveal direction="scale">
+        <section
+          aria-label="Next Actions"
+          className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-soft)] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+        >
+          <div className="space-y-1 text-center sm:text-left">
+            <h3 className="text-base font-bold text-[var(--color-ink)]">
+              {isEnglish ? "Want to see if this career suits you?" : "Ingin tahu apakah karier ini cocok untukmu?"}
+            </h3>
+            <p className="text-xs text-[var(--color-muted)]">
+              {isEnglish
+                ? "Take the 5-minute personality assessment to measure your psychological compatibility."
+                : "Ambil tes kepribadian 5 menit untuk mengukur kecocokan karakter dan minat kerjamu."}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <MagneticButton strength={0.35}>
+              <Link
+                href={`/${locale}/mbti`}
+                className="px-5 py-3 rounded-lg text-xs font-bold bg-teal-700 hover:bg-teal-800 text-white transition-colors inline-flex items-center gap-2 shadow-sm"
+              >
+                <span>{isEnglish ? "Take MBTI Test" : "Mulai Tes MBTI"}</span>
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
+            </MagneticButton>
+            <MagneticButton strength={0.25}>
+              <Link
+                href={`/${locale}/majors`}
+                className="px-5 py-3 rounded-lg text-xs font-semibold bg-[var(--color-surface)] border border-[var(--color-line)] hover:bg-[var(--color-soft)] text-[var(--color-ink)] transition-colors"
+              >
+                {isEnglish ? "Explore Relevant Majors" : "Lihat Jurusan Terkait"}
+              </Link>
+            </MagneticButton>
+          </div>
+        </section>
+      </SectionReveal>
 
     </div>
   );
