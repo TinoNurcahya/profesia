@@ -1,4 +1,8 @@
 {
+  "Common": {
+    "skipToContent": "Lewati ke konten utama",
+    "loading": "Memuat"
+  },
   "Navbar": {
     "brand": "Profesia",
     "home": "Beranda",
@@ -13,30 +17,72 @@
     "profile": "Profil Saya",
     "admin": "Admin Panel",
     "logout": "Keluar",
-    "tagline": "Karier & MBTI",
+    "tagline": "Atlas karier",
     "toggleMenu": "Buka menu navigasi",
     "zodiac": "Zodiak",
+    "explore": "Eksplorasi",
+    "primaryNavigation": "Navigasi utama",
+    "mobileNavigation": "Navigasi seluler",
+    "chooseLanguage": "Pilih bahasa",
     "languageIndonesian": "Bahasa Indonesia",
-    "languageEnglish": "Bahasa Inggris"
+    "languageEnglish": "Bahasa Inggris",
+    "closeMenu": "Tutup navigasi",
+    "themeToggle": "Ganti tema visual",
+    "switchToDark": "Beralih ke Mode Gelap",
+    "switchToLight": "Beralih ke Mode Terang"
   },
   "Landing": {
     "hero": {
-      "badge": "Platform Eksplorasi Karier",
-      "titleLine1": "Temukan arah karier",
-      "titleLine2": "yang lebih cocok untukmu.",
-      "subtitle": "Kenali minat, kepribadian, dan kemampuanmu untuk menemukan pilihan karier yang relevan beserta alasan kecocokannya.",
-      "ctaPrimary": "Mulai Jelajahi Karier",
-      "ctaSecondary": "Lihat Cara Kerja"
+      "badge": "Atlas karier",
+      "titleLine1": "Kenali dirimu.",
+      "titleLine2": "Buka kemungkinanmu.",
+      "subtitle": "Jelajahi profesi melalui minat, cara berpikir, dan kemampuanmu. Pahami alasannya, lalu tentukan langkah berikutnya.",
+      "ctaPrimary": "Jelajahi profesi",
+      "ctaSecondary": "Kenali dirimu",
+      "edition": "Profesia / Eksplorasi diri & karier",
+      "indexTitle": "Indeks kemungkinan",
+      "indexCount": "{count} pilihan awal",
+      "indexNote": "Sebuah awal untuk menjelajah. Bukan batas dari kemungkinanmu.",
+      "empty": "Indeks profesi belum tersedia.",
+      "scroll": "Lihat bagaimana semuanya terhubung"
     },
     "preview": {
+      "eyebrow": "Metodologi & Kerangka Analisis",
+      "title": "Peta Analisis & Kerangka Asesmen Terintegrasi",
+      "subtitle": "Menggabungkan dua teori psikometri terbesar (MBTI & Holland Code RIASEC) dengan database profesi dan jurusan kuliah.",
+      "framework1Badge": "Tipologi Kepribadian",
+      "framework2Badge": "Minat Vokasional",
+      "mbtiTitle": "16 Tipologi Kepribadian (Jungian Typology)",
+      "mbtiDescription": "Memetakan 4 fungsi kognitif alami (Analyst, Diplomat, Sentinel, Explorer) untuk menemukan gaya kerja dan lingkungan optimal.",
+      "riasecTitle": "6 Dimensi Minat Vokasional",
+      "riasecDescription": "Mengukur preferensi aktivitas konkret untuk memvalidasi kesesuaian tugas harian pekerjaan.",
+      "majorsTitle": "Pemetaan Jurusan Kuliah Terarah",
+      "majorsDescription": "Menghubungkan kecenderungan psikologis dengan kurikulum akademik perguruan tinggi agar terhindar dari salah pilih jurusan.",
+      "majorsBadge": "Jalur Langsung",
+      "pathAssessment": "Hasil Asesmen",
+      "pathMajors": "Rekomendasi Jurusan",
+      "pathCareers": "Karier Impian",
+      "professionsDescription": "Lengkap dengan riset rentang gaji industri nyata, kualifikasi pendidikan, skill kunci, dan jenjang karier dari pemula hingga pimpinan.",
       "roleGroupsLabel": "4 Rumpun 16Personalities:",
       "roleGroupsTitle": "4 Rumpun Kepribadian 16Personalities",
       "roleGroupsDescription": "Setiap tipe kepribadian tergolong dalam satu rumpun yang menggambarkan orientasi energi dan karakter kerja alami mereka.",
       "groups": {
-        "analysts": { "title": "Analis (Analysts)", "description": "Pemikir analitis & strategis yang haus akan ilmu dan rasionalitas tinggi." },
-        "diplomats": { "title": "Diplomat (Diplomats)", "description": "Idealis bermotivasi empati yang berdedikasi membangun keharmonisan sesama." },
-        "sentinels": { "title": "Sentinel (Sentinels)", "description": "Pengawal praktis & teratur yang menjaga ketertiban, fakta, dan integritas." },
-        "explorers": { "title": "Penjelajah (Explorers)", "description": "Sosok spontan & berani yang menguasai berbagai alat praktis dan eksperimen." }
+        "analysts": {
+          "title": "Analis (Analysts)",
+          "description": "Pemikir analitis & strategis yang haus akan ilmu dan rasionalitas tinggi."
+        },
+        "diplomats": {
+          "title": "Diplomat (Diplomats)",
+          "description": "Idealis bermotivasi empati yang berdedikasi membangun keharmonisan sesama."
+        },
+        "sentinels": {
+          "title": "Sentinel (Sentinels)",
+          "description": "Pengawal praktis & teratur yang menjaga ketertiban, fakta, dan integritas."
+        },
+        "explorers": {
+          "title": "Penjelajah (Explorers)",
+          "description": "Sosok spontan & berani yang menguasai berbagai alat praktis dan eksperimen."
+        }
       },
       "stats": {
         "professions": "Profesi Terdaftar",
@@ -46,45 +92,126 @@
       }
     },
     "howItWorks": {
-      "title": "3 Langkah Mudah Menemukan Karirmu",
+      "eyebrow": "Menghubungkan petunjuk",
+      "title": "Dari diri sendiri, menuju kemungkinan baru.",
+      "leadSubtitle": "Mulai dari hal yang membuatmu penasaran. Kenali caramu bekerja, lalu lihat kemampuan yang dibutuhkan sebuah profesi.",
+      "step1Badge": "50 Pertanyaan Adaptif",
+      "step2Badge": "Breakdown 4 Fungsi & 6 Minat",
+      "step3Badge": "Karier Terkurasi & Jurusan",
+      "ctaLink": "Mulai Tes Sekarang",
       "step1Title": "1. Ambil Kuis MBTI & RIASEC",
       "step1Desc": "Jawab pertanyaan psikometri interaktif dalam 5-7 menit.",
       "step2Title": "2. Analisis Kepribadian & Vokasional",
       "step2Desc": "Dapatkan peta breakdown 5 dimensi MBTI & 6 dimensi Holland Code.",
       "step3Title": "3. Dapatkan Rekomendasi AI",
-      "step3Desc": "Temukan daftar pekerjaan & jurusan yang paling cocok dengan gaya kerjamu."
+      "step3Desc": "Temukan daftar pekerjaan & jurusan yang paling cocok dengan gaya kerjamu.",
+      "exampleLabel": "Contoh eksplorasi, bukan hasil pribadimu.",
+      "skip": "Lewati cerita",
+      "progress": "Langkah {current} dari {total}",
+      "unavailable": "Contoh profesi belum tersedia.",
+      "interest": {
+        "label": "Minat",
+        "title": "Apa yang membuatmu penasaran?",
+        "description": "Perhatikan kegiatan yang ingin kamu pelajari lebih jauh. RIASEC membantu mengeksplorasi enam kelompok minat.",
+        "detailLabel": "Pertanyaan untuk diri sendiri",
+        "detail": "Apakah kamu menikmati mencari pola dan memecahkan masalah?"
+      },
+      "preferences": {
+        "label": "Cara bekerja",
+        "title": "Bagaimana kamu mendekati sesuatu?",
+        "description": "Preferensi berpikir bisa menjadi bahan refleksi. MBTI memberi bahasa untuk mengeksplorasinya, bukan menetapkan batas kemampuanmu.",
+        "detailLabel": "Bahan refleksi",
+        "detail": "Mencoba langsung, berdiskusi, atau memahami sistemnya terlebih dahulu?"
+      },
+      "evidence": {
+        "label": "Kemungkinan karier",
+        "title": "Lihat pekerjaan di balik namanya.",
+        "description": "Bandingkan aktivitas, keterampilan, dan pendidikan yang dibutuhkan. Gunakan informasi itu untuk menentukan apa yang ingin kamu coba.",
+        "detailLabel": "Contoh dari katalog"
+      }
     },
     "explainable": {},
     "assessment": {
-      "eyebrow": "Assessment & Discovery",
-      "title": "Kenali pola dirimu sebagai salah satu petunjuk karier",
+      "eyebrow": "Perspektif diri",
+      "title": "Banyak cara melihat dunia.",
       "description": "Profesia membantu kamu memahami pola kepribadian dan minat sebagai bagian dari proses eksplorasi karier—bukan sebagai jawaban mutlak.",
+      "typeCount": "{count} Tipe",
       "groups": {
-        "analysts": { "title": "Analis", "description": "Pola berpikir strategis dan analitis" },
-        "diplomats": { "title": "Diplomat", "description": "Empati dan cara berpikir yang berorientasi pada orang lain" },
-        "sentinels": { "title": "Sentinel", "description": "Kecermatan, keteraturan, dan perhatian pada fakta" },
-        "explorers": { "title": "Penjelajah", "description": "Keberanian mencoba dan belajar melalui pengalaman" }
-      }
+        "analysts": {
+          "title": "Analis",
+          "description": "Pola berpikir strategis dan analitis"
+        },
+        "diplomats": {
+          "title": "Diplomat",
+          "description": "Empati dan cara berpikir yang berorientasi pada orang lain"
+        },
+        "sentinels": {
+          "title": "Sentinel",
+          "description": "Kecermatan, keteraturan, dan perhatian pada fakta"
+        },
+        "explorers": {
+          "title": "Penjelajah",
+          "description": "Keberanian mencoba dan belajar melalui pengalaman"
+        }
+      },
+      "explore": "Jelajahi MBTI"
     },
     "skills": {},
     "exploration": {
-      "title": "Profesi Populer Saat Ini",
-      "subtitle": "Pilihan karir dengan prospek cerah dan gaji menarik di industri modern.",
-      "viewAll": "Lihat Semua Profesi",
+      "eyebrow": "Atlas profesi",
+      "title": "Ada lebih dari satu arah untukmu.",
+      "subtitle": "Kenali pekerjaan dari aktivitas dan kemampuan yang dibutuhkan. Pilih satu untuk mulai menjelajah.",
+      "viewAll": "Buka katalog",
       "salaryLabel": "Estimasi Gaji:",
       "mbtiMatchLabel": "Kecocokan MBTI:",
-      "detailCta": "Detail Profesi",
+      "detailCta": "Kenali profesi ini",
       "prospectLabel": "Prospek {value}",
       "highProspect": "Tinggi",
-      "salaryValue": "Rp {min} - {max} Jt/bln"
+      "salaryValue": "Rp {min} - {max} Jt/bln",
+      "spotlight": "Satu profesi, lebih dekat",
+      "otherPaths": "Arah lain untuk dijelajahi",
+      "sourceNote": "Pratinjau dari katalog Profesia. Informasi karier perlu dipertimbangkan bersama pengalaman dan sumber lain.",
+      "empty": "Katalog belum tersedia."
     },
     "finalCta": {
-      "badge": "Bilingual & 100% Gratis",
-      "title": "Siap Menemukan Profesi yang Cocok Untukmu?",
-      "description": "Ambil tes MBTI 50 pertanyaan sekarang dan jelajahi rekomendasi pekerjaan beserta kecocokan Zodiak karirmu!",
-      "primaryCta": "Mulai Tes MBTI Sekarang",
-      "secondaryCta": "Lihat Zodiak Karir"
+      "badge": "Langkah berikutnya",
+      "title": "Satu langkah membuka arah baru.",
+      "description": "Tidak perlu langsung tahu semua jawabannya. Mulai dari satu profesi yang membuatmu penasaran.",
+      "primaryCta": "Jelajahi profesi",
+      "secondaryCta": "Kenali dirimu"
+    },
+    "method": {
+      "eyebrow": "Metode & batasan",
+      "title": "Petunjuk yang bisa kamu pahami.",
+      "assessments": {
+        "title": "Dua sudut pandang",
+        "description": "MBTI mengeksplorasi preferensi kepribadian. RIASEC mengeksplorasi minat pada aktivitas kerja."
+      },
+      "reasoning": {
+        "title": "Lihat alasannya",
+        "description": "Bandingkan petunjuk dari asesmen dengan keterampilan dan aktivitas dalam katalog profesi."
+      },
+      "limits": {
+        "title": "Keputusan tetap milikmu",
+        "description": "Hasil adalah bahan eksplorasi, bukan diagnosis atau jaminan kecocokan karier. Pengalaman dan peluangmu juga berperan."
+      }
     }
+  },
+  "Compare": {
+    "eyebrow": "Alat keputusan",
+    "title": "Bandingkan profesi",
+    "description": "Pilih tepat dua profesi. Hasil perbandingan tersimpan di URL dan dapat dibagikan.",
+    "first": "Profesi pertama",
+    "second": "Profesi kedua",
+    "choose": "Pilih profesi",
+    "action": "Bandingkan",
+    "caption": "Perbandingan dua profesi",
+    "aspect": "Aspek",
+    "salary": "Kisaran gaji",
+    "prospects": "Prospek",
+    "balance": "Keseimbangan kerja",
+    "education": "Pendidikan",
+    "empty": "Pilih dua profesi berbeda untuk melihat perbandingan."
   },
   "Profession": {
     "salaryRange": "Estimasi Gaji",
@@ -173,6 +300,18 @@
     "soshum": "Soshum (Sosial & Humaniora)",
     "seni": "Seni & Desain"
   },
+  "Zodiac": {
+    "eyebrow": "Eksplorasi reflektif",
+    "title": "Lihat arah karier melalui lensa zodiakmu.",
+    "description": "Temukan hubungan ringan antara karakter zodiak, elemen, dan ragam lingkungan kerja untuk dijelajahi.",
+    "element": "Elemen: {value}",
+    "traits": "Karakter utama",
+    "view": "Lihat arah karier",
+    "back": "Kembali ke eksplorasi",
+    "disclaimer": "Zodiak digunakan sebagai eksplorasi reflektif dan hiburan, bukan bukti ilmiah atau penentu pilihan karier.",
+    "directions": "Arah karier untuk dieksplorasi",
+    "empty": "Belum ada arah karier yang terhubung."
+  },
   "Riasec": {
     "title": "Psikometri RIASEC (Holland Code)",
     "subtitle": "Ukur 6 dimensi vokasional untuk rekomendasi karir presisi.",
@@ -190,6 +329,7 @@
     "quizTitle": "Kuis Psikometri RIASEC Holland Code (36 Soal Likert)",
     "resetNotice": "Kuis RIASEC direset.",
     "completedToast": "Kuis RIASEC Selesai! Kode Holland: {code}",
+    "questionUnanswered": "Pertanyaan {number} belum dijawab.",
     "noResult": "Belum Ada Hasil Kuis RIASEC",
     "noResultDescription": "Silakan ikuti kuis RIASEC terlebih dahulu untuk mengetahui tipe Holland Code dan minat vokasional Anda.",
     "start": "Mulai Kuis RIASEC",
@@ -198,6 +338,125 @@
     "explore": "Jelajahi Profesi Cocok",
     "retake": "Ulangi Kuis",
     "breakdown": "Breakdown 6 Dimensi RIASEC"
+  },
+  "MbtiIntro": {
+    "eyebrow": "Asesmen kepribadian",
+    "title": "Pahami pola dirimu, lalu jelajahi arah karier yang lebih alami.",
+    "description": "Lima puluh pertanyaan membantu memetakan lima dimensi kepribadian. Hasilnya adalah bahan refleksi, bukan batas bagi pilihanmu.",
+    "start": "Mulai asesmen MBTI",
+    "typesTitle": "Enam belas tipe, empat pola kerja",
+    "typesDescription": "Pelajari kecenderungan tiap tipe dan lanjutkan ke profesi yang relevan dengan pola tersebut.",
+    "careers": "Profesi untuk {code}",
+    "allTypes": "Semua Tipe",
+    "roleAnalysts": "Analis",
+    "roleDiplomats": "Diplomat",
+    "roleSentinels": "Sentinel",
+    "roleExplorers": "Penjelajah",
+    "viewProfile": "Profil Lengkap",
+    "matchedCareers": "Karier Terkait",
+    "strengthsTitle": "Kekuatan Kunci",
+    "exploreAll16": "Jelajahi 16 Karakter",
+    "badgeConstellation": "16 Karakter MBTI",
+    "testDuration": "5–7 Menit · 50 Soal",
+    "noResultsFound": "Tidak ada tipe yang cocok dengan filter",
+    "searchPlaceholder": "Cari kode atau nama (mis. INTJ, Arsitek)...",
+    "scrollHint": "Empat perspektif untuk mulai memahami preferensi diri. Tidak ada satu tipe yang membatasi kemungkinanmu.",
+    "quickFinderTitle": "Temukan profil tertentu",
+    "quickFinderDescription": "Cari tipe atau pilih rumpun untuk membuka profil dan menjelajahi profesi terkait.",
+    "mediaFallback": "Visual video belum tersedia. Ilustrasi karakter tetap mengikuti perjalanan scroll.",
+    "roleProgress": "Rumpun {current} dari {total}",
+    "viewAllTypes": "Lihat semua tipe",
+    "viewLess": "Tampilkan lebih sedikit",
+    "skipStory": "Lewati ke indeks tipe",
+    "searchCount": "{count} tipe ditemukan"
+  },
+  "MbtiStory": {
+    "chapter00Label": "PENGENALAN DIRI",
+    "chapter00Eyebrow": "Eksplorasi Pola Pikir & Kepribadian",
+    "chapter00Title": "Pahami pola dirimu, lalu jelajahi arah karier yang lebih alami.",
+    "chapter00Description": "Lima puluh pertanyaan membantu memetakan lima dimensi kepribadian. Hasilnya adalah bahan refleksi, bukan batas bagi pilihanmu.",
+    "chapter00Start": "Mulai Asesmen MBTI",
+    "chapter00Majors": "Jelajahi Jurusan Kuliah",
+    "trustDuration": "5–7 Menit",
+    "trustQuestions": "50 Pertanyaan",
+    "trustFree": "100% Gratis Tanpa Daftar",
+    "trustDatabase": "Terhubung Database Karier",
+    "archetypeRole": "Rumpun",
+    "archetypeStrengths": "Kekuatan Kunci",
+    "chapter01Label": "POLA KITA",
+    "chapter01Lead": "Setiap orang memiliki pola unik yang menggerakkan cara hidupnya.",
+    "chapter01Item1": "CARA KITA BERPIKIR.",
+    "chapter01Item1Desc": "Bagaimana kita menyerap fakta mentah atau mencari makna konseptual di baliknya.",
+    "chapter01Item2": "CARA KITA MEMUTUSKAN.",
+    "chapter01Item2Desc": "Mengutamakan konsistensi logika objektif atau nilai empati antarmanusia.",
+    "chapter01Item3": "CARA KITA BERINTERAKSI.",
+    "chapter01Item3Desc": "Mendapatkan energi dari refleksi mendalam atau dinamika sosial di sekitar.",
+    "chapter01Item4": "CARA KITA MENGHADAPI KETIDAKPASTIAN.",
+    "chapter01Item4Desc": "Menyukai rencana terstruktur atau kebebasan fleksibel yang adaptif.",
+    "chapter02Label": "ENAM BELAS PERSPEKTIF",
+    "chapter02Title": "Enam belas cara melihat dan merespons dunia.",
+    "chapter02Subtitle": "Bukan untuk mengelompokkan manusia ke dalam kotak sempit, melainkan memahami keberagaman cara kita bertumbuh dan berkontribusi.",
+    "chapter02Bridge": "Namun kepribadianmu jauh lebih luas dari sekadar empat huruf singkatan.",
+    "chapter03Label": "LEBIH DARI EMPAT HURUF",
+    "chapter03Title": "Kepribadian bukan kotak mati. Ia adalah spektrum kecenderungan.",
+    "chapter03Subtitle": "Profesia memetakan lima dimensi dinamis yang saling melengkapi dalam pengambilan keputusan dan interaksi profesional.",
+    "spectrumMind": "Energi Pikiran",
+    "spectrumMindLeft": "Introvert (I)",
+    "spectrumMindRight": "Ekstrovert (E)",
+    "spectrumEnergy": "Fokus Persepsi",
+    "spectrumEnergyLeft": "Intuitif (N)",
+    "spectrumEnergyRight": "Observan (S)",
+    "spectrumNature": "Dasar Keputusan",
+    "spectrumNatureLeft": "Thinking (T)",
+    "spectrumNatureRight": "Feeling (F)",
+    "spectrumTactics": "Pendekatan Kerja",
+    "spectrumTacticsLeft": "Judging (J)",
+    "spectrumTacticsRight": "Prospecting (P)",
+    "spectrumIdentity": "Respon Ketegangan",
+    "spectrumIdentityLeft": "Assertive (-A)",
+    "spectrumIdentityRight": "Turbulent (-T)",
+    "chapter03Quote": "Hasil asesmen adalah kompas refleksi diri, bukan pembatas masa depanmu.",
+    "chapter04Label": "DARI POLA MENUJU KEMUNGKINAN",
+    "chapter04Title": "Memahami diri hanyalah titik tolak.",
+    "chapter04Subtitle": "Jalur karier yang bermakna terbentuk saat kecenderungan alami dihubungkan dengan keahlian yang nyata.",
+    "stepPersonality": "Kepribadian",
+    "stepTendency": "Kecenderungan",
+    "stepStrength": "Kekuatan Alami",
+    "stepSkill": "Keahlian Relevan",
+    "stepPossibility": "Peluang Karier",
+    "stepPersonalityDesc": "Cara alami memproses informasi dan energi.",
+    "stepTendencyDesc": "Preferensi dalam memecahkan masalah sehari-hari.",
+    "stepStrengthDesc": "Bakat bawaan yang dapat diasah menjadi keunggulan.",
+    "stepSkillDesc": "Kompetensi teknis dan sosial yang dipelajari.",
+    "stepPossibilityDesc": "Pilihan peran kerja yang memberi rasa kepuasan.",
+    "chapter05Label": "BANYAK JALUR",
+    "chapter05Title": "Satu pola kepribadian. Ratusan kemungkinan jalan.",
+    "chapter05Subtitle": "Tidak ada satu jalan mutlak. Tipe kepribadian yang sama dapat berkembang pesat di berbagai bidang industri.",
+    "viewCareerCatalog": "Lihat Semua Profesi Terkait",
+    "chapter06Label": "EKSPLORASI EKOSISTEM",
+    "chapter06Title": "Instrumen eksplorasi karier terintegrasi.",
+    "chapter06Subtitle": "Hubungkan hasil asesmen psikometri dengan data nyata pasar kerja, jurusan perguruan tinggi, dan analisis profesi.",
+    "bridgeCareersTitle": "Katalog 120+ Profesi",
+    "bridgeCareersDesc": "Eksplorasi gaji, proyeksi kerja, kualifikasi, dan kecocokan tipe kepribadian.",
+    "bridgeMajorsTitle": "Direktori Jurusan Kuliah",
+    "bridgeMajorsDesc": "Temukan jurusan akademik yang selaras dengan profil minat dan potensi masa depanmu.",
+    "bridgeZodiacTitle": "Eksplorasi Zodiak Karier",
+    "bridgeZodiacDesc": "Perspektif alternatif komplementer untuk mengenali gaya kepemimpinan dan dinamika tim.",
+    "bridgeRiasecTitle": "Minat Karier RIASEC (Holland)",
+    "bridgeRiasecDesc": "Validasi kecenderungan vokasional melalui enam model tipe minat kerja.",
+    "exploreButton": "Buka Eksplorasi",
+    "chapter07Label": "MEMULAI LANGKAH",
+    "chapter07Quote": "Kariermu tidak dimulai dari sebuah gelar atau jabatan. Ia dimulai dari keberanian untuk memahami dirimu secara utuh.",
+    "chapter07Subtitle": "Ambil langkah pertama dalam 5–7 menit. Kenali pola berpikir dan temukan peluang yang selaras.",
+    "chapter07CTA": "Mulai Asesmen MBTI Sekarang",
+    "chapter07Secondary": "Pelajari 16 Profil Kepribadian",
+    "dimensionDemo": "Simulasi interaktif, bukan hasil tesmu. Geser untuk melihat perubahan preferensi.",
+    "dimensionValue": "{left}: {leftValue}%, {right}: {rightValue}%",
+    "careerToolLabel": "Aktivitas & kemampuan",
+    "majorToolLabel": "Pendidikan tinggi",
+    "riasecToolLabel": "Minat kerja",
+    "zodiacToolLabel": "Eksplorasi tambahan",
+    "careerPreview": "Contoh dari katalog, bukan rekomendasi pribadi atau jaminan kecocokan."
   },
   "Mbti": {
     "quizTitle": "Kuis MBTI 16Personalities (50 Soal Likert)",
@@ -217,6 +476,7 @@
     "viewResults": "Lihat Hasil MBTI",
     "resetSuccess": "Kuis direset ke awal.",
     "completedToast": "Kuis Selesai! Hasil Anda: {code}",
+    "questionUnanswered": "Pertanyaan {number} belum dijawab.",
     "backToIntro": "Kembali ke Intro MBTI",
     "retake": "Tes Ulang",
     "breakdown": "Breakdown 5 Dimensi",
@@ -225,9 +485,19 @@
     "weaknesses": "Kelemahan (Weaknesses)",
     "workStyle": "Gaya Kerja Alami",
     "professionDetails": "Lihat Detail Profesi →",
-    "dimensions": {"breakdown": "Breakdown 5 Dimensi", "extraverted": "Ekstrovert (E)", "introverted": "Introvert (I)", "intuitive": "Intuitif (N)", "observant": "Observan (S)", "thinking": "Thinking (T)", "feeling": "Feeling (F)", "judging": "Judging (J)", "prospecting": "Prospecting (P)", "assertive": "Assertive (-A)", "turbulent": "Turbulent (-T)"},
-    "strengths": "Kekuatan Utama (Strengths)",
-    "weaknesses": "Kelemahan (Weaknesses)"
+    "dimensions": {
+      "breakdown": "Breakdown 5 Dimensi",
+      "extraverted": "Ekstrovert (E)",
+      "introverted": "Introvert (I)",
+      "intuitive": "Intuitif (N)",
+      "observant": "Observan (S)",
+      "thinking": "Thinking (T)",
+      "feeling": "Feeling (F)",
+      "judging": "Judging (J)",
+      "prospecting": "Prospecting (P)",
+      "assertive": "Assertive (-A)",
+      "turbulent": "Turbulent (-T)"
+    }
   },
   "Footer": {
     "brand": "Profesia",
@@ -241,10 +511,10 @@
     "professionComparison": "Perbandingan Profesi Berdampingan",
     "personalityGroups": "4 Rumpun Kepribadian",
     "builtFor": "Dibuat dengan",
-    "audience": "untuk pencari kerja dan penggemar karier di Indonesia."
-    ,"github": "GitHub"
-    ,"twitter": "Twitter"
-    ,"linkedin": "LinkedIn",
+    "audience": "untuk pencari kerja dan penggemar karier di Indonesia.",
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "linkedin": "LinkedIn",
     "analysts": "Analis (Analysts):",
     "diplomats": "Diplomat (Diplomats):",
     "sentinels": "Sentinel (Sentinels):",
@@ -282,15 +552,32 @@
     "forgotPassword": "Lupa kata sandi?",
     "showPassword": "Tampilkan kata sandi",
     "hidePassword": "Sembunyikan kata sandi",
-    "brand": "Profesia"
+    "brand": "Profesia",
+    "contextEyebrow": "Ruang eksplorasi pribadi",
+    "contextTitle": "Karier yang tepat dimulai dari pemahaman diri.",
+    "contextDescription": "Simpan hasil asesmen, profesi pilihan, dan rekomendasi dalam satu perjalanan yang terhubung.",
+    "contextPointOne": "Hasil MBTI dan RIASEC tersimpan",
+    "contextPointTwo": "Profesi favorit mudah ditemukan kembali",
+    "contextPointThree": "Data pribadi tetap berada dalam kendalimu"
   },
   "Error": {
+    "eyebrow": "Gangguan sementara",
     "title": "Terjadi masalah",
     "description": "Halaman ini mengalami kendala. Coba lagi atau kembali ke beranda.",
     "retry": "Coba lagi",
     "home": "Kembali ke beranda",
     "notFoundTitle": "Halaman tidak ditemukan",
     "notFoundDescription": "Halaman yang kamu cari tidak tersedia atau sudah dipindahkan."
+  },
+  "Admin": {
+    "title": "Tata kelola konten",
+    "description": "Akses diverifikasi di server. Perubahan konten dicatat dalam audit log.",
+    "catalogTitle": "Katalog profesi",
+    "count": "{count} profesi terdaftar",
+    "name": "Nama",
+    "status": "Status",
+    "sources": "Sumber",
+    "published": "Terbit"
   },
   "Profile": {
     "eyebrow": "Ruang perjalananmu",
@@ -302,8 +589,15 @@
     "email": "Email",
     "notAvailable": "Belum tersedia",
     "assessmentTitle": "Eksplorasi Karier",
+    "assessmentDescription": "Lihat hasil terbaru atau lanjutkan asesmen yang membantu perjalanan kariermu.",
     "assessmentPending": "Riwayat hasil dan rekomendasi akan muncul di sini setelah fitur penyimpanan selesai.",
     "mbtiAction": "Mulai MBTI",
-    "riasecAction": "Mulai RIASEC"
+    "riasecAction": "Mulai RIASEC",
+    "savedTitle": "Profesi tersimpan",
+    "savedEmpty": "Belum ada profesi tersimpan.",
+    "savedAction": "Jelajahi katalog profesi",
+    "dataTitle": "Kontrol data",
+    "exportAction": "Ekspor data saya",
+    "dataDescription": "Data asesmen dan rekomendasi disimpan hingga kamu menghapus data akun. Penghapusan tersedia melalui kontrol akun yang aman."
   }
 }

@@ -17,12 +17,12 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
   ];
 
   return (
-    <div className="space-y-16 lg:space-y-24 pb-16 overflow-hidden">
-      <LandingHero locale={locale} />
-      <LandingStats />
-      <LandingRoleGroups locale={locale} groups={groups} />
+    <div className="career-atlas">
+      <LandingHero locale={locale} professions={professionsSeed} />
+      <HowItWorks locale={locale} profession={professionsSeed[0]} />
       <LandingProfessions locale={locale} professions={professionsSeed} />
-      <HowItWorks />
+      <LandingRoleGroups locale={locale} groups={groups} />
+      <LandingStats locale={locale} />
       <FinalCTA locale={locale} />
     </div>
   );

@@ -1,91 +1,44 @@
 import { getTranslations } from "next-intl/server";
-import { Brain, Layers, Compass } from "lucide-react";
+import type { Profession } from "@/services/professions";
+import CareerStoryMotion from "@/components/motion/CareerStoryMotion";
+import TextReveal from "@/components/motion/TextReveal";
 
-export default async function HowItWorks() {
-  const t = await getTranslations("Landing.howItWorks");
+interface HowItWorksProps { locale: string; profession?: Profession }
 
-  const steps = [
-    {
-      titleKey: "step1Title",
-      descKey: "step1Desc",
-      phase: "PHASE 01",
-      icon: Brain,
-      tag: "Asesmen Psikometri",
-    },
-    {
-      titleKey: "step2Title",
-      descKey: "step2Desc",
-      phase: "PHASE 02",
-      icon: Layers,
-      tag: "Pemetaan Dimensi",
-    },
-    {
-      titleKey: "step3Title",
-      descKey: "step3Desc",
-      phase: "PHASE 03",
-      icon: Compass,
-      tag: "Rekomendasi Cerdas",
-    },
-  ] as const;
-
+export default async function HowItWorks({ locale, profession }: HowItWorksProps) {
+  const t = await getTranslations({ locale, namespace: "Landing.howItWorks" });
+  const skills = profession ? (locale === "en" ? profession.skills_en : profession.skills_id).slice(0, 3) : [];
+  const steps = ["interest", "preferences", "evidence"] as const;
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-      
-      {/* Editorial Header */}
-      <div className="space-y-2 text-center max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-[0.16em] text-teal-700">
-          <span>[ 04 // ALUR KERJA ]</span>
-        </div>
-        <h2 className="text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] text-slate-900">
-          {t("title")}
-        </h2>
-      </div>
-
-      {/* 3 Architectural Process Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {steps.map((step, index) => {
-          const Icon = step.icon;
-
-          return (
-            <div
-              key={step.phase}
-              className="relative rounded-2xl border border-slate-200/90 bg-white p-7 shadow-sm flex flex-col justify-between space-y-6 hover:border-slate-300 transition-colors"
-            >
-              <div className="space-y-4">
-                
-                {/* Header row: phase badge + icon */}
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-bold text-teal-700 bg-teal-50 border border-teal-100 px-2.5 py-1 rounded-md">
-                    {`// ${step.phase}`}
-                  </span>
-                  <div className="w-9 h-9 rounded-xl bg-slate-50 border border-slate-200/70 flex items-center justify-center text-slate-700">
-                    <Icon className="w-4 h-4" aria-hidden="true" />
-                  </div>
-                </div>
-
-                {/* Step content */}
-                <div className="space-y-2">
-                  <h3 className="text-lg font-bold text-slate-900 leading-snug">
-                    {t(step.titleKey)}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    {t(step.descKey)}
-                  </p>
-                </div>
-
-              </div>
-
-              {/* Step indicator footer */}
-              <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 font-mono">
-                <span>{step.tag}</span>
-                <span className="font-bold text-slate-600">0{index + 1} / 03</span>
-              </div>
-
+    <section id="career-story" tabIndex={-1} className="atlas-chapter atlas-story-section" aria-labelledby="career-story-title">
+      <div className="page-shell">
+        <div className="atlas-chapter-line"><p className="eyebrow">02 / {t("eyebrow")}</p><a href="#career-atlas" className="atlas-text-link text-xs">{t("skip")}</a></div>
+        <CareerStoryMotion>
+          <div data-story-pin className="atlas-story-layout">
+            <div className="atlas-story-intro">
+              <TextReveal as="h2" id="career-story-title" className="atlas-heading">{t("title")}</TextReveal>
+              <p className="atlas-body mt-6 max-w-md">{t("leadSubtitle")}</p>
+              <p className="atlas-caption mt-8 max-w-sm leading-relaxed">{t("exampleLabel")}</p>
             </div>
-          );
-        })}
+            <ol className="atlas-story-steps">
+              {steps.map((step, index) => (
+                <li key={step} data-story-step className="atlas-story-step">
+                  <div className="atlas-story-step-heading"><span className="atlas-step-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><div><p className="atlas-caption mb-3">{t(`${step}.label`)}</p><h3 className="text-2xl font-semibold tracking-tight sm:text-3xl">{t(`${step}.title`)}</h3></div></div>
+                  <p className="atlas-body mt-5">{t(`${step}.description`)}</p>
+                  <div data-story-layer className="atlas-evidence">
+                    <p className="atlas-caption mb-4">{t(`${step}.detailLabel`)}</p>
+                    {step === "interest" ? <p className="text-xl font-medium leading-relaxed">{t("interest.detail")}</p>
+                      : step === "preferences" ? <p className="text-xl font-medium leading-relaxed">{t("preferences.detail")}</p>
+                      : profession ? <><p className="text-2xl font-semibold tracking-tight">{locale === "en" ? profession.name_en : profession.name_id}</p><ul className="mt-4 flex flex-wrap gap-2">{skills.map(skill => <li key={skill} className="atlas-chip">{skill}</li>)}</ul></>
+                      : <p className="atlas-body">{t("unavailable")}</p>}
+                  </div>
+                  <p className="atlas-caption mt-6">{t("progress", { current: index + 1, total: steps.length })}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </CareerStoryMotion>
       </div>
-
     </section>
   );
 }

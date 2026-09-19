@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export default async function LocaleNotFound() {
-  const t = await getTranslations("Error");
-  return <main className="mx-auto flex min-h-[50vh] max-w-xl flex-col items-center justify-center gap-4 px-6 text-center"><h1 className="text-3xl font-bold text-slate-900">{t("notFoundTitle")}</h1><p className="text-slate-600">{t("notFoundDescription")}</p><Link href="/" className="rounded-lg bg-teal-700 px-4 py-2 font-semibold text-white hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700">{t("home")}</Link></main>;
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: "Error" });
+  return <main className="page-shell flex min-h-[60vh] max-w-3xl flex-col items-start justify-center gap-5 py-20"><p className="eyebrow">404</p><h1 className="page-title">{t("notFoundTitle")}</h1><p className="max-w-xl text-lg leading-relaxed text-slate-600">{t("notFoundDescription")}</p><Link href={`/${locale}`} className="btn-primary mt-2 min-h-11">{t("home")}</Link></main>;
 }

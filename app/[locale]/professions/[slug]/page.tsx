@@ -40,13 +40,13 @@ export default async function ProfessionDetailPage({
   const careerSteps = careerPath.split(" -> ").map((step) => step.trim());
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+    <div className="page-shell max-w-6xl space-y-14 py-12 sm:py-16">
       
       {/* 1. Breadcrumbs Navigation */}
       <nav aria-label="Breadcrumb">
         <Link
           href={`/${locale}/professions`}
-          className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-slate-500 hover:text-teal-700 transition-colors group"
+          className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-[var(--color-muted)] hover:text-teal-700 transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
           <span>{isEnglish ? "Back to Professions Catalog" : "Kembali ke Katalog Profesi"}</span>
@@ -54,12 +54,12 @@ export default async function ProfessionDetailPage({
       </nav>
 
       {/* 2. Hero Editorial Header */}
-      <header className="space-y-4 border-b border-slate-200/80 pb-8">
+      <header className="space-y-4 border-b border-[var(--color-line)] pb-8">
         <div className="flex flex-wrap items-center gap-2.5">
           <p className="text-xs font-mono font-semibold uppercase tracking-[0.16em] text-teal-700">
             {categoryName}
           </p>
-          <span className="text-slate-300" aria-hidden="true">·</span>
+          <span className="text-[var(--color-muted)]" aria-hidden="true">·</span>
           <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-md">
             <TrendingUp className="w-3.5 h-3.5" aria-hidden="true" />
             {profession.prospects === "high"
@@ -70,11 +70,11 @@ export default async function ProfessionDetailPage({
           </span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.1] text-slate-900">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.1] text-[var(--color-ink)]">
           {name}
         </h1>
 
-        <p className="max-w-3xl text-base sm:text-lg text-slate-600 leading-relaxed">
+        <p className="max-w-3xl text-base sm:text-lg text-[var(--color-muted)] leading-relaxed">
           {description}
         </p>
       </header>
@@ -88,21 +88,18 @@ export default async function ProfessionDetailPage({
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
           
           {/* Tile 1: Salary Benchmark (6 cols) */}
-          <div className="md:col-span-6 rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm space-y-4">
+          <article className="space-y-4 border-t-2 border-teal-700 py-6 md:col-span-6">
             <div className="flex items-center justify-between">
               <div className="w-9 h-9 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-700">
                 <DollarSign className="w-5 h-5" aria-hidden="true" />
               </div>
-              <span className="text-xs font-mono font-bold text-slate-400">
-                {`// BENCHMARK`}
-              </span>
             </div>
 
             <div className="space-y-1">
-              <div className="text-xs font-medium text-slate-500">{t("salaryRange")}</div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              <div className="text-xs font-medium text-[var(--color-muted)]">{t("salaryRange")}</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-[var(--color-ink)] tracking-tight">
                 Rp {(profession.salary_min / 1000000).toFixed(0)}–{(profession.salary_max / 1000000).toFixed(0)}{" "}
-                <span className="text-base sm:text-lg font-medium text-slate-500 font-sans">
+                <span className="text-base sm:text-lg font-medium text-[var(--color-muted)] font-sans">
                   {isEnglish ? "mil / month" : "jt / bulan"}
                 </span>
               </div>
@@ -111,7 +108,7 @@ export default async function ProfessionDetailPage({
             {/* Visual Bar Indicator */}
             <div className="space-y-1.5 pt-2">
               <div
-                className="h-2 w-full bg-slate-100 rounded-full overflow-hidden"
+                className="h-2 w-full bg-[var(--color-soft)] rounded-full overflow-hidden"
                 role="meter"
                 aria-label={t("salaryRange")}
                 aria-valuemin={0}
@@ -124,56 +121,50 @@ export default async function ProfessionDetailPage({
                   style={{ width: `${Math.min(100, Math.max(15, (profession.salary_max / 35000000) * 100))}%` }}
                 />
               </div>
-              <div className="flex justify-between text-[11px] font-mono text-slate-400">
+              <div className="flex justify-between text-[11px] font-mono text-[var(--color-muted)]">
                 <span>Entry Level (Min)</span>
                 <span>Lead / Executive (Max)</span>
               </div>
             </div>
-          </div>
+          </article>
 
           {/* Tile 2: Education Minimum (6 cols) */}
-          <div className="md:col-span-6 rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <article className="flex flex-col justify-between space-y-4 border-t-2 border-[var(--color-line)] py-6 md:col-span-6">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <div className="w-9 h-9 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-700">
+                <div className="w-9 h-9 rounded-xl bg-[var(--color-soft)] border border-[var(--color-line)] flex items-center justify-center text-[var(--color-ink)]">
                   <GraduationCap className="w-5 h-5" aria-hidden="true" />
                 </div>
-                <span className="text-xs font-mono font-bold text-slate-400">
-                  {`// KUALIFIKASI`}
-                </span>
               </div>
 
               <div className="space-y-1">
-                <div className="text-xs font-medium text-slate-500">{t("education")}</div>
-                <div className="text-lg font-bold text-slate-900 leading-snug">
+                <div className="text-xs font-medium text-[var(--color-muted)]">{t("education")}</div>
+                <div className="text-lg font-bold text-[var(--color-ink)] leading-snug">
                   {education}
                 </div>
               </div>
             </div>
 
             {workEnv && (
-              <p className="text-xs text-slate-500 pt-2 border-t border-slate-100">
-                <span className="font-semibold text-slate-700">{isEnglish ? "Environment: " : "Lingkungan Kerja: "}</span>
+              <p className="text-xs text-[var(--color-muted)] pt-2 border-t border-[var(--color-line)]">
+                <span className="font-semibold text-[var(--color-ink)]">{isEnglish ? "Environment: " : "Lingkungan Kerja: "}</span>
                 {workEnv}
               </p>
             )}
-          </div>
+          </article>
 
           {/* Tile 3: Work-Life Balance (6 cols) */}
-          <div className="md:col-span-6 rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm space-y-3">
+          <article className="space-y-3 border-t-2 border-[var(--color-line)] py-6 md:col-span-6">
             <div className="flex items-center justify-between">
-              <div className="w-9 h-9 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-700">
+              <div className="w-9 h-9 rounded-xl bg-[var(--color-soft)] border border-[var(--color-line)] flex items-center justify-center text-[var(--color-ink)]">
                 <Clock className="w-5 h-5" aria-hidden="true" />
               </div>
-              <span className="text-xs font-mono font-bold text-slate-400">
-                {`// KESEIMBANGAN`}
-              </span>
             </div>
 
             <div className="flex items-baseline justify-between">
-              <div className="text-xs font-medium text-slate-500">{t("workLifeBalance")}</div>
-              <div className="text-xl font-extrabold text-slate-900">
-                {profession.work_life_balance} <span className="text-xs font-normal text-slate-400">/ 5</span>
+              <div className="text-xs font-medium text-[var(--color-muted)]">{t("workLifeBalance")}</div>
+              <div className="text-xl font-extrabold text-[var(--color-ink)]">
+                {profession.work_life_balance} <span className="text-xs font-normal text-[var(--color-muted)]">/ 5</span>
               </div>
             </div>
 
@@ -185,26 +176,23 @@ export default async function ProfessionDetailPage({
                   className={`h-2 rounded-full ${
                     index <= profession.work_life_balance
                       ? "bg-teal-700"
-                      : "bg-slate-200"
+                      : "bg-[var(--color-soft)]"
                   }`}
                 />
               ))}
             </div>
-          </div>
+          </article>
 
           {/* Tile 4: Matching Personality & MBTI Alignment (6 cols) */}
-          <div className="md:col-span-6 rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm space-y-3">
+          <article className="space-y-3 border-t-2 border-teal-700 py-6 md:col-span-6">
             <div className="flex items-center justify-between">
               <div className="w-9 h-9 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-700">
                 <Sparkles className="w-5 h-5" aria-hidden="true" />
               </div>
-              <span className="text-xs font-mono font-bold text-slate-400">
-                {`// KECOCOKAN`}
-              </span>
             </div>
 
             <div className="space-y-1">
-              <div className="text-xs font-medium text-slate-500">{t("matchedMbti")}</div>
+              <div className="text-xs font-medium text-[var(--color-muted)]">{t("matchedMbti")}</div>
               <div className="flex flex-wrap gap-2 pt-1">
                 {profession.matched_mbti.map((m) => (
                   <Link
@@ -218,21 +206,21 @@ export default async function ProfessionDetailPage({
                 ))}
               </div>
             </div>
-          </div>
+          </article>
 
         </div>
       </section>
 
       {/* 4. Key Skills Matrix */}
-      <section aria-labelledby="skills-heading" className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-sm space-y-5">
+      <section aria-labelledby="skills-heading" className="space-y-5 border-y border-[var(--color-line)] py-8">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-teal-700" aria-hidden="true" />
-            <h2 id="skills-heading" className="text-xl font-bold text-slate-900">
+            <h2 id="skills-heading" className="text-xl font-bold text-[var(--color-ink)]">
               {t("skills")}
             </h2>
           </div>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-[var(--color-muted)]">
             {isEnglish
               ? "Competencies and tools commonly expected by industry recruiters."
               : "Kompetensi teknis dan alat kerja yang paling dicari perusahaan pada posisi ini."}
@@ -243,7 +231,7 @@ export default async function ProfessionDetailPage({
           {skills.map((skill) => (
             <span
               key={skill}
-              className="px-3.5 py-2 rounded-md border border-slate-200 bg-slate-50/70 text-slate-800 text-xs sm:text-sm font-semibold hover:border-slate-300 transition-colors"
+              className="px-3.5 py-2 rounded-md border border-[var(--color-line)] bg-[var(--color-soft)] text-[var(--color-ink)] text-xs sm:text-sm font-semibold hover:border-[var(--color-line)] transition-colors"
             >
               {skill}
             </span>
@@ -252,15 +240,15 @@ export default async function ProfessionDetailPage({
       </section>
 
       {/* 5. Architectural Career Progression Timeline */}
-      <section aria-labelledby="career-ladder-heading" className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-sm space-y-6">
+      <section aria-labelledby="career-ladder-heading" className="space-y-6 border-y border-[var(--color-line)] py-8">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <Briefcase className="w-5 h-5 text-teal-700" aria-hidden="true" />
-            <h2 id="career-ladder-heading" className="text-xl font-bold text-slate-900">
+            <h2 id="career-ladder-heading" className="text-xl font-bold text-[var(--color-ink)]">
               {t("careerPath")}
             </h2>
           </div>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-[var(--color-muted)]">
             {isEnglish
               ? "Typical milestone trajectories from junior stages to senior leadership."
               : "Tahapan jenjang karier dari pemula hingga posisi pimpinan spesialis/manajemen."}
@@ -271,15 +259,15 @@ export default async function ProfessionDetailPage({
           {careerSteps.map((step, index) => (
             <li
               key={step}
-              className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-4 space-y-2 relative group hover:border-teal-300 transition-colors"
+              className="rounded-xl border border-[var(--color-line)] bg-[var(--color-soft)] p-4 space-y-2 relative group hover:border-teal-300 transition-colors"
             >
               <div className="flex items-center justify-between text-xs font-mono font-bold text-teal-700">
                 <span>STAGE 0{index + 1}</span>
                 {index < careerSteps.length - 1 && (
-                  <ArrowRight className="w-3.5 h-3.5 text-slate-400 hidden lg:block" aria-hidden="true" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[var(--color-muted)] hidden lg:block" aria-hidden="true" />
                 )}
               </div>
-              <h3 className="text-sm font-bold text-slate-900 leading-snug">
+              <h3 className="text-sm font-bold text-[var(--color-ink)] leading-snug">
                 {step}
               </h3>
             </li>
@@ -290,13 +278,13 @@ export default async function ProfessionDetailPage({
       {/* 6. Action Strip */}
       <section
         aria-label="Next Actions"
-        className="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+        className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-soft)] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4"
       >
         <div className="space-y-1 text-center sm:text-left">
-          <h3 className="text-base font-bold text-slate-900">
+          <h3 className="text-base font-bold text-[var(--color-ink)]">
             {isEnglish ? "Want to see if this career suits you?" : "Ingin tahu apakah karier ini cocok untukmu?"}
           </h3>
-          <p className="text-xs text-slate-600">
+          <p className="text-xs text-[var(--color-muted)]">
             {isEnglish
               ? "Take the 5-minute personality assessment to measure your psychological compatibility."
               : "Ambil tes kepribadian 5 menit untuk mengukur kecocokan karakter dan minat kerjamu."}
@@ -313,7 +301,7 @@ export default async function ProfessionDetailPage({
           </Link>
           <Link
             href={`/${locale}/majors`}
-            className="px-5 py-3 rounded-lg text-xs font-semibold bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 transition-colors"
+            className="px-5 py-3 rounded-lg text-xs font-semibold bg-[var(--color-surface)] border border-[var(--color-line)] hover:bg-[var(--color-soft)] text-[var(--color-ink)] transition-colors"
           >
             {isEnglish ? "Explore Relevant Majors" : "Lihat Jurusan Terkait"}
           </Link>

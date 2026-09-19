@@ -1,19 +1,26 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import zodiacs from "@/data/zodiacs.json";
 import { fetchProfessions } from "@/services/professions";
 
-export function generateStaticParams() { return zodiacs.map(({ slug }) => ({ slug })); }
-
 export default async function ZodiacDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale, slug } = await params;
+  const t = await getTranslations({ locale, namespace: "Zodiac" });
   const zodiac = zodiacs.find((item) => item.slug === slug);
   if (!zodiac) notFound();
   const professions = (await fetchProfessions()).filter((item) => zodiac.recommended_professions.includes(item.slug));
-  const label = (id: string, en: string) => locale === "id" ? id : en;
-  return <main className="mx-auto max-w-5xl space-y-10 px-4 py-12 sm:px-6">
-    <Link href={`/${locale}/zodiac`} className="font-semibold text-amber-700">← {label("Kembali ke eksplorasi", "Back to exploration")}</Link>
-    <header className="space-y-5 rounded-3xl bg-amber-50 p-8"><p className="text-5xl" aria-hidden="true">{zodiac.symbol}</p><h1 className="text-4xl font-black text-slate-900">{locale === "id" ? zodiac.name_id : zodiac.name_en}</h1><p className="font-semibold text-amber-800">{locale === "id" ? zodiac.dates_id : zodiac.dates_en} · {locale === "id" ? zodiac.element_id : zodiac.element_en}</p><p className="max-w-3xl text-slate-700">{locale === "id" ? zodiac.career_summary_id : zodiac.career_summary_en}</p><p className="text-sm text-slate-600">{label("Zodiak digunakan sebagai eksplorasi reflektif dan hiburan, bukan bukti ilmiah atau penentu pilihan karier.", "Zodiac is offered for reflective exploration and entertainment, not as scientific evidence or a career determinant.")}</p></header>
-    <section className="space-y-4"><h2 className="text-2xl font-bold">{label("Arah karier untuk dieksplorasi", "Career directions to explore")}</h2><ul className="grid gap-4 sm:grid-cols-2">{professions.map((profession) => <li key={profession.slug}><Link href={`/${locale}/professions/${profession.slug}`} className="block rounded-xl border border-slate-200 bg-white p-5 font-bold text-teal-700">{locale === "id" ? profession.name_id : profession.name_en}</Link></li>)}</ul></section>
-  </main>;
+  const isEnglish = locale === "en";
+
+  return (
+    <main className="page-shell max-w-5xl space-y-12 py-12 sm:py-16">
+      <Link href={`/${locale}/zodiac`} className="inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-amber-800"><ArrowLeft aria-hidden="true" className="h-4 w-4" />{t("back")}</Link>
+      <header className="grid gap-6 border-y border-amber-300 py-8 sm:grid-cols-[auto_1fr] sm:py-12">
+        <p className="text-6xl" aria-hidden="true">{zodiac.symbol}</p>
+        <div className="space-y-4"><h1 className="page-title">{isEnglish ? zodiac.name_en : zodiac.name_id}</h1><p className="font-semibold text-amber-800">{isEnglish ? zodiac.dates_en : zodiac.dates_id} · {isEnglish ? zodiac.element_en : zodiac.element_id}</p><p className="max-w-3xl text-lg leading-relaxed text-[var(--color-ink)]">{isEnglish ? zodiac.career_summary_en : zodiac.career_summary_id}</p><p className="max-w-3xl border-l-2 border-amber-500 pl-4 text-sm leading-relaxed text-[var(--color-muted)]">{t("disclaimer")}</p></div>
+      </header>
+      <section className="space-y-5" aria-labelledby="career-directions"><h2 id="career-directions" className="text-3xl font-bold tracking-[-0.035em]">{t("directions")}</h2>{professions.length ? <ul className="divide-y divide-slate-300 border-y border-[var(--color-line)]">{professions.map((profession) => <li key={profession.slug}><Link href={`/${locale}/professions/${profession.slug}`} className="flex min-h-16 items-center justify-between gap-4 font-bold text-[var(--color-ink)] hover:text-teal-700">{isEnglish ? profession.name_en : profession.name_id}<ArrowRight aria-hidden="true" className="h-4 w-4" /></Link></li>)}</ul> : <p className="border-l-2 border-[var(--color-line)] pl-4 text-[var(--color-muted)]">{t("empty")}</p>}</section>
+    </main>
+  );
 }

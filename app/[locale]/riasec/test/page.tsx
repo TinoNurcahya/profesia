@@ -87,7 +87,7 @@ export default function RiasecQuizPage() {
       for (let i = 0; i < totalQuestions; i++) {
         if (answers[questions[i].id] === undefined) {
           setCurrentIndex(i);
-          toast.error(`Pertanyaan ${i + 1} belum dijawab!`);
+          toast.error(t("questionUnanswered", { number: i + 1 }));
           return;
         }
       }
@@ -108,49 +108,49 @@ export default function RiasecQuizPage() {
   const currentDimensionInfo = RIASEC_DIMENSION_NAMES[currentQuestion.dimension as RiasecDimension];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-32 sm:pb-10 space-y-8">
+    <div className="page-shell min-h-[calc(100dvh-64px)] max-w-4xl space-y-8 py-8 pb-32 sm:py-12 sm:pb-12">
       {/* Quiz Header & Progress */}
-      <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-4 shadow-sm">
+      <header className="sticky top-16 z-30 space-y-4 border-b border-[var(--color-line)] bg-[var(--color-canvas)] py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Compass className="w-5 h-5 text-teal-700" />
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+            <Compass aria-hidden="true" className="w-5 h-5 text-teal-700" />
+            <h1 className="text-xs font-bold uppercase tracking-wider text-[var(--color-ink)]">
               {t("quizTitle")}
-            </span>
+            </h1>
           </div>
           <button
             onClick={handleResetQuiz}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-rose-500 transition-colors"
+            className="inline-flex min-h-11 items-center gap-1.5 text-xs font-semibold text-[var(--color-muted)] hover:text-rose-500 transition-colors"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw aria-hidden="true" className="w-3.5 h-3.5" />
             {t("resetQuiz")}
           </button>
         </div>
 
         {/* Progress Bar */}
         <div className="space-y-1.5">
-          <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+          <div className="flex items-center justify-between text-xs font-bold text-[var(--color-ink)]">
             <span>
               {t("questionProgress", { current: currentIndex + 1, total: totalQuestions })}
             </span>
             <span>{progressPercent}% {t("complete")}</span>
           </div>
-          <div className="w-full h-3 bg-slate-200 rounded-full overflow-hidden p-0.5">
+          <div className="w-full h-3 bg-[var(--color-soft)] rounded-full overflow-hidden p-0.5">
             <div
               className="h-full bg-teal-600 rounded-full transition-all duration-300"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
         </div>
-      </div>
+      </header>
 
       {/* Main Question Card */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-12 text-center space-y-8 min-h-[340px] flex flex-col justify-between shadow-sm">
+      <section className="flex min-h-[420px] flex-col justify-between space-y-10 border-y border-[var(--color-line)] py-8 text-center sm:py-12" aria-labelledby="riasec-question">
         <div className="space-y-4">
           <span className="inline-block px-3 py-1 rounded-md text-xs font-bold bg-emerald-100 text-emerald-700">
             {locale === "id" ? currentDimensionInfo.name_id : currentDimensionInfo.name_en}
           </span>
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 leading-relaxed max-w-2xl mx-auto">
+          <h2 id="riasec-question" className="mx-auto max-w-2xl text-xl font-bold leading-relaxed text-[var(--color-ink)] sm:text-3xl">
             &ldquo;{locale === "id" ? currentQuestion.statement_id : currentQuestion.statement_en}&rdquo;
           </h2>
         </div>
@@ -161,7 +161,7 @@ export default function RiasecQuizPage() {
             <span className="text-rose-600">
               {t("stronglyDisagree")}
             </span>
-            <span className="text-slate-400">{t("neutral")}</span>
+            <span className="text-[var(--color-muted)]">{t("neutral")}</span>
             <span className="text-emerald-600">
               {t("stronglyAgree")}
             </span>
@@ -174,10 +174,11 @@ export default function RiasecQuizPage() {
                 <button
                   key={val}
                   onClick={() => handleSelectOption(val)}
+                  aria-label={`${val}: ${val < 3 ? t("stronglyDisagree") : val > 3 ? t("stronglyAgree") : t("neutral")}`}
                   className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl border-2 font-bold transition-all flex items-center justify-center active:scale-95 ${
                     selected
                       ? "bg-emerald-600 border-emerald-600 text-white scale-110 shadow-lg shadow-emerald-600/40"
-                      : "bg-slate-50 border-slate-200 text-slate-700 hover:scale-105 hover:bg-emerald-50"
+                      : "bg-[var(--color-soft)] border-[var(--color-line)] text-[var(--color-ink)] hover:scale-105 hover:bg-emerald-50"
                   }`}
                 >
                   <span className="text-base sm:text-lg">{val}</span>
@@ -188,11 +189,11 @@ export default function RiasecQuizPage() {
         </div>
 
         {/* Navigation Buttons */}
-        <div className="fixed bottom-0 left-0 right-0 sm:relative sm:bottom-auto sm:left-auto sm:right-auto bg-white/95 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border-t border-slate-200 sm:border-slate-100 p-4 sm:p-0 flex items-center justify-between pb-[calc(1rem+env(safe-area-inset-bottom))] sm:pb-0 z-50 sm:z-auto sm:pt-6">
+        <div className="fixed bottom-0 left-0 right-0 sm:relative sm:bottom-auto sm:left-auto sm:right-auto bg-[var(--color-surface)] sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border-t border-[var(--color-line)] sm:border-[var(--color-line)] p-4 sm:p-0 flex items-center justify-between pb-[calc(1rem+env(safe-area-inset-bottom))] sm:pb-0 z-50 sm:z-auto sm:pt-6">
           <button
             onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
             disabled={currentIndex === 0}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 disabled:opacity-40"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold border border-[var(--color-line)] disabled:opacity-40"
           >
             <ArrowLeft className="w-4 h-4" />
             {t("previous")}
@@ -217,7 +218,7 @@ export default function RiasecQuizPage() {
             </button>
           )}
         </div>
-      </div>
+      </section>
     </div>
   );
 }

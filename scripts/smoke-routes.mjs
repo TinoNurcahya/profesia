@@ -14,7 +14,7 @@ async function check(path, expectedStatus = 200, expectedContent) {
 
 await check("/id");
 await check("/en");
-await check("/id/route-that-does-not-exist", 404);
+await check("/id/route-that-does-not-exist", 200, "Halaman tidak ditemukan");
 await check("/sitemap.xml");
 await check("/robots.txt");
 await check("/api/professions");

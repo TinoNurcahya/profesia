@@ -4,6 +4,23 @@ Dokumen ini adalah rencana eksekusi faktual untuk membawa Profesia dari prototyp
 
 Tanggal audit status: 12 September 2026.
 
+## Jalur desain aktif — 18 September 2026
+
+Pembaruan 19 September 2026: implementasi dan verifikasi penuh Career Atlas telah selesai pada homepage, motion, MBTI, dan seluruh 8 permukaan fungsional. Typecheck, lint, tests, build, smoke 9/9, serta pengujian interaktif & visual via browser subagent lulus 100% tanpa error; rincian dan bukti empiris di [docs/design/verification.md](docs/design/verification.md).
+
+- [x] Tetapkan arah **Career Atlas**, komposisi halaman, typography, copy dan pilihan motion di [DESIGN.md](DESIGN.md).
+- [x] Susun paket kecil D0–D9, file target, dependency, fallback, quality gate dan prompt handoff di [DESIGN_EXECUTION_PLAN.md](DESIGN_EXECUTION_PLAN.md).
+- [x] D0–D1: baseline teknis dan foundation editorial diterapkan; visual lintas viewport lulus uji.
+- [x] D2–D3: homepage editorial dan konten berbasis data diterapkan; SSR/rute lulus, visual multi-viewport tervalidasi.
+- [x] D4–D5: motion terpilih dan spacing ketat DESIGN.md diterapkan; scroll lifecycle, navigasi Back, dan screenshot tervalidasi.
+- [x] D6–D7: MBTI exploration, finder dinamis, alur kuis Likert, draft recovery, dan 8 permukaan UI fungsional teruji.
+- [ ] D8: canvas sequence, opsional setelah aset tersedia; deferred untuk baseline.
+- [x] D9: quality gate teknis penuh (typecheck, lint, test, build, smoke) dan trace performa lulus 100%.
+
+Urutan detail dan status per paket mengikuti DESIGN_EXECUTION_PLAN.md. Jalur desain ini adalah prioritas untuk pekerjaan redesign berikutnya; roadmap production di bawah tetap berlaku untuk kesiapan rilis.
+
+Tabel status di bawah adalah snapshot audit **12 September 2026**, bukan audit ulang checkout hari ini. Beberapa route/fitur telah berkembang sejak snapshot tersebut; verifikasi kode dan evidence sebelum mengambil pekerjaan production. Penyusunan plan desain tidak mengubah status backend atau deployment.
+
 ## Prinsip eksekusi
 
 - Status [x] hanya digunakan untuk deliverable yang terbukti ada dan berfungsi di repository.

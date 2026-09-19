@@ -34,13 +34,13 @@ export default async function MbtiResultPage({
   );
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+    <div className="page-shell max-w-6xl space-y-14 py-12 sm:py-16">
       
       {/* Back Button */}
       <div>
         <Link
           href={`/${locale}/mbti`}
-          className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors"
+          className="inline-flex items-center gap-2 text-xs font-bold text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           {t("backToIntro")}
@@ -48,7 +48,7 @@ export default async function MbtiResultPage({
       </div>
 
       {/* Result Hero Header (Editorial Identity Card) */}
-      <div className="bg-white border border-slate-200 rounded-3xl p-8 sm:p-12 space-y-8 shadow-sm relative overflow-hidden flex flex-col md:flex-row items-center gap-8 justify-between">
+      <header className="relative flex flex-col items-center justify-between gap-8 overflow-hidden border-y border-[var(--color-line)] py-8 sm:py-12 md:flex-row">
         
         <div className="space-y-6 flex-1 relative z-10 w-full">
           <div className="flex flex-wrap items-center gap-3">
@@ -62,7 +62,7 @@ export default async function MbtiResultPage({
             </span>
             <Link
               href={`/${locale}/mbti/test`}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-[11px] font-bold text-slate-600 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-soft)] hover:bg-[var(--color-soft)] text-[11px] font-bold text-[var(--color-muted)] transition-colors"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               {t("retake")}
@@ -70,13 +70,13 @@ export default async function MbtiResultPage({
           </div>
 
           <div className="space-y-2">
-            <h1 className="text-5xl sm:text-7xl font-black tracking-tight text-slate-900">
+            <h1 className="text-5xl sm:text-7xl font-black tracking-tight text-[var(--color-ink)]">
               {fullCode}
             </h1>
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-700">
+            <h2 className="text-xl sm:text-2xl font-bold text-[var(--color-ink)]">
               &ldquo;{locale === "id" ? mbtiData.name_id : mbtiData.name_en}&rdquo;
             </h2>
-            <p className="text-sm sm:text-base text-slate-500 leading-relaxed max-w-xl">
+            <p className="text-sm sm:text-base text-[var(--color-muted)] leading-relaxed max-w-xl">
               {locale === "id" ? mbtiData.title_id : mbtiData.title_en}
             </p>
           </div>
@@ -85,14 +85,14 @@ export default async function MbtiResultPage({
         {/* Persona Image Slot */}
         <PersonaImage mbtiCode={mbtiCode} fullCode={fullCode} />
 
-      </div>
+      </header>
 
       {/* Grid: 5-Dimension Analytics & Description */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         {/* Left Col: 5 Dimensions Breakdown Chart */}
-        <div className="md:col-span-1 bg-white border border-slate-200 rounded-3xl p-6 space-y-6">
-          <h3 className="text-base font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-3">
+        <aside className="space-y-6 border-t-2 border-teal-700 py-6 md:col-span-1">
+          <h3 className="text-base font-bold text-[var(--color-ink)] flex items-center gap-2 border-b border-[var(--color-line)] pb-3">
             <Brain className="w-5 h-5 text-teal-700" />
             {t("dimensions.breakdown")}
           </h3>
@@ -100,11 +100,11 @@ export default async function MbtiResultPage({
           <div className="space-y-5 text-xs font-bold">
             {/* Mind E vs I */}
             <div className="space-y-1.5">
-              <div className="flex justify-between text-slate-600">
+              <div className="flex justify-between text-[var(--color-muted)]">
                 <span>{t("dimensions.extraverted")}</span>
                 <span>{t("dimensions.introverted")}</span>
               </div>
-              <div className="h-2.5 bg-slate-200 rounded-full overflow-hidden flex">
+              <div className="h-2.5 bg-[var(--color-soft)] rounded-full overflow-hidden flex">
                 <div className="bg-teal-500 h-full" style={{ width: mbtiCode.includes("E") ? "70%" : "30%" }} />
                 <div className="bg-purple-500 h-full" style={{ width: mbtiCode.includes("E") ? "30%" : "70%" }} />
               </div>
@@ -112,11 +112,11 @@ export default async function MbtiResultPage({
 
             {/* Energy S vs N */}
             <div className="space-y-1.5">
-              <div className="flex justify-between text-slate-600">
+              <div className="flex justify-between text-[var(--color-muted)]">
                 <span>{t("dimensions.intuitive")}</span>
                 <span>{t("dimensions.observant")}</span>
               </div>
-              <div className="h-2.5 bg-slate-200 rounded-full overflow-hidden flex">
+              <div className="h-2.5 bg-[var(--color-soft)] rounded-full overflow-hidden flex">
                 <div className="bg-emerald-500 h-full" style={{ width: mbtiCode.includes("N") ? "75%" : "25%" }} />
                 <div className="bg-amber-500 h-full" style={{ width: mbtiCode.includes("N") ? "25%" : "75%" }} />
               </div>
@@ -124,11 +124,11 @@ export default async function MbtiResultPage({
 
             {/* Nature T vs F */}
             <div className="space-y-1.5">
-              <div className="flex justify-between text-slate-600">
+              <div className="flex justify-between text-[var(--color-muted)]">
                 <span>{t("dimensions.thinking")}</span>
                 <span>{t("dimensions.feeling")}</span>
               </div>
-              <div className="h-2.5 bg-slate-200 rounded-full overflow-hidden flex">
+              <div className="h-2.5 bg-[var(--color-soft)] rounded-full overflow-hidden flex">
                 <div className="bg-purple-600 h-full" style={{ width: mbtiCode.includes("T") ? "80%" : "20%" }} />
                 <div className="bg-teal-500 h-full" style={{ width: mbtiCode.includes("T") ? "20%" : "80%" }} />
               </div>
@@ -136,11 +136,11 @@ export default async function MbtiResultPage({
 
             {/* Tactics J vs P */}
             <div className="space-y-1.5">
-              <div className="flex justify-between text-slate-600">
+              <div className="flex justify-between text-[var(--color-muted)]">
                 <span>{t("dimensions.judging")}</span>
                 <span>{t("dimensions.prospecting")}</span>
               </div>
-              <div className="h-2.5 bg-slate-200 rounded-full overflow-hidden flex">
+              <div className="h-2.5 bg-[var(--color-soft)] rounded-full overflow-hidden flex">
                 <div className="bg-sky-500 h-full" style={{ width: mbtiCode.includes("J") ? "68%" : "32%" }} />
                 <div className="bg-orange-500 h-full" style={{ width: mbtiCode.includes("J") ? "32%" : "68%" }} />
               </div>
@@ -148,40 +148,40 @@ export default async function MbtiResultPage({
 
             {/* Identity A vs T */}
             <div className="space-y-1.5">
-              <div className="flex justify-between text-slate-600">
+              <div className="flex justify-between text-[var(--color-muted)]">
                 <span>{t("dimensions.assertive")}</span>
                 <span>{t("dimensions.turbulent")}</span>
               </div>
-              <div className="h-2.5 bg-slate-200 rounded-full overflow-hidden flex">
+              <div className="h-2.5 bg-[var(--color-soft)] rounded-full overflow-hidden flex">
                 <div className="bg-blue-600 h-full" style={{ width: variantCode === "A" ? "72%" : "28%" }} />
                 <div className="bg-rose-500 h-full" style={{ width: variantCode === "A" ? "28%" : "72%" }} />
               </div>
             </div>
 
           </div>
-        </div>
+        </aside>
 
         {/* Right Col: Deep Personality Analysis */}
         <div className="md:col-span-2 space-y-6">
           
           {/* Description */}
-          <div className="bg-white border border-slate-200 rounded-3xl p-6 space-y-3">
-            <h3 className="text-lg font-bold text-slate-900">{t("personalityDescription")}</h3>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          <section className="space-y-3 border-t border-[var(--color-line)] py-6">
+            <h3 className="text-lg font-bold text-[var(--color-ink)]">{t("personalityDescription")}</h3>
+            <p className="text-xs sm:text-sm text-[var(--color-muted)] leading-relaxed">
               {locale === "id" ? mbtiData.description_id : mbtiData.description_en}
             </p>
-          </div>
+          </section>
 
           {/* Strengths & Weaknesses Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             
             {/* Strengths */}
-            <div className="bg-white border-l border-r border-b border-t-4 border-slate-200 border-t-emerald-500 rounded-3xl p-6 space-y-3">
+            <section className="space-y-3 border-t-2 border-emerald-500 py-6">
               <h4 className="text-sm font-bold text-emerald-600 flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4" />
                 {t("strengths")}
               </h4>
-              <ul className="space-y-2 text-xs text-slate-700">
+              <ul className="space-y-2 text-xs text-[var(--color-ink)]">
                 {(locale === "id" ? mbtiData.strengths_id : mbtiData.strengths_en).map((s, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="text-emerald-500 font-bold">•</span>
@@ -189,15 +189,15 @@ export default async function MbtiResultPage({
                   </li>
                 ))}
               </ul>
-            </div>
+            </section>
 
             {/* Weaknesses */}
-            <div className="bg-white border-l border-r border-b border-t-4 border-slate-200 border-t-rose-500 rounded-3xl p-6 space-y-3">
+            <section className="space-y-3 border-t-2 border-rose-500 py-6">
               <h4 className="text-sm font-bold text-rose-600 flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4" />
                 {t("weaknesses")}
               </h4>
-              <ul className="space-y-2 text-xs text-slate-700">
+              <ul className="space-y-2 text-xs text-[var(--color-ink)]">
                 {(locale === "id" ? mbtiData.weaknesses_id : mbtiData.weaknesses_en).map((w, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="text-rose-500 font-bold">•</span>
@@ -205,17 +205,17 @@ export default async function MbtiResultPage({
                   </li>
                 ))}
               </ul>
-            </div>
+            </section>
 
           </div>
 
           {/* Work Style */}
-          <div className="bg-white border-r border-b border-t border-l-4 border-slate-200 border-l-teal-600 rounded-3xl p-6 space-y-2">
-                <h4 className="text-sm font-bold text-slate-900">{t("workStyle")}</h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
+          <section className="space-y-2 border-l-2 border-teal-700 py-2 pl-6">
+                <h4 className="text-sm font-bold text-[var(--color-ink)]">{t("workStyle")}</h4>
+            <p className="text-xs text-[var(--color-muted)] leading-relaxed">
               {locale === "id" ? mbtiData.work_style_id : mbtiData.work_style_en}
             </p>
-          </div>
+          </section>
 
         </div>
 
@@ -237,11 +237,11 @@ export default async function MbtiResultPage({
       <div className="space-y-6 pt-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
+            <h3 className="text-2xl font-bold text-[var(--color-ink)] flex items-center gap-2">
               <Briefcase className="w-6 h-6 text-teal-700" />
               Rekomendasi Karir Cocok Untuk {fullCode}
             </h3>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-[var(--color-muted)]">
               Daftar pekerjaan dengan tingkat kesesuaian tinggi berdasarkan gaya kerja {mbtiCode}.
             </p>
           </div>
@@ -253,21 +253,21 @@ export default async function MbtiResultPage({
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
           {matchedProfessions.slice(0, 3).map((prof) => (
-            <div key={prof.id} className="bg-white border border-slate-200 hover:border-teal-500 transition-colors rounded-2xl p-6 space-y-3">
+            <article key={prof.id} className="space-y-3 border-t border-[var(--color-line)] py-6 transition-colors hover:border-teal-700">
               <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-teal-50 text-teal-700 border border-teal-100">
                 {prof.category_name_id}
               </span>
-              <h4 className="text-base font-bold text-slate-900">{prof.name_id}</h4>
-              <p className="text-xs text-slate-500 line-clamp-2">{prof.description_id}</p>
+              <h4 className="text-base font-bold text-[var(--color-ink)]">{prof.name_id}</h4>
+              <p className="text-xs text-[var(--color-muted)] line-clamp-2">{prof.description_id}</p>
               <Link
                 href={`/${locale}/professions/${prof.slug}`}
                 className="inline-block pt-2 text-xs font-bold text-teal-700 hover:underline"
               >
                 {t("professionDetails")}
               </Link>
-            </div>
+            </article>
           ))}
         </div>
       </div>

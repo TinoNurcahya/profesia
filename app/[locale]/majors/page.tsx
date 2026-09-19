@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import majorsSeed from "@/data/majors.json";
 import { Major } from "@/services/majorService";
 import { Search, SearchX, ArrowRight, BookOpen, Clock, TrendingUp } from "lucide-react";
+import TextReveal from "@/components/motion/TextReveal";
 
 export default function MajorsPage({
   searchParams,
@@ -54,32 +55,32 @@ export default function MajorsPage({
   }, [search, category, mbti]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <div className="page-shell space-y-10 py-12 sm:py-16">
       {/* Header Page */}
-      <div className="space-y-3">
-        <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] text-teal-700">
+      <div className="page-intro">
+        <p className="eyebrow">
           {t("catalogBadge")}
         </p>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        <TextReveal as="h1" className="page-title">
           {t("catalogTitle")}
-        </h1>
-        <p className="text-sm text-slate-600 max-w-2xl">
+        </TextReveal>
+        <TextReveal as="p" delay={0.1} className="max-w-2xl text-base leading-relaxed text-[var(--color-muted)] sm:text-lg">
           {t("catalogSubtitle")}
-        </p>
+        </TextReveal>
       </div>
 
       {/* Filter Bar */}
-      <div className="glass-panel p-4 sm:p-6 rounded-3xl space-y-4">
+      <div className="surface space-y-4 p-4 sm:p-6">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {/* Search Input */}
           <div className="relative">
-            <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3.5 top-3 text-[var(--color-muted)]" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={t("searchPlaceholder")}
-              className="w-full pl-10 pr-4 py-2 rounded-xl text-xs bg-white border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="field-control pl-10 text-xs"
             />
           </div>
 
@@ -87,7 +88,7 @@ export default function MajorsPage({
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl text-xs bg-white border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="field-control text-xs"
           >
             <option value="all">{t("allStreams")}</option>
             <option value="saintek">{t("saintek")}</option>
@@ -99,7 +100,7 @@ export default function MajorsPage({
           <select
             value={mbti}
             onChange={(e) => setMbti(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl text-xs bg-white border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="field-control text-xs"
           >
             <option value="all">{t("allMbti")}</option>
             {["INTJ", "INTP", "ENTJ", "ENTP", "INFJ", "INFP", "ENFJ", "ENFP", "ISTJ", "ISFJ", "ESTJ", "ESFJ", "ISTP", "ISFP", "ESTP", "ESFP"].map((t) => (
@@ -112,7 +113,7 @@ export default function MajorsPage({
       </div>
 
       {/* Results Count */}
-      <div className="flex items-center justify-between text-xs font-semibold text-slate-500 border-b border-slate-200 pb-3">
+      <div className="flex items-center justify-between text-xs font-semibold text-[var(--color-muted)] border-b border-[var(--color-line)] pb-3">
         <span>
           {t("showing", { shown: filteredMajors.length, total: (majorsSeed as Major[]).length })}
         </span>
@@ -120,33 +121,33 @@ export default function MajorsPage({
 
       {/* Majors Grid */}
       {filteredMajors.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-x-10 md:grid-cols-2 lg:grid-cols-3">
           {filteredMajors.map((major) => (
             <div
               key={major.id}
-              className="bg-white rounded-2xl p-6 flex flex-col justify-between space-y-6 hover:shadow-md hover:border-teal-500 transition-all border border-slate-200"
+              className="flex flex-col justify-between space-y-6 border-t border-[var(--color-line)] py-6 transition-colors hover:border-teal-700"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="px-3 py-1 rounded-md text-[11px] font-bold bg-emerald-100 text-emerald-700">
                     {major.category}
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-500">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[var(--color-muted)]">
                     <TrendingUp className="w-3.5 h-3.5 text-emerald-500" />
                     {t("prospectLabel")} {major.career_prospect}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-slate-900 leading-snug">
+                <h3 className="text-lg font-bold text-[var(--color-ink)] leading-snug">
                   {locale === "id" ? major.name_id : major.name_en}
                 </h3>
 
-                <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
+                <p className="text-xs text-[var(--color-muted)] line-clamp-3 leading-relaxed">
                   {locale === "id" ? major.description_id : major.description_en}
                 </p>
 
                 {/* Meta details */}
-                <div className="flex items-center gap-4 text-xs font-medium text-slate-500 pt-2 border-t border-slate-100">
+                <div className="flex items-center gap-4 text-xs font-medium text-[var(--color-muted)] pt-2 border-t border-[var(--color-line)]">
                   <span className="inline-flex items-center gap-1">
                     <BookOpen className="w-3.5 h-3.5 text-teal-600" />
                     {major.min_education_level}
@@ -160,7 +161,7 @@ export default function MajorsPage({
 
               <Link
                 href={`/${locale}/majors/${major.slug}`}
-                className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-emerald-600 transition-colors"
+                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-[10px] bg-slate-950 text-xs font-bold text-white transition-colors hover:bg-teal-700"
               >
                 {t("detail")}
                 <ArrowRight className="w-4 h-4" />
@@ -170,13 +171,13 @@ export default function MajorsPage({
         </div>
       ) : (
         <div className="glass-card rounded-3xl p-12 text-center space-y-4 max-w-md mx-auto my-12">
-          <div className="w-12 h-12 mx-auto rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+          <div className="w-12 h-12 mx-auto rounded-full bg-[var(--color-soft)] flex items-center justify-center text-[var(--color-muted)]">
             <SearchX className="w-6 h-6" />
           </div>
-          <h3 className="text-lg font-bold text-slate-900">
+          <h3 className="text-lg font-bold text-[var(--color-ink)]">
             {t("notFound")}
           </h3>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-[var(--color-muted)]">
             {t("notFoundDescription")}
           </p>
           <button

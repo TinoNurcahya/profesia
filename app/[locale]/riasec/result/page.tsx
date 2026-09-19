@@ -30,17 +30,17 @@ export default function RiasecResultPage() {
 
   if (!result) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-20 text-center space-y-6">
+      <div className="page-shell max-w-3xl space-y-6 py-20 text-center">
         <Compass className="w-16 h-16 text-emerald-500 mx-auto animate-pulse" />
-        <h1 className="text-2xl font-bold text-slate-900">
+        <h1 className="text-2xl font-bold text-[var(--color-ink)]">
           {t("noResult")}
         </h1>
-        <p className="text-slate-600">
+        <p className="text-[var(--color-muted)]">
           {t("noResultDescription")}
         </p>
         <Link
           href={`/${locale}/riasec/test`}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-emerald-600 text-white font-bold hover:bg-emerald-500 transition-colors shadow-lg"
+          className="btn-primary min-h-12"
         >
           {t("start")}
           <ArrowRight className="w-4 h-4" />
@@ -59,9 +59,9 @@ export default function RiasecResultPage() {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+    <div className="page-shell max-w-5xl space-y-12 py-12 sm:py-16">
       {/* Top Banner */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-8 sm:p-12 text-center space-y-6 shadow-sm">
+      <header className="space-y-6 border-y border-[var(--color-line)] py-8 text-center sm:py-12">
         <p className="text-xs font-mono font-bold uppercase tracking-[0.16em] text-emerald-700">
           {t("calculated")}
         </p>
@@ -70,12 +70,12 @@ export default function RiasecResultPage() {
           <p className="text-sm font-semibold uppercase tracking-widest text-emerald-700">
             {t("topThree")}
           </p>
-          <h1 className="text-5xl sm:text-7xl font-black tracking-tight text-slate-900 drop-shadow-sm">
+          <h1 className="text-5xl sm:text-7xl font-black tracking-tight text-[var(--color-ink)] drop-shadow-sm">
             {result.top_3_code}
           </h1>
         </div>
 
-        <p className="text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
+        <p className="text-sm text-[var(--color-muted)] max-w-xl mx-auto leading-relaxed">
           {locale === "id"
             ? `Profil Anda didominasi oleh kombinasi dimensi ${result.top_3_code[0]}, ${result.top_3_code[1]}, dan ${result.top_3_code[2]}. Kombinasi ini memberikan gambaran presisi lingkungan kerja dan tipe profesi ideal Anda.`
             : `Your profile is dominated by ${result.top_3_code[0]}, ${result.top_3_code[1]}, and ${result.top_3_code[2]}. This combination provides precise insights into your ideal work environments.`}
@@ -91,17 +91,17 @@ export default function RiasecResultPage() {
           </Link>
           <Link
             href={`/${locale}/riasec/test`}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-white text-slate-700 font-bold hover:bg-slate-50 transition-colors border border-slate-300 shadow-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[var(--color-surface)] text-[var(--color-ink)] font-bold hover:bg-[var(--color-soft)] transition-colors border border-[var(--color-line)] shadow-sm"
           >
             <RotateCcw className="w-4 h-4" />
             {t("retake")}
           </Link>
         </div>
-      </div>
+      </header>
 
       {/* Breakdown 6 Dimension Bars */}
-      <div className="bg-white border border-slate-200 p-8 rounded-2xl space-y-6 shadow-sm">
-        <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+      <section className="space-y-8 border-t-2 border-teal-700 py-8">
+        <h2 className="text-xl font-bold text-[var(--color-ink)] flex items-center gap-2">
           <Compass className="w-5 h-5 text-emerald-500" />
           {t("breakdown")}
         </h2>
@@ -112,12 +112,12 @@ export default function RiasecResultPage() {
             const isTop3 = result.top_3_code.includes(key);
 
             return (
-              <div
+              <article
                 key={key}
-                className={`p-5 rounded-2xl border transition-all ${
+                className={`border-t p-5 transition-colors ${
                   isTop3
                     ? "bg-emerald-50 border-emerald-200"
-                    : "bg-slate-50 border-slate-200"
+                    : "bg-[var(--color-soft)] border-[var(--color-line)]"
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
@@ -125,7 +125,7 @@ export default function RiasecResultPage() {
                     <span className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 font-black flex items-center justify-center text-sm">
                       {key}
                     </span>
-                    <span className="font-bold text-sm text-slate-900">
+                    <span className="font-bold text-sm text-[var(--color-ink)]">
                       {locale === "id" ? info.name_id : info.name_en}
                     </span>
                   </div>
@@ -134,21 +134,21 @@ export default function RiasecResultPage() {
                   </span>
                 </div>
 
-                <div className="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden mb-3">
+                <div className="w-full h-2.5 bg-[var(--color-soft)] rounded-full overflow-hidden mb-3">
                   <div
                     className="h-full bg-teal-600 rounded-full"
                     style={{ width: `${score}%` }}
                   />
                 </div>
 
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-[var(--color-muted)] leading-relaxed">
                   {locale === "id" ? info.description_id : info.description_en}
                 </p>
-              </div>
+              </article>
             );
           })}
         </div>
-      </div>
+      </section>
     </div>
   );
 }

@@ -1,128 +1,132 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { Compass, Menu, X, Sparkles, User, Briefcase, Brain, Stars, GraduationCap } from "lucide-react";
+import { Brain, BriefcaseBusiness, ChevronDown, Compass, GraduationCap, Menu, Scale, Stars, User, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ThemeSwitcher from "./ThemeSwitcher";
+
+const focusableSelector = "a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [exploreOpen, setExploreOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const exploreRef = useRef<HTMLDivElement>(null);
+  const exploreButtonRef = useRef<HTMLButtonElement>(null);
   const locale = useLocale();
   const pathname = usePathname();
   const t = useTranslations("Navbar");
-
-  const navLinks = [
+  const primaryLinks = [
     { href: `/${locale}`, label: t("home"), icon: Compass },
-    { href: `/${locale}/professions`, label: t("professions"), icon: Briefcase },
-    { href: `/${locale}/majors`, label: t("majors"), icon: GraduationCap },
+    { href: `/${locale}/professions`, label: t("professions"), icon: BriefcaseBusiness },
     { href: `/${locale}/mbti`, label: t("mbti"), icon: Brain },
+  ];
+  const exploreLinks = [
+    { href: `/${locale}/majors`, label: t("majors"), icon: GraduationCap },
     { href: `/${locale}/riasec/test`, label: t("riasec"), icon: Compass },
     { href: `/${locale}/zodiac`, label: t("zodiac"), icon: Stars },
-    { href: `/${locale}/professions/compare`, label: t("compare"), icon: Sparkles },
+    { href: `/${locale}/professions/compare`, label: t("compare"), icon: Scale },
   ];
+  const isActive = (href: string) => href === `/${locale}` ? pathname === href : pathname.startsWith(href);
+  const closeMenus = () => { setIsOpen(false); setExploreOpen(false); };
 
-  const isActive = (path: string) => pathname === path;
+  useEffect(() => {
+    if (!isOpen) return;
+    const drawer = drawerRef.current;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    drawer?.querySelector<HTMLElement>(focusableSelector)?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeMenus();
+      if (event.key !== "Tab" || !drawer) return;
+      const items = Array.from(drawer.querySelectorAll<HTMLElement>(focusableSelector));
+      const first = items[0];
+      const last = items.at(-1);
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKeyDown); document.body.style.overflow = previousOverflow; previousFocus?.focus(); };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!exploreOpen) return;
+    const dismiss = (event: PointerEvent) => {
+      if (event.target instanceof Node && !exploreRef.current?.contains(event.target)) setExploreOpen(false);
+    };
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { setExploreOpen(false); exploreButtonRef.current?.focus(); }
+    };
+    document.addEventListener("pointerdown", dismiss);
+    document.addEventListener("keydown", escape);
+    return () => { document.removeEventListener("pointerdown", dismiss); document.removeEventListener("keydown", escape); };
+  }, [exploreOpen]);
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const resize = () => { setIsOpen(false); setExploreOpen(false); };
+    desktop.addEventListener("change", resize);
+    return () => desktop.removeEventListener("change", resize);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          
-          {/* Logo Brand */}
-          <Link href={`/${locale}`} className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-lg bg-teal-700 flex items-center justify-center transition-colors duration-200 group-hover:bg-teal-800">
-              <div className="w-full h-full rounded-lg flex items-center justify-center">
-                <Compass aria-hidden="true" className="w-5 h-5 text-white" />
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-xl tracking-tight text-slate-900">
-                {t("brand")}
-              </span>
-              <span className="text-[10px] font-semibold text-slate-500 tracking-wider uppercase -mt-1">
-              {t("tagline")}
-              </span>
-            </div>
+    <header className="sticky top-0 z-50 border-b border-[var(--color-line)] bg-[var(--color-canvas)]">
+      <div className="page-shell flex h-16 items-center justify-between gap-3 sm:gap-6">
+        <Link href={`/${locale}`} onClick={closeMenus} className="group flex min-h-11 shrink-0 items-center gap-2.5" aria-label={`${t("brand")} — ${t("home")}`}>
+          <span className="grid h-10 w-10 place-items-center rounded-[10px] bg-teal-700 text-white transition-colors group-hover:bg-teal-800"><Compass aria-hidden="true" className="h-5 w-5" /></span>
+          <span className="leading-none"><span className="block text-lg font-bold tracking-[-0.03em] text-[var(--color-ink)]">{t("brand")}</span><span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--color-muted)]">{t("tagline")}</span></span>
+        </Link>
+
+        <nav className="hidden items-center gap-1 lg:flex" aria-label={t("primaryNavigation")}>
+          {primaryLinks.map((link) => <Link key={link.href} href={link.href} onClick={closeMenus} aria-current={isActive(link.href) ? "page" : undefined} className={`min-h-11 inline-flex items-center rounded-md px-3.5 py-2 text-sm font-semibold transition-colors ${isActive(link.href) ? "bg-teal-50 text-teal-800" : "text-[var(--color-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-ink)]"}`}>{link.label}</Link>)}
+          <div ref={exploreRef} className="relative">
+            <button ref={exploreButtonRef} type="button" onClick={() => setExploreOpen((value) => !value)} aria-expanded={exploreOpen} aria-controls="explore-navigation" className={`inline-flex items-center gap-1 min-h-11 inline-flex items-center rounded-md px-3.5 py-2 text-sm font-semibold transition-colors ${exploreLinks.some((link) => isActive(link.href)) ? "bg-teal-50 text-teal-800" : "text-[var(--color-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-ink)]"}`}>{t("explore")}<ChevronDown aria-hidden="true" className={`h-4 w-4 transition-transform ${exploreOpen ? "rotate-180" : ""}`} /></button>
+            {exploreOpen && <div className="absolute right-0 top-[calc(100%+0.75rem)] w-72 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-2 shadow-[0_18px_50px_rgba(15,23,42,0.12)]" id="explore-navigation">{exploreLinks.map(({ href, label, icon: Icon }) => <Link key={href} href={href} onClick={closeMenus}  className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-[var(--color-ink)] hover:bg-[var(--color-soft)] hover:text-teal-800"><Icon aria-hidden="true" className="h-4 w-4 text-teal-700" />{label}</Link>)}</div>}
+          </div>
+        </nav>
+
+        <div className="hidden shrink-0 items-center gap-2 lg:flex">
+          <LanguageSwitcher />
+          <ThemeSwitcher />
+          <Link href={`/${locale}/login`} className="btn-primary min-h-11">
+            <User aria-hidden="true" className="h-4 w-4" />
+            {t("login")}
           </Link>
+        </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-            {navLinks.map((link) => {
-              const active = isActive(link.href);
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`px-3 xl:px-4 py-2.5 rounded-full text-[13px] xl:text-sm font-bold tracking-wide transition-all duration-300 ${
-                    active
-                    ? "bg-teal-50 text-teal-700"
-                    : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Right Action Items */}
-          <div className="hidden lg:flex items-center gap-4">
-            <LanguageSwitcher />
-            <Link
-              href={`/${locale}/login`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold bg-teal-700 hover:bg-teal-800 text-white shadow-sm hover:shadow transition-all duration-300"
-            >
-              <User className="w-4 h-4" />
-              {t("login")}
-            </Link>
-          </div>
-
-          {/* Mobile Menu Toggle Button */}
-          <div className="flex lg:hidden items-center gap-2">
-            <LanguageSwitcher />
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-xl text-slate-600 hover:bg-slate-100 transition-colors"
-              aria-label={t("toggleMenu")}
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-
+        <div className="flex items-center gap-2 lg:hidden">
+          <LanguageSwitcher />
+          <ThemeSwitcher />
+          <button type="button" onClick={() => setIsOpen((value) => !value)} className="grid h-11 w-11 place-items-center rounded-[10px] border border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-ink)]" aria-expanded={isOpen} aria-controls="mobile-navigation" aria-label={t("toggleMenu")}>
+            {isOpen ? <X aria-hidden="true" className="h-5 w-5" /> : <Menu aria-hidden="true" className="h-5 w-5" />}
+          </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
       {isOpen && (
-        <div className="lg:hidden bg-white border-t border-slate-200 px-4 pt-4 pb-6 space-y-2 animate-in slide-in-from-top-2 duration-200 shadow-xl">
-          {navLinks.map((link) => {
-            const Icon = link.icon;
-            const active = isActive(link.href);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-all ${
-                  active
-                    ? "bg-teal-50 text-teal-700 font-semibold"
-                    : "text-slate-700 hover:bg-slate-50"
-                }`}
-              >
-                <Icon className="w-5 h-5 text-teal-600" />
-                {link.label}
-              </Link>
-            );
-          })}
-          <div className="pt-3 border-t border-slate-200">
-            <Link
-              href={`/${locale}/login`}
-              onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center gap-2 w-full py-3 rounded-full text-base font-bold bg-teal-700 hover:bg-teal-800 text-white transition-all duration-300"
-            >
-              <User className="w-5 h-5" />
+        <div className="fixed inset-0 top-16 bg-slate-950/30 lg:hidden" onMouseDown={(event) => { if (event.target === event.currentTarget) closeMenus(); }}>
+          <div ref={drawerRef} id="mobile-navigation" data-native-scroll className="ml-auto flex h-full w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-[var(--color-line)] bg-[var(--color-canvas)] p-4 pb-[max(1rem,env(safe-area-inset-bottom))]" role="dialog" aria-modal="true" aria-label={t("mobileNavigation")}>
+            <button type="button" onClick={closeMenus} className="atlas-text-link self-end" aria-label={t("closeMenu")}>
+              <X aria-hidden="true" className="h-5 w-5" />
+              {t("closeMenu")}
+            </button>
+            <nav className="grid gap-1" aria-label={t("mobileNavigation")}>
+              {[...primaryLinks, ...exploreLinks].map((link) => {
+                const Icon = link.icon;
+                return (
+                  <Link key={link.href} href={link.href} onClick={closeMenus} aria-current={isActive(link.href) ? "page" : undefined} className={`flex min-h-12 items-center gap-3 rounded-xl px-3 text-base font-semibold ${isActive(link.href) ? "bg-teal-700 text-white" : "text-[var(--color-ink)] hover:bg-[var(--color-surface)]"}`}>
+                    <Icon aria-hidden="true" className="h-5 w-5" />
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </nav>
+            <Link href={`/${locale}/login`} onClick={closeMenus} className="btn-primary mt-auto min-h-12">
+              <User aria-hidden="true" className="h-5 w-5" />
               {t("login")}
             </Link>
           </div>

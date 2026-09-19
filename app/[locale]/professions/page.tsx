@@ -7,6 +7,7 @@ import FilterBar from "@/components/profession/FilterBar";
 import professionsSeed from "@/data/professions-seed.json";
 import { SearchX } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
+import TextReveal from "@/components/motion/TextReveal";
 
 export default function ProfessionsPage({
   searchParams,
@@ -119,22 +120,22 @@ export default function ProfessionsPage({
   }, [search, category, mbti, riasec, prospects, education, salaryMin, salaryMax, sort, professions]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <div className="page-shell space-y-10 py-12 sm:py-16">
       
       {/* Header Page */}
-      <div className="space-y-3">
-        <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] text-teal-700">
+      <div className="page-intro">
+        <p className="eyebrow">
           {t("catalogBadge")}
         </p>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        <TextReveal as="h1" className="page-title">
           {t("catalogTitle")}
-        </h1>
-        <p className="text-sm text-slate-600 max-w-2xl">
+        </TextReveal>
+        <TextReveal as="p" delay={0.1} className="max-w-2xl text-base leading-relaxed text-[var(--color-muted)] sm:text-lg">
           {t("catalogSubtitle")}
-        </p>
+        </TextReveal>
       </div>
 
-      {catalogState === "loading" && <p className="text-xs text-slate-500" role="status">{t("catalogLoading")}</p>}
+      {catalogState === "loading" && <p className="text-xs text-[var(--color-muted)]" role="status">{t("catalogLoading")}</p>}
       {catalogState === "fallback" && <p className="text-xs text-amber-700" role="status">{t("catalogError")}</p>}
 
       {/* Filter Component */}
@@ -161,7 +162,7 @@ export default function ProfessionsPage({
       />
 
       {/* Results Header */}
-      <div className="flex items-center justify-between text-xs font-semibold text-slate-500 border-b border-slate-200 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--color-line)] pb-4 text-xs font-semibold text-[var(--color-muted)]">
         <span>{t("showing", { shown: filteredProfessions.length, total: professions.length })}</span>
         {mbti !== "all" && (
           <span className="px-2.5 py-1 rounded bg-purple-100 text-purple-700 font-bold">
@@ -172,18 +173,18 @@ export default function ProfessionsPage({
 
       {/* Professions Grid */}
       {filteredProfessions.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-x-10 md:grid-cols-2 lg:grid-cols-3">
           {filteredProfessions.map((prof) => (
             <ProfessionCard key={prof.id} profession={prof} />
           ))}
         </div>
       ) : (
-        <div className="glass-card rounded-3xl p-12 text-center space-y-4 max-w-md mx-auto my-12">
-          <div className="w-12 h-12 mx-auto rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+        <div className="surface mx-auto my-12 max-w-md space-y-4 p-8 text-center sm:p-12">
+          <div className="w-12 h-12 mx-auto rounded-full bg-[var(--color-soft)] flex items-center justify-center text-[var(--color-muted)]">
             <SearchX className="w-6 h-6" />
           </div>
-          <h3 className="text-lg font-bold text-slate-900">{t("notFound")}</h3>
-          <p className="text-xs text-slate-500">
+          <h3 className="text-lg font-bold text-[var(--color-ink)]">{t("notFound")}</h3>
+          <p className="text-xs text-[var(--color-muted)]">
             {t("notFoundDescription")}
           </p>
           <button

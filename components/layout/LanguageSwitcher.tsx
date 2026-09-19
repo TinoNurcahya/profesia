@@ -15,31 +15,31 @@ export default function LanguageSwitcher() {
     
     // Replace the locale prefix in current pathname
     const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`);
-    router.push(newPathname || `/${newLocale}`);
+    router.push(`${newPathname || `/${newLocale}`}${window.location.search}${window.location.hash}`);
   };
 
   return (
-    <div className="inline-flex items-center gap-1 bg-slate-100 p-1 rounded-full border border-slate-200 text-xs font-semibold">
-      <Globe className="w-3.5 h-3.5 text-slate-500 ml-1.5" />
+    <div className="inline-flex min-h-11 items-center gap-0.5 rounded-[10px] border border-[var(--color-line)] bg-[var(--color-soft)] p-1 text-xs font-semibold" role="group" aria-label={t("chooseLanguage")}>
+      <Globe aria-hidden="true" className="ml-1.5 h-3.5 w-3.5 text-[var(--color-muted)]" />
       <button
         onClick={() => toggleLocale("id")}
-        className={`px-2.5 py-1 rounded-full transition-all duration-200 ${
+        className={`min-h-11 min-w-11 rounded-md px-2 transition-colors ${
           locale === "id"
-            ? "bg-teal-700 text-white shadow-sm font-bold"
-            : "text-slate-600 hover:text-slate-900"
+            ? "bg-teal-700 text-white font-bold"
+            : "text-[var(--color-muted)] hover:text-[var(--color-ink)]"
         }`}
-        aria-label={t("languageIndonesian")}
+        aria-pressed={locale === "id"} aria-label={t("languageIndonesian")}
       >
         ID
       </button>
       <button
         onClick={() => toggleLocale("en")}
-        className={`px-2.5 py-1 rounded-full transition-all duration-200 ${
+        className={`min-h-11 min-w-11 rounded-md px-2 transition-colors ${
           locale === "en"
-            ? "bg-teal-700 text-white shadow-sm font-bold"
-            : "text-slate-600 hover:text-slate-900"
+            ? "bg-teal-700 text-white font-bold"
+            : "text-[var(--color-muted)] hover:text-[var(--color-ink)]"
         }`}
-        aria-label={t("languageEnglish")}
+        aria-pressed={locale === "en"} aria-label={t("languageEnglish")}
       >
         EN
       </button>

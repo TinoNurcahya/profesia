@@ -1,4 +1,8 @@
 {
+  "Common": {
+    "skipToContent": "Skip to main content",
+    "loading": "Loading"
+  },
   "Navbar": {
     "brand": "Profesia",
     "home": "Home",
@@ -13,30 +17,72 @@
     "profile": "My Profile",
     "admin": "Admin Panel",
     "logout": "Sign Out",
-    "tagline": "Career & MBTI",
+    "tagline": "Career atlas",
     "toggleMenu": "Toggle navigation menu",
     "zodiac": "Zodiac",
+    "explore": "Explore",
+    "primaryNavigation": "Primary navigation",
+    "mobileNavigation": "Mobile navigation",
+    "chooseLanguage": "Choose language",
     "languageIndonesian": "Indonesian",
-    "languageEnglish": "English"
+    "languageEnglish": "English",
+    "closeMenu": "Close navigation",
+    "themeToggle": "Toggle visual theme",
+    "switchToDark": "Switch to Dark Mode",
+    "switchToLight": "Switch to Light Mode"
   },
   "Landing": {
     "hero": {
-      "badge": "Career Discovery Platform",
-      "titleLine1": "Find a career direction",
-      "titleLine2": "that fits you better.",
-      "subtitle": "Understand your interests, personality, and abilities to discover relevant career options with clear reasons behind each fit.",
-      "ctaPrimary": "Start Exploring Careers",
-      "ctaSecondary": "See How It Works"
+      "badge": "Career atlas",
+      "titleLine1": "Know yourself.",
+      "titleLine2": "Explore your possibilities.",
+      "subtitle": "Explore careers through your interests, thinking preferences, and skills. Understand the reasoning, then choose your next step.",
+      "ctaPrimary": "Explore careers",
+      "ctaSecondary": "Discover yourself",
+      "edition": "Profesia / Self & career discovery",
+      "indexTitle": "An index of possibilities",
+      "indexCount": "{count} starting points",
+      "indexNote": "A place to begin exploring. Not a limit on your possibilities.",
+      "empty": "The career index is not available yet.",
+      "scroll": "See how it all connects"
     },
     "preview": {
+      "eyebrow": "Methodology & Framework",
+      "title": "Integrated Assessment & Analysis Architecture",
+      "subtitle": "Combining the two leading psychometric frameworks (MBTI & Holland Code RIASEC) with an extensive industry profession and college major database.",
+      "framework1Badge": "Personality Typology",
+      "framework2Badge": "Vocational Interests",
+      "mbtiTitle": "16 Personality Typologies (Jungian Typology)",
+      "mbtiDescription": "Mapping 4 natural cognitive functions (Analyst, Diplomat, Sentinel, Explorer) to reveal optimal working environments.",
+      "riasecTitle": "6 Vocational Interest Dimensions",
+      "riasecDescription": "Measuring concrete activity preferences to validate day-to-day work task alignment.",
+      "majorsTitle": "Curated College Major Pathways",
+      "majorsDescription": "Connecting psychological inclinations with academic curricula to prevent choosing the wrong major.",
+      "majorsBadge": "Direct Pathway",
+      "pathAssessment": "Assessment Result",
+      "pathMajors": "Recommended Majors",
+      "pathCareers": "Target Career",
+      "professionsDescription": "Complete with real-world industry salary data, required educational qualifications, essential skills, and progression trajectories.",
       "roleGroupsLabel": "4 16Personalities Role Groups:",
       "roleGroupsTitle": "4 16Personalities Personality Groups",
       "roleGroupsDescription": "Each personality type belongs to a group that reflects its natural energy orientation and working style.",
       "groups": {
-        "analysts": { "title": "Analysts", "description": "Analytical and strategic thinkers driven by knowledge and rationality." },
-        "diplomats": { "title": "Diplomats", "description": "Empathetic idealists dedicated to building harmony with others." },
-        "sentinels": { "title": "Sentinels", "description": "Practical and organized guardians of order, facts, and integrity." },
-        "explorers": { "title": "Explorers", "description": "Spontaneous and bold people who thrive through practical experimentation." }
+        "analysts": {
+          "title": "Analysts",
+          "description": "Analytical and strategic thinkers driven by knowledge and rationality."
+        },
+        "diplomats": {
+          "title": "Diplomats",
+          "description": "Empathetic idealists dedicated to building harmony with others."
+        },
+        "sentinels": {
+          "title": "Sentinels",
+          "description": "Practical and organized guardians of order, facts, and integrity."
+        },
+        "explorers": {
+          "title": "Explorers",
+          "description": "Spontaneous and bold people who thrive through practical experimentation."
+        }
       },
       "stats": {
         "professions": "Professions Listed",
@@ -46,45 +92,126 @@
       }
     },
     "howItWorks": {
-      "title": "3 Simple Steps to Your Ideal Career",
+      "eyebrow": "Connecting the clues",
+      "title": "From self-discovery to new possibilities.",
+      "leadSubtitle": "Begin with what makes you curious. Explore how you work, then look at the skills a career calls for.",
+      "step1Badge": "50 Adaptive Questions",
+      "step2Badge": "4 Cognitive & 6 Interest Breakdown",
+      "step3Badge": "Curated Careers & Majors",
+      "ctaLink": "Start Assessment Now",
       "step1Title": "1. Take MBTI & RIASEC Quiz",
       "step1Desc": "Answer interactive psychometric questions in 5-7 minutes.",
       "step2Title": "2. Personality & Vocational Analysis",
       "step2Desc": "Get a precise breakdown chart of 5 MBTI dimensions & 6 Holland Code dimensions.",
       "step3Title": "3. Get AI Recommendations",
-      "step3Desc": "Discover careers & college majors tailored to your natural working style."
+      "step3Desc": "Discover careers & college majors tailored to your natural working style.",
+      "exampleLabel": "Exploration example, not your personal result.",
+      "skip": "Skip the story",
+      "progress": "Step {current} of {total}",
+      "unavailable": "The career example is not available yet.",
+      "interest": {
+        "label": "Interests",
+        "title": "What makes you curious?",
+        "description": "Notice the activities you want to explore further. RIASEC helps you consider six groups of interests.",
+        "detailLabel": "A question for yourself",
+        "detail": "Do you enjoy finding patterns and solving problems?"
+      },
+      "preferences": {
+        "label": "Working preferences",
+        "title": "How do you approach things?",
+        "description": "Thinking preferences can be useful for reflection. MBTI offers a way to explore them, without defining the limits of your abilities.",
+        "detailLabel": "Something to reflect on",
+        "detail": "Do you try things out, talk them through, or understand the system first?"
+      },
+      "evidence": {
+        "label": "Career possibilities",
+        "title": "Look beyond the job title.",
+        "description": "Compare the activities, skills, and education a career involves. Use that information to decide what you want to try.",
+        "detailLabel": "An example from the catalog"
+      }
     },
     "explainable": {},
     "assessment": {
-      "eyebrow": "Assessment & Discovery",
-      "title": "Understand your patterns as one signal for career direction",
+      "eyebrow": "Personal perspectives",
+      "title": "Many ways to see the world.",
       "description": "Profesia helps you understand patterns in your personality and interests as part of career exploration—not as an absolute answer.",
+      "typeCount": "{count} Types",
       "groups": {
-        "analysts": { "title": "Analysts", "description": "Strategic and analytical ways of thinking" },
-        "diplomats": { "title": "Diplomats", "description": "Empathy and people-oriented ways of thinking" },
-        "sentinels": { "title": "Sentinels", "description": "Care for structure, detail, and facts" },
-        "explorers": { "title": "Explorers", "description": "Courage to try, adapt, and learn through experience" }
-      }
+        "analysts": {
+          "title": "Analysts",
+          "description": "Strategic and analytical ways of thinking"
+        },
+        "diplomats": {
+          "title": "Diplomats",
+          "description": "Empathy and people-oriented ways of thinking"
+        },
+        "sentinels": {
+          "title": "Sentinels",
+          "description": "Care for structure, detail, and facts"
+        },
+        "explorers": {
+          "title": "Explorers",
+          "description": "Courage to try, adapt, and learn through experience"
+        }
+      },
+      "explore": "Explore MBTI"
     },
     "skills": {},
     "exploration": {
-      "title": "Trending Professions",
-      "subtitle": "Top career choices with bright prospects and competitive compensation.",
-      "viewAll": "View All Professions",
+      "eyebrow": "Career atlas",
+      "title": "There is more than one direction for you.",
+      "subtitle": "Get to know careers through their activities and skills. Choose one to start exploring.",
+      "viewAll": "Open the catalog",
       "salaryLabel": "Estimated Salary:",
       "mbtiMatchLabel": "MBTI Match:",
-      "detailCta": "Profession Details",
+      "detailCta": "Explore this career",
       "prospectLabel": "{value} Prospects",
       "highProspect": "High",
-      "salaryValue": "Rp {min} - {max}M/month"
+      "salaryValue": "Rp {min} - {max}M/month",
+      "spotlight": "One career, a closer look",
+      "otherPaths": "Other paths to explore",
+      "sourceNote": "A preview from the Profesia catalog. Consider career information alongside your experiences and other sources.",
+      "empty": "The catalog is not available yet."
     },
     "finalCta": {
-      "badge": "Bilingual & 100% Free",
-      "title": "Ready to Find the Right Profession for You?",
-      "description": "Take the 50-question MBTI test now and explore job recommendations along with career zodiac compatibility!",
-      "primaryCta": "Start MBTI Test Now",
-      "secondaryCta": "Explore Career Zodiac"
+      "badge": "Your next step",
+      "title": "One step opens a new direction.",
+      "description": "You do not need all the answers right away. Begin with one career that makes you curious.",
+      "primaryCta": "Explore careers",
+      "secondaryCta": "Discover yourself"
+    },
+    "method": {
+      "eyebrow": "Methods & limitations",
+      "title": "Clues you can understand.",
+      "assessments": {
+        "title": "Two perspectives",
+        "description": "MBTI explores personality preferences. RIASEC explores interests in work activities."
+      },
+      "reasoning": {
+        "title": "Understand the reasoning",
+        "description": "Compare clues from assessments with the skills and activities in the career catalog."
+      },
+      "limits": {
+        "title": "The choice is yours",
+        "description": "Results support exploration. They are not a diagnosis or a guarantee of career fit. Your experiences and opportunities matter too."
+      }
     }
+  },
+  "Compare": {
+    "eyebrow": "Decision tool",
+    "title": "Compare professions",
+    "description": "Choose exactly two professions. The comparison is stored in the URL and can be shared.",
+    "first": "First profession",
+    "second": "Second profession",
+    "choose": "Choose a profession",
+    "action": "Compare",
+    "caption": "Two-profession comparison",
+    "aspect": "Aspect",
+    "salary": "Salary range",
+    "prospects": "Prospects",
+    "balance": "Work-life balance",
+    "education": "Education",
+    "empty": "Choose two different professions to view a comparison."
   },
   "Profession": {
     "salaryRange": "Salary Range",
@@ -173,6 +300,18 @@
     "soshum": "Social Sciences & Humanities",
     "seni": "Art & Design"
   },
+  "Zodiac": {
+    "eyebrow": "Reflective exploration",
+    "title": "View career directions through the lens of your zodiac sign.",
+    "description": "Explore light connections between zodiac traits, elements, and different working environments.",
+    "element": "Element: {value}",
+    "traits": "Key traits",
+    "view": "View career directions",
+    "back": "Back to exploration",
+    "disclaimer": "Zodiac is offered for reflective exploration and entertainment, not as scientific evidence or a career determinant.",
+    "directions": "Career directions to explore",
+    "empty": "No career directions are linked yet."
+  },
   "Riasec": {
     "title": "RIASEC Psychometrics (Holland Code)",
     "subtitle": "Measure 6 vocational dimensions for precise career matching.",
@@ -190,6 +329,7 @@
     "quizTitle": "RIASEC Holland Code Assessment (36 Likert Items)",
     "resetNotice": "RIASEC quiz reset.",
     "completedToast": "RIASEC quiz complete! Holland Code: {code}",
+    "questionUnanswered": "Question {number} has not been answered.",
     "noResult": "No RIASEC Results Found",
     "noResultDescription": "Please complete the RIASEC quiz first to discover your Holland Code and vocational interests.",
     "start": "Start RIASEC Quiz",
@@ -198,6 +338,125 @@
     "explore": "Explore Matching Careers",
     "retake": "Retake Quiz",
     "breakdown": "Breakdown of 6 RIASEC Dimensions"
+  },
+  "MbtiIntro": {
+    "eyebrow": "Personality assessment",
+    "title": "Understand your patterns, then explore career directions that feel more natural.",
+    "description": "Fifty questions map five personality dimensions. The result is a reflection tool, not a limit on your choices.",
+    "start": "Start the MBTI assessment",
+    "typesTitle": "Sixteen types, four working patterns",
+    "typesDescription": "Learn each type's tendencies and continue to careers that relate to those patterns.",
+    "careers": "Careers for {code}",
+    "allTypes": "All Archetypes",
+    "roleAnalysts": "Analysts",
+    "roleDiplomats": "Diplomats",
+    "roleSentinels": "Sentinels",
+    "roleExplorers": "Explorers",
+    "viewProfile": "Full Profile",
+    "matchedCareers": "Matched Careers",
+    "strengthsTitle": "Core Strengths",
+    "exploreAll16": "Explore All 16 Archetypes",
+    "badgeConstellation": "16 MBTI Archetypes",
+    "testDuration": "5–7 Mins · 50 Questions",
+    "noResultsFound": "No archetypes match the filter",
+    "searchPlaceholder": "Search code or title (e.g. INTJ, Architect)...",
+    "scrollHint": "Four perspectives to begin exploring your preferences. No single type defines your possibilities.",
+    "quickFinderTitle": "Find a specific profile",
+    "quickFinderDescription": "Search for a type or choose a group to open a profile and explore related careers.",
+    "mediaFallback": "The video visual is not available yet. Character illustrations will continue to follow the scroll journey.",
+    "roleProgress": "Role group {current} of {total}",
+    "viewAllTypes": "View all types",
+    "viewLess": "Show fewer types",
+    "skipStory": "Skip to the type index",
+    "searchCount": "{count} types found"
+  },
+  "MbtiStory": {
+    "chapter00Label": "SELF DISCOVERY",
+    "chapter00Eyebrow": "Cognitive Pattern & Personality Exploration",
+    "chapter00Title": "Understand your patterns, then explore career directions that feel more natural.",
+    "chapter00Description": "Fifty questions map five personality dimensions. The result is a reflection tool, not a limit on your choices.",
+    "chapter00Start": "Start the MBTI Assessment",
+    "chapter00Majors": "Explore College Majors",
+    "trustDuration": "5–7 Minutes",
+    "trustQuestions": "50 Questions",
+    "trustFree": "100% Free & No Sign-up",
+    "trustDatabase": "Connected to Career Database",
+    "archetypeRole": "Role Group",
+    "archetypeStrengths": "Core Strengths",
+    "chapter01Label": "OUR PATTERNS",
+    "chapter01Lead": "Every individual carries a distinct pattern that shapes how they live.",
+    "chapter01Item1": "HOW WE THINK.",
+    "chapter01Item1Desc": "How we process concrete observations or synthesize abstract underlying concepts.",
+    "chapter01Item2": "HOW WE DECIDE.",
+    "chapter01Item2Desc": "Balancing objective logical consistency against empathetic human values.",
+    "chapter01Item3": "HOW WE ENGAGE.",
+    "chapter01Item3Desc": "Drawing internal energy from deep solitude or collective social dynamics.",
+    "chapter01Item4": "HOW WE FACE UNCERTAINTY.",
+    "chapter01Item4Desc": "Favoring deliberate structured plans or flexible, emergent adaptations.",
+    "chapter02Label": "SIXTEEN PERSPECTIVES",
+    "chapter02Title": "Sixteen ways of perceiving and engaging the world.",
+    "chapter02Subtitle": "Not to confine human complexity into rigid boxes, but to appreciate the spectrum of how we contribute.",
+    "chapter02Bridge": "Yet your personality is far richer than just four acronym letters.",
+    "chapter03Label": "MORE THAN FOUR LETTERS",
+    "chapter03Title": "Personality is not a rigid box. It is a spectrum of tendencies.",
+    "chapter03Subtitle": "Profesia maps five dynamic dimensions that complement each other in professional decisions and collaboration.",
+    "spectrumMind": "Mind Energy",
+    "spectrumMindLeft": "Introverted (I)",
+    "spectrumMindRight": "Extraverted (E)",
+    "spectrumEnergy": "Perceptual Focus",
+    "spectrumEnergyLeft": "Intuitive (N)",
+    "spectrumEnergyRight": "Observant (S)",
+    "spectrumNature": "Decision Basis",
+    "spectrumNatureLeft": "Thinking (T)",
+    "spectrumNatureRight": "Feeling (F)",
+    "spectrumTactics": "Work Approach",
+    "spectrumTacticsLeft": "Judging (J)",
+    "spectrumTacticsRight": "Prospecting (P)",
+    "spectrumIdentity": "Stress Response",
+    "spectrumIdentityLeft": "Assertive (-A)",
+    "spectrumIdentityRight": "Turbulent (-T)",
+    "chapter03Quote": "Assessment results serve as a reflective compass, never a boundary on your future.",
+    "chapter04Label": "FROM PATTERN TO POSSIBILITY",
+    "chapter04Title": "Understanding yourself is merely the beginning.",
+    "chapter04Subtitle": "A fulfilling career path emerges when innate inclinations intersect with deliberate, cultivated skills.",
+    "stepPersonality": "Personality",
+    "stepTendency": "Tendency",
+    "stepStrength": "Innate Strength",
+    "stepSkill": "Relevant Skill",
+    "stepPossibility": "Career Opportunity",
+    "stepPersonalityDesc": "Natural wiring for processing data and energy.",
+    "stepTendencyDesc": "Everyday approach to addressing dilemmas.",
+    "stepStrengthDesc": "Inherent strengths that can be honed into mastery.",
+    "stepSkillDesc": "Acquired technical and interpersonal competencies.",
+    "stepPossibilityDesc": "Fulfilling roles where you can excel authentically.",
+    "chapter05Label": "MULTIPLE PATHWAYS",
+    "chapter05Title": "One personality archetype. Countless pathways.",
+    "chapter05Subtitle": "There is no single mandatory path. The same archetype thrives across diverse industries and domains.",
+    "viewCareerCatalog": "Explore All Related Careers",
+    "chapter06Label": "ECOSYSTEM EXPLORATION",
+    "chapter06Title": "Integrated career discovery instruments.",
+    "chapter06Subtitle": "Connect psychometric discoveries directly to real-world employment data, college majors, and role architectures.",
+    "bridgeCareersTitle": "120+ Profession Catalog",
+    "bridgeCareersDesc": "Explore compensation, market outlook, prerequisites, and personality compatibility.",
+    "bridgeMajorsTitle": "College Majors Directory",
+    "bridgeMajorsDesc": "Discover academic programs tailored to your innate curiosity and future career goals.",
+    "bridgeZodiacTitle": "Career Zodiac Insights",
+    "bridgeZodiacDesc": "A complementary archetypal lens for interpersonal dynamics and team resonance.",
+    "bridgeRiasecTitle": "RIASEC Vocational Assessment",
+    "bridgeRiasecDesc": "Validate your occupational interests across six core vocational personality types.",
+    "exploreButton": "Explore Now",
+    "chapter07Label": "BEGINNING THE JOURNEY",
+    "chapter07Quote": "Your career does not begin with a job title or degree. It begins with the courage to understand who you truly are.",
+    "chapter07Subtitle": "Take the first step in 5–7 minutes. Map your cognitive tendencies and discover paths that fit.",
+    "chapter07CTA": "Start MBTI Assessment Now",
+    "chapter07Secondary": "Explore All 16 Archetypes",
+    "dimensionDemo": "Interactive example, not your test result. Move the sliders to explore preference changes.",
+    "dimensionValue": "{left}: {leftValue}%, {right}: {rightValue}%",
+    "careerToolLabel": "Activities & skills",
+    "majorToolLabel": "Higher education",
+    "riasecToolLabel": "Work interests",
+    "zodiacToolLabel": "Optional exploration",
+    "careerPreview": "Catalog examples, not personal recommendations or a guarantee of fit."
   },
   "Mbti": {
     "quizTitle": "MBTI 16Personalities Quiz (50 Likert Questions)",
@@ -217,6 +476,7 @@
     "viewResults": "View MBTI Results",
     "resetSuccess": "Quiz reset to the beginning.",
     "completedToast": "Quiz complete! Your result: {code}",
+    "questionUnanswered": "Question {number} has not been answered.",
     "backToIntro": "Back to MBTI Intro",
     "retake": "Retake Test",
     "breakdown": "Breakdown of 5 Dimensions",
@@ -225,9 +485,19 @@
     "weaknesses": "Weaknesses",
     "workStyle": "Natural Work Style",
     "professionDetails": "View Profession Details →",
-    "dimensions": {"breakdown": "5-Dimension Breakdown", "extraverted": "Extraverted (E)", "introverted": "Introverted (I)", "intuitive": "Intuitive (N)", "observant": "Observant (S)", "thinking": "Thinking (T)", "feeling": "Feeling (F)", "judging": "Judging (J)", "prospecting": "Prospecting (P)", "assertive": "Assertive (-A)", "turbulent": "Turbulent (-T)"},
-    "strengths": "Strengths",
-    "weaknesses": "Weaknesses"
+    "dimensions": {
+      "breakdown": "5-Dimension Breakdown",
+      "extraverted": "Extraverted (E)",
+      "introverted": "Introverted (I)",
+      "intuitive": "Intuitive (N)",
+      "observant": "Observant (S)",
+      "thinking": "Thinking (T)",
+      "feeling": "Feeling (F)",
+      "judging": "Judging (J)",
+      "prospecting": "Prospecting (P)",
+      "assertive": "Assertive (-A)",
+      "turbulent": "Turbulent (-T)"
+    }
   },
   "Footer": {
     "brand": "Profesia",
@@ -241,10 +511,10 @@
     "professionComparison": "Side-by-Side Profession Comparison",
     "personalityGroups": "4 Personality Groups",
     "builtFor": "Built with",
-    "audience": "for job seekers and career enthusiasts in Indonesia."
-    ,"github": "GitHub"
-    ,"twitter": "Twitter"
-    ,"linkedin": "LinkedIn",
+    "audience": "for job seekers and career enthusiasts in Indonesia.",
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "linkedin": "LinkedIn",
     "analysts": "Analysts:",
     "diplomats": "Diplomats:",
     "sentinels": "Sentinels:",
@@ -282,15 +552,32 @@
     "forgotPassword": "Forgot password?",
     "showPassword": "Show password",
     "hidePassword": "Hide password",
-    "brand": "Profesia"
+    "brand": "Profesia",
+    "contextEyebrow": "Your private exploration space",
+    "contextTitle": "A fitting career starts with understanding yourself.",
+    "contextDescription": "Keep assessment results, saved careers, and recommendations connected in one journey.",
+    "contextPointOne": "Your MBTI and RIASEC results stay saved",
+    "contextPointTwo": "Return to favorite careers at any time",
+    "contextPointThree": "Your personal data remains under your control"
   },
   "Error": {
+    "eyebrow": "Temporary interruption",
     "title": "Something went wrong",
     "description": "This page ran into a problem. Try again or return to the homepage.",
     "retry": "Try again",
     "home": "Back to homepage",
     "notFoundTitle": "Page not found",
     "notFoundDescription": "The page you are looking for is unavailable or has moved."
+  },
+  "Admin": {
+    "title": "Content governance",
+    "description": "Access is verified on the server. Content changes are recorded in the audit log.",
+    "catalogTitle": "Profession catalog",
+    "count": "{count} professions listed",
+    "name": "Name",
+    "status": "Status",
+    "sources": "Sources",
+    "published": "Published"
   },
   "Profile": {
     "eyebrow": "Your career journey",
@@ -302,8 +589,15 @@
     "email": "Email",
     "notAvailable": "Not available yet",
     "assessmentTitle": "Career Exploration",
+    "assessmentDescription": "Review your latest results or continue the assessments that support your career journey.",
     "assessmentPending": "Your saved results and recommendations will appear here once persistence is available.",
     "mbtiAction": "Start MBTI",
-    "riasecAction": "Start RIASEC"
+    "riasecAction": "Start RIASEC",
+    "savedTitle": "Saved careers",
+    "savedEmpty": "No saved careers yet.",
+    "savedAction": "Explore the profession catalog",
+    "dataTitle": "Data controls",
+    "exportAction": "Export my data",
+    "dataDescription": "Assessment and recommendation data is retained until you delete your account data. Deletion remains available through secure account controls."
   }
 }
