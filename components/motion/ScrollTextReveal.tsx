@@ -72,13 +72,16 @@ export default function ScrollTextReveal({
     { scope: containerRef, dependencies: [children, dimOpacity] }
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Comp = Component as any;
+
   return (
-    <Component ref={containerRef} className={className} {...props}>
+    <Comp ref={containerRef} className={className} {...props}>
       {words.map((word, index) => (
         <span key={index} data-scrub-word className="inline-block mr-[0.3em] transition-none">
           {word}
         </span>
       ))}
-    </Component>
+    </Comp>
   );
 }

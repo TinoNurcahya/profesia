@@ -5,6 +5,8 @@ import StoryLabel from "./StoryLabel";
 import KineticSplitText from "@/components/motion/KineticSplitText";
 import MagneticButton from "@/components/motion/MagneticButton";
 import CardTilt3D from "@/components/motion/CardTilt3D";
+import HeroShrinkEffect from "@/components/motion/HeroShrinkEffect";
+import ParallaxLayer from "@/components/motion/ParallaxLayer";
 
 export interface MbtiTypeItem {
   code: string;
@@ -54,9 +56,15 @@ export default function Chapter00Hero({ types, locale, labels }: Chapter00HeroPr
   const colorScheme = roleColors[activeGroup] || roleColors.Analysts;
 
   return (
-    <section className="atlas-hero border-b border-[var(--color-line)] bg-[var(--color-canvas)]" aria-labelledby="mbti-hero-title">
-      <div className="page-shell">
-        <div className="atlas-chapter-line">
+    <section className="atlas-hero border-b border-[var(--color-line)] bg-[var(--color-canvas)] relative overflow-hidden" aria-labelledby="mbti-hero-title">
+      <ParallaxLayer speed={0.2} className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] right-[-5%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-br from-indigo-500/5 to-purple-500/5 blur-3xl mix-blend-multiply dark:mix-blend-screen" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-tr from-sky-500/5 to-emerald-500/5 blur-3xl mix-blend-multiply dark:mix-blend-screen" />
+      </ParallaxLayer>
+
+      <HeroShrinkEffect className="relative z-10">
+        <div className="page-shell">
+          <div className="atlas-chapter-line">
           <div className="flex items-center gap-3">
             <StoryLabel label={labels.label} />
             <span className="atlas-caption hidden sm:block">{labels.eyebrow}</span>
@@ -178,7 +186,8 @@ export default function Chapter00Hero({ types, locale, labels }: Chapter00HeroPr
           </div>
 
         </div>
-      </div>
+        </div>
+      </HeroShrinkEffect>
     </section>
   );
 }

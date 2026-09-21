@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import StoryLabel from "./StoryLabel";
-import TextReveal from "../../motion/TextReveal";
+import KineticSplitText from "@/components/motion/KineticSplitText";
+import ScrollTextReveal from "@/components/motion/ScrollTextReveal";
+import ParallaxLayer from "@/components/motion/ParallaxLayer";
+import MagneticButton from "@/components/motion/MagneticButton";
 
 interface Chapter07BeginProps {
   locale: string;
@@ -21,10 +24,14 @@ interface Chapter07BeginProps {
 export default function Chapter07Begin({ locale, labels }: Chapter07BeginProps) {
   return (
     <section
-      className="atlas-chapter bg-[var(--color-canvas)]"
+      className="atlas-chapter bg-[var(--color-canvas)] relative overflow-hidden"
       aria-labelledby="begin-heading"
     >
-      <div className="page-shell">
+      <ParallaxLayer speed={0.15} className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[20%] left-[50%] -translate-x-1/2 w-[80vw] h-[80vw] sm:w-[60vw] sm:h-[60vw] rounded-full bg-gradient-to-t from-teal-500/10 to-transparent blur-3xl mix-blend-multiply dark:mix-blend-screen" />
+      </ParallaxLayer>
+
+      <div className="page-shell relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           
           <div className="inline-flex justify-center">
@@ -32,32 +39,33 @@ export default function Chapter07Begin({ locale, labels }: Chapter07BeginProps) 
           </div>
 
           {/* Emotional Editorial Quote */}
-          <TextReveal
+          <KineticSplitText
             as="h2"
             id="begin-heading"
             className="atlas-heading"
           >
             {labels.quote}
-          </TextReveal>
+          </KineticSplitText>
 
-          <TextReveal
+          <ScrollTextReveal
             as="p"
-            delay={0.1}
             className="max-w-2xl mx-auto text-base sm:text-lg text-[var(--color-muted)] leading-relaxed text-pretty"
           >
             {labels.subtitle}
-          </TextReveal>
+          </ScrollTextReveal>
 
           {/* Action CTAs */}
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-            <Link
-              href={`/${locale}/mbti/test`}
-              className="btn-primary min-h-12 w-full sm:w-auto"
-            >
-              
-              <span>{labels.cta}</span>
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
-            </Link>
+            <MagneticButton strength={0.4}>
+              <Link
+                href={`/${locale}/mbti/test`}
+                className="btn-primary min-h-12 w-full sm:w-auto"
+              >
+                
+                <span>{labels.cta}</span>
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
+            </MagneticButton>
 
             <a
               href="#perspectives-heading"

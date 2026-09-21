@@ -79,8 +79,10 @@ export default function KineticSplitText({
     { scope: rootRef, dependencies: [children] }
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Comp = Component as any;
   return (
-    <Component ref={rootRef} className={`perspective-[1000px] ${className}`} {...props}>
+    <Comp ref={rootRef} className={`perspective-[1000px] ${className}`} {...props}>
       {words.map((item, wIndex) => (
         <span
           key={wIndex}
@@ -110,6 +112,6 @@ export default function KineticSplitText({
           )}
         </span>
       ))}
-    </Component>
+    </Comp>
   );
 }

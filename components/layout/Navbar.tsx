@@ -66,7 +66,7 @@ export default function Navbar() {
   ];
   const exploreLinks = [
     { href: `/${locale}/majors`, label: t("majors"), icon: GraduationCap },
-    { href: `/${locale}/riasec/test`, label: t("riasec"), icon: Compass },
+    { href: `/${locale}/riasec`, label: t("riasec"), icon: Compass },
     { href: `/${locale}/zodiac`, label: t("zodiac"), icon: Stars },
     { href: `/${locale}/professions/compare`, label: t("compare"), icon: Scale },
   ];

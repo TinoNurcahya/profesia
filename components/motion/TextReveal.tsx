@@ -41,11 +41,13 @@ export default function TextReveal({ children, as: Component = "div", className 
     });
     return () => media.revert();
   }, { scope: rootRef, dependencies: [children, animate, delay], revertOnUpdate: true });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Comp = Component as any;
   return (
-    <Component ref={rootRef} className={className} {...props}>
+    <Comp ref={rootRef} className={className} {...props}>
       {tokens.map((token, index) => /^\s+$/.test(token.text)
         ? <Fragment key={index}>{token.text}</Fragment>
         : <span key={index} className={`reveal-mask ${token.highlight ? highlightClass : ""}`}><span data-reveal-word className="inline-block">{token.text}</span></span>)}
-    </Component>
+    </Comp>
   );
 }

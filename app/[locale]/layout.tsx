@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
+import ThemeScript from "@/components/layout/ThemeScript";
 import { getMessages, getTranslations } from "next-intl/server";
 import { Toaster } from "sonner";
 import Navbar from "@/components/layout/Navbar";
@@ -45,26 +45,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <Script
-          id="theme-initializer"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var stored = localStorage.getItem('theme');
-                  if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark');
-                    document.documentElement.classList.remove('light');
-                  } else if (stored === 'light') {
-                    document.documentElement.classList.add('light');
-                    document.documentElement.classList.remove('dark');
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
+        <ThemeScript />
       </head>
       <body className="flex flex-col min-h-screen">
         <NextIntlClientProvider messages={messages}>

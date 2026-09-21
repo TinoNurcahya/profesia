@@ -11,6 +11,7 @@ import Chapter04Possibility from "@/components/mbti/story/Chapter04Possibility";
 import Chapter05Paths from "@/components/mbti/story/Chapter05Paths";
 import Chapter06Explore from "@/components/mbti/story/Chapter06Explore";
 import Chapter07Begin from "@/components/mbti/story/Chapter07Begin";
+import ScrollProgressBar from "@/components/motion/ScrollProgressBar";
 
 export default async function MbtiIntroPage({
   params,
@@ -147,7 +148,9 @@ export default async function MbtiIntroPage({
   };
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden relative">
+      <ScrollProgressBar />
+      
       {/* Chapter 00: The Question & Character Stage */}
       <Chapter00Hero
         types={allTypes}

@@ -4,7 +4,9 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { ArrowUpRight, Compass, BookOpen, Sparkles, Target } from "lucide-react";
 import StoryLabel from "./StoryLabel";
-import TextReveal from "../../motion/TextReveal";
+import KineticSplitText from "@/components/motion/KineticSplitText";
+import ScrollTextReveal from "@/components/motion/ScrollTextReveal";
+import StaggerGridReveal from "@/components/motion/StaggerGridReveal";
 
 interface Chapter06ExploreProps {
   locale: string;
@@ -75,24 +77,23 @@ export default function Chapter06Explore({ locale, labels }: Chapter06ExplorePro
         {/* Editorial Header */}
         <div className="max-w-3xl space-y-4">
           <StoryLabel label={labels.label} />
-          <TextReveal
+          <KineticSplitText
             as="h2"
             id="explore-heading"
             className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.035em] text-[var(--color-ink)] leading-[1.1] text-balance"
           >
             {labels.title}
-          </TextReveal>
-          <TextReveal
+          </KineticSplitText>
+          <ScrollTextReveal
             as="p"
-            delay={0.1}
             className="text-[var(--color-muted)] text-base sm:text-lg leading-relaxed text-pretty"
           >
             {labels.subtitle}
-          </TextReveal>
+          </ScrollTextReveal>
         </div>
 
         {/* Asymmetric Bento Grid (7+5 / 5+7 / 12) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5">
+        <StaggerGridReveal className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5">
           {tools.map((tool) => {
             const Icon = tool.icon;
             return (
@@ -113,14 +114,13 @@ export default function Chapter06Explore({ locale, labels }: Chapter06ExplorePro
                     </span>
                   </div>
 
-                  <TextReveal
-                    as="h3"
+                  <h3
                     className={`font-bold text-[var(--color-ink)] group-hover:text-[var(--color-brand)] transition-colors ${
                       tool.large ? "text-2xl sm:text-3xl mb-3" : "text-lg sm:text-xl mb-2"
                     }`}
                   >
                     {tool.title}
-                  </TextReveal>
+                  </h3>
                   <p
                     className={`text-[var(--color-muted)] leading-relaxed ${
                       tool.large
@@ -139,7 +139,7 @@ export default function Chapter06Explore({ locale, labels }: Chapter06ExplorePro
               </Link>
             );
           })}
-        </div>
+        </StaggerGridReveal>
 
       </div>
     </section>

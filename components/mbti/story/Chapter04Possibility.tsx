@@ -1,6 +1,9 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import StoryLabel from "./StoryLabel";
-import TextReveal from "../../motion/TextReveal";
+import KineticSplitText from "@/components/motion/KineticSplitText";
+import ScrollTextReveal from "@/components/motion/ScrollTextReveal";
+import GsapScrollStagger from "@/components/motion/GsapScrollStagger";
+import MagneticButton from "@/components/motion/MagneticButton";
 
 
 interface Chapter04PossibilityProps {
@@ -62,20 +65,19 @@ export default function Chapter04Possibility({ labels }: Chapter04PossibilityPro
         {/* Editorial Header */}
         <div className="max-w-3xl space-y-4">
           <StoryLabel label={labels.label} />
-          <TextReveal
+          <KineticSplitText
             as="h2"
             id="possibility-heading"
             className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.035em] text-[var(--color-ink)] leading-[1.1] text-balance"
           >
             {labels.title}
-          </TextReveal>
-          <TextReveal
+          </KineticSplitText>
+          <ScrollTextReveal
             as="p"
-            delay={0.1}
             className="text-[var(--color-muted)] text-base sm:text-lg leading-relaxed text-pretty"
           >
             {labels.subtitle}
-          </TextReveal>
+          </ScrollTextReveal>
         </div>
 
         {/* Connected Timeline Layout */}
@@ -88,7 +90,7 @@ export default function Chapter04Possibility({ labels }: Chapter04PossibilityPro
           />
 
           {/* Steps as tall vertical columns */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-0">
+          <GsapScrollStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-0 relative z-10">
             {steps.map((step, idx) => {
               const isLast = idx === steps.length - 1;
               return (
@@ -97,24 +99,23 @@ export default function Chapter04Possibility({ labels }: Chapter04PossibilityPro
                   className="relative flex flex-col items-center text-center group"
                 >
                   {/* Node circle */}
-                  <div className="step-node relative z-10 flex items-center justify-center w-[72px] h-[72px] rounded-lg bg-[var(--color-surface)] border border-[var(--color-line)] group-hover:border-teal-500 shadow-sm transition-all duration-300 mb-6">
-                    {isLast ? (
-                      <Sparkles aria-hidden="true" className="w-6 h-6 text-teal-600" />
-                    ) : (
-                      <span className="font-mono text-lg font-black text-teal-700">
-                        {step.num}
-                      </span>
-                    )}
-                  </div>
+                  <MagneticButton strength={0.3}>
+                    <div className="step-node relative z-10 flex items-center justify-center w-[72px] h-[72px] rounded-lg bg-[var(--color-surface)] border border-[var(--color-line)] group-hover:border-teal-500 shadow-sm transition-all duration-300 mb-6">
+                      {isLast ? (
+                        <Sparkles aria-hidden="true" className="w-6 h-6 text-teal-600" />
+                      ) : (
+                        <span className="font-mono text-lg font-black text-teal-700">
+                          {step.num}
+                        </span>
+                      )}
+                    </div>
+                  </MagneticButton>
 
                   {/* Vertical card content */}
-                  <div className="px-3 sm:px-4 py-6 max-w-[240px] space-y-3">
-                    <TextReveal
-                      as="h3"
-                      className="text-lg sm:text-xl font-bold text-[var(--color-ink)] group-hover:text-[var(--color-brand)] transition-colors"
-                    >
+                  <div className="px-3 sm:px-4 py-2 max-w-[240px] space-y-3">
+                    <h3 className="text-lg sm:text-xl font-bold text-[var(--color-ink)] group-hover:text-[var(--color-brand)] transition-colors">
                       {step.title}
-                    </TextReveal>
+                    </h3>
                     <p className="text-xs sm:text-sm text-[var(--color-muted)] leading-relaxed">
                       {step.desc}
                     </p>
@@ -129,7 +130,7 @@ export default function Chapter04Possibility({ labels }: Chapter04PossibilityPro
                 </div>
               );
             })}
-          </div>
+          </GsapScrollStagger>
         </div>
 
       </div>

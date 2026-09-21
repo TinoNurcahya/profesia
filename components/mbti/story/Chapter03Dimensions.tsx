@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import StoryLabel from "./StoryLabel";
+import DimensionCanvas3D from "@/components/motion/DimensionCanvas3D";
+import ScrollTextReveal from "@/components/motion/ScrollTextReveal";
 
 interface Chapter03DimensionsProps {
   labels: {
@@ -107,11 +109,12 @@ export default function Chapter03Dimensions({ labels }: Chapter03DimensionsProps
   };
 
   return (
-    <section className="atlas-chapter bg-[var(--color-soft)]" aria-labelledby="dimensions-heading">
-      <div className="page-shell">
+    <section className="atlas-chapter bg-[var(--color-soft)] relative z-0" aria-labelledby="dimensions-heading">
+      <DimensionCanvas3D mind={values.mind} energy={values.energy} nature={values.nature} tactics={values.tactics} />
+      <div className="page-shell relative z-10">
         <div className="atlas-chapter-line"><StoryLabel label={labels.label} /></div>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-5"><h2 id="dimensions-heading" className="atlas-heading">{labels.title}</h2><p className="atlas-body mt-6">{labels.subtitle}</p><p className="atlas-caption mt-8 leading-relaxed">{t("dimensionDemo")}</p><p className="my-8 break-words text-5xl font-semibold tracking-tight sm:text-6xl" aria-live="polite" aria-atomic="true">{derivedCode.join("")}<span className="text-[var(--color-brand)]">-{identitySuffix}</span></p><blockquote className="atlas-body border-l border-[var(--color-brand)] pl-5">{labels.quote}</blockquote></div>
+          <div className="lg:col-span-5"><h2 id="dimensions-heading" className="atlas-heading">{labels.title}</h2><ScrollTextReveal as="p" className="atlas-body mt-6 text-lg">{labels.subtitle}</ScrollTextReveal><p className="atlas-caption mt-8 leading-relaxed bg-[var(--color-soft)]/50 backdrop-blur-sm p-2 rounded-lg">{t("dimensionDemo")}</p><p className="my-8 break-words text-5xl font-semibold tracking-tight sm:text-6xl drop-shadow-sm" aria-live="polite" aria-atomic="true">{derivedCode.join("")}<span className="text-[var(--color-brand)]">-{identitySuffix}</span></p><blockquote className="atlas-body border-l border-[var(--color-brand)] pl-5 bg-[var(--color-soft)]/50 backdrop-blur-sm p-4 rounded-r-lg">{labels.quote}</blockquote></div>
           <div className="lg:col-span-7">{spectrums.map(spec => <div key={spec.key} className="border-t border-[var(--color-line)] py-6"><label htmlFor={`dimension-${spec.key}`} className="text-lg font-semibold">{spec.name}</label><div className="mt-4 flex justify-between gap-4 text-sm text-[var(--color-muted)]"><span>{spec.leftLabel} <span className="tabular-nums">{100-spec.value}%</span></span><span className="text-right">{spec.rightLabel} <span className="tabular-nums">{spec.value}%</span></span></div><input id={`dimension-${spec.key}`} type="range" min={0} max={100} value={spec.value} onChange={event => handleSliderChange(spec.key, Number(event.target.value))} aria-valuetext={t("dimensionValue", { left: spec.leftLabel, leftValue: 100-spec.value, right: spec.rightLabel, rightValue: spec.value })} className="mt-2 min-h-11 w-full cursor-pointer accent-[var(--color-brand)]" /></div>)}</div>
         </div>
       </div>
