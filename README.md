@@ -1,12 +1,21 @@
 # Profesia
 
-**Platform Informasi Karir, Psikometri MBTI (16Personalities Style) & Navigasi Zodiak**
+**Platform Eksplorasi Karir, Psikometri MBTI (16Personalities Style), RIASEC Holland Code & Navigasi Kosmis Zodiak**
 
-Profesia adalah platform web bilingual (Indonesia/English) yang menyediakan informasi lengkap tentang ratusan profesi, fitur tes kepribadian MBTI interaktif gaya **16Personalities**, dan navigasi karir berbasis Zodiak.
+[![Live Demo](https://img.shields.io/badge/Live_Demo-profesia--app.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://profesia-app.vercel.app)
+[![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![React 19](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript_5-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+🌐 **URL Produksi Resmi:** [https://profesia-app.vercel.app](https://profesia-app.vercel.app)
+
+Profesia adalah platform web bilingual (Indonesia/English) mutakhir yang memadukan penemuan karir berbasis sains psikometri (**MBTI 16Personalities** & **RIASEC Holland Code**) dengan eksplorasi arketipe kosmis (**Astrolabe 12 Zodiak & Observatorium Konstelasi Langit**), ditenagai rekomendasi cerdas AI Google Gemini.
 
 ---
 
-## 🌟 Informasi Fitur Lengkap
+## 🌟 Informasi Fitur Unggulan
 
 ### 1. Katalog Profesi & Informasi Detail
 Daftar ~50+ jenis pekerjaan (dokter, programmer, desainer, data scientist, dll) lengkap dengan metrik:
@@ -66,8 +75,12 @@ Kartu visual ringkasan hasil MBTI dan profesi rekomendasi yang dirancang estetik
 ### 10. Auto-Save Progress Kuis MBTI (Draf Kuis Persistent)
 Sistem penyimpanan otomatis draf jawaban kuis 50 soal di *Local Storage*. Pengguna tidak perlu khawatir kehilangan progres kuis jika terjadi gangguan koneksi atau refresh halaman secara tidak sengaja.
 
-### 11. Navigasi Karir Berdasarkan Zodiak (Zodiac Career Explorer)
-Halaman modul khusus (`/zodiac`) yang menampilkan 12 tanda Zodiak (Aries hingga Pisces) lengkap dengan elemen (Api, Tanah, Udara, Air), karakter dominan, dan daftar profesi rekomendasi yang cocok dengan energi zodiak tersebut.
+### 11. Cosmic Career Astrolabe & Observatorium Konstelasi Langit
+Modul astrologi karir mutakhir (`/zodiac`) yang dilengkapi:
+- **Interactive Pinned Astrolabe**: Roda orbit 12 zodiak interaktif yang berputar halus saat di-scroll atau diklik, bertengger di atas citra tangan emas kosmis (*Golden Hand in the Shadows*) dan dihiasi medallion talisman 3D celestial custom.
+- **Constellation Sky Canvas**: Visualisasi garis rasi bintang astronomis resmi IAU yang presisi dengan filter glow elemental.
+- **Constellation Observatory Modal**: Modal planetarium layar penuh untuk mengamati rasi bintang dalam skala besar, dilengkapi toggle siluet arketipe mitologis, cincin koordinat kubah langit, serta inspektur bintang interaktif untuk melihat peran anatomis setiap bintang.
+- **Dossier Blueprint Karir**: Rekomendasi profesi terpilih yang selaras dengan kecenderungan alami dan energi masing-masing zodiak.
 
 ### 12. Modul Jurusan Kuliah (Majors & Study Programs Explorer)
 Halaman katalog jurusan kuliah (`/majors`) lengkap dengan mata kuliah inti, durasi, jenjang pendidikan, prospek industri, serta relasi *cross-link* ke katalog profesi yang relevan dan tingkat kecocokan MBTI/RIASEC.
@@ -82,14 +95,19 @@ Engine rekomendasi 2-layer yang menggabungkan kalkulasi deterministik ($\text{RI
 
 ## 🛠️ Tech Stack & Alat Pengembangan
 
-| Layer | Teknologi | Versi |
+| Layer | Teknologi | Versi / Keterangan |
 |---|---|---|
-| **Framework** | Next.js (App Router) | `15.x / 16.x` |
+| **Deployment** | Vercel | [Live Production](https://profesia-app.vercel.app) |
+| **Framework** | Next.js (App Router) | `16.x` (Turbopack) |
 | **UI Library** | React / React DOM | `19.x` |
 | **Styling** | Tailwind CSS (PostCSS) | `v4` |
-| **Bahasa** | TypeScript | `^5` (strict) |
+| **Bahasa** | TypeScript | `^5` (strict mode) |
+| **Motion & Animation** | GSAP & @gsap/react | `3.15.x` (ScrollTrigger, Pinning, Scrubbing) |
+| **3D Graphics** | Three.js & React Three Fiber | `three`, `@react-three/fiber`, `@react-three/drei` |
+| **Smooth Scrolling** | Lenis | `^1.3.x` |
+| **AI Intelligence** | Google Gemini Flash | Gemini API (Layer 2 Personalizer) |
 | **Database & Auth** | Supabase PostgreSQL + Supabase Auth | `@supabase/ssr` / `@supabase/supabase-js` |
-| **Internationalization** | `next-intl` | `^3.x` |
+| **Internationalization** | `next-intl` | `^4.x` (Bilingual ID / EN) |
 | **Icons** | Lucide React | Latest |
 | **Charts** | Recharts | Latest |
 | **Toast Notification** | Sonner | Latest |
@@ -170,10 +188,12 @@ profesia/
 │       ├── layout.tsx                # Root layout with fonts & providers
 │       └── page.tsx                  # Landing Page utama
 ├── components/
-│   ├── layout/                       # Navbar, Footer, LanguageSwitcher
+│   ├── layout/                       # Navbar, Footer, LanguageSwitcher, ThemeScript
+│   ├── motion/                       # DimensionCanvas3D, KineticSplitText, ScrollTextReveal, TextReveal
 │   ├── profession/                   # ProfessionCard, FilterBar, SalaryChart, CareerPathTimeline
-│   ├── mbti/                         # ShareCard, DimensionChart, QuizCard, ProgressBar, ResultCard
-│   ├── zodiac/                       # ZodiacCard, ZodiacGrid, ZodiacDetail
+│   ├── mbti/                         # ShareCard, DimensionChart, QuizCard, ProgressBar, ResultCard, StoryChapters
+│   ├── riasec/                       # HollandHexagonRadar, HollandHexagonStoryboard, HollandSynergyExplorer
+│   ├── zodiac/                       # ZodiacAstrolabePinned, ZodiacConstellationSvg, ConstellationObservatoryModal
 │   └── ui/                           # Button, Modal, Skeleton, Toast, Badge primitives
 ├── services/                         # Data access and business logic
 │   ├── professions.ts                # Profession queries & filters
@@ -181,7 +201,8 @@ profesia/
 │   ├── majorService.ts               # Majors catalog queries
 │   ├── recommendationService.ts      # Layer 1 deterministic scoring
 │   └── aiService.ts                  # Layer 2 Gemini LLM personalizer
-├── data/                             # Static seed JSON (fallback & dev)
+├── data/                             # Static seed JSON & Constellations (fallback & dev)
+│   ├── constellationsData.ts         # 12 Zodiac IAU stars, coordinates & mythology
 │   ├── professions-seed.json
 │   ├── mbti-questions.json
 │   ├── mbti-types.json
