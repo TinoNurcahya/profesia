@@ -326,10 +326,6 @@ export default function ConstellationObservatoryModal({
                         strokeWidth={star.isMajor ? 2.5 : 1.5}
                         filter={`url(#modalStarGlow-${constellation.slug})`}
                         className="transition-all duration-200"
-                        style={{
-                          transformBox: "fill-box",
-                          transformOrigin: "center",
-                        }}
                       />
 
                       {/* Permanent Star Label */}

@@ -45,11 +45,11 @@ export default function ZodiacConstellationSvg({
       line.style.strokeDashoffset = `${len}`;
     });
 
-    // 2. Animate stars pop-in with explicit fill-box transform origin
+    // 2. Animate stars fade-in smoothly without any transform displacement
     tl.fromTo(
       stars,
-      { scale: 0, opacity: 0, transformOrigin: "center", transformBox: "fill-box" },
-      { scale: 1, opacity: 1, duration: 0.6, stagger: 0.04, transformOrigin: "center", transformBox: "fill-box" }
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5, stagger: 0.04 }
     );
 
     // 3. Draw lines connecting stars (DrawSVG effect)
@@ -137,7 +137,6 @@ export default function ZodiacConstellationSvg({
                 strokeWidth={star.isMajor ? 2 : 1}
                 filter={`url(#starGlow-${slug})`}
                 className="constellation-star transition-opacity duration-200 group-hover:opacity-90"
-                style={{ transformBox: "fill-box", transformOrigin: "center" }}
               />
 
               {/* Star Label on Hover */}
