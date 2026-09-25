@@ -380,7 +380,7 @@
 .atlas-step-number { color: var(--color-brand); font-size: 4rem; line-height: 1; letter-spacing: -.06em; font-variant-numeric: tabular-nums; font-weight: 400; }
 .atlas-evidence { margin-top: 28px; border-left: 2px solid var(--color-brand); padding: 20px 0 20px 24px; }
 .atlas-chip { display: inline-flex; padding: 6px 10px; background: var(--color-soft); border: 1px solid var(--color-line); border-radius: 4px; font-size: .75rem; font-weight: 500; }
-.atlas-featured { padding: 28px; background: var(--color-soft); border-top: 2px solid var(--color-brand); }
+.atlas-featured { padding: 28px; background: var(--color-soft); }
 .atlas-row-link { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; min-height: 44px; transition: color 200ms; }
 .atlas-row-link:hover { color: var(--color-brand); }
 .atlas-role { display: grid; grid-template-columns: minmax(0, 1fr) 96px; align-items: end; gap: 16px; border-top: 1px solid var(--color-line); padding: 32px 0; }

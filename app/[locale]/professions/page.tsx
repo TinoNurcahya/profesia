@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import ProfessionCard from "@/components/profession/ProfessionCard";
 import FilterBar from "@/components/profession/FilterBar";
 import professionsSeed from "@/data/professions-seed.json";
-import { SearchX } from "lucide-react";
+import { ChevronLeft, ChevronRight, SearchX } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import KineticSplitText from "@/components/motion/KineticSplitText";
 import TextReveal from "@/components/motion/TextReveal";
@@ -18,10 +18,35 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(Flip);
 }
 
+function getPageNumbers(current: number, total: number): (number | "...")[] {
+  if (total <= 7) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+
+  if (current <= 3) {
+    return [1, 2, 3, 4, "...", total];
+  }
+
+  if (current >= total - 2) {
+    return [1, "...", total - 3, total - 2, total - 1, total];
+  }
+
+  return [1, "...", current - 1, current, current + 1, "...", total];
+}
+
 export default function ProfessionsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ mbti?: string; riasec?: string; category?: string; search?: string; education?: string; sort?: string }>;
+  searchParams: Promise<{
+    mbti?: string;
+    riasec?: string;
+    category?: string;
+    search?: string;
+    education?: string;
+    sort?: string;
+    page?: string;
+    limit?: string;
+  }>;
 }) {
   const initialParams = use(searchParams);
   const t = useTranslations("Profession");
@@ -34,6 +59,12 @@ export default function ProfessionsPage({
   const [riasec, setRiasec] = useState(initialParams.riasec || "all");
   const [education, setEducation] = useState(initialParams.education || "");
   const [sort, setSort] = useState(initialParams.sort || "default");
+  const [currentPage, setCurrentPage] = useState(
+    initialParams.page ? Math.max(1, parseInt(initialParams.page, 10) || 1) : 1
+  );
+  const [pageSize, setPageSize] = useState<number>(
+    [10, 20, 50].includes(Number(initialParams.limit)) ? Number(initialParams.limit) : 10
+  );
   const [professions, setProfessions] = useState(professionsSeed);
   const [catalogState, setCatalogState] = useState<"loading" | "ready" | "fallback">("loading");
 
@@ -51,14 +82,26 @@ export default function ProfessionsPage({
 
   useEffect(() => {
     const params = new URLSearchParams();
-    const values = { search: search.trim(), category, mbti, riasec, education: education.trim(), sort };
+    const values = {
+      search: search.trim(),
+      category,
+      mbti,
+      riasec,
+      education: education.trim(),
+      sort,
+      page: currentPage > 1 ? String(currentPage) : undefined,
+      limit: pageSize !== 10 ? String(pageSize) : undefined,
+    };
     Object.entries(values).forEach(([key, value]) => {
       if (value && value !== "all" && value !== "default") params.set(key, value);
     });
     const query = params.toString();
-    const timer = window.setTimeout(() => router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false }), 200);
+    const timer = window.setTimeout(
+      () => router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false }),
+      200
+    );
     return () => window.clearTimeout(timer);
-  }, [category, education, mbti, pathname, riasec, router, search, sort]);
+  }, [category, currentPage, education, mbti, pathname, pageSize, riasec, router, search, sort]);
 
   const handleReset = () => {
     setSearch("");
@@ -67,6 +110,7 @@ export default function ProfessionsPage({
     setRiasec("all");
     setEducation("");
     setSort("default");
+    setCurrentPage(1);
   };
 
   // Capture GSAP Flip state BEFORE filter changes
@@ -79,14 +123,26 @@ export default function ProfessionsPage({
     }
   }, []);
 
-  // Wrapper setters that capture flip state before updating
-  const setSearchWithFlip = useCallback((v: string) => { captureFlipState(); setSearch(v); }, [captureFlipState]);
-  const setCategoryWithFlip = useCallback((v: string) => { captureFlipState(); setCategory(v); }, [captureFlipState]);
-  const setMbtiWithFlip = useCallback((v: string) => { captureFlipState(); setMbti(v); }, [captureFlipState]);
-  const setRiasecWithFlip = useCallback((v: string) => { captureFlipState(); setRiasec(v); }, [captureFlipState]);
-  const setSortWithFlip = useCallback((v: string) => { captureFlipState(); setSort(v); }, [captureFlipState]);
-  const setEducationWithFlip = useCallback((v: string) => { captureFlipState(); setEducation(v); }, [captureFlipState]);
+  // Wrapper setters that capture flip state before updating and reset page to 1
+  const setSearchWithFlip = useCallback((v: string) => { captureFlipState(); setSearch(v); setCurrentPage(1); }, [captureFlipState]);
+  const setCategoryWithFlip = useCallback((v: string) => { captureFlipState(); setCategory(v); setCurrentPage(1); }, [captureFlipState]);
+  const setMbtiWithFlip = useCallback((v: string) => { captureFlipState(); setMbti(v); setCurrentPage(1); }, [captureFlipState]);
+  const setRiasecWithFlip = useCallback((v: string) => { captureFlipState(); setRiasec(v); setCurrentPage(1); }, [captureFlipState]);
+  const setSortWithFlip = useCallback((v: string) => { captureFlipState(); setSort(v); setCurrentPage(1); }, [captureFlipState]);
+  const setEducationWithFlip = useCallback((v: string) => { captureFlipState(); setEducation(v); setCurrentPage(1); }, [captureFlipState]);
   const handleResetWithFlip = useCallback(() => { captureFlipState(); handleReset(); }, [captureFlipState]);
+
+  const handlePageSizeChange = (size: number) => {
+    captureFlipState();
+    setPageSize(size);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    captureFlipState();
+    setCurrentPage(page);
+    gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const filteredProfessions = useMemo(() => {
     let list = [...professions];
@@ -131,7 +187,21 @@ export default function ProfessionsPage({
     return list;
   }, [search, category, mbti, riasec, education, sort, professions]);
 
-  // Apply GSAP Flip animation AFTER render with new filtered results
+  const totalPages = Math.max(1, Math.ceil(filteredProfessions.length / pageSize));
+
+  // Ensure currentPage doesn't exceed totalPages if filtered list shrinks
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
+
+  const paginatedProfessions = useMemo(() => {
+    const start = (currentPage - 1) * pageSize;
+    return filteredProfessions.slice(start, start + pageSize);
+  }, [filteredProfessions, currentPage, pageSize]);
+
+  // Apply GSAP Flip animation AFTER render with new filtered / paginated results
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
@@ -154,18 +224,15 @@ export default function ProfessionsPage({
       }
       flipStateRef.current = null;
     }
-  }, [filteredProfessions]);
+  }, [paginatedProfessions]);
 
   return (
     <div className="page-shell space-y-10 py-12 sm:py-16">
       <ScrollProgressBar />
 
-      {/* Header Page */}
+      {/* Header Page - Removed catalogBadge text per user request */}
       <SectionReveal direction="up">
         <div className="page-intro">
-          <p className="eyebrow">
-            {t("catalogBadge")}
-          </p>
           <KineticSplitText as="h1" className="page-title">
             {t("catalogTitle")}
           </KineticSplitText>
@@ -195,23 +262,130 @@ export default function ProfessionsPage({
         onReset={handleResetWithFlip}
       />
 
-      {/* Results Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--color-line)] pb-4 text-xs font-semibold text-[var(--color-muted)]">
-        <span>{t("showing", { shown: filteredProfessions.length, total: professions.length })}</span>
-        {mbti !== "all" && (
-          <span className="px-2.5 py-1 rounded bg-purple-100 text-purple-700 font-bold">
-            {t("activeMbti", { value: mbti })}
+      {/* Results Header with Limit Selector */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--color-line)] pb-4 text-xs font-semibold text-[var(--color-muted)]">
+        <div className="flex flex-wrap items-center gap-3">
+          <span>
+            {filteredProfessions.length > 0
+              ? t("showingRange", {
+                  start: (currentPage - 1) * pageSize + 1,
+                  end: Math.min(currentPage * pageSize, filteredProfessions.length),
+                  total: filteredProfessions.length,
+                })
+              : t("showing", { shown: 0, total: professions.length })}
           </span>
-        )}
+          {mbti !== "all" && (
+            <span className="px-2.5 py-1 rounded bg-purple-100 text-purple-700 font-bold dark:bg-purple-900/40 dark:text-purple-300">
+              {t("activeMbti", { value: mbti })}
+            </span>
+          )}
+        </div>
+
+        {/* Limit Selector: 10, 20, 50 */}
+        <div className="flex items-center gap-2">
+          <span className="text-[var(--color-muted)] font-medium">{t("itemsPerPage")}</span>
+          <div className="inline-flex items-center rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-0.5 text-xs font-semibold">
+            {[10, 20, 50].map((size) => (
+              <button
+                key={size}
+                type="button"
+                onClick={() => handlePageSizeChange(size)}
+                className={`min-h-8 min-w-8 rounded-md px-2.5 py-1 transition-colors ${
+                  pageSize === size
+                    ? "bg-teal-700 text-white font-bold shadow-xs"
+                    : "text-[var(--color-muted)] hover:text-[var(--color-ink)]"
+                }`}
+                aria-pressed={pageSize === size}
+                aria-label={`${size} ${t("itemsPerPage")}`}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Professions Grid with GSAP Flip */}
-      {filteredProfessions.length > 0 ? (
-        <div ref={gridRef} className="grid grid-cols-1 gap-x-10 md:grid-cols-2 lg:grid-cols-3">
-          {filteredProfessions.map((prof) => (
-            <ProfessionCard key={prof.id} profession={prof} />
-          ))}
-        </div>
+      {paginatedProfessions.length > 0 ? (
+        <>
+          <div ref={gridRef} className="grid grid-cols-1 gap-x-10 md:grid-cols-2 lg:grid-cols-3">
+            {paginatedProfessions.map((prof) => (
+              <ProfessionCard key={prof.id} profession={prof} />
+            ))}
+          </div>
+
+          {/* Pagination Navigation */}
+          {totalPages > 1 && (
+            <nav
+              className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-[var(--color-line)]"
+              aria-label={t("paginationNav")}
+            >
+              <p className="text-xs text-[var(--color-muted)] font-medium order-2 sm:order-1">
+                {t("paginationPage", { current: currentPage, total: totalPages })}
+              </p>
+
+              <div className="flex items-center gap-1.5 order-1 sm:order-2">
+                {/* Previous Page */}
+                <button
+                  type="button"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage <= 1}
+                  className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 text-xs font-semibold text-[var(--color-ink)] transition-colors hover:bg-[var(--color-soft)] disabled:pointer-events-none disabled:opacity-35"
+                  aria-label={t("paginationPrev")}
+                >
+                  <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                  <span className="hidden sm:inline">{t("paginationPrev")}</span>
+                </button>
+
+                {/* Numbered Page Buttons with Ellipsis */}
+                {getPageNumbers(currentPage, totalPages).map((p, idx) => {
+                  if (p === "...") {
+                    return (
+                      <span
+                        key={`ellipsis-${idx}`}
+                        className="grid h-10 w-7 place-items-center text-xs text-[var(--color-muted)] font-mono select-none"
+                      >
+                        ...
+                      </span>
+                    );
+                  }
+
+                  const pageNum = p as number;
+                  const isCurrent = pageNum === currentPage;
+
+                  return (
+                    <button
+                      key={pageNum}
+                      type="button"
+                      onClick={() => handlePageChange(pageNum)}
+                      className={`grid h-10 w-10 place-items-center rounded-xl text-xs font-bold transition-all ${
+                        isCurrent
+                          ? "bg-teal-700 text-white shadow-sm ring-1 ring-teal-500"
+                          : "border border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-ink)] hover:bg-[var(--color-soft)]"
+                      }`}
+                      aria-current={isCurrent ? "page" : undefined}
+                      aria-label={`${t("paginationPageNumber")} ${pageNum}`}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })}
+
+                {/* Next Page */}
+                <button
+                  type="button"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage >= totalPages}
+                  className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 text-xs font-semibold text-[var(--color-ink)] transition-colors hover:bg-[var(--color-soft)] disabled:pointer-events-none disabled:opacity-35"
+                  aria-label={t("paginationNext")}
+                >
+                  <span className="hidden sm:inline">{t("paginationNext")}</span>
+                  <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                </button>
+              </div>
+            </nav>
+          )}
+        </>
       ) : (
         <div className="surface mx-auto my-12 max-w-md space-y-4 p-8 text-center sm:p-12">
           <div className="w-12 h-12 mx-auto rounded-full bg-[var(--color-soft)] flex items-center justify-center text-[var(--color-muted)]">

@@ -12,7 +12,7 @@ export interface NarrativeStep {
   badge: string;
   title: string;
   subtitle: string;
-  detail: string;
+  detail?: string;
   tags?: string[];
 }
 
@@ -35,12 +35,18 @@ interface Particle3D {
   speed: number;
 }
 
-interface Node3D {
+interface Node4D {
   x: number;
   y: number;
   z: number;
-  label: string;
+  w: number;
   cluster: number;
+}
+
+interface Edge4D {
+  i1: number;
+  i2: number;
+  isHyperEdge: boolean;
 }
 
 /**
@@ -125,10 +131,53 @@ export default function ScrollCanvas3DSequence({
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animationFrameId = 0;
+    let isVisible = false;
+    let isTabActive = typeof document !== "undefined" ? !document.hidden : true;
     let width = 0;
     let height = 0;
     let dpr = 1;
+
+    const startLoop = () => {
+      if (!animationFrameId && isVisible && isTabActive) {
+        animationFrameId = requestAnimationFrame(render);
+      }
+    };
+
+    const stopLoop = () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = 0;
+      }
+    };
+
+    // Pre-warm IntersectionObserver (200px lookahead buffer)
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
+      },
+      { rootMargin: "200px 0px 200px 0px", threshold: 0 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    // Pause RAF when browser tab is inactive
+    const handleVisibilityChange = () => {
+      isTabActive = !document.hidden;
+      if (isTabActive && isVisible) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     // Handle high DPI resize
     const handleResize = () => {
@@ -166,28 +215,48 @@ export default function ScrollCanvas3DSequence({
       });
     }
 
-    // Cognitive dimension nodes (Hypercube / Octahedron)
-    const nodes: Node3D[] = [
-      { x: -110, y: -110, z: -110, label: "Extraversion", cluster: 0 },
-      { x: 110, y: -110, z: -110, label: "Introversion", cluster: 0 },
-      { x: 110, y: 110, z: -110, label: "Intuition", cluster: 1 },
-      { x: -110, y: 110, z: -110, label: "Sensing", cluster: 1 },
-      { x: -110, y: -110, z: 110, label: "Thinking", cluster: 2 },
-      { x: 110, y: -110, z: 110, label: "Feeling", cluster: 2 },
-      { x: 110, y: 110, z: 110, label: "Judging", cluster: 3 },
-      { x: -110, y: 110, z: 110, label: "Perceiving", cluster: 3 },
-    ];
+    // 16 vertices of the 4D Hypercube (Tesseract)
+    const nodes4D: Node4D[] = [];
+    for (let w = -1; w <= 1; w += 2) {
+      for (let z = -1; z <= 1; z += 2) {
+        for (let y = -1; y <= 1; y += 2) {
+          for (let x = -1; x <= 1; x += 2) {
+            nodes4D.push({
+              x,
+              y,
+              z,
+              w,
+              cluster: w === -1 ? 0 : 1,
+            });
+          }
+        }
+      }
+    }
 
-    // Edges connecting nodes
-    const edges = [
-      [0, 1], [1, 2], [2, 3], [3, 0],
-      [4, 5], [5, 6], [6, 7], [7, 4],
-      [0, 4], [1, 5], [2, 6], [3, 7],
-      [0, 6], [1, 7], [2, 4], [3, 5],
-    ];
+    // 32 edges connecting the 4D Hypercube vertices
+    const edges4D: Edge4D[] = [];
+    for (let i = 0; i < nodes4D.length; i++) {
+      for (let j = i + 1; j < nodes4D.length; j++) {
+        const a = nodes4D[i];
+        const b = nodes4D[j];
+        const diff =
+          (a.x !== b.x ? 1 : 0) +
+          (a.y !== b.y ? 1 : 0) +
+          (a.z !== b.z ? 1 : 0) +
+          (a.w !== b.w ? 1 : 0);
+        if (diff === 1) {
+          edges4D.push({
+            i1: i,
+            i2: j,
+            isHyperEdge: a.w !== b.w,
+          });
+        }
+      }
+    }
 
     let angleY = 0;
     let angleX = 0;
+    let ambientRotation = 0;
 
     // Render loop
     const render = () => {
@@ -223,12 +292,13 @@ export default function ScrollCanvas3DSequence({
 
       // Mode B: Procedural 3D Astrolabe & Cognitive Lattice Sequence
       const fov = 450;
-      const centerX = width * 0.58;
+      const centerX = width < 768 ? width * 0.5 : width * 0.58;
       const centerY = height * 0.5;
 
-      // Rotation angles scrubbed purely by scroll progress
-      angleY = progress * Math.PI * 3.2;
-      angleX = 0.25 + progress * Math.PI * 0.9;
+      // Natural Globe Yaw: exactly 360 degrees (2 * PI) across scroll + subtle ambient idle spin
+      ambientRotation += 0.0025;
+      angleY = progress * Math.PI * 2 + ambientRotation;
+      const angleX = 0.35; // Fixed elegant isometric tilt (approx 20 degrees), no irregular wobble
 
       const cosY = Math.cos(angleY);
       const sinY = Math.sin(angleY);
@@ -261,24 +331,34 @@ export default function ScrollCanvas3DSequence({
       ctx.arc(centerX, centerY, width * 0.45, 0, Math.PI * 2);
       ctx.fill();
 
-      // 2. Render 3D Celestial Astrolabe Rings
-      const ringCount = 4;
-      for (let r = 0; r < ringCount; r++) {
-        const ringRadius = 130 + r * 55 + Math.sin(progress * Math.PI) * 35;
-        const ringRotZ = (r * Math.PI) / ringCount + progress * 1.5;
-        const segments = 48;
+      // 4D Dimensional Fold Angle (Morphing rotation through hyper-space)
+      const angle4D = progress * Math.PI * 2 + ambientRotation * 0.4;
+      const cos4D = Math.cos(angle4D);
+      const sin4D = Math.sin(angle4D);
+
+      const distance4D = 2.4;
+      const baseHyperScale = width < 768 ? 140 : 175;
+
+      // 2. Render 2 Thin Celestial Gyroscope Rings surrounding the 4D Hypercube
+      const ringConfigs = [
+        { radius: 215, inclination: 0.22, opacity: 0.22 },
+        { radius: 240, inclination: -0.75, opacity: 0.16 },
+      ];
+
+      for (let r = 0; r < ringConfigs.length; r++) {
+        const { radius: ringRadius, inclination: ringRotZ, opacity } = ringConfigs[r];
+        const segments = 64;
 
         ctx.beginPath();
         let first = true;
 
         for (let s = 0; s <= segments; s++) {
           const a = (s / segments) * Math.PI * 2;
-          // Unrotated ring in XY
           const rx = Math.cos(a) * ringRadius;
-          const ry = Math.sin(a) * ringRadius * Math.cos(ringRotZ);
-          const rz = Math.sin(a) * ringRadius * Math.sin(ringRotZ);
+          const ry = Math.sin(a) * ringRadius * Math.sin(ringRotZ);
+          const rz = Math.sin(a) * ringRadius * Math.cos(ringRotZ);
 
-          // 3D rotation
+          // 3D turntable rotation
           const x1 = rx * cosY + rz * sinY;
           const z1 = -rx * sinY + rz * cosY;
           const y1 = ry * cosX - z1 * sinX;
@@ -297,49 +377,63 @@ export default function ScrollCanvas3DSequence({
           }
         }
 
-        ctx.strokeStyle = `${glowColor}${0.18 + r * 0.07})`;
-        ctx.lineWidth = r === 0 ? 1.8 : 1;
+        ctx.strokeStyle = `${glowColor}${opacity})`;
+        ctx.lineWidth = 1.2;
         ctx.stroke();
       }
 
-      // 3. Render 3D Connected Cognitive Nodes
-      const morphFactor = Math.sin(progress * Math.PI);
-      const projectedNodes: { px: number; py: number; scale: number; node: Node3D }[] = [];
+      // 3. Project 4D Tesseract Vertices to 3D and 2D Screen
+      const projectedNodes: ({ px: number; py: number; scale: number; isInner: boolean } | null)[] =
+        new Array(nodes4D.length).fill(null);
 
-      nodes.forEach((node) => {
-        // Morph node position with progress
-        const expansion = 1 + morphFactor * 0.45;
-        const nx = node.x * expansion;
-        const ny = node.y * expansion;
-        const nz = node.z * expansion;
+      nodes4D.forEach((node, index) => {
+        // Rotate in 4D hyper-plane (Z-W plane)
+        const zRot = node.z * cos4D - node.w * sin4D;
+        const wRot = node.z * sin4D + node.w * cos4D;
+        const xRot = node.x;
+        const yRot = node.y;
 
-        // Apply 3D rotation
-        const x1 = nx * cosY + nz * sinY;
-        const z1 = -nx * sinY + nz * cosY;
-        const y1 = ny * cosX - z1 * sinX;
-        const z2 = ny * sinX + z1 * cosX + fov;
+        // 4D to 3D stereographic perspective projection
+        const k = 1 / (distance4D - wRot);
+        const x3 = xRot * baseHyperScale * k;
+        const y3 = yRot * baseHyperScale * k;
+        const z3 = zRot * baseHyperScale * k;
+
+        // 3D Turntable rotation
+        const x1 = x3 * cosY + z3 * sinY;
+        const z1 = -x3 * sinY + z3 * cosY;
+        const y1 = y3 * cosX - z1 * sinX;
+        const z2 = y3 * sinX + z1 * cosX + fov;
 
         if (z2 > 20) {
           const scale = fov / z2;
-          projectedNodes.push({
+          projectedNodes[index] = {
             px: centerX + x1 * scale,
             py: centerY + y1 * scale,
             scale,
-            node,
-          });
+            isInner: wRot < 0,
+          };
         }
       });
 
-      // Draw 3D Edges
-      ctx.lineWidth = 1.2;
-      edges.forEach(([i1, i2]) => {
+      // 4. Draw 4D Tesseract Edges (Glowing Cyber-Lattice)
+      edges4D.forEach(({ i1, i2, isHyperEdge }) => {
         const p1 = projectedNodes[i1];
         const p2 = projectedNodes[i2];
         if (!p1 || !p2) return;
 
         const edgeGrad = ctx.createLinearGradient(p1.px, p1.py, p2.px, p2.py);
-        edgeGrad.addColorStop(0, `${glowColor}0.35)`);
-        edgeGrad.addColorStop(1, `${glowColor}0.1)`);
+        if (isHyperEdge) {
+          // Cross-connecting 4D hyper-edges (connecting inner & outer corners)
+          ctx.lineWidth = 1.3;
+          edgeGrad.addColorStop(0, `${glowColor}0.5)`);
+          edgeGrad.addColorStop(1, `${glowColor}0.25)`);
+        } else {
+          // Primary cube frame edges
+          ctx.lineWidth = 2.0;
+          edgeGrad.addColorStop(0, `${glowColor}0.85)`);
+          edgeGrad.addColorStop(1, `${glowColor}0.5)`);
+        }
 
         ctx.strokeStyle = edgeGrad;
         ctx.beginPath();
@@ -348,17 +442,19 @@ export default function ScrollCanvas3DSequence({
         ctx.stroke();
       });
 
-      // Draw Nodes
-      projectedNodes.forEach(({ px, py, scale }) => {
-        const nodeRadius = Math.max(2, 4 * scale);
+      // 5. Draw 4D Tesseract Vertices (Glowing Nodes)
+      projectedNodes.forEach((p) => {
+        if (!p) return;
+        const { px, py, scale, isInner } = p;
+        const nodeRadius = Math.max(2.5, (isInner ? 3.5 : 5.0) * scale);
         ctx.fillStyle = isDark ? "#ffffff" : "#0d9488";
         ctx.beginPath();
         ctx.arc(px, py, nodeRadius, 0, Math.PI * 2);
         ctx.fill();
 
         // Node aura pulse
-        ctx.strokeStyle = `${glowColor}0.6)`;
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = `${glowColor}0.75)`;
+        ctx.lineWidth = 1.2;
         ctx.beginPath();
         ctx.arc(px, py, nodeRadius * 2, 0, Math.PI * 2);
         ctx.stroke();
@@ -392,14 +488,18 @@ export default function ScrollCanvas3DSequence({
         if (p.x > 300) p.x = -300;
       });
 
-      animationFrameId = requestAnimationFrame(render);
+      if (isVisible && isTabActive) {
+        animationFrameId = requestAnimationFrame(render);
+      } else {
+        stopLoop();
+      }
     };
-
-    render();
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(animationFrameId);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      observer.disconnect();
+      stopLoop();
     };
   }, [hasFrames]);
 
@@ -420,71 +520,57 @@ export default function ScrollCanvas3DSequence({
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,var(--color-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-line)_1px,transparent_1px)] bg-[size:4.5rem_4.5rem] opacity-25"
       />
 
+      {/* Top & Bottom Vignette / Shadow Transitions for smooth entry & exit */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 inset-x-0 h-36 sm:h-56 bg-gradient-to-b from-[var(--color-canvas)] via-[var(--color-canvas)]/75 to-transparent z-10"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 inset-x-0 h-36 sm:h-56 bg-gradient-to-t from-[var(--color-canvas)] via-[var(--color-canvas)]/75 to-transparent z-10"
+      />
+
       {/* Foreground Narrative Overlay Container */}
-      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between p-6 sm:p-12 lg:p-16 pointer-events-none">
-        {/* Top HUD bar */}
-        <div className="flex items-center justify-between border-b border-[var(--color-line)] pb-4">
-          <div className="flex items-center gap-3">
-            <span className="flex h-2.5 w-2.5 rounded-full bg-[var(--color-brand)] animate-ping" />
-            <span className="atlas-caption font-mono uppercase tracking-widest text-[var(--color-brand)]">
-              3D Career Sequence / Step {String(activeStepIndex + 1).padStart(2, "0")}
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            {steps.map((_, i) => (
-              <span
-                key={i}
-                className={`h-1.5 rounded-full transition-all duration-500 ${
-                  i === activeStepIndex
-                    ? "w-8 bg-[var(--color-brand)]"
-                    : "w-2 bg-[var(--color-line)]"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
+      <div className="page-shell relative z-20 h-full flex flex-col justify-center pointer-events-none">
+        {/* Narrative Milestones - Sheer crystal glassmorphism on mobile only, untouched on desktop */}
+        <div className="my-auto w-full max-w-2xl pointer-events-auto rounded-2xl sm:rounded-3xl border border-white/15 bg-[var(--color-surface)]/25 p-5 sm:p-7 backdrop-blur-[3px] shadow-lg ring-1 ring-white/10 md:rounded-none md:border-none md:bg-transparent md:p-0 md:backdrop-blur-none md:shadow-none md:ring-0">
+          <div className="grid grid-cols-1 grid-rows-1 items-center">
+            {steps.map((step, index) => {
+              const isCurrent = index === activeStepIndex;
+              const isPast = index < activeStepIndex;
 
-        {/* Narrative Card Milestones */}
-        <div className="my-auto max-w-xl pointer-events-auto">
-          {steps.map((step, index) => {
-            const isActive = index === activeStepIndex;
-            return (
-              <div
-                key={step.id}
-                className={`transition-all duration-700 ease-out ${
-                  isActive
-                    ? "opacity-100 translate-y-0 relative"
-                    : "opacity-0 translate-y-8 absolute pointer-events-none"
-                }`}
-              >
-                <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)]/85 p-8 shadow-2xl backdrop-blur-xl">
-                  <div className="flex items-center justify-between gap-4 border-b border-[var(--color-line)] pb-4">
-                    <span className="atlas-caption font-mono text-[var(--color-brand)] font-bold">
-                      {step.badge}
-                    </span>
-                    <span className="atlas-caption font-mono text-[var(--color-muted)]">
-                      {String(index + 1).padStart(2, "0")} / {String(steps.length).padStart(2, "0")}
-                    </span>
-                  </div>
+              return (
+                <div
+                  key={step.id}
+                  className={`col-start-1 row-start-1 w-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    isCurrent
+                      ? "opacity-100 translate-y-0 scale-100 blur-0 z-20 pointer-events-auto"
+                      : isPast
+                      ? "opacity-0 -translate-y-16 scale-95 blur-[3px] z-10 pointer-events-none"
+                      : "opacity-0 translate-y-20 scale-105 blur-[2px] z-0 pointer-events-none"
+                  }`}
+                >
+                  <div className="space-y-3 sm:space-y-4">
+                    <h3 className="text-2xl font-bold tracking-tight text-[var(--color-ink)] sm:text-3xl md:text-4xl lg:text-5xl leading-snug md:leading-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+                      {step.title}
+                    </h3>
 
-                  <h3 className="mt-5 text-2xl font-semibold tracking-tight text-[var(--color-ink)] sm:text-3xl">
-                    {step.title}
-                  </h3>
-
-                  <p className="atlas-body mt-3 text-sm leading-relaxed">
-                    {step.subtitle}
-                  </p>
-
-                  <div className="mt-6 rounded-xl border border-[var(--color-line)] bg-[var(--color-canvas)]/60 p-4">
-                    <p className="text-sm font-medium leading-relaxed text-[var(--color-ink)]">
-                      {step.detail}
+                    <p className="atlas-body text-sm sm:text-base md:text-lg leading-relaxed text-[var(--color-muted)] max-w-lg drop-shadow-[0_1px_6px_rgba(0,0,0,0.85)]">
+                      {step.subtitle}
                     </p>
+
+                    {step.detail && (
+                      <p className="text-xs sm:text-sm md:text-base font-medium leading-relaxed text-[var(--color-brand)] max-w-md pt-0.5 sm:pt-1 drop-shadow-[0_1px_6px_rgba(0,0,0,0.85)]">
+                        {step.detail}
+                      </p>
+                    )}
+
                     {step.tags && step.tags.length > 0 && (
-                      <div className="mt-3 flex flex-wrap gap-1.5">
+                      <div className="flex flex-wrap gap-2 pt-2">
                         {step.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="rounded-md border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-1 text-xs font-semibold text-[var(--color-brand)]"
+                            className="rounded-full bg-[var(--color-surface)]/70 px-3.5 py-1 text-xs font-medium text-[var(--color-ink)] border border-[var(--color-line)]/50 backdrop-blur-xs"
                           >
                             {tag}
                           </span>
@@ -493,18 +579,9 @@ export default function ScrollCanvas3DSequence({
                     )}
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Bottom Interactive Scroll Indicator */}
-        <div className="flex items-center justify-between border-t border-[var(--color-line)] pt-4 text-xs font-mono text-[var(--color-muted)]">
-          <span>SCRUB_DRIVEN_SEQUENCE: ACTIVE</span>
-          <span className="flex items-center gap-2">
-            <span>SCROLL TO ADVANCE</span>
-            <span className="inline-block animate-bounce">↓</span>
-          </span>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

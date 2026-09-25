@@ -3,8 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Sparkles, Compass } from "lucide-react";
-import StoryLabel from "./StoryLabel";
+import { Compass, Sparkles } from "lucide-react";
 import KineticSplitText from "@/components/motion/KineticSplitText";
 import MagneticButton from "@/components/motion/MagneticButton";
 import HeroShrinkEffect from "@/components/motion/HeroShrinkEffect";
@@ -34,7 +33,7 @@ interface Chapter00HeroProps {
     start: string;
     majors: string;
     trustDuration: string;
-    trustQuestions: string;
+    trustQuestions?: string;
     trustFree: string;
     trustDatabase: string;
     roleGroup: string;
@@ -126,18 +125,6 @@ export default function Chapter00Hero({ types, locale, labels }: Chapter00HeroPr
 
       <HeroShrinkEffect className="relative z-10">
         <div className="page-shell">
-          {/* Top chapter eyebrow bar */}
-          <div className="atlas-chapter-line mb-8 sm:mb-10">
-            <div className="flex items-center gap-3">
-              <StoryLabel label={labels.label} />
-              <span className="atlas-caption hidden sm:block">{labels.eyebrow}</span>
-            </div>
-            <Link href={`/${locale}/mbti/test`} className="atlas-text-link text-sm">
-              {labels.start}
-              <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
-            </Link>
-          </div>
-
           {/* 2-Column Grid Layout */}
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
             {/* Left Column: Editorial Headline, Description, CTAs, and Trust Badges */}
@@ -163,7 +150,10 @@ export default function Chapter00Hero({ types, locale, labels }: Chapter00HeroPr
                   >
                     <Sparkles aria-hidden="true" className="h-4 w-4" />
                     {labels.start}
-                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                    <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
                   </Link>
                 </MagneticButton>
                 <MagneticButton strength={0.25}>
@@ -177,8 +167,6 @@ export default function Chapter00Hero({ types, locale, labels }: Chapter00HeroPr
               {/* Trust Badges */}
               <div className="atlas-caption flex flex-wrap items-center gap-x-6 gap-y-2 pt-4 border-t border-[var(--color-line)] max-w-lg">
                 <span>{labels.trustDuration}</span>
-                <span aria-hidden="true">•</span>
-                <span>{labels.trustQuestions}</span>
                 {labels.trustFree && (
                   <>
                     <span aria-hidden="true">•</span>

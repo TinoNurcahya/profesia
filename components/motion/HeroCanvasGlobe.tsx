@@ -49,10 +49,11 @@ export default function HeroCanvasGlobe({ className = "" }: { className?: string
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animId: number;
+    let animId = 0;
     let width = 0;
     let height = 0;
-    let isVisible = true;
+    let isVisible = false;
+    let isTabActive = typeof document !== "undefined" ? !document.hidden : true;
 
     // Detect theme color
     const getColors = () => {
@@ -64,10 +65,10 @@ export default function HeroCanvasGlobe({ className = "" }: { className?: string
       };
     };
 
-    // Generate 3D sphere points (orbital rings + career nodes)
-    const radius = 130;
+    // Generate 3D sphere points (orbital rings + career nodes as unit vectors)
+    let currentRadius = 180;
     const nodes: Point3D[] = [];
-    const numNodes = 48;
+    const numNodes = 52;
     const phi = Math.PI * (3 - Math.sqrt(5)); // Golden ratio distribution
 
     for (let i = 0; i < numNodes; i++) {
@@ -75,26 +76,26 @@ export default function HeroCanvasGlobe({ className = "" }: { className?: string
       const r = Math.sqrt(1 - y * y);
       const theta = phi * i;
       nodes.push({
-        x: Math.cos(theta) * r * radius,
-        y: y * radius,
-        z: Math.sin(theta) * r * radius,
+        x: Math.cos(theta) * r,
+        y: y,
+        z: Math.sin(theta) * r,
       });
     }
 
-    // Generate dust particles
+    // Generate dust particles (unit distances)
     const particles: (Point3D & { size: number })[] = [];
-    for (let i = 0; i < 36; i++) {
+    for (let i = 0; i < 40; i++) {
       const u = Math.random();
       const v = Math.random();
       const theta = u * 2.0 * Math.PI;
       const phiAngle = Math.acos(2.0 * v - 1.0);
-      const r = radius * (1.1 + Math.random() * 0.45);
+      const r = 1.1 + Math.random() * 0.45;
       const sinPhi = Math.sin(phiAngle);
       particles.push({
         x: r * sinPhi * Math.cos(theta),
         y: r * sinPhi * Math.sin(theta),
         z: r * Math.cos(phiAngle),
-        size: Math.random() * 1.8 + 0.6,
+        size: Math.random() * 2.0 + 0.6,
       });
     }
 
@@ -104,6 +105,7 @@ export default function HeroCanvasGlobe({ className = "" }: { className?: string
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       width = rect.width;
       height = rect.height;
+      currentRadius = Math.min(width, height) * 0.38;
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       ctx.scale(dpr, dpr);
@@ -112,17 +114,49 @@ export default function HeroCanvasGlobe({ className = "" }: { className?: string
     handleResize();
     window.addEventListener("resize", handleResize);
 
-    // Visibility observer to pause RAF when off-screen
-    const observer = new IntersectionObserver(([entry]) => {
-      isVisible = entry.isIntersecting;
-    });
+    const startLoop = () => {
+      if (!animId && isVisible && isTabActive) {
+        animId = requestAnimationFrame(render);
+      }
+    };
+
+    const stopLoop = () => {
+      if (animId) {
+        cancelAnimationFrame(animId);
+        animId = 0;
+      }
+    };
+
+    // Pre-warm Visibility observer (200px lookahead buffer) to pause RAF when off-screen
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
+      },
+      { rootMargin: "200px 0px 200px 0px", threshold: 0 }
+    );
     observer.observe(canvas);
+
+    // Pause RAF when browser tab is inactive
+    const handleVisibilityChange = () => {
+      isTabActive = !document.hidden;
+      if (isTabActive && isVisible) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     let idleAngle = 0;
 
     const render = () => {
-      if (!isVisible) {
-        animId = requestAnimationFrame(render);
+      if (!isVisible || !isTabActive) {
+        stopLoop();
         return;
       }
 
@@ -142,18 +176,22 @@ export default function HeroCanvasGlobe({ className = "" }: { className?: string
 
       const centerX = width / 2;
       const centerY = height / 2;
-      const fov = 420;
+      const fov = currentRadius * 3.2;
 
       // Project function
       const project = (p: Point3D) => {
-        // Rotate around Y
-        const x1 = p.x * cosY - p.z * sinY;
-        const z1 = p.z * cosY + p.x * sinY;
-        // Rotate around X
-        const y2 = p.y * cosX - z1 * sinX;
-        const z2 = z1 * cosX + p.y * sinX;
+        const px = p.x * currentRadius;
+        const py = p.y * currentRadius;
+        const pz = p.z * currentRadius;
 
-        const scale = fov / (fov + z2 + radius * 0.5);
+        // Rotate around Y
+        const x1 = px * cosY - pz * sinY;
+        const z1 = pz * cosY + px * sinY;
+        // Rotate around X
+        const y2 = py * cosX - z1 * sinX;
+        const z2 = z1 * cosX + py * sinX;
+
+        const scale = fov / (fov + z2 + currentRadius * 0.5);
         return {
           x: centerX + x1 * scale,
           y: centerY + y2 * scale,
@@ -168,9 +206,9 @@ export default function HeroCanvasGlobe({ className = "" }: { className?: string
         const segments = 64;
         for (let i = 0; i <= segments; i++) {
           const a = (i / segments) * Math.PI * 2;
-          const rX = Math.cos(a) * (radius * 1.18);
-          const rY = Math.sin(a) * (radius * 1.18) * Math.sin(tilt);
-          const rZ = Math.sin(a) * (radius * 1.18) * Math.cos(tilt);
+          const rX = Math.cos(a) * 1.18;
+          const rY = Math.sin(a) * 1.18 * Math.sin(tilt);
+          const rZ = Math.sin(a) * 1.18 * Math.cos(tilt);
           const pt = project({ x: rX, y: rY, z: rZ });
           if (i === 0) ctx.moveTo(pt.x, pt.y);
           else ctx.lineTo(pt.x, pt.y);
@@ -190,18 +228,19 @@ export default function HeroCanvasGlobe({ className = "" }: { className?: string
       ctx.lineWidth = 0.8;
       for (let i = 0; i < projectedNodes.length; i++) {
         const p1 = projectedNodes[i];
-        if (p1.z < -radius * 0.6) continue;
+        if (p1.z < -currentRadius * 0.6) continue;
 
         for (let j = i + 1; j < projectedNodes.length; j++) {
           const p2 = projectedNodes[j];
-          if (p2.z < -radius * 0.6) continue;
+          if (p2.z < -currentRadius * 0.6) continue;
 
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
+          const maxDist = currentRadius * 0.44;
 
-          if (dist < 55) {
-            const alpha = Math.max(0, (1 - dist / 55) * 0.22 * p1.scale);
+          if (dist < maxDist) {
+            const alpha = Math.max(0, (1 - dist / maxDist) * 0.22 * p1.scale);
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
@@ -213,32 +252,35 @@ export default function HeroCanvasGlobe({ className = "" }: { className?: string
 
       // Draw node dots
       for (const p of projectedNodes) {
-        const alpha = Math.min(1, Math.max(0.1, (p.z + radius) / (radius * 2)));
+        const alpha = Math.min(1, Math.max(0.1, (p.z + currentRadius) / (currentRadius * 2)));
         ctx.beginPath();
-        ctx.arc(p.x, p.y, Math.max(1, 2.4 * p.scale), 0, Math.PI * 2);
-        ctx.fillStyle = `${colors.brand}${alpha * 0.85})`;
+        ctx.arc(p.x, p.y, Math.max(1.2, 2.6 * p.scale), 0, Math.PI * 2);
+        ctx.fillStyle = `${colors.brand}${alpha * 0.9})`;
         ctx.fill();
       }
 
       // Draw floating cosmic particles
       for (const pt of particles) {
         const projected = project(pt);
-        const alpha = Math.max(0.08, (projected.z + radius * 1.5) / (radius * 3));
+        const alpha = Math.max(0.08, (projected.z + currentRadius * 1.5) / (currentRadius * 3));
         ctx.beginPath();
         ctx.arc(projected.x, projected.y, pt.size * projected.scale, 0, Math.PI * 2);
-        ctx.fillStyle = `${colors.particle}${alpha * 0.7})`;
+        ctx.fillStyle = `${colors.particle}${alpha * 0.75})`;
         ctx.fill();
       }
 
-      animId = requestAnimationFrame(render);
+      if (isVisible && isTabActive) {
+        animId = requestAnimationFrame(render);
+      } else {
+        stopLoop();
+      }
     };
 
-    render();
-
     return () => {
-      cancelAnimationFrame(animId);
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       observer.disconnect();
+      stopLoop();
     };
   }, []);
 
@@ -247,7 +289,7 @@ export default function HeroCanvasGlobe({ className = "" }: { className?: string
       <canvas
         ref={canvasRef}
         aria-hidden="true"
-        className="h-full w-full max-h-[460px] max-w-[460px] select-none pointer-events-none"
+        className="h-full w-full select-none pointer-events-none"
       />
     </div>
   );

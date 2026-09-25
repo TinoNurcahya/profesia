@@ -35,34 +35,33 @@ export default async function LandingProfessions({
           />
         </ParallaxLayer>
 
-        <div className="atlas-chapter-line">
-          <p className="eyebrow">03 / {t("eyebrow")}</p>
-          <MagneticButton strength={0.2}>
-            <Link href={`/${locale}/professions`} className="atlas-text-link text-sm">
-              {t("viewAll")}
-              <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
-            </Link>
-          </MagneticButton>
-        </div>
-
-        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
-          <KineticSplitText as="h2" id="professions-title" className="atlas-heading lg:col-span-7">
-            {t("title")}
-          </KineticSplitText>
-          <p className="atlas-body max-w-md lg:col-span-5 lg:self-end leading-relaxed">
-            {t("subtitle")}
-          </p>
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12 items-end">
+          <div className="lg:col-span-7">
+            <KineticSplitText as="h2" id="professions-title" className="atlas-heading">
+              {t("title")}
+            </KineticSplitText>
+          </div>
+          <div className="lg:col-span-5 flex flex-col items-start gap-4">
+            <p className="atlas-body leading-relaxed">
+              {t("subtitle")}
+            </p>
+            <MagneticButton strength={0.2}>
+              <Link href={`/${locale}/professions`} className="atlas-text-link text-sm">
+                {t("viewAll")}
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+              </Link>
+            </MagneticButton>
+          </div>
         </div>
 
         {featured ? (
           <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-16 items-start">
             <div className="lg:col-span-7">
               <CardTilt3D maxAngle={6} scale={1.015}>
-                <article className="atlas-featured rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-8 sm:p-10 shadow-sm transition-shadow hover:shadow-xl">
-                  <div className="flex items-center justify-between gap-4 border-b border-[var(--color-line)] pb-4">
-                    <p className="atlas-caption font-semibold">{t("spotlight")}</p>
-                    <span className="atlas-caption font-mono">01</span>
-                  </div>
+                <article className="relative rounded-3xl border border-white/10 bg-[var(--color-surface)]/60 p-7 sm:p-10 backdrop-blur-xl shadow-xl transition-all duration-300 hover:border-white/20 hover:bg-[var(--color-surface)]/75 hover:shadow-2xl">
+                  <p className="atlas-caption text-[var(--color-brand)] font-semibold tracking-wider">
+                    {t("spotlight")}
+                  </p>
 
                   <p className="atlas-caption mt-8 text-[var(--color-brand)] font-semibold tracking-wider">
                     {locale === "en" ? featured.category_name_en : featured.category_name_id}
@@ -78,7 +77,10 @@ export default async function LandingProfessions({
 
                   <div className="mt-8 flex flex-wrap gap-2">
                     {(locale === "en" ? featured.skills_en : featured.skills_id).slice(0, 4).map((skill) => (
-                      <span key={skill} className="atlas-chip font-medium">
+                      <span
+                        key={skill}
+                        className="inline-flex items-center px-3.5 py-1.5 rounded-lg text-xs font-medium text-[var(--color-ink)] bg-white/5 border border-white/10 backdrop-blur-sm"
+                      >
                         {skill}
                       </span>
                     ))}

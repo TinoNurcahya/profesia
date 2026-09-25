@@ -24,7 +24,7 @@ export default function ScrollProgressBar() {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
 
-    // Progress bar width scrub
+    // Progress bar width scrub across entire document including pinned sections
     gsap.fromTo(
       bar,
       { scaleX: 0 },
@@ -32,10 +32,11 @@ export default function ScrollProgressBar() {
         scaleX: 1,
         ease: "none",
         scrollTrigger: {
-          trigger: document.documentElement,
-          start: "top top",
-          end: "bottom bottom",
+          start: 0,
+          end: "max",
           scrub: 0.3,
+          invalidateOnRefresh: true,
+          refreshPriority: -999,
         },
       }
     );
@@ -44,6 +45,7 @@ export default function ScrollProgressBar() {
     ScrollTrigger.create({
       start: "100px top",
       end: "max",
+      refreshPriority: -999,
       onEnter: () => gsap.to(wrap, { opacity: 1, duration: 0.3 }),
       onLeaveBack: () => gsap.to(wrap, { opacity: 0, duration: 0.3 }),
     });

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { ArrowUpRight } from "lucide-react";
-import StoryLabel from "./StoryLabel";
 import GsapScrollStagger from "@/components/motion/GsapScrollStagger";
 import ParallaxLayer from "@/components/motion/ParallaxLayer";
 
@@ -47,8 +46,7 @@ export default function Chapter05Paths({ professions, locale, labels }: Chapter0
       </ParallaxLayer>
 
       <div className="relative z-10">
-        <div className="atlas-chapter-line">
-          <StoryLabel label={labels.label} />
+        <div className="atlas-chapter-line justify-end">
           <Link href={`/${locale}/professions`} className="atlas-text-link text-sm">
             {labels.viewCatalog}<ArrowUpRight aria-hidden="true" className="h-4 w-4" />
           </Link>

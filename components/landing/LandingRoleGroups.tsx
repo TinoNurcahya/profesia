@@ -60,23 +60,23 @@ export default async function LandingRoleGroups({
           />
         </ParallaxLayer>
 
-        <div className="atlas-chapter-line">
-          <p className="eyebrow">04 / {t("eyebrow")}</p>
-          <MagneticButton strength={0.25}>
-            <Link href={`/${locale}/mbti`} className="atlas-text-link text-sm">
-              {t("explore")}
-              <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
-            </Link>
-          </MagneticButton>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-12 lg:gap-12">
-          <KineticSplitText as="h2" id="role-groups-title" className="atlas-heading lg:col-span-7">
-            {t("title")}
-          </KineticSplitText>
-          <p className="atlas-body max-w-md lg:col-span-5 lg:self-end leading-relaxed">
-            {t("description")}
-          </p>
+        <div className="grid gap-6 lg:grid-cols-12 lg:gap-12 items-end">
+          <div className="lg:col-span-7">
+            <KineticSplitText as="h2" id="role-groups-title" className="atlas-heading">
+              {t("title")}
+            </KineticSplitText>
+          </div>
+          <div className="lg:col-span-5 flex flex-col items-start gap-4">
+            <p className="atlas-body leading-relaxed">
+              {t("description")}
+            </p>
+            <MagneticButton strength={0.25}>
+              <Link href={`/${locale}/mbti`} className="atlas-text-link text-sm">
+                {t("explore")}
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+              </Link>
+            </MagneticButton>
+          </div>
         </div>
 
         {/* Interactive Awwwards-grade Role Groups Stage with GSAP Flip */}

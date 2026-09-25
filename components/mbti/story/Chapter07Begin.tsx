@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import StoryLabel from "./StoryLabel";
 import KineticSplitText from "@/components/motion/KineticSplitText";
 import ScrollTextReveal from "@/components/motion/ScrollTextReveal";
 import ParallaxLayer from "@/components/motion/ParallaxLayer";
@@ -9,13 +8,13 @@ import MagneticButton from "@/components/motion/MagneticButton";
 interface Chapter07BeginProps {
   locale: string;
   labels: {
-    label: string;
+    label?: string;
     quote: string;
     subtitle: string;
     cta: string;
     secondary: string;
     trustDuration: string;
-    trustQuestions: string;
+    trustQuestions?: string;
     trustFree: string;
     trustDatabase: string;
   };
@@ -33,11 +32,6 @@ export default function Chapter07Begin({ locale, labels }: Chapter07BeginProps) 
 
       <div className="page-shell relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          
-          <div className="inline-flex justify-center">
-            <StoryLabel label={labels.label} />
-          </div>
-
           {/* Emotional Editorial Quote */}
           <KineticSplitText
             as="h2"
@@ -74,8 +68,6 @@ export default function Chapter07Begin({ locale, labels }: Chapter07BeginProps) 
               <span>{labels.secondary}</span>
             </a>
           </div>
-
-          <p className="atlas-caption border-t border-[var(--color-line)] pt-8">{labels.trustQuestions}</p>
 
         </div>
       </div>

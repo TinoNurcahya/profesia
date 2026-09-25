@@ -1,6 +1,5 @@
 "use client";
 
-import StoryLabel from "./StoryLabel";
 import MbtiCharacterGrid, { MbtiTypeData } from "@/components/mbti/MbtiCharacterGrid";
 import TextReveal from "../../motion/TextReveal";
 
@@ -55,13 +54,12 @@ export default function Chapter02Perspectives({
 
   return (
     <section
-      className="bg-[var(--color-soft)] py-20 lg:py-32"
+      className="bg-[var(--color-canvas)] relative overflow-hidden py-16 lg:py-24"
       aria-labelledby="perspectives-heading"
     >
       <div className="space-y-12">
         {/* Editorial Section Header */}
         <div className="page-shell"><div className="max-w-3xl space-y-4">
-          <StoryLabel label={labels.label} />
           <TextReveal
             as="h2"
             id="perspectives-heading"

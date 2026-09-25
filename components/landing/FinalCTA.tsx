@@ -28,12 +28,10 @@ export default async function FinalCTA({ locale }: { locale: string }) {
         </ParallaxLayer>
 
         <div className="atlas-closing relative z-10 border-t border-[var(--color-line)] pt-12 pb-16">
-          <p className="eyebrow">06 / {t("badge")}</p>
-
           <KineticSplitText
             as="h2"
             id="closing-title"
-            className="atlas-display mt-8 max-w-4xl"
+            className="atlas-display max-w-4xl"
             highlightClass="atlas-serif text-[var(--color-brand)]"
             splitBy="chars"
           >

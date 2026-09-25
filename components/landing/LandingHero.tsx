@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { Profession } from "@/services/professions";
 import KineticSplitText from "@/components/motion/KineticSplitText";
 import HeroMotion from "@/components/motion/HeroMotion";
@@ -11,12 +11,11 @@ import HeroShrinkEffect from "@/components/motion/HeroShrinkEffect";
 
 interface LandingHeroProps {
   locale: string;
-  professions: Profession[];
+  professions?: Profession[];
 }
 
-export default async function LandingHero({ locale, professions }: LandingHeroProps) {
+export default async function LandingHero({ locale }: LandingHeroProps) {
   const t = await getTranslations({ locale, namespace: "Landing.hero" });
-  const records = professions.slice(0, 3);
 
   return (
     <section className="atlas-hero relative overflow-hidden" aria-labelledby="atlas-title">
@@ -33,11 +32,6 @@ export default async function LandingHero({ locale, professions }: LandingHeroPr
       </ParallaxLayer>
 
       <div className="page-shell">
-        <div className="atlas-chapter-line">
-          <p className="eyebrow">01 / {t("badge")}</p>
-          <span className="atlas-caption hidden sm:block">{t("edition")}</span>
-        </div>
-
         <HeroShrinkEffect>
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
             <div className="min-w-0 lg:col-span-7 z-10">
@@ -69,65 +63,20 @@ export default async function LandingHero({ locale, professions }: LandingHeroPr
               </div>
             </div>
 
-            <HeroMotion className="min-w-0 lg:col-span-5 relative flex flex-col items-center">
-              <ParallaxLayer speed={0.2} direction="up">
-                <div className="w-full flex items-center justify-center -mb-8 sm:-mb-12">
-                  <HeroCanvasGlobe className="h-[260px] w-[260px] sm:h-[300px] sm:w-[300px]" />
+            <HeroMotion className="min-w-0 lg:col-span-5 relative flex items-center justify-center">
+              <ParallaxLayer speed={0.15} direction="up" className="w-full flex items-center justify-center">
+                <div className="relative w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[500px] aspect-square flex items-center justify-center">
+                  {/* Atmospheric cosmic ambient glow behind the globe */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-8 rounded-full bg-[var(--color-brand)]/12 blur-3xl pointer-events-none"
+                  />
+                  <HeroCanvasGlobe className="h-full w-full" />
                 </div>
               </ParallaxLayer>
-
-              <div
-                data-hero-art
-                className="atlas-index w-full relative z-10 bg-[var(--color-surface)]/80 backdrop-blur-md rounded-2xl p-6 border border-[var(--color-line)] shadow-sm"
-              >
-                <div className="flex items-center justify-between gap-4 border-b border-[var(--color-line)] pb-4">
-                  <h2 className="atlas-caption font-semibold">{t("indexTitle")}</h2>
-                  <span className="atlas-caption font-mono">{t("indexCount", { count: records.length })}</span>
-                </div>
-
-                {records.length ? (
-                  <ol className="divide-y divide-[var(--color-line)]">
-                    {records.map((profession, index) => (
-                      <li key={profession.id}>
-                        <Link
-                          href={`/${locale}/professions/${profession.slug}`}
-                          className="atlas-index-row group py-4 transition-transform hover:translate-x-1.5"
-                        >
-                          <span className="atlas-index-number font-mono" aria-hidden="true">
-                            {String(index + 1).padStart(2, "0")}
-                          </span>
-                          <span className="min-w-0">
-                            <span className="atlas-caption mb-1 block">
-                              {locale === "en" ? profession.category_name_en : profession.category_name_id}
-                            </span>
-                            <span className="atlas-index-title text-base sm:text-lg font-semibold">
-                              {locale === "en" ? profession.name_en : profession.name_id}
-                            </span>
-                          </span>
-                          <ArrowUpRight
-                            aria-hidden="true"
-                            className="h-4 w-4 text-[var(--color-brand)] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-                          />
-                        </Link>
-                      </li>
-                    ))}
-                  </ol>
-                ) : (
-                  <p className="atlas-body py-8">{t("empty")}</p>
-                )}
-
-                <p className="atlas-caption mt-4 leading-relaxed opacity-75">{t("indexNote")}</p>
-              </div>
             </HeroMotion>
           </div>
         </HeroShrinkEffect>
-
-        <div className="mt-12 flex items-center justify-between">
-          <a className="atlas-text-link text-xs flex items-center gap-2" href="#career-story">
-            <ArrowDown aria-hidden="true" className="h-4 w-4 animate-bounce" />
-            {t("scroll")}
-          </a>
-        </div>
       </div>
     </section>
   );

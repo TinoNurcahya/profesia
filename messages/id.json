@@ -277,7 +277,14 @@
     "catalogError": "Katalog online tidak tersedia. Menampilkan data lokal.",
     "practitionerTitle": "Praktisi Profesi",
     "practitionerBadge": "Spotlight",
-    "practitionerPlaceholder": "Profil praktisi yang sedang menjalani profesi ini akan segera hadir."
+    "practitionerPlaceholder": "Profil praktisi yang sedang menjalani profesi ini akan segera hadir.",
+    "paginationPrev": "Sebelumnya",
+    "paginationNext": "Selanjutnya",
+    "paginationPage": "Halaman {current} dari {total}",
+    "paginationPageNumber": "Halaman",
+    "paginationNav": "Navigasi halaman",
+    "itemsPerPage": "Per halaman:",
+    "showingRange": "Menampilkan {start} - {end} dari {total} Profesi"
   },
   "Majors": {
     "title": "Katalog Jurusan Kuliah",

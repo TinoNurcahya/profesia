@@ -38,10 +38,6 @@ export default async function LandingStats({ locale }: { locale: string }) {
           />
         </ParallaxLayer>
 
-        <div className="atlas-chapter-line">
-          <p className="eyebrow">05 / {t("eyebrow")}</p>
-        </div>
-
         <StaggerGridReveal>
           <div className="mb-14 grid grid-cols-2 gap-6 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-6 sm:grid-cols-4 sm:p-8 shadow-xs">
             {metrics.map((m, idx) => (

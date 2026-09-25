@@ -277,7 +277,14 @@
     "catalogError": "The online catalog is unavailable. Showing local data.",
     "practitionerTitle": "Field Practitioner",
     "practitionerBadge": "Spotlight",
-    "practitionerPlaceholder": "Profiles of practitioners currently in this role coming soon."
+    "practitionerPlaceholder": "Profiles of practitioners currently in this role coming soon.",
+    "paginationPrev": "Previous",
+    "paginationNext": "Next",
+    "paginationPage": "Page {current} of {total}",
+    "paginationPageNumber": "Page",
+    "paginationNav": "Page navigation",
+    "itemsPerPage": "Per page:",
+    "showingRange": "Showing {start} - {end} of {total} Professions"
   },
   "Majors": {
     "title": "College Majors Catalog",

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { ArrowUpRight, Compass, BookOpen, Sparkles, Target } from "lucide-react";
-import StoryLabel from "./StoryLabel";
 import KineticSplitText from "@/components/motion/KineticSplitText";
 import ScrollTextReveal from "@/components/motion/ScrollTextReveal";
 import StaggerGridReveal from "@/components/motion/StaggerGridReveal";
@@ -76,7 +75,6 @@ export default function Chapter06Explore({ locale, labels }: Chapter06ExplorePro
 
         {/* Editorial Header */}
         <div className="max-w-3xl space-y-4">
-          <StoryLabel label={labels.label} />
           <KineticSplitText
             as="h2"
             id="explore-heading"
