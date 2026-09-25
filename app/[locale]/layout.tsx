@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import ThemeScript from "@/components/layout/ThemeScript";
 import { getMessages, getTranslations } from "next-intl/server";
 import { Toaster } from "sonner";
 import Navbar from "@/components/layout/Navbar";
@@ -43,10 +42,7 @@ export default async function LocaleLayout({
   const t = await getTranslations({ locale, namespace: "Common" });
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <head>
-        <ThemeScript />
-      </head>
+    <html lang={locale} className="dark" style={{ colorScheme: "dark" }} suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
         <NextIntlClientProvider messages={messages}>
           <SmoothScrollProvider>
@@ -54,7 +50,7 @@ export default async function LocaleLayout({
             <Navbar />
             <main id="main-content" tabIndex={-1} className="min-w-0 flex-1 w-full max-w-full">{children}</main>
             <Footer />
-            <Toaster position="top-right" richColors />
+            <Toaster theme="dark" position="top-right" richColors />
           </SmoothScrollProvider>
         </NextIntlClientProvider>
       </body>

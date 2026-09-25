@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Brain, BriefcaseBusiness, ChevronDown, Compass, GraduationCap, Menu, Scale, Stars, User, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
-import ThemeSwitcher from "./ThemeSwitcher";
 
 const focusableSelector = "a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])";
 
@@ -130,16 +129,15 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label={t("primaryNavigation")}>
-          {primaryLinks.map((link) => <Link key={link.href} href={link.href} onClick={closeMenus} aria-current={isActive(link.href) ? "page" : undefined} className={`min-h-11 inline-flex items-center rounded-md px-3.5 py-2 text-sm font-semibold transition-colors ${isActive(link.href) ? "bg-teal-50 text-teal-800" : "text-[var(--color-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-ink)]"}`}>{link.label}</Link>)}
+          {primaryLinks.map((link) => <Link key={link.href} href={link.href} onClick={closeMenus} aria-current={isActive(link.href) ? "page" : undefined} className={`min-h-11 inline-flex items-center rounded-md px-3.5 py-2 text-sm font-semibold transition-colors ${isActive(link.href) ? "bg-[var(--color-brand)]/15 text-[var(--color-brand)]" : "text-[var(--color-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-ink)]"}`}>{link.label}</Link>)}
           <div ref={exploreRef} className="relative">
-            <button ref={exploreButtonRef} type="button" onClick={() => setExploreOpen((value) => !value)} aria-expanded={exploreOpen} aria-controls="explore-navigation" className={`inline-flex items-center gap-1 min-h-11 inline-flex items-center rounded-md px-3.5 py-2 text-sm font-semibold transition-colors ${exploreLinks.some((link) => isActive(link.href)) ? "bg-teal-50 text-teal-800" : "text-[var(--color-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-ink)]"}`}>{t("explore")}<ChevronDown aria-hidden="true" className={`h-4 w-4 transition-transform ${exploreOpen ? "rotate-180" : ""}`} /></button>
-            {exploreOpen && <div className="absolute right-0 top-[calc(100%+0.75rem)] w-72 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-2 shadow-[0_18px_50px_rgba(15,23,42,0.12)]" id="explore-navigation">{exploreLinks.map(({ href, label, icon: Icon }) => <Link key={href} href={href} onClick={closeMenus}  className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-[var(--color-ink)] hover:bg-[var(--color-soft)] hover:text-teal-800"><Icon aria-hidden="true" className="h-4 w-4 text-teal-700" />{label}</Link>)}</div>}
+            <button ref={exploreButtonRef} type="button" onClick={() => setExploreOpen((value) => !value)} aria-expanded={exploreOpen} aria-controls="explore-navigation" className={`inline-flex items-center gap-1 min-h-11 inline-flex items-center rounded-md px-3.5 py-2 text-sm font-semibold transition-colors ${exploreLinks.some((link) => isActive(link.href)) ? "bg-[var(--color-brand)]/15 text-[var(--color-brand)]" : "text-[var(--color-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-ink)]"}`}>{t("explore")}<ChevronDown aria-hidden="true" className={`h-4 w-4 transition-transform ${exploreOpen ? "rotate-180" : ""}`} /></button>
+            {exploreOpen && <div className="absolute right-0 top-[calc(100%+0.75rem)] w-72 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-2 shadow-[0_18px_50px_rgba(15,23,42,0.12)]" id="explore-navigation">{exploreLinks.map(({ href, label, icon: Icon }) => <Link key={href} href={href} onClick={closeMenus}  className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-[var(--color-ink)] hover:bg-[var(--color-soft)] hover:text-[var(--color-brand)]"><Icon aria-hidden="true" className="h-4 w-4 text-[var(--color-brand)]" />{label}</Link>)}</div>}
           </div>
         </nav>
 
         <div className="hidden shrink-0 items-center gap-2 lg:flex">
           <LanguageSwitcher />
-          <ThemeSwitcher />
           <Link href={`/${locale}/login`} className="btn-primary min-h-11">
             <User aria-hidden="true" className="h-4 w-4" />
             {t("login")}
@@ -148,7 +146,6 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2 lg:hidden">
           <LanguageSwitcher />
-          <ThemeSwitcher />
           <button type="button" onClick={() => setIsOpen((value) => !value)} className="grid h-11 w-11 place-items-center rounded-[10px] border border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-ink)]" aria-expanded={isOpen} aria-controls="mobile-navigation" aria-label={t("toggleMenu")}>
             {isOpen ? <X aria-hidden="true" className="h-5 w-5" /> : <Menu aria-hidden="true" className="h-5 w-5" />}
           </button>

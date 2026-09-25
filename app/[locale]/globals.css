@@ -87,15 +87,16 @@
 @layer base {
   :root {
     --font-profesia: "Outfit", system-ui, sans-serif;
-    --color-canvas: #f6f7f3;
-    --color-ink: #0b172a;
-    --color-muted: #5f6f7d;
-    --color-line: #dce3df;
-    --color-brand: #0f766e;
-    --color-surface: #ffffff;
-    --color-soft: #edf1eb;
-    --color-brand-hover: #115e59;
-    --color-on-brand: #ffffff;
+    color-scheme: dark;
+    --color-canvas: #101b1a;
+    --color-ink: #f6f7f3;
+    --color-muted: #b6c5c1;
+    --color-line: #526a64;
+    --color-brand: #5eead4;
+    --color-brand-hover: #99f6e4;
+    --color-on-brand: #102421;
+    --color-surface: #172623;
+    --color-soft: #20312b;
 
     /* 4 Role Group CSS vars (semantic data only) */
     --color-analyst-primary:   #88619a;
@@ -153,10 +154,10 @@
     @apply bg-transparent;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 rounded-full;
+    @apply bg-slate-700 rounded-full;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-400;
+    @apply bg-slate-600;
   }
 }
 
@@ -343,16 +344,16 @@
 }
 
 :root {
-  color-scheme: light;
-  --color-canvas: #f6f7f3;
-  --color-ink: #0b172a;
-  --color-muted: #5f6f7d;
-  --color-line: #dce3df;
-  --color-brand: #0f766e;
-  --color-surface: #ffffff;
-  --color-soft: #edf1eb;
-  --color-brand-hover: #115e59;
-  --color-on-brand: #ffffff;
+  color-scheme: dark;
+  --color-canvas: #101b1a;
+  --color-ink: #f6f7f3;
+  --color-muted: #b6c5c1;
+  --color-line: #526a64;
+  --color-brand: #5eead4;
+  --color-brand-hover: #99f6e4;
+  --color-on-brand: #102421;
+  --color-surface: #172623;
+  --color-soft: #20312b;
 }
 :where(section[id], h2[id], main[id]) { scroll-margin-top: 88px; }
 .atlas-display, .atlas-heading, .atlas-index-title { overflow-wrap: break-word; word-break: normal; }
@@ -416,7 +417,7 @@
   [data-pinned="true"] .atlas-story-steps { display: grid; position: relative; isolation: isolate; overflow: hidden; border-radius: 1.5rem; }
   [data-pinned="true"] .atlas-story-step { grid-area: 1 / 1; background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.04); backdrop-filter: blur(8px); will-change: transform, opacity; }
 }
-:root.dark, html.dark {
+:root, :root.dark, html.dark {
   color-scheme: dark;
   --color-canvas: #101b1a;
   --color-ink: #f6f7f3;
@@ -428,30 +429,10 @@
   --color-surface: #172623;
   --color-soft: #20312b;
 }
-:root.dark .field-control:disabled, html.dark .field-control:disabled { background: var(--color-soft); color: var(--color-muted); }
-:root.dark .field-control::placeholder, html.dark .field-control::placeholder,
-:root.dark .input-field::placeholder, html.dark .input-field::placeholder { color: var(--color-muted); }
-:root.dark .skip-link, html.dark .skip-link { background: var(--color-brand); color: var(--color-on-brand); }
-
-:root.light, html.light {
-  color-scheme: light;
-  --color-canvas: #f6f7f3;
-  --color-ink: #0b172a;
-  --color-muted: #5f6f7d;
-  --color-line: #dce3df;
-  --color-brand: #0f766e;
-  --color-surface: #ffffff;
-  --color-soft: #edf1eb;
-  --color-brand-hover: #115e59;
-  --color-on-brand: #ffffff;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) { color-scheme: dark; --color-canvas: #101b1a; --color-ink: #f6f7f3; --color-muted: #b6c5c1; --color-line: #526a64; --color-brand: #5eead4; --color-brand-hover: #99f6e4; --color-on-brand: #102421; --color-surface: #172623; --color-soft: #20312b; }
-  :root:not(.light) .field-control:disabled { background: var(--color-soft); color: var(--color-muted); }
-  :root:not(.light) .field-control::placeholder, :root:not(.light) .input-field::placeholder { color: var(--color-muted); }
-  :root:not(.light) .skip-link { background: var(--color-brand); color: var(--color-on-brand); }
-}
+.field-control:disabled { background: var(--color-soft); color: var(--color-muted); }
+.field-control::placeholder,
+.input-field::placeholder { color: var(--color-muted); }
+.skip-link { background: var(--color-brand); color: var(--color-on-brand); }
 @media (prefers-reduced-motion: reduce) {
   .reveal-mask { overflow: visible; }
 }

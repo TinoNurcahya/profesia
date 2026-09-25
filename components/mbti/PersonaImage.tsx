@@ -13,7 +13,7 @@ export function PersonaImage({ mbtiCode, fullCode }: PersonaImageProps) {
   const [hasError, setHasError] = useState(false);
 
   return (
-    <div className="w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-slate-50 border-4 border-slate-100 flex items-center justify-center flex-shrink-0 relative overflow-hidden">
+    <div className="w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-[var(--color-surface)] border-4 border-[var(--color-line)] flex items-center justify-center flex-shrink-0 relative overflow-hidden">
       {!hasError ? (
         <Image
           src={`/images/mbti/${mbtiCode.toLowerCase()}.png`}
@@ -24,9 +24,9 @@ export function PersonaImage({ mbtiCode, fullCode }: PersonaImageProps) {
           onError={() => setHasError(true)}
         />
       ) : (
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-300 gap-2">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-[var(--color-muted)] gap-2">
           <Brain className="w-12 h-12" />
-          <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-muted)]">
             Persona
           </span>
         </div>

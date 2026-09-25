@@ -99,9 +99,9 @@ export default function MbtiHeroMotion({ children, types, locale }: MbtiHeroMoti
               <Link
                 key={type.code}
                 href={`/${locale}/mbti/result/${type.code}`}
-                className={`group/avatar relative flex items-center gap-2.5 rounded-2xl border border-slate-200/90 bg-white/90 px-3 py-2 shadow-2xs backdrop-blur-xs transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shrink-0 ${glow}`}
+                className={`group/avatar relative flex items-center gap-2.5 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)]/90 px-3 py-2 shadow-2xs backdrop-blur-xs transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shrink-0 ${glow}`}
               >
-                <div className="relative h-10 w-10 sm:h-11 sm:w-11 rounded-xl overflow-hidden bg-slate-50 border border-slate-200/70 p-0.5 shrink-0 shadow-2xs transition-transform duration-300 group-hover/avatar:scale-110">
+                <div className="relative h-10 w-10 sm:h-11 sm:w-11 rounded-xl overflow-hidden bg-[var(--color-soft)] border border-[var(--color-line)]/70 p-0.5 shrink-0 shadow-2xs transition-transform duration-300 group-hover/avatar:scale-110">
                   <Image
                     src={`/images/mbti/${type.code.toLowerCase()}.png`}
                     alt={type.code}
@@ -111,10 +111,10 @@ export default function MbtiHeroMotion({ children, types, locale }: MbtiHeroMoti
                   />
                 </div>
                 <div className="text-left min-w-0 pr-1">
-                  <div className="font-mono text-xs font-bold text-slate-900 leading-tight">
+                  <div className="font-mono text-xs font-bold text-[var(--color-ink)] leading-tight">
                     {type.code}
                   </div>
-                  <div className="text-[10px] font-medium text-slate-500 truncate max-w-[80px] sm:max-w-[100px]">
+                  <div className="text-[10px] font-medium text-[var(--color-muted)] truncate max-w-[80px] sm:max-w-[100px]">
                     {locale === "en" ? type.name_en : type.name_id}
                   </div>
                 </div>
