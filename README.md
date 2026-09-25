@@ -17,18 +17,25 @@ Profesia adalah platform web bilingual (Indonesia/English) mutakhir yang memaduk
 
 ## 🌟 Informasi Fitur Unggulan
 
-### 1. Katalog Profesi & Informasi Detail
-Daftar ~50+ jenis pekerjaan (dokter, programmer, desainer, data scientist, dll) lengkap dengan metrik:
-- **Deskripsi Pekerjaan**: Gambaran umum dan tanggung jawab harian.
-- **Range Gaji Rata-rata**: Estimasi gaji minimum dan maksimum dalam IDR/bulan.
-- **Pendidikan Minimum**: Syarat latar belakang pendidikan (SMA, D3, S1, S2, Sertifikasi).
-- **Keahlian Utama (Skills)**: Daftar *hard skill* & *soft skill* yang diperlukan.
-- **Lingkungan Kerja**: Kondisi kerja (Remote/Hybrid/WFO, startup vs korporat).
-- **Jalur Karir (Career Path)**: Visual timeline kenaikan jenjang dari entry-level hingga executive.
-- **Prospek Masa Depan**: Indicator prospek industri (*High*, *Medium*, *Low*).
-- **Rating Work-Life Balance**: Penilaian keseimbangan hidup-kerja (skala 1-5 bintang).
+### 1. Katalog Eksplorasi Profesi & Informasi Detail (Terstandarisasi O*NET)
+Katalog pekerjaan modern dengan pendekatan eksplorasi bersih (*distraction-free exploration*):
+- **Kartu Eksplorasi Bersih (`/professions`)**: Menampilkan nama profesi, rumpun industri, deskripsi esensial, dan badge MBTI dengan kode warna resmi 4 rumpun peran. Indikator gaji dan prospek disembunyikan di halaman depan agar pengguna fokus mengenali ragam karir baru tanpa bias materi.
+- **Halaman Detail Komprehensif (`/professions/[slug]`)**: Menyajikan metrik mendalam:
+  - **Practitioner Spotlight Card**: Kartu visual foto praktisi pekerja nyata dari Unsplash di hero section yang menampilkan lingkungan kerja dan profesi yang sedang dijalankan.
+  - **Estimasi Gaji Realistis**: Rentang estimasi gaji minimum & maksimum (IDR/bulan).
+  - **Syarat Pendidikan & Skill**: Kualifikasi akademik dan daftar *hard skills* & *soft skills* utama.
+  - **Jalur Karir (Career Path)**: Visual timeline jenjang karir dari entry-level hingga executive.
+  - **Lingkungan Kerja & Work-Life Balance**: Fleksibilitas kerja (Remote/Hybrid/WFO) dan rating WLB bintang 1-5.
+  - **Matriks Kecocokan MBTI**: Alasan psikologis mengapa kepribadian tertentu unggul dalam profesi tersebut.
 
-### 2. Kuis MBTI Interaktif Gaya 16Personalities (50 Pernyataan Likert Scale)
+### 2. Standarisasi Data Karir Berbasis Taksonomi O*NET-SOC
+Seluruh 50+ profesi dalam sistem Profesia distandarisasi menggunakan taksonomi ketenagakerjaan resmi **O*NET (Occupational Information Network)** dari U.S. Department of Labor:
+- **O*NET-SOC Code**: Setiap profesi memiliki kode klasifikasi baku (misal `15-1252.00` untuk Software Engineer, `29-1216.00` untuk Dokter Umum, `27-1024.00` untuk Graphic Designer).
+- **Pemetaan Holland Code (RIASEC)**: Kode orientasi minat vokasional 3 huruf (Realistic, Investigative, Artistic, Social, Enterprising, Conventional) yang terhubung langsung dengan engine rekomendasi psikometri.
+- **Bilingual Taxonomy**: Nama, deskripsi, skill, dan jalur karir tersedia lengkap dalam Bahasa Indonesia dan English.
+- **Script Otomasi Importer**: Dilengkapi script fleksibel (`scripts/import-onet-professions.mjs`) untuk validasi, auto-backup, dan sinkronisasi instan ke JSON dan Supabase SQL.
+
+### 3. Kuis MBTI Interaktif Gaya 16Personalities (50 Pernyataan Likert Scale)
 Kuis psikometri kepribadian dengan 50 pernyataan berbasis **Skala Likert 5-Poin** (*Sangat Setuju* hingga *Sangat Tidak Setuju*) yang mengukur 5 dimensi kepribadian:
 - **Mind ($E / I$)** — *Extraverted vs Introverted* (Fokus sosial & sumber energi)
 - **Energy ($S / N$)** — *Observant/Sensing vs Intuitive* (Cara mengolah informasi & realitas)
@@ -36,59 +43,59 @@ Kuis psikometri kepribadian dengan 50 pernyataan berbasis **Skala Likert 5-Poin*
 - **Tactics ($J / P$)** — *Judging vs Prospecting/Perceiving* (Gaya kerja & pendekatan perencanaan)
 - **Identity ($-A / -T$)** — *Assertive vs Turbulent* (Ketahanan diri & toleransi terhadap stres)
 
-### 3. 4 Rumpun Kepribadian (Role Groups) & Visual Styling
+### 4. 4 Rumpun Kepribadian (Role Groups) & Visual Styling
 Menyajikan 16 tipe MBTI dalam 4 kelompok resmi bergaya 16Personalities:
 - 💜 **Analis (Analysts)** — INTJ, INTP, ENTJ, ENTP *(Warna Ungu/Purple)*
 - 💚 **Diplomat (Diplomats)** — INFJ, INFP, ENFJ, ENFP *(Warna Hijau/Emerald)*
 - 💙 **Sentinel (Sentinels)** — ISTJ, ISFJ, ESTJ, ESFJ *(Warna Biru/Sky)*
 - 💛 **Penjelajah (Explorers)** — ISTP, ISFP, ESTP, ESFP *(Warna Kuning/Amber)*
 
-### 4. Engine Rekomendasi Karir Berbasis MBTI & Varian Identitas (-A / -T)
+### 5. Engine Rekomendasi Karir Berbasis MBTI & Varian Identitas (-A / -T)
 Setelah menyelesaikan kuis, pengguna akan mendapatkan:
 - Kode hasil 5 huruf (contoh: `INTJ-A`, `ENFP-T`).
 - Grafik persentase breakdown 5 dimensi kepribadian.
 - Penjelasan gaya kerja, kekuatan (*strengths*), dan kelemahan (*weaknesses*).
 - Daftar profesi yang cocok beserta skor kecocokan (%) dan alasan psikologisnya.
 
-### 5. Search, Multi-Filter & Quick-Filter Rumpun MBTI
-Pencarian dan penyaringan cepat di halaman katalog berdasarkan:
-- Kata kunci nama profesi atau deskripsi.
-- Kategori industri (Kesehatan, Teknologi, Pendidikan, Seni & Desain, Pemasaran, dll).
-- **Quick-Filter Rumpun & Tipe MBTI**: Menampilkan profesi yang cocok untuk Rumpun atau Tipe khusus (`?mbti=INTJ`).
-- Range gaji (slider min-max).
-- Tingkat pendidikan & prospek karir.
-- Sorting (Gaji Tertinggi/Terendah, A-Z, Work-Life Balance).
+### 6. Search & 4-Column Multi-Filter Terintegrasi
+Pencarian dan penyaringan cepat di halaman katalog `/professions` berbasis 4 dimensi eksplorasi:
+- **Pencarian Bebas**: Kata kunci nama profesi, deskripsi, atau keahlian (skills) dalam ID/EN.
+- **Kategori Industri**: Pilihan 5 rumpun (Teknologi, Kesehatan, Seni & Desain, Pemasaran, Pendidikan).
+- **Dimensi Minat RIASEC**: Filter langsung tipe Holland (Realistic, Investigative, Artistic, Social, Enterprising, Conventional).
+- **Rumpun & 16 Tipe MBTI**: Filter cepat kepribadian dengan warna tema kelompok peran.
+- **Tingkat Pendidikan**: Filter kualifikasi akademik (SMA/SMK, D3, S1, S2, Profesi).
+- **Sorting Presisi**: Urutan Nama (A-Z) dan Keseimbangan Hidup-Kerja (Work-Life Balance).
 
-### 6. Tool Komparasi Profesi Side-by-Side
+### 7. Tool Komparasi Profesi Side-by-Side
 Fitur untuk membandingkan 2 profesi secara berdampingan dalam tabel komparatif lengkap dengan visualisasi *Radar Chart* dan link yang dapat dibagikan (*shareable URL*).
 
-### 7. Bookmark Profesi & Dashboard Pengguna
+### 8. Bookmark Profesi & Dashboard Pengguna
 - **Bookmark**: Pengguna dapat menyimpan profesi favorit ke daftar bookmark pribadi.
 - **Profil User**: Menampilkan tipe MBTI aktif, zodiak pilihan, riwayat tes MBTI sebelumnya, daftar bookmark, dan pengaturan profil.
 
-### 8. Dual Bahasa (Bilingual ID / EN)
+### 9. Dual Bahasa (Bilingual ID / EN)
 Dukungan penuh dua bahasa (Bahasa Indonesia & English) pada seluruh interface UI dan database konten profesi dengan toggle switcher yang mulus tanpa *full page reload*.
 
-### 9. Shareable MBTI Result Card (Viral Story Card)
+### 10. Shareable MBTI Result Card (Viral Story Card)
 Kartu visual ringkasan hasil MBTI dan profesi rekomendasi yang dirancang estetik dengan identitas visual modern khas Profesia (*Instagram Story & LinkedIn ready*), memungkinkan pengguna mengunduh atau membagikan hasil tes ke media sosial.
 
-### 10. Auto-Save Progress Kuis MBTI (Draf Kuis Persistent)
+### 11. Auto-Save Progress Kuis MBTI (Draf Kuis Persistent)
 Sistem penyimpanan otomatis draf jawaban kuis 50 soal di *Local Storage*. Pengguna tidak perlu khawatir kehilangan progres kuis jika terjadi gangguan koneksi atau refresh halaman secara tidak sengaja.
 
-### 11. Cosmic Career Astrolabe & Observatorium Konstelasi Langit
+### 12. Cosmic Career Astrolabe & Observatorium Konstelasi Langit
 Modul astrologi karir mutakhir (`/zodiac`) yang dilengkapi:
 - **Interactive Pinned Astrolabe**: Roda orbit 12 zodiak interaktif yang berputar halus saat di-scroll atau diklik, bertengger di atas citra tangan emas kosmis (*Golden Hand in the Shadows*) dan dihiasi medallion talisman 3D celestial custom.
 - **Constellation Sky Canvas**: Visualisasi garis rasi bintang astronomis resmi IAU yang presisi dengan filter glow elemental.
 - **Constellation Observatory Modal**: Modal planetarium layar penuh untuk mengamati rasi bintang dalam skala besar, dilengkapi toggle siluet arketipe mitologis, cincin koordinat kubah langit, serta inspektur bintang interaktif untuk melihat peran anatomis setiap bintang.
 - **Dossier Blueprint Karir**: Rekomendasi profesi terpilih yang selaras dengan kecenderungan alami dan energi masing-masing zodiak.
 
-### 12. Modul Jurusan Kuliah (Majors & Study Programs Explorer)
+### 13. Modul Jurusan Kuliah (Majors & Study Programs Explorer)
 Halaman katalog jurusan kuliah (`/majors`) lengkap dengan mata kuliah inti, durasi, jenjang pendidikan, prospek industri, serta relasi *cross-link* ke katalog profesi yang relevan dan tingkat kecocokan MBTI/RIASEC.
 
-### 13. Integrasi Psikometri RIASEC (Holland Code 6 Dimensions)
+### 14. Integrasi Psikometri RIASEC (Holland Code 6 Dimensions)
 Modul tes psikometri vokasional terpisah (36 pernyataan Likert) yang mengukur 6 dimensi Holland (*Realistic, Investigative, Artistic, Social, Enterprising, Conventional*) untuk kalkulasi rekomendasi karir yang presisi.
 
-### 14. Engine Rekomendasi Karir Berbasis AI (2-Layer Hybrid Gemini Free Tier)
+### 15. Engine Rekomendasi Karir Berbasis AI (2-Layer Hybrid Gemini Free Tier)
 Engine rekomendasi 2-layer yang menggabungkan kalkulasi deterministik ($\text{RIASEC} \times 0.6 + \text{MBTI} \times 0.4$) dengan personalisasi AI terintegrasi **Google Gemini Flash Free Tier** untuk menghasilkan penalaran psikologis terpersonalisasi, dilengkapi validasi skema JSON dan *zero-cost fallback engine* otomatis jika API key tidak tersedia.
 
 ---
@@ -156,6 +163,33 @@ npm run build
 npm run start
 ```
 
+### 4. Manajemen Data & Pipeline Otomasi O*NET
+
+Profesia dilengkapi pipeline CLI otomatis untuk memvalidasi, menstandarisasi, dan memperbarui data profesi O*NET:
+
+```bash
+# Menjalankan standarisasi & update data/professions-seed.json + migrasi SQL
+node scripts/import-onet-professions.mjs
+
+# Mengimpor dataset kustom dari file eksternal
+node scripts/import-onet-professions.mjs --input=path/to/custom-professions.json
+
+# Dry-run untuk simulasi validasi tanpa menulis file
+node scripts/import-onet-professions.mjs --dry-run
+
+# Menjalankan uji integritas domain & skema data
+node scripts/domain-tests.mjs
+
+# Memeriksa keselarasan kamus i18n bilingual (ID / EN)
+node scripts/check-i18n.mjs
+```
+
+**Alur Kerja Otomasi:**
+1. **Validasi Skema**: Memastikan setiap profesi memiliki kode O*NET-SOC, kode RIASEC valid (R/I/A/S/E/C), serta relasi MBTI yang presisi.
+2. **Auto-Backup**: Membuat salinan cadangan instan ke `data/professions-seed.json.backup.json`.
+3. **Pembaruan JSON Lokal**: Menyimpan dataset terverifikasi ke `data/professions-seed.json` untuk rendering offline/lokal.
+4. **Auto-Generate SQL Migration**: Menghasilkan script SQL `supabase/migrations/0008_onet_seed.sql` berisi perintah `insert ... on conflict (slug) do nothing` yang siap disinkronkan ke Supabase PostgreSQL.
+
 ---
 
 ## 📁 Struktur Direktori Proyek
@@ -169,9 +203,9 @@ profesia/
 │   │           └── route.ts          # API Route: 2-Layer AI Recommendation Handler
 │   └── [locale]/                     # Dynamic Locale Routing (/id, /en)
 │       ├── (auth)/                   # Route Group: Auth (login, register)
-│       ├── professions/              # Katalog Profesi & Multi-Filter
+│       ├── professions/              # Katalog Eksplorasi Bersih & Multi-Filter
 │       │   ├── compare/              # Tool Komparasi Side-by-Side
-│       │   └── [slug]/               # Halaman Detail Profesi
+│       │   └── [slug]/               # Detail Profesi & Hero Practitioner Spotlight
 │       ├── mbti/                     # Landing MBTI & Grid 4 Rumpun
 │       │   ├── test/                 # Kuis Likert Scale 50 Soal
 │       │   └── result/[type]/        # Halaman Hasil & Dimensi MBTI
@@ -190,20 +224,26 @@ profesia/
 ├── components/
 │   ├── layout/                       # Navbar, Footer, LanguageSwitcher, ThemeScript
 │   ├── motion/                       # DimensionCanvas3D, KineticSplitText, ScrollTextReveal, TextReveal
-│   ├── profession/                   # ProfessionCard, FilterBar, SalaryChart, CareerPathTimeline
+│   ├── profession/                   # ProfessionCard, FilterBar, PractitionerSpotlightCard, SalaryChart, CareerPathTimeline
 │   ├── mbti/                         # ShareCard, DimensionChart, QuizCard, ProgressBar, ResultCard, StoryChapters
 │   ├── riasec/                       # HollandHexagonRadar, HollandHexagonStoryboard, HollandSynergyExplorer
 │   ├── zodiac/                       # ZodiacAstrolabePinned, ZodiacConstellationSvg, ConstellationObservatoryModal
 │   └── ui/                           # Button, Modal, Skeleton, Toast, Badge primitives
+├── scripts/                          # Otomasi & Pipeline Data
+│   ├── import-onet-professions.mjs   # O*NET taxonomy importer, validator & SQL migration generator
+│   ├── generate-profession-seed.mjs  # SQL seed generator fallback
+│   ├── domain-tests.mjs              # Integrity & domain test runner
+│   └── check-i18n.mjs                # Bilingual dictionary parity validator
 ├── services/                         # Data access and business logic
-│   ├── professions.ts                # Profession queries & filters
+│   ├── professions.ts                # Profession queries, hybrid Supabase/Seed & filters
 │   ├── riasecService.ts              # RIASEC scoring & Holland Code
 │   ├── majorService.ts               # Majors catalog queries
 │   ├── recommendationService.ts      # Layer 1 deterministic scoring
 │   └── aiService.ts                  # Layer 2 Gemini LLM personalizer
 ├── data/                             # Static seed JSON & Constellations (fallback & dev)
 │   ├── constellationsData.ts         # 12 Zodiac IAU stars, coordinates & mythology
-│   ├── professions-seed.json
+│   ├── professions-seed.json         # Master 54 O*NET standardized professions
+│   ├── professions-seed.json.backup.json
 │   ├── mbti-questions.json
 │   ├── mbti-types.json
 │   ├── riasec-questions.json
@@ -214,7 +254,8 @@ profesia/
 │   └── supabase/                     # Supabase server and middleware clients
 ├── app/api/auth/                     # Login, register, logout API routes
 ├── supabase/
-│   └── schema.sql                    # PostgreSQL schema, RLS, dan auth trigger
+│   ├── schema.sql                    # PostgreSQL schema, RLS, dan auth trigger
+│   └── migrations/                   # Database migrations (0001 - 0008_onet_seed.sql)
 ├── i18n/                             # next-intl request handler
 ├── PRD.md                            # Technical PRD & SQL Schema Spec
 └── README.md                         # Developer Guide & Feature Info (file ini)
