@@ -274,7 +274,10 @@
     "notFound": "Profesi Tidak Ditemukan",
     "notFoundDescription": "Tidak ada pekerjaan yang cocok dengan kriteria filter Anda. Coba ubah kata kunci atau reset filter.",
     "catalogLoading": "Memuat katalog profesi...",
-    "catalogError": "Katalog online tidak tersedia. Menampilkan data lokal."
+    "catalogError": "Katalog online tidak tersedia. Menampilkan data lokal.",
+    "practitionerTitle": "Praktisi Profesi",
+    "practitionerBadge": "Spotlight",
+    "practitionerPlaceholder": "Profil praktisi yang sedang menjalani profesi ini akan segera hadir."
   },
   "Majors": {
     "title": "Katalog Jurusan Kuliah",

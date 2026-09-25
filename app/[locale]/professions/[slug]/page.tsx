@@ -22,6 +22,7 @@ import SectionReveal from "@/components/motion/SectionReveal";
 import MagneticButton from "@/components/motion/MagneticButton";
 import ScrollProgressBar from "@/components/motion/ScrollProgressBar";
 import CareerPathTimeline from "@/components/profession/CareerPathTimeline";
+import PractitionerSpotlightCard from "@/components/profession/PractitionerSpotlightCard";
 
 export default async function ProfessionDetailPage({
   params,
@@ -65,31 +66,47 @@ export default async function ProfessionDetailPage({
         </Link>
       </nav>
 
-      {/* 2. Hero Editorial Header with KineticSplitText */}
+      {/* 2. Hero Editorial Header with KineticSplitText & Practitioner Card */}
       <SectionReveal direction="up">
-        <header className="space-y-4 border-b border-[var(--color-line)] pb-8">
-          <div className="flex flex-wrap items-center gap-2.5">
-            <p className="text-xs font-mono font-semibold uppercase tracking-[0.16em] text-teal-700">
-              {categoryName}
-            </p>
-            <span className="text-[var(--color-muted)]" aria-hidden="true">·</span>
-            <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-md">
-              <TrendingUp className="w-3.5 h-3.5" aria-hidden="true" />
-              {profession.prospects === "high"
-                ? isEnglish ? "High Growth" : "Prospek Tinggi"
-                : profession.prospects === "medium"
-                ? isEnglish ? "Stable Demand" : "Prospek Sedang"
-                : isEnglish ? "Niche Demand" : "Prospek Khusus"}
-            </span>
+        <header className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-[var(--color-line)] pb-10 items-center">
+          {/* Main Title & Description Column */}
+          <div className="lg:col-span-8 space-y-4">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <p className="text-xs font-mono font-semibold uppercase tracking-[0.16em] text-teal-700">
+                {categoryName}
+              </p>
+              <span className="text-[var(--color-muted)]" aria-hidden="true">·</span>
+              <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 px-2.5 py-0.5 rounded-md">
+                <TrendingUp className="w-3.5 h-3.5" aria-hidden="true" />
+                {profession.prospects === "high"
+                  ? isEnglish ? "High Growth" : "Prospek Tinggi"
+                  : profession.prospects === "medium"
+                  ? isEnglish ? "Stable Demand" : "Prospek Sedang"
+                  : isEnglish ? "Niche Demand" : "Prospek Khusus"}
+              </span>
+            </div>
+
+            <KineticSplitText as="h1" className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.1] text-[var(--color-ink)]">
+              {name}
+            </KineticSplitText>
+
+            <ScrollTextReveal className="max-w-2xl text-base sm:text-lg text-[var(--color-muted)] leading-relaxed" dimOpacity={0.2}>
+              {description}
+            </ScrollTextReveal>
           </div>
 
-          <KineticSplitText as="h1" className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.1] text-[var(--color-ink)]">
-            {name}
-          </KineticSplitText>
-
-          <ScrollTextReveal className="max-w-3xl text-base sm:text-lg text-[var(--color-muted)] leading-relaxed" dimOpacity={0.2}>
-            {description}
-          </ScrollTextReveal>
+          {/* Practitioner Persona Card Column */}
+          <div className="lg:col-span-4 flex justify-center lg:justify-end">
+            <PractitionerSpotlightCard
+              imageUrl={profession.image_url}
+              professionName={name}
+              workEnvironment={workEnv}
+              titleLabel={t("practitionerTitle")}
+              badgeLabel={t("practitionerBadge")}
+              fallbackText={t("practitionerPlaceholder")}
+              environmentLabel={isEnglish ? "Work Environment" : "Lingkungan Kerja"}
+            />
+          </div>
         </header>
       </SectionReveal>
 

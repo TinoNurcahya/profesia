@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { DollarSign, TrendingUp, Heart, ArrowRight } from "lucide-react";
+import { Heart, ArrowRight } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { toast } from "sonner";
 import gsap from "gsap";
@@ -25,6 +25,27 @@ export interface ProfessionCardProps {
   };
 }
 
+function getMbtiBadgeStyle(code: string): string {
+  const upper = code.toUpperCase();
+  // Analysts (NT): Purple
+  if (["INTJ", "INTP", "ENTJ", "ENTP"].includes(upper)) {
+    return "bg-purple-100 text-purple-700 border-purple-200/60 dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800/40";
+  }
+  // Diplomats (NF): Emerald
+  if (["INFJ", "INFP", "ENFJ", "ENFP"].includes(upper)) {
+    return "bg-emerald-100 text-emerald-700 border-emerald-200/60 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/40";
+  }
+  // Sentinels (SJ): Sky
+  if (["ISTJ", "ISFJ", "ESTJ", "ESFJ"].includes(upper)) {
+    return "bg-sky-100 text-sky-700 border-sky-200/60 dark:bg-sky-950/60 dark:text-sky-300 dark:border-sky-800/40";
+  }
+  // Explorers (SP): Amber
+  if (["ISTP", "ISFP", "ESTP", "ESFP"].includes(upper)) {
+    return "bg-amber-100 text-amber-700 border-amber-200/60 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800/40";
+  }
+  return "bg-[var(--color-soft)] text-[var(--color-muted)] border-[var(--color-line)]";
+}
+
 export default function ProfessionCard({ profession }: ProfessionCardProps) {
   const locale = useLocale();
   const t = useTranslations("Profession");
@@ -32,7 +53,6 @@ export default function ProfessionCard({ profession }: ProfessionCardProps) {
   const [isSaving, setIsSaving] = useState(false);
 
   const cardRef = useRef<HTMLElement>(null);
-  const salaryBarRef = useRef<HTMLDivElement>(null);
   const bookmarkRef = useRef<HTMLButtonElement>(null);
 
   // Tilt physics refs
@@ -60,12 +80,6 @@ export default function ProfessionCard({ profession }: ProfessionCardProps) {
     rxTo.current(((centerY - y) / centerY) * 5);
     ryTo.current(((x - centerX) / centerX) * 5);
     scaleTo.current(1.02);
-
-    // Animate salary bar fill on hover
-    if (salaryBarRef.current) {
-      const targetWidth = `${Math.min(100, Math.max(15, (profession.salary_max / 35000000) * 100))}%`;
-      gsap.to(salaryBarRef.current, { width: targetWidth, duration: 0.6, ease: "power2.out" });
-    }
   };
 
   const handleMouseLeave = () => {
@@ -108,8 +122,6 @@ export default function ProfessionCard({ profession }: ProfessionCardProps) {
     }
   };
 
-  const salaryPercent = Math.min(100, Math.max(15, (profession.salary_max / 35000000) * 100));
-
   return (
     <article
       ref={cardRef}
@@ -125,27 +137,21 @@ export default function ProfessionCard({ profession }: ProfessionCardProps) {
             {locale === "id" ? profession.category_name_id : profession.category_name_en}
           </span>
           
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700">
-              <TrendingUp className="w-3.5 h-3.5" />
-              {profession.prospects === "high" ? t("highProspects") : profession.prospects}
-            </span>
-            <button
-              ref={bookmarkRef}
-              onClick={toggleBookmark}
-              disabled={isSaving}
-              className="grid h-10 w-10 place-items-center rounded-[10px] text-[var(--color-muted)] transition-colors hover:bg-[var(--color-soft)] hover:text-[var(--color-ink)] disabled:opacity-50"
-              aria-label={t("bookmarkLabel")}
-            >
-              <Heart
-                className={`w-4 h-4 transition-colors ${
-                  isBookmarked
-                    ? "text-rose-500 fill-rose-500"
-                    : "text-[var(--color-muted)] hover:text-[var(--color-muted)]"
-                }`}
-              />
-            </button>
-          </div>
+          <button
+            ref={bookmarkRef}
+            onClick={toggleBookmark}
+            disabled={isSaving}
+            className="grid h-10 w-10 place-items-center rounded-[10px] text-[var(--color-muted)] transition-colors hover:bg-[var(--color-soft)] hover:text-[var(--color-ink)] disabled:opacity-50"
+            aria-label={t("bookmarkLabel")}
+          >
+            <Heart
+              className={`w-4 h-4 transition-colors ${
+                isBookmarked
+                  ? "text-rose-500 fill-rose-500"
+                  : "text-[var(--color-muted)] hover:text-[var(--color-muted)]"
+              }`}
+            />
+          </button>
         </div>
 
         {/* Title */}
@@ -159,35 +165,17 @@ export default function ProfessionCard({ profession }: ProfessionCardProps) {
         <p className="line-clamp-3 text-sm leading-relaxed text-[var(--color-muted)]">
           {locale === "id" ? profession.description_id : profession.description_en}
         </p>
-
-        {/* Salary with animated bar */}
-        <div className="flex items-end justify-between gap-4 border-l-2 border-teal-700 pl-3 text-xs">
-          <div className="flex-1 space-y-1.5">
-            <span className="text-[var(--color-muted)] font-medium">{t("salaryLabel")}</span>
-            <div className="h-1 w-full bg-[var(--color-soft)] rounded-full overflow-hidden">
-              <div
-                ref={salaryBarRef}
-                className="h-full bg-teal-700 rounded-full transition-[width] duration-500"
-                style={{ width: `${salaryPercent}%` }}
-              />
-            </div>
-          </div>
-          <span className="flex items-center gap-1 text-right font-bold text-[var(--color-ink)] shrink-0">
-            <DollarSign className="w-3.5 h-3.5 text-emerald-500" />
-            Rp {(profession.salary_min / 1000000).toFixed(0)} - {(profession.salary_max / 1000000).toFixed(0)} {t("salaryUnit")}
-          </span>
-        </div>
       </div>
 
       {/* Footer Details */}
       <div className="flex items-end justify-between gap-4 border-t border-[var(--color-line)] pt-4">
-        <div className="flex items-center gap-1 text-xs">
+        <div className="flex items-center gap-1.5 text-xs">
           <span className="font-semibold text-[var(--color-muted)]">{t("matchedMbti")}:</span>
-          <div className="flex gap-1">
+          <div className="flex flex-wrap gap-1">
             {profession.matched_mbti.slice(0, 3).map((m) => (
               <span
                 key={m.code}
-                className="rounded-md bg-purple-100 px-1.5 py-0.5 text-[10px] font-bold text-purple-700"
+                className={`rounded-md border px-1.5 py-0.5 text-[10px] font-bold ${getMbtiBadgeStyle(m.code)}`}
               >
                 {m.code}
               </span>
@@ -197,7 +185,7 @@ export default function ProfessionCard({ profession }: ProfessionCardProps) {
 
         <Link
           href={`/${locale}/professions/${profession.slug}`}
-          className="inline-flex min-h-10 items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-900 transition-transform hover:translate-x-0.5"
+          className="inline-flex min-h-10 items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-900 transition-transform hover:translate-x-0.5 shrink-0"
         >
           {t("detail")}
           <ArrowRight className="w-3.5 h-3.5" />

@@ -15,16 +15,10 @@ export interface FilterBarProps {
   setMbti: (v: string) => void;
   riasec: string;
   setRiasec: (v: string) => void;
-  prospects: string;
-  setProspects: (v: string) => void;
   sort: string;
   setSort: (v: string) => void;
   education: string;
   setEducation: (v: string) => void;
-  salaryMin: string;
-  setSalaryMin: (v: string) => void;
-  salaryMax: string;
-  setSalaryMax: (v: string) => void;
   onReset: () => void;
 }
 
@@ -37,22 +31,21 @@ export default function FilterBar({
   setMbti,
   riasec,
   setRiasec,
-  prospects,
-  setProspects,
   sort,
   setSort,
   education,
   setEducation,
-  salaryMin,
-  setSalaryMin,
-  salaryMax,
-  setSalaryMax,
   onReset,
 }: FilterBarProps) {
   const t = useTranslations("Profession");
 
   const hasActiveFilters =
-    category !== "all" || mbti !== "all" || riasec !== "all" || prospects !== "all" || education.trim() !== "" || salaryMin !== "" || salaryMax !== "";
+    category !== "all" ||
+    mbti !== "all" ||
+    riasec !== "all" ||
+    education.trim() !== "" ||
+    search.trim() !== "" ||
+    sort !== "default";
 
   return (
     <section
@@ -61,10 +54,8 @@ export default function FilterBar({
       }`}
       aria-label={t("catalogBadge")}
     >
-      
       {/* Top Bar: Search Input and Sort */}
-      <div className="flex flex-col gap-3 md:flex-row">
-        
+      <div className="flex flex-col gap-3 md:flex-row md:items-center">
         {/* Search Bar */}
         <div className="relative flex-1 w-full">
           <Search className="w-5 h-5 text-[var(--color-muted)] absolute left-4 top-1/2 -translate-y-1/2" />
@@ -85,19 +76,31 @@ export default function FilterBar({
             className="field-control font-semibold md:min-w-56"
           >
             <option value="default">{t("sortDefault")}</option>
-            <option value="salary_desc">{t("sortSalaryDesc")}</option>
-            <option value="salary_asc">{t("sortSalaryAsc")}</option>
             <option value="wlb_desc">{t("sortWorkLife")}</option>
             <option value="name_asc">{t("sortName")}</option>
           </select>
         </div>
 
+        {/* Reset Button (visible when any filter or search is active) */}
+        {hasActiveFilters && (
+          <div className="shrink-0">
+            <MagneticButton strength={0.3}>
+              <button
+                onClick={onReset}
+                className="flex min-h-11 w-full items-center justify-center gap-2 rounded-[10px] border border-[var(--color-line)] px-4 text-xs font-bold text-[var(--color-ink)] transition-colors hover:bg-[var(--color-soft)] sm:w-auto"
+                aria-label={t("resetFilter")}
+              >
+                <RotateCcw className="w-3.5 h-3.5 text-teal-700" />
+                <span>{t("resetFilter")}</span>
+              </button>
+            </MagneticButton>
+          </div>
+        )}
       </div>
 
-      {/* Filter Controls Row with stagger entrance */}
-      <GsapScrollStagger selector="[data-gsap='filter']" stagger={0.08} yOffset={20} triggerHook="top 95%">
+      {/* Filter Controls Row: 4 Discovery Columns */}
+      <GsapScrollStagger selector="[data-gsap='filter']" stagger={0.06} yOffset={15} triggerHook="top 95%">
         <div className="grid grid-cols-1 gap-4 border-t border-[var(--color-line)] pt-5 sm:grid-cols-2 lg:grid-cols-4">
-          
           {/* Category Filter */}
           <div data-gsap="filter" className="space-y-1.5">
             <label className="text-xs font-bold text-[var(--color-muted)] flex items-center gap-1.5">
@@ -118,11 +121,20 @@ export default function FilterBar({
             </select>
           </div>
 
+          {/* RIASEC Filter */}
           <div data-gsap="filter" className="space-y-1.5">
             <label className="text-xs font-bold text-[var(--color-muted)]">{t("riasecFilterLabel")}</label>
-            <select value={riasec} onChange={(event) => setRiasec(event.target.value)} className="field-control text-xs font-semibold">
+            <select
+              value={riasec}
+              onChange={(event) => setRiasec(event.target.value)}
+              className="field-control text-xs font-semibold"
+            >
               <option value="all">{t("allRiasec")}</option>
-              {"RIASEC".split("").map((code) => <option value={code} key={code}>{code} — {t(`riasec${code}`)}</option>)}
+              {"RIASEC".split("").map((code) => (
+                <option value={code} key={code}>
+                  {code} — {t(`riasec${code}`)}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -135,59 +147,30 @@ export default function FilterBar({
             <select
               value={mbti}
               onChange={(e) => setMbti(e.target.value)}
-              className="field-control border-purple-200 bg-purple-50 text-xs font-bold text-purple-900 focus:border-purple-600 focus:ring-purple-600/15"
+              className="field-control border-purple-200 bg-purple-50 text-xs font-bold text-purple-900 focus:border-purple-600 focus:ring-purple-600/15 dark:border-purple-900/60 dark:bg-purple-950/40 dark:text-purple-300"
             >
               <option value="all">{t("allMbti")}</option>
-              {mbtiTypes.map((t) => (
-                <option key={t.code} value={t.code}>
-                  {t.code} - {t.name_id} ({t.group_id})
+              {mbtiTypes.map((item) => (
+                <option key={item.code} value={item.code}>
+                  {item.code} - {item.name_id} ({item.group_id})
                 </option>
               ))}
             </select>
           </div>
 
+          {/* Education Filter */}
           <div data-gsap="filter" className="space-y-1.5">
-            <label className="text-xs font-bold text-[var(--color-muted)]" htmlFor="education-filter">{t("educationFilterLabel")}</label>
-            <input id="education-filter" value={education} onChange={(event) => setEducation(event.target.value)} placeholder={t("educationFilterPlaceholder")} className="field-control text-xs" />
-          </div>
-
-          <div data-gsap="filter" className="space-y-1.5">
-            <label className="text-xs font-bold text-[var(--color-muted)]">{t("salaryFilterLabel")}</label>
-            <div className="grid grid-cols-2 gap-2">
-              <input type="number" min="0" inputMode="numeric" value={salaryMin} onChange={(event) => setSalaryMin(event.target.value)} placeholder={t("salaryMinPlaceholder")} aria-label={t("salaryMinLabel")} className="field-control min-w-0 text-xs" />
-              <input type="number" min="0" inputMode="numeric" value={salaryMax} onChange={(event) => setSalaryMax(event.target.value)} placeholder={t("salaryMaxPlaceholder")} aria-label={t("salaryMaxLabel")} className="field-control min-w-0 text-xs" />
-            </div>
-          </div>
-
-          {/* Prospects Filter */}
-          <div data-gsap="filter" className="space-y-1.5">
-            <label className="text-xs font-bold text-[var(--color-muted)]">
-              {t("prospectsLabel")}
+            <label className="text-xs font-bold text-[var(--color-muted)]" htmlFor="education-filter">
+              {t("educationFilterLabel")}
             </label>
-            <select
-              value={prospects}
-              onChange={(e) => setProspects(e.target.value)}
-              className="field-control text-xs font-semibold"
-            >
-              <option value="all">{t("filterProspects")}</option>
-              <option value="high">{t("highProspectsLong")}</option>
-              <option value="medium">{t("mediumProspectsLong")}</option>
-            </select>
+            <input
+              id="education-filter"
+              value={education}
+              onChange={(event) => setEducation(event.target.value)}
+              placeholder={t("educationFilterPlaceholder")}
+              className="field-control text-xs"
+            />
           </div>
-
-          {/* Reset Button with MagneticButton */}
-          <div data-gsap="filter" className="flex items-end">
-            <MagneticButton strength={0.3} className="w-full">
-              <button
-                onClick={onReset}
-                className="flex min-h-11 w-full items-center justify-center gap-2 rounded-[10px] border border-[var(--color-line)] px-4 text-xs font-bold text-[var(--color-ink)] transition-colors hover:bg-[var(--color-soft)]"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                {t("resetFilter")}
-              </button>
-            </MagneticButton>
-          </div>
-
         </div>
       </GsapScrollStagger>
     </section>

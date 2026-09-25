@@ -21,7 +21,7 @@ if (typeof window !== "undefined") {
 export default function ProfessionsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ mbti?: string; riasec?: string; category?: string; search?: string; prospects?: string; education?: string; salaryMin?: string; salaryMax?: string; sort?: string }>;
+  searchParams: Promise<{ mbti?: string; riasec?: string; category?: string; search?: string; education?: string; sort?: string }>;
 }) {
   const initialParams = use(searchParams);
   const t = useTranslations("Profession");
@@ -32,10 +32,7 @@ export default function ProfessionsPage({
   const [category, setCategory] = useState(initialParams.category || "all");
   const [mbti, setMbti] = useState(initialParams.mbti || "all");
   const [riasec, setRiasec] = useState(initialParams.riasec || "all");
-  const [prospects, setProspects] = useState(initialParams.prospects || "all");
   const [education, setEducation] = useState(initialParams.education || "");
-  const [salaryMin, setSalaryMin] = useState(initialParams.salaryMin || "");
-  const [salaryMax, setSalaryMax] = useState(initialParams.salaryMax || "");
   const [sort, setSort] = useState(initialParams.sort || "default");
   const [professions, setProfessions] = useState(professionsSeed);
   const [catalogState, setCatalogState] = useState<"loading" | "ready" | "fallback">("loading");
@@ -54,24 +51,21 @@ export default function ProfessionsPage({
 
   useEffect(() => {
     const params = new URLSearchParams();
-    const values = { search: search.trim(), category, mbti, riasec, prospects, education: education.trim(), salaryMin, salaryMax, sort };
+    const values = { search: search.trim(), category, mbti, riasec, education: education.trim(), sort };
     Object.entries(values).forEach(([key, value]) => {
       if (value && value !== "all" && value !== "default") params.set(key, value);
     });
     const query = params.toString();
     const timer = window.setTimeout(() => router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false }), 200);
     return () => window.clearTimeout(timer);
-  }, [category, education, mbti, pathname, prospects, riasec, router, salaryMax, salaryMin, search, sort]);
+  }, [category, education, mbti, pathname, riasec, router, search, sort]);
 
   const handleReset = () => {
     setSearch("");
     setCategory("all");
     setMbti("all");
     setRiasec("all");
-    setProspects("all");
     setEducation("");
-    setSalaryMin("");
-    setSalaryMax("");
     setSort("default");
   };
 
@@ -90,11 +84,8 @@ export default function ProfessionsPage({
   const setCategoryWithFlip = useCallback((v: string) => { captureFlipState(); setCategory(v); }, [captureFlipState]);
   const setMbtiWithFlip = useCallback((v: string) => { captureFlipState(); setMbti(v); }, [captureFlipState]);
   const setRiasecWithFlip = useCallback((v: string) => { captureFlipState(); setRiasec(v); }, [captureFlipState]);
-  const setProspectsWithFlip = useCallback((v: string) => { captureFlipState(); setProspects(v); }, [captureFlipState]);
   const setSortWithFlip = useCallback((v: string) => { captureFlipState(); setSort(v); }, [captureFlipState]);
   const setEducationWithFlip = useCallback((v: string) => { captureFlipState(); setEducation(v); }, [captureFlipState]);
-  const setSalaryMinWithFlip = useCallback((v: string) => { captureFlipState(); setSalaryMin(v); }, [captureFlipState]);
-  const setSalaryMaxWithFlip = useCallback((v: string) => { captureFlipState(); setSalaryMax(v); }, [captureFlipState]);
   const handleResetWithFlip = useCallback(() => { captureFlipState(); handleReset(); }, [captureFlipState]);
 
   const filteredProfessions = useMemo(() => {
@@ -116,10 +107,6 @@ export default function ProfessionsPage({
       list = list.filter((p) => p.category_slug === category);
     }
 
-    if (prospects !== "all") {
-      list = list.filter((p) => p.prospects === prospects);
-    }
-
     if (mbti !== "all") {
       const code = mbti.toUpperCase();
       list = list.filter((p) => p.matched_mbti.some((m) => m.code === code));
@@ -135,23 +122,14 @@ export default function ProfessionsPage({
       list = list.filter((profession) => profession.education_id.toLowerCase().includes(value) || profession.education_en.toLowerCase().includes(value));
     }
 
-    const minimum = Number(salaryMin);
-    const maximum = Number(salaryMax);
-    if (salaryMin && Number.isFinite(minimum)) list = list.filter((profession) => profession.salary_max >= minimum);
-    if (salaryMax && Number.isFinite(maximum)) list = list.filter((profession) => profession.salary_min <= maximum);
-
-    if (sort === "salary_desc") {
-      list.sort((a, b) => b.salary_max - a.salary_max);
-    } else if (sort === "salary_asc") {
-      list.sort((a, b) => a.salary_min - b.salary_min);
-    } else if (sort === "wlb_desc") {
+    if (sort === "wlb_desc") {
       list.sort((a, b) => b.work_life_balance - a.work_life_balance);
     } else if (sort === "name_asc") {
       list.sort((a, b) => a.name_id.localeCompare(b.name_id));
     }
 
     return list;
-  }, [search, category, mbti, riasec, prospects, education, salaryMin, salaryMax, sort, professions]);
+  }, [search, category, mbti, riasec, education, sort, professions]);
 
   // Apply GSAP Flip animation AFTER render with new filtered results
   useEffect(() => {
@@ -210,16 +188,10 @@ export default function ProfessionsPage({
         setMbti={setMbtiWithFlip}
         riasec={riasec}
         setRiasec={setRiasecWithFlip}
-        prospects={prospects}
-        setProspects={setProspectsWithFlip}
         sort={sort}
         setSort={setSortWithFlip}
         education={education}
         setEducation={setEducationWithFlip}
-        salaryMin={salaryMin}
-        setSalaryMin={setSalaryMinWithFlip}
-        salaryMax={salaryMax}
-        setSalaryMax={setSalaryMaxWithFlip}
         onReset={handleResetWithFlip}
       />
 

@@ -274,7 +274,10 @@
     "notFound": "No Profession Found",
     "notFoundDescription": "No profession matches your filter criteria. Try changing your search or resetting the filters.",
     "catalogLoading": "Loading profession catalog...",
-    "catalogError": "The online catalog is unavailable. Showing local data."
+    "catalogError": "The online catalog is unavailable. Showing local data.",
+    "practitionerTitle": "Field Practitioner",
+    "practitionerBadge": "Spotlight",
+    "practitionerPlaceholder": "Profiles of practitioners currently in this role coming soon."
   },
   "Majors": {
     "title": "College Majors Catalog",
