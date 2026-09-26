@@ -82,7 +82,6 @@ export default function ProfessionsPage({
     [10, 20, 50].includes(Number(initialParams.limit)) ? Number(initialParams.limit) : 10
   );
   const [professions, setProfessions] = useState(professionsSeed);
-  const [catalogState, setCatalogState] = useState<"loading" | "ready" | "fallback">("loading");
 
   const gridRef = useRef<HTMLDivElement>(null);
   const flipStateRef = useRef<Flip.FlipState | null>(null);
@@ -91,8 +90,8 @@ export default function ProfessionsPage({
     let active = true;
     fetch("/api/professions")
       .then((response) => response.json() as Promise<{ success?: boolean; data?: typeof professionsSeed }>)
-      .then((result) => { if (!active) return; if (result.success && result.data?.length) { setProfessions(result.data); setCatalogState("ready"); } else setCatalogState("fallback"); })
-      .catch(() => { if (active) setCatalogState("fallback"); });
+      .then((result) => { if (!active) return; if (result.success && result.data?.length) { setProfessions(result.data); } })
+      .catch(() => {});
     return () => { active = false; };
   }, []);
 

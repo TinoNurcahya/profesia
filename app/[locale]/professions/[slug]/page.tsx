@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { fetchProfessionBySlug } from "@/services/professions";
 import {
-  ArrowLeft,
   ArrowRight,
   Briefcase,
   CheckCircle2,

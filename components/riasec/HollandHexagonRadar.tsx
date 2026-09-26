@@ -116,8 +116,6 @@ export default function HollandHexagonRadar({
   interactive = true,
   onSelectDimension,
 }: HollandHexagonRadarProps) {
-  const isEn = locale === "en";
-
   const currentRatios = useRef<number[]>([0.5, 0.5, 0.5, 0.5, 0.5, 0.5]);
   const [renderedPoints, setRenderedPoints] = useState<string>("");
   const [activeCoords, setActiveCoords] = useState<{ x: number; y: number }[]>([
