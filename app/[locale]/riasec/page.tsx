@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { ArrowRight, Compass, Sparkles, ShieldCheck, Flame } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import KineticSplitText from "@/components/motion/KineticSplitText";
 import ScrollTextReveal from "@/components/motion/ScrollTextReveal";
 import ScrollProgressBar from "@/components/motion/ScrollProgressBar";
@@ -25,17 +25,6 @@ export default async function RiasecPage({
       {/* Chapter 00: Hero Section */}
       <section className="relative pt-24 pb-16 sm:pt-32 sm:pb-24 border-b border-[var(--color-line)] overflow-hidden">
         <div className="page-shell">
-          {/* Eyebrow badge */}
-          <div className="flex items-center gap-3 mb-6">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-              <Compass className="w-3.5 h-3.5" />
-              {t("badge")}
-            </span>
-            <span className="text-xs font-mono text-[var(--color-muted)]">
-              Profesia Vocation Engine
-            </span>
-          </div>
-
           {/* Kinetic Headline */}
           <div className="max-w-4xl mb-8">
             <KineticSplitText
@@ -75,12 +64,6 @@ export default async function RiasecPage({
               <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               <span>{t("quickStats")}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Flame className="w-4 h-4 text-amber-500" />
-              <span>
-                {locale === "en" ? "Interactive SVG Radar" : "Radar SVG Interaktif"}
-              </span>
-            </div>
           </div>
         </div>
       </section>
@@ -89,9 +72,6 @@ export default async function RiasecPage({
       <SectionReveal direction="up">
         <section className="page-shell py-16 sm:py-24 border-b border-[var(--color-line)]">
           <DrawSvgPath className="mb-6" />
-          <div className="atlas-chapter-line mb-6">
-            <p className="eyebrow">{t("philosophyEyebrow")}</p>
-          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-6">
@@ -136,9 +116,6 @@ export default async function RiasecPage({
       {/* Chapter 02: Pinned Holland Hexagon Storyboard */}
       <section id="storyboard" className="page-shell border-b border-[var(--color-line)]">
         <div className="pt-16 sm:pt-20">
-          <div className="atlas-chapter-line mb-4">
-            <p className="eyebrow">{t("storyEyebrow")}</p>
-          </div>
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--color-ink)]">
             {t("storyTitle")}
           </h2>
@@ -154,9 +131,6 @@ export default async function RiasecPage({
       {/* Chapter 03: Synergistic Archetypes Explorer */}
       <SectionReveal direction="up">
         <section className="page-shell py-16 sm:py-24 border-b border-[var(--color-line)] relative z-10 bg-[var(--color-canvas)]">
-          <div className="atlas-chapter-line mb-4">
-            <p className="eyebrow">{t("synergyEyebrow")}</p>
-          </div>
           <div className="max-w-3xl mb-12">
             <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--color-ink)]">
               {t("synergyTitle")}
@@ -177,11 +151,6 @@ export default async function RiasecPage({
           <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-emerald-500/15 filter blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-              <Sparkles className="w-3.5 h-3.5" />
-              {t("ctaEyebrow")}
-            </span>
-
             <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--color-ink)]">
               {t("ctaTitle")}
             </h2>

@@ -36,7 +36,7 @@
     "career_path_en": "Junior Engineer -> Mid-Level Engineer -> Senior Engineer -> Tech Lead -> Engineering Manager / Software Architect",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/software-engineer.webp",
     "is_featured": true,
     "riasec_code": "IRC",
     "matched_mbti": [
@@ -99,7 +99,7 @@
     "career_path_en": "Junior Data Analyst -> Data Scientist -> Senior Data Scientist -> Principal Data Scientist -> Head of Data",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/data-scientist.webp",
     "is_featured": true,
     "riasec_code": "ICR",
     "matched_mbti": [
@@ -164,7 +164,7 @@
     "career_path_en": "SOC Analyst -> Security Engineer -> Penetration Tester -> Chief Information Security Officer (CISO)",
     "prospects": "high",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/cybersecurity-specialist.webp",
     "is_featured": false,
     "riasec_code": "IRC",
     "matched_mbti": [
@@ -229,7 +229,7 @@
     "career_path_en": "Cloud Engineer -> Senior DevOps -> Cloud Architect -> Principal Enterprise Architect",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/cloud-solutions-architect.webp",
     "is_featured": false,
     "riasec_code": "IRE",
     "matched_mbti": [
@@ -294,7 +294,7 @@
     "career_path_en": "Junior Sysadmin -> DevOps Engineer -> Senior Platform Engineer -> Head of Infrastructure",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1618401471353-b98aedd04e11?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/devops-engineer.webp",
     "is_featured": false,
     "riasec_code": "RCI",
     "matched_mbti": [
@@ -359,7 +359,7 @@
     "career_path_en": "AI Researcher -> Machine Learning Engineer -> Senior AI Architect -> Chief AI Officer",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/ai-machine-learning-engineer.webp",
     "is_featured": false,
     "riasec_code": "IRA",
     "matched_mbti": [
@@ -424,7 +424,7 @@
     "career_path_en": "Junior DBA -> Senior DBA -> Database Architect -> Head of Data Infrastructure",
     "prospects": "medium",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/database-administrator.webp",
     "is_featured": false,
     "riasec_code": "CIR",
     "matched_mbti": [
@@ -489,7 +489,7 @@
     "career_path_en": "Junior Mobile Dev -> Senior Mobile Dev -> Mobile Tech Lead -> Head of Mobile Engineering",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/mobile-app-developer.webp",
     "is_featured": false,
     "riasec_code": "IRC",
     "matched_mbti": [
@@ -554,7 +554,7 @@
     "career_path_en": "Manual QA -> QA Automation Engineer -> Lead QA -> Head of Quality Engineering",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/qa-automation-engineer.webp",
     "is_featured": false,
     "riasec_code": "CIR",
     "matched_mbti": [
@@ -617,7 +617,7 @@
     "career_path_en": "General Doctor -> Resident Physician -> Medical Specialist -> Hospital Consultant / Medical Director",
     "prospects": "high",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/general-practitioner.webp",
     "is_featured": true,
     "riasec_code": "SIR",
     "matched_mbti": [
@@ -680,7 +680,7 @@
     "career_path_en": "Clinic Associate -> Private Practice Owner -> Dental Specialist (Orthodontics) -> Dental Faculty",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/dentist.webp",
     "is_featured": false,
     "riasec_code": "ISR",
     "matched_mbti": [
@@ -743,7 +743,7 @@
     "career_path_en": "Staff Pharmacist -> Pharmacy Manager -> Director of Pharmacy -> Pharma Regulatory Lead",
     "prospects": "medium",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/pharmacist.webp",
     "is_featured": false,
     "riasec_code": "ICS",
     "matched_mbti": [
@@ -806,7 +806,7 @@
     "career_path_en": "Staff Nurse -> Charge Nurse -> Unit Supervisor -> Chief Nursing Officer",
     "prospects": "high",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/registered-nurse.webp",
     "is_featured": false,
     "riasec_code": "SIC",
     "matched_mbti": [
@@ -869,7 +869,7 @@
     "career_path_en": "Junior Psychologist -> Senior Therapist -> Clinic Director -> Forensic/Consulting Psychologist",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/clinical-psychologist.webp",
     "is_featured": false,
     "riasec_code": "SIA",
     "matched_mbti": [
@@ -932,7 +932,7 @@
     "career_path_en": "Clinical Physiotherapist -> Pro Sports Team Therapist -> Clinic Director -> Ergonomics Consultant",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/physical-therapist.webp",
     "is_featured": false,
     "riasec_code": "SRI",
     "matched_mbti": [
@@ -995,7 +995,7 @@
     "career_path_en": "Junior Designer -> UI/UX Designer -> Lead Designer -> Product Design Manager -> Head of Design",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/ui-ux-designer.webp",
     "is_featured": true,
     "riasec_code": "AIE",
     "matched_mbti": [
@@ -1058,7 +1058,7 @@
     "career_path_en": "Junior 3D Modeler -> Character Animator -> Lead 3D Artist -> Animation Director",
     "prospects": "high",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/animator-3d-artist.webp",
     "is_featured": false,
     "riasec_code": "AIR",
     "matched_mbti": [
@@ -1121,7 +1121,7 @@
     "career_path_en": "Junior Graphic Designer -> Senior Visual Designer -> Art Director -> Creative Director",
     "prospects": "medium",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/graphic-designer.webp",
     "is_featured": false,
     "riasec_code": "AER",
     "matched_mbti": [
@@ -1184,7 +1184,7 @@
     "career_path_en": "Assistant Editor -> Offline Editor -> Online/Lead Video Editor -> Post-Production Supervisor",
     "prospects": "high",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/video-editor.webp",
     "is_featured": false,
     "riasec_code": "ARE",
     "matched_mbti": [
@@ -1247,7 +1247,7 @@
     "career_path_en": "Junior Interior Designer -> Project Interior Designer -> Lead Interior Architect -> Studio Partner / Owner",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/interior-designer.webp",
     "is_featured": false,
     "riasec_code": "AER",
     "matched_mbti": [
@@ -1310,7 +1310,7 @@
     "career_path_en": "Digital Marketing Executive -> Performance Marketer -> Marketing Manager -> VP of Marketing",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/digital-marketing-specialist.webp",
     "is_featured": true,
     "riasec_code": "EAS",
     "matched_mbti": [
@@ -1373,7 +1373,7 @@
     "career_path_en": "Associate PM -> Product Manager -> Senior PM -> Group PM -> Chief Product Officer (CPO)",
     "prospects": "high",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/product-manager.webp",
     "is_featured": false,
     "riasec_code": "ECI",
     "matched_mbti": [
@@ -1436,7 +1436,7 @@
     "career_path_en": "Financial Analyst -> Senior Analyst -> Portfolio Manager -> Chief Financial Officer (CFO)",
     "prospects": "high",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/financial-analyst.webp",
     "is_featured": false,
     "riasec_code": "CIE",
     "matched_mbti": [
@@ -1499,7 +1499,7 @@
     "career_path_en": "Junior Auditor -> Senior Auditor -> Audit Manager -> Accounting Firm Partner",
     "prospects": "medium",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/public-accountant.webp",
     "is_featured": false,
     "riasec_code": "CEI",
     "matched_mbti": [
@@ -1562,7 +1562,7 @@
     "career_path_en": "HR Specialist -> HR Business Partner (HRBP) -> HR Manager -> Chief Human Resources Officer (CHRO)",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/human-resources-manager.webp",
     "is_featured": false,
     "riasec_code": "ESC",
     "matched_mbti": [
@@ -1625,7 +1625,7 @@
     "career_path_en": "Assistant Professor -> Associate Professor -> Full Professor -> Faculty Dean",
     "prospects": "medium",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/university-lecturer.webp",
     "is_featured": false,
     "riasec_code": "SAI",
     "matched_mbti": [
@@ -1688,7 +1688,7 @@
     "career_path_en": "Staff Teacher -> Department Lead -> Vice Principal -> School Principal",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/high-school-teacher.webp",
     "is_featured": false,
     "riasec_code": "SAE",
     "matched_mbti": [
@@ -1751,7 +1751,7 @@
     "career_path_en": "E-learning Specialist -> Instructional Designer -> Lead Learning Architect -> VP of Learning Experience",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/instructional-designer.webp",
     "is_featured": false,
     "riasec_code": "ASI",
     "matched_mbti": [
@@ -1814,7 +1814,7 @@
     "career_path_en": "Guidance Counselor -> Career Coach -> Director of Career Services -> Talent Development Consultant",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/career-counselor.webp",
     "is_featured": false,
     "riasec_code": "SAE",
     "matched_mbti": [
@@ -1877,7 +1877,7 @@
     "career_path_en": "Postdoctoral Researcher -> Research Scientist -> Principal Investigator (PI) -> Director of Scientific Research",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/research-scientist.webp",
     "is_featured": false,
     "riasec_code": "IRC",
     "matched_mbti": [
@@ -1940,7 +1940,7 @@
     "career_path_en": "Junior Architect -> Project Architect -> Senior Design Architect -> Principal / Studio Partner",
     "prospects": "high",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/architect.webp",
     "is_featured": false,
     "riasec_code": "AIR",
     "matched_mbti": [
@@ -2003,7 +2003,7 @@
     "career_path_en": "Mechanical Engineer -> Senior Design Engineer -> Engineering Project Lead -> VP of Engineering",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/mechanical-engineer.webp",
     "is_featured": false,
     "riasec_code": "RIE",
     "matched_mbti": [
@@ -2066,7 +2066,7 @@
     "career_path_en": "Electrical Engineer -> Senior Systems Engineer -> Chief Electrical Consultant -> VP of Hardware Infrastructure",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1581092335397-9583fe92d232?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/electrical-engineer.webp",
     "is_featured": false,
     "riasec_code": "IRE",
     "matched_mbti": [
@@ -2129,7 +2129,7 @@
     "career_path_en": "Site Engineer -> Structural Engineer -> Construction Project Director -> Infrastructure Executive",
     "prospects": "high",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/civil-engineer.webp",
     "is_featured": false,
     "riasec_code": "RIC",
     "matched_mbti": [
@@ -2192,7 +2192,7 @@
     "career_path_en": "Pediatric Resident -> Attending Pediatrician -> Pediatric Subspecialist Consultant -> Chief of Pediatrics",
     "prospects": "high",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/pediatrician.webp",
     "is_featured": false,
     "riasec_code": "SIR",
     "matched_mbti": [
@@ -2255,7 +2255,7 @@
     "career_path_en": "Psychiatric Resident -> Board-Certified Psychiatrist -> Forensic/Addiction Consultant -> Professor of Psychiatry",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1527613426441-4da17471b66d?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/psychiatrist.webp",
     "is_featured": false,
     "riasec_code": "ISA",
     "matched_mbti": [
@@ -2318,7 +2318,7 @@
     "career_path_en": "Clinical Dietitian -> Outpatient Specialist -> Director of Nutrition Services -> Health Policy Consultant",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/clinical-dietitian.webp",
     "is_featured": false,
     "riasec_code": "SIC",
     "matched_mbti": [
@@ -2381,7 +2381,7 @@
     "career_path_en": "Staff Midwife -> Private Birthing Practice Owner -> Maternity Care Coordinator -> Midwifery Faculty",
     "prospects": "high",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/nurse-midwife.webp",
     "is_featured": false,
     "riasec_code": "SIR",
     "matched_mbti": [
@@ -2444,7 +2444,7 @@
     "career_path_en": "Staff Radiographer -> Senior MRI Specialist -> Radiology Operations Manager -> Medical Physicist",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/radiologic-technologist.webp",
     "is_featured": false,
     "riasec_code": "RIS",
     "matched_mbti": [
@@ -2507,7 +2507,7 @@
     "career_path_en": "Lab Technologist -> Technical Supervisor -> Quality Assurance Director -> Diagnostic Research Associate",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/medical-lab-technologist.webp",
     "is_featured": false,
     "riasec_code": "IRC",
     "matched_mbti": [
@@ -2570,7 +2570,7 @@
     "career_path_en": "Assistant Photographer -> Studio Photographer -> Lead Commercial Photographer -> Creative Visual Agency Owner",
     "prospects": "medium",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/commercial-photographer.webp",
     "is_featured": false,
     "riasec_code": "AER",
     "matched_mbti": [
@@ -2633,7 +2633,7 @@
     "career_path_en": "Assistant Designer -> Fashion Designer -> Head of Apparel Design -> Independent Fashion Brand Founder",
     "prospects": "medium",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/fashion-designer.webp",
     "is_featured": false,
     "riasec_code": "AER",
     "matched_mbti": [
@@ -2696,7 +2696,7 @@
     "career_path_en": "Junior Copywriter -> Senior Copywriter -> Creative Group Head -> Executive Creative Director",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/copywriter.webp",
     "is_featured": false,
     "riasec_code": "ASE",
     "matched_mbti": [
@@ -2759,7 +2759,7 @@
     "career_path_en": "Junior Level Designer -> Game Systems Designer -> Lead Game Designer -> Creative Game Director",
     "prospects": "high",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/game-designer.webp",
     "is_featured": false,
     "riasec_code": "AIR",
     "matched_mbti": [
@@ -2822,7 +2822,7 @@
     "career_path_en": "SEO Specialist -> Senior Technical SEO -> SEO Manager -> Head of Organic Growth",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1571721795195-a2ca2d3370a9?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/seo-specialist.webp",
     "is_featured": false,
     "riasec_code": "IEC",
     "matched_mbti": [
@@ -2885,7 +2885,7 @@
     "career_path_en": "Social Media Officer -> Social Media Specialist -> Social Media Manager -> Head of Brand Communications",
     "prospects": "high",
     "work_life_balance": 3,
-    "image_url": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/social-media-manager.webp",
     "is_featured": false,
     "riasec_code": "ESA",
     "matched_mbti": [
@@ -2948,7 +2948,7 @@
     "career_path_en": "Assistant Brand Manager -> Brand Manager -> Senior Brand Manager -> Marketing Director",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/brand-manager.webp",
     "is_featured": false,
     "riasec_code": "EAS",
     "matched_mbti": [
@@ -3011,7 +3011,7 @@
     "career_path_en": "BizDev Associate -> Business Development Manager -> Head of Partnerships -> Chief Commercial Officer (CCO)",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/business-development-manager.webp",
     "is_featured": false,
     "riasec_code": "ECS",
     "matched_mbti": [
@@ -3074,7 +3074,7 @@
     "career_path_en": "PR Associate -> Corporate PR Specialist -> PR Manager -> VP of Corporate Affairs",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/public-relations-specialist.webp",
     "is_featured": false,
     "riasec_code": "EAS",
     "matched_mbti": [
@@ -3137,7 +3137,7 @@
     "career_path_en": "Preschool Educator -> Lead Kindergarten Teacher -> Kindergarten Principal -> Early Childhood Education Inspector",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/kindergarten-teacher.webp",
     "is_featured": false,
     "riasec_code": "SAE",
     "matched_mbti": [
@@ -3200,7 +3200,7 @@
     "career_path_en": "Inclusion Specialist -> Special School Principal -> Inclusive Education Advisory Director",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/special-education-teacher.webp",
     "is_featured": false,
     "riasec_code": "SAI",
     "matched_mbti": [
@@ -3263,7 +3263,7 @@
     "career_path_en": "Reference Librarian -> Head of Digital Collections -> Library Dean -> National Archival Director",
     "prospects": "medium",
     "work_life_balance": 5,
-    "image_url": "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/digital-librarian.webp",
     "is_featured": false,
     "riasec_code": "CSA",
     "matched_mbti": [
@@ -3326,7 +3326,7 @@
     "career_path_en": "Motion Designer -> Senior Motion Lead -> Motion Art Director -> Creative Director",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/motion-graphic-designer.webp",
     "is_featured": false,
     "riasec_code": "AIR",
     "matched_mbti": [
@@ -3389,7 +3389,7 @@
     "career_path_en": "Smart Contract Dev -> Blockchain Protocol Engineer -> Smart Contract Security Auditor -> Web3 CTO",
     "prospects": "high",
     "work_life_balance": 4,
-    "image_url": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=800&auto=format&fit=crop",
+    "image_url": "/images/professions/blockchain-developer.webp",
     "is_featured": false,
     "riasec_code": "IRC",
     "matched_mbti": [

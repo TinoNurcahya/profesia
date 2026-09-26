@@ -164,16 +164,6 @@ export default function HollandHexagonStoryboard({
                   Holland Hexagon Radar
                 </span>
               </div>
-              <span
-                className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold border transition-colors duration-500"
-                style={{
-                  color: currentCfg.colorHex,
-                  borderColor: currentCfg.colorHex,
-                  backgroundColor: `${currentCfg.colorHex}15`,
-                }}
-              >
-                Dim: {activeDimension} ({currentCfg.shortName})
-              </span>
             </div>
 
             {/* SVG Geometric Radar */}

@@ -25,6 +25,8 @@ import CareerPathTimeline from "@/components/profession/CareerPathTimeline";
 import PractitionerSpotlightCard from "@/components/profession/PractitionerSpotlightCard";
 import { getMbtiBadgeStyle, getMbtiRoleName } from "@/lib/mbti";
 
+import SmartBackButton from "@/components/ui/SmartBackButton";
+
 export default async function ProfessionDetailPage({
   params,
 }: {
@@ -58,20 +60,17 @@ export default async function ProfessionDetailPage({
 
       {/* 1. Breadcrumbs Navigation */}
       <nav aria-label="Breadcrumb">
-        <Link
-          href={`/${locale}/professions`}
-          className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-[var(--color-muted)] hover:text-teal-700 transition-colors group"
-        >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
-          <span>{isEnglish ? "Back to Professions Catalog" : "Kembali ke Katalog Profesi"}</span>
-        </Link>
+        <SmartBackButton
+          fallbackHref={`/${locale}/professions`}
+          label={isEnglish ? "Back to Professions Catalog" : "Kembali ke Katalog Profesi"}
+        />
       </nav>
 
       {/* 2. Hero Editorial Header with KineticSplitText & Practitioner Card */}
       <SectionReveal direction="up">
         <header className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-[var(--color-line)] pb-10 items-center">
           {/* Main Title & Description Column */}
-          <div className="lg:col-span-8 space-y-4">
+          <div className="lg:col-span-7 space-y-4">
             <div className="flex flex-wrap items-center gap-2.5">
               <p className="text-xs font-mono font-semibold uppercase tracking-[0.16em] text-teal-700">
                 {categoryName}
@@ -97,15 +96,11 @@ export default async function ProfessionDetailPage({
           </div>
 
           {/* Practitioner Persona Card Column */}
-          <div className="lg:col-span-4 flex justify-center lg:justify-end">
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
             <PractitionerSpotlightCard
               imageUrl={profession.image_url}
               professionName={name}
-              workEnvironment={workEnv}
-              titleLabel={t("practitionerTitle")}
-              badgeLabel={t("practitionerBadge")}
               fallbackText={t("practitionerPlaceholder")}
-              environmentLabel={isEnglish ? "Work Environment" : "Lingkungan Kerja"}
             />
           </div>
         </header>

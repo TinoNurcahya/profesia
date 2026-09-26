@@ -96,6 +96,33 @@ export default function ProfessionsPage({
     return () => { active = false; };
   }, []);
 
+  // Synchronize state when initialParams updates (e.g., browser back/forward or deep linking)
+  useEffect(() => {
+    const searchFromUrl = initialParams.search || "";
+    if (searchFromUrl !== search) setSearch(searchFromUrl);
+
+    const categoryFromUrl = initialParams.category || "all";
+    if (categoryFromUrl !== category) setCategory(categoryFromUrl);
+
+    const mbtiFromUrl = initialParams.mbti || "all";
+    if (mbtiFromUrl !== mbti) setMbti(mbtiFromUrl);
+
+    const riasecFromUrl = initialParams.riasec || "all";
+    if (riasecFromUrl !== riasec) setRiasec(riasecFromUrl);
+
+    const educationFromUrl = initialParams.education || "";
+    if (educationFromUrl !== education) setEducation(educationFromUrl);
+
+    const sortFromUrl = initialParams.sort || "default";
+    if (sortFromUrl !== sort) setSort(sortFromUrl);
+
+    const pageFromUrl = initialParams.page ? Math.max(1, parseInt(initialParams.page, 10) || 1) : 1;
+    if (pageFromUrl !== currentPage) setCurrentPage(pageFromUrl);
+
+    const limitFromUrl = [10, 20, 50].includes(Number(initialParams.limit)) ? Number(initialParams.limit) : 10;
+    if (limitFromUrl !== pageSize) setPageSize(limitFromUrl);
+  }, [initialParams]);
+
   useEffect(() => {
     const params = new URLSearchParams();
     const values = {
@@ -257,9 +284,6 @@ export default function ProfessionsPage({
           </TextReveal>
         </div>
       </SectionReveal>
-
-      {catalogState === "loading" && <p className="text-xs text-[var(--color-muted)]" role="status">{t("catalogLoading")}</p>}
-      {catalogState === "fallback" && <p className="text-xs text-amber-700" role="status">{t("catalogError")}</p>}
 
       {/* Filter Component */}
       <FilterBar

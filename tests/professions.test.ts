@@ -7,18 +7,33 @@ const professions = professionsSeed as Profession[];
 
 describe("profession filters", () => {
   it("searches localized names, descriptions, and skills", () => {
-    assert.deepEqual(filterProfessions(professions, { search: "machine learning" }).map(({ slug }) => slug), ["data-scientist"]);
+    assert.deepEqual(
+      filterProfessions(professions, { search: "machine learning" }).map(({ slug }) => slug),
+      ["data-scientist", "ai-machine-learning-engineer"]
+    );
   });
 
   it("combines category, MBTI, RIASEC, education, and salary filters", () => {
-    const result = filterProfessions(professions, { category: "teknologi", mbti: "INTJ", riasec: "I", education: "komputer", salaryMin: 20_000_000, salaryMax: 12_000_000 });
-    assert.deepEqual(result.map(({ slug }) => slug), ["data-scientist"]);
+    const result = filterProfessions(professions, {
+      category: "teknologi",
+      mbti: "INTJ",
+      riasec: "I",
+      education: "komputer",
+      salaryMin: 20_000_000,
+      salaryMax: 12_000_000,
+    });
+    assert.deepEqual(result.map(({ slug }) => slug), [
+      "data-scientist",
+      "ai-machine-learning-engineer",
+      "database-administrator",
+      "blockchain-developer",
+    ]);
   });
 
   it("sorts salary and work-life balance without mutating the source", () => {
     const originalOrder = professions.map(({ slug }) => slug);
     const salaries = filterProfessions(professions, { sort: "salary_desc" });
-    assert.equal(salaries[0].slug, "dokter-umum");
+    assert.equal(salaries[0].slug, "pediatrician");
     assert.deepEqual(professions.map(({ slug }) => slug), originalOrder);
   });
 

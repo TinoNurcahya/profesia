@@ -326,17 +326,29 @@ export default function HollandHexagonRadar({
 
           return (
             <g key={cfg.key} className="transition-transform duration-300">
-              {/* Active Pulse Ring */}
+              {/* Active Pulse Ring (Native SVG animation to ensure perfect centering without transform drift) */}
               {isActive && (
                 <circle
                   cx={coord.x}
                   cy={coord.y}
-                  r={12}
+                  r={6}
                   fill="none"
                   stroke={cfg.colorHex}
                   strokeWidth="1.5"
-                  className="animate-ping opacity-60"
-                />
+                >
+                  <animate
+                    attributeName="r"
+                    values="6;16"
+                    dur="1.8s"
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="opacity"
+                    values="0.8;0"
+                    dur="1.8s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
               )}
 
               {/* Data Vertex Node */}
@@ -381,10 +393,24 @@ export default function HollandHexagonRadar({
 
         {/* Dimension Labels Around Perimeter */}
         {HEXAGON_DIMENSIONS.map((dim, idx) => {
-          const labelDist = 1.26;
+          const labelDist = 1.32;
           const pos = getPointCoords(dim.angleDeg, labelDist);
           const isActive = dim.key === activeDimension;
           const isHovered = hoveredIndex === idx;
+
+          // Determine radial text anchor and offsets for active/hovered pill tag
+          const layout = (() => {
+            if (dim.angleDeg === -90) {
+              return { titleDx: 0, titleDy: -30, rectX: -44, rectY: -12, textX: 0, textY: 3 };
+            }
+            if (dim.angleDeg === 90) {
+              return { titleDx: 0, titleDy: 32, rectX: -44, rectY: -11, textX: 0, textY: 4 };
+            }
+            if (dim.angleDeg > -90 && dim.angleDeg < 90) {
+              return { titleDx: 28, titleDy: 0, rectX: 0, rectY: -11, textX: 44, textY: 4 };
+            }
+            return { titleDx: -28, titleDy: 0, rectX: -88, rectY: -11, textX: -44, textY: 4 };
+          })();
 
           return (
             <g
@@ -397,49 +423,54 @@ export default function HollandHexagonRadar({
               onMouseEnter={() => setHoveredIndex(idx)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              {/* Badge Background */}
+              {/* Clean Badge Circle */}
               <circle
-                r={16}
-                fill={isActive ? dim.colorHex : "var(--color-soft)"}
+                r={isActive ? 18 : 16}
+                fill={isActive ? dim.colorHex : "var(--color-surface)"}
                 stroke={dim.colorHex}
-                strokeWidth={isActive ? 2 : 1}
-                className="transition-colors duration-300"
+                strokeWidth={isActive ? 2.5 : 1.5}
+                className="transition-colors duration-300 drop-shadow-md"
               />
 
               {/* Key Letter (R, I, A, S, E, C) */}
               <text
                 textAnchor="middle"
-                dy="4"
-                className={`text-[12px] font-black tracking-wider transition-colors duration-300 ${
-                  isActive
-                    ? "fill-white"
-                    : "fill-[var(--color-ink)]"
+                dy="4.5"
+                className={`text-[13px] font-black tracking-wider transition-colors duration-300 ${
+                  isActive ? "fill-white" : "fill-[var(--color-ink)] dark:fill-white"
                 }`}
               >
                 {dim.label}
               </text>
 
-              {/* Sub-label Title */}
-              <text
-                textAnchor="middle"
-                dy="28"
-                className={`text-[11px] font-bold tracking-tight transition-colors duration-300 ${
-                  isActive || isHovered
-                    ? "fill-[var(--color-ink)]"
-                    : "fill-[var(--color-muted)]"
-                }`}
-              >
-                {dim.shortName}
-              </text>
-
-              {/* Descriptor */}
-              <text
-                textAnchor="middle"
-                dy="40"
-                className="text-[9px] font-medium fill-[var(--color-muted)] opacity-80"
-              >
-                {isEn ? dim.fullNameEn : dim.fullNameId}
-              </text>
+              {/* Sleek Pill Tag — Only visible on Hover or Active Dimension */}
+              {(isActive || isHovered) && (
+                <g
+                  transform={`translate(${layout.titleDx}, ${layout.titleDy})`}
+                  className="transition-all duration-300"
+                >
+                  <rect
+                    x={layout.rectX}
+                    y={layout.rectY}
+                    width={88}
+                    height={22}
+                    rx={6}
+                    fill="var(--color-surface)"
+                    stroke={dim.colorHex}
+                    strokeWidth="1.5"
+                    className="shadow-xl opacity-95"
+                  />
+                  <text
+                    x={layout.textX}
+                    y={layout.textY}
+                    textAnchor="middle"
+                    fill={dim.colorHex}
+                    className="text-[11px] font-black tracking-tight"
+                  >
+                    {dim.shortName}
+                  </text>
+                </g>
+              )}
             </g>
           );
         })}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, BookOpen, Clock, TrendingUp, Sparkles, ArrowUpRight } from "lucide-react";
 import { getMbtiBadgeStyle, getMbtiRoleName } from "@/lib/mbti";
+import SmartBackButton from "@/components/ui/SmartBackButton";
 
 export default async function MajorDetailPage({
   params,
@@ -26,13 +27,11 @@ export default async function MajorDetailPage({
   return (
     <div className="page-shell max-w-6xl space-y-12 py-12 sm:py-16">
       {/* Back Button */}
-      <Link
-        href={`/${locale}/majors`}
-        className="inline-flex items-center gap-2 text-xs font-bold text-[var(--color-muted)] hover:text-emerald-600 transition-colors"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        {locale === "id" ? "Kembali ke Katalog Jurusan" : "Back to Majors Catalog"}
-      </Link>
+      <SmartBackButton
+        fallbackHref={`/${locale}/majors`}
+        label={locale === "id" ? "Kembali ke Katalog Jurusan" : "Back to Majors Catalog"}
+        className="inline-flex items-center gap-2 text-xs font-bold text-[var(--color-muted)] hover:text-emerald-600 transition-colors group cursor-pointer"
+      />
 
       {/* Hero Header */}
       <header className="space-y-6 border-y border-[var(--color-line)] py-8 sm:py-12">

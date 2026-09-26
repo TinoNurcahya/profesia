@@ -109,6 +109,24 @@ export default function MajorsPage({
     return filteredMajors.slice(start, start + ITEMS_PER_PAGE);
   }, [filteredMajors, safePage]);
 
+  // Synchronize state when initialParams updates (e.g., browser back/forward or deep linking)
+  useEffect(() => {
+    const searchFromUrl = initialParams.search || "";
+    if (searchFromUrl !== search) setSearch(searchFromUrl);
+
+    const categoryFromUrl = initialParams.category || "all";
+    if (categoryFromUrl !== category) setCategory(categoryFromUrl);
+
+    const mbtiFromUrl = initialParams.mbti || "all";
+    if (mbtiFromUrl !== mbti) setMbti(mbtiFromUrl);
+
+    const sortFromUrl = initialParams.sort || "default";
+    if (sortFromUrl !== sort) setSort(sortFromUrl);
+
+    const pageFromUrl = initialParams.page ? Math.max(1, parseInt(initialParams.page, 10) || 1) : 1;
+    if (pageFromUrl !== currentPage) setCurrentPage(pageFromUrl);
+  }, [initialParams]);
+
   // Sync state to URL search parameters with debouncing
   useEffect(() => {
     const params = new URLSearchParams();
