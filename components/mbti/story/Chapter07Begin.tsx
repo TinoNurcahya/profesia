@@ -49,24 +49,25 @@ export default function Chapter07Begin({ locale, labels }: Chapter07BeginProps) 
           </ScrollTextReveal>
 
           {/* Action CTAs */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-            <MagneticButton strength={0.4}>
+          <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3.5 w-full max-w-md mx-auto">
+            <MagneticButton strength={0.35} className="w-full sm:w-auto">
               <Link
                 href={`/${locale}/mbti/test`}
-                className="btn-primary min-h-12 w-full sm:w-auto"
+                className="w-full sm:w-auto inline-flex min-h-12 items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-sm font-bold bg-[var(--color-brand)] text-[var(--color-on-brand)] shadow-md shadow-teal-500/20 hover:bg-[var(--color-brand-hover)] transition-all duration-200"
               >
-                
                 <span>{labels.cta}</span>
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </MagneticButton>
 
-            <a
-              href="#perspectives-heading"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-sm font-semibold bg-[var(--color-surface)] border border-[var(--color-line)] hover:border-[var(--color-line)] text-[var(--color-ink)] hover:bg-[var(--color-soft)] transition-all duration-200"
-            >
-              <span>{labels.secondary}</span>
-            </a>
+            <MagneticButton strength={0.25} className="w-full sm:w-auto">
+              <a
+                href="#perspectives-heading"
+                className="w-full sm:w-auto inline-flex min-h-12 items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-sm font-semibold bg-[var(--color-surface)] border border-[var(--color-line)] hover:border-teal-500/40 text-[var(--color-ink)] hover:bg-[var(--color-soft)] transition-all duration-200"
+              >
+                <span>{labels.secondary}</span>
+              </a>
+            </MagneticButton>
           </div>
 
         </div>

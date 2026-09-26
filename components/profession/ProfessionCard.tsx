@@ -6,6 +6,7 @@ import { Heart, ArrowRight } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { toast } from "sonner";
 import gsap from "gsap";
+import { getMbtiBadgeStyle } from "@/lib/mbti";
 
 export interface ProfessionCardProps {
   profession: {
@@ -23,27 +24,6 @@ export interface ProfessionCardProps {
     work_life_balance: number;
     matched_mbti: { code: string; match_score: number }[];
   };
-}
-
-function getMbtiBadgeStyle(code: string): string {
-  const upper = code.toUpperCase();
-  // Analysts (NT): Purple
-  if (["INTJ", "INTP", "ENTJ", "ENTP"].includes(upper)) {
-    return "bg-purple-100 text-purple-700 border-purple-200/60 dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800/40";
-  }
-  // Diplomats (NF): Emerald
-  if (["INFJ", "INFP", "ENFJ", "ENFP"].includes(upper)) {
-    return "bg-emerald-100 text-emerald-700 border-emerald-200/60 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/40";
-  }
-  // Sentinels (SJ): Sky
-  if (["ISTJ", "ISFJ", "ESTJ", "ESFJ"].includes(upper)) {
-    return "bg-sky-100 text-sky-700 border-sky-200/60 dark:bg-sky-950/60 dark:text-sky-300 dark:border-sky-800/40";
-  }
-  // Explorers (SP): Amber
-  if (["ISTP", "ISFP", "ESTP", "ESFP"].includes(upper)) {
-    return "bg-amber-100 text-amber-700 border-amber-200/60 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800/40";
-  }
-  return "bg-[var(--color-soft)] text-[var(--color-muted)] border-[var(--color-line)]";
 }
 
 export default function ProfessionCard({ profession }: ProfessionCardProps) {

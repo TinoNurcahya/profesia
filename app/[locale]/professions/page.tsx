@@ -18,7 +18,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(Flip);
 }
 
-function getPageNumbers(current: number, total: number): (number | "...")[] {
+function getDesktopPageNumbers(current: number, total: number): (number | "...")[] {
   if (total <= 7) {
     return Array.from({ length: total }, (_, i) => i + 1);
   }
@@ -32,6 +32,22 @@ function getPageNumbers(current: number, total: number): (number | "...")[] {
   }
 
   return [1, "...", current - 1, current, current + 1, "...", total];
+}
+
+function getMobilePageNumbers(current: number, total: number): (number | "...")[] {
+  if (total <= 4) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+
+  if (current <= 2) {
+    return [1, 2, "...", total];
+  }
+
+  if (current >= total - 1) {
+    return [1, "...", total - 1, total];
+  }
+
+  return [1, "...", current, "...", total];
 }
 
 export default function ProfessionsPage({
@@ -324,59 +340,97 @@ export default function ProfessionsPage({
                 {t("paginationPage", { current: currentPage, total: totalPages })}
               </p>
 
-              <div className="flex items-center gap-1.5 order-1 sm:order-2">
+              <div className="flex items-center gap-1 sm:gap-1.5 order-1 sm:order-2">
                 {/* Previous Page */}
                 <button
                   type="button"
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage <= 1}
-                  className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 text-xs font-semibold text-[var(--color-ink)] transition-colors hover:bg-[var(--color-soft)] disabled:pointer-events-none disabled:opacity-35"
+                  className="inline-flex min-h-9 sm:min-h-10 items-center justify-center gap-1.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 sm:px-3 text-xs font-semibold text-[var(--color-ink)] transition-colors hover:bg-[var(--color-soft)] disabled:pointer-events-none disabled:opacity-35"
                   aria-label={t("paginationPrev")}
                 >
                   <ChevronLeft className="h-4 w-4" aria-hidden="true" />
                   <span className="hidden sm:inline">{t("paginationPrev")}</span>
                 </button>
 
-                {/* Numbered Page Buttons with Ellipsis */}
-                {getPageNumbers(currentPage, totalPages).map((p, idx) => {
-                  if (p === "...") {
+                {/* Mobile Numbered Page Buttons (Compact: max 4-5 items) */}
+                <div className="flex sm:hidden items-center gap-1">
+                  {getMobilePageNumbers(currentPage, totalPages).map((p, idx) => {
+                    if (p === "...") {
+                      return (
+                        <span
+                          key={`mobile-ellipsis-${idx}`}
+                          className="grid h-9 w-6 place-items-center text-xs text-[var(--color-muted)] font-mono select-none"
+                        >
+                          ...
+                        </span>
+                      );
+                    }
+
+                    const pageNum = p as number;
+                    const isCurrent = pageNum === currentPage;
+
                     return (
-                      <span
-                        key={`ellipsis-${idx}`}
-                        className="grid h-10 w-7 place-items-center text-xs text-[var(--color-muted)] font-mono select-none"
+                      <button
+                        key={`mobile-page-${pageNum}`}
+                        type="button"
+                        onClick={() => handlePageChange(pageNum)}
+                        className={`grid h-9 w-9 place-items-center rounded-xl text-xs font-bold transition-all ${
+                          isCurrent
+                            ? "bg-teal-700 text-white shadow-sm ring-1 ring-teal-500"
+                            : "border border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-ink)] hover:bg-[var(--color-soft)]"
+                        }`}
+                        aria-current={isCurrent ? "page" : undefined}
+                        aria-label={`${t("paginationPageNumber")} ${pageNum}`}
                       >
-                        ...
-                      </span>
+                        {pageNum}
+                      </button>
                     );
-                  }
+                  })}
+                </div>
 
-                  const pageNum = p as number;
-                  const isCurrent = pageNum === currentPage;
+                {/* Desktop Numbered Page Buttons with Full Ellipsis */}
+                <div className="hidden sm:flex items-center gap-1.5">
+                  {getDesktopPageNumbers(currentPage, totalPages).map((p, idx) => {
+                    if (p === "...") {
+                      return (
+                        <span
+                          key={`desktop-ellipsis-${idx}`}
+                          className="grid h-10 w-7 place-items-center text-xs text-[var(--color-muted)] font-mono select-none"
+                        >
+                          ...
+                        </span>
+                      );
+                    }
 
-                  return (
-                    <button
-                      key={pageNum}
-                      type="button"
-                      onClick={() => handlePageChange(pageNum)}
-                      className={`grid h-10 w-10 place-items-center rounded-xl text-xs font-bold transition-all ${
-                        isCurrent
-                          ? "bg-teal-700 text-white shadow-sm ring-1 ring-teal-500"
-                          : "border border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-ink)] hover:bg-[var(--color-soft)]"
-                      }`}
-                      aria-current={isCurrent ? "page" : undefined}
-                      aria-label={`${t("paginationPageNumber")} ${pageNum}`}
-                    >
-                      {pageNum}
-                    </button>
-                  );
-                })}
+                    const pageNum = p as number;
+                    const isCurrent = pageNum === currentPage;
+
+                    return (
+                      <button
+                        key={`desktop-page-${pageNum}`}
+                        type="button"
+                        onClick={() => handlePageChange(pageNum)}
+                        className={`grid h-10 w-10 place-items-center rounded-xl text-xs font-bold transition-all ${
+                          isCurrent
+                            ? "bg-teal-700 text-white shadow-sm ring-1 ring-teal-500"
+                            : "border border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-ink)] hover:bg-[var(--color-soft)]"
+                        }`}
+                        aria-current={isCurrent ? "page" : undefined}
+                        aria-label={`${t("paginationPageNumber")} ${pageNum}`}
+                      >
+                        {pageNum}
+                      </button>
+                    );
+                  })}
+                </div>
 
                 {/* Next Page */}
                 <button
                   type="button"
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage >= totalPages}
-                  className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 text-xs font-semibold text-[var(--color-ink)] transition-colors hover:bg-[var(--color-soft)] disabled:pointer-events-none disabled:opacity-35"
+                  className="inline-flex min-h-9 sm:min-h-10 items-center justify-center gap-1.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 sm:px-3 text-xs font-semibold text-[var(--color-ink)] transition-colors hover:bg-[var(--color-soft)] disabled:pointer-events-none disabled:opacity-35"
                   aria-label={t("paginationNext")}
                 >
                   <span className="hidden sm:inline">{t("paginationNext")}</span>

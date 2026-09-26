@@ -23,6 +23,7 @@ import MagneticButton from "@/components/motion/MagneticButton";
 import ScrollProgressBar from "@/components/motion/ScrollProgressBar";
 import CareerPathTimeline from "@/components/profession/CareerPathTimeline";
 import PractitionerSpotlightCard from "@/components/profession/PractitionerSpotlightCard";
+import { getMbtiBadgeStyle, getMbtiRoleName } from "@/lib/mbti";
 
 export default async function ProfessionDetailPage({
   params,
@@ -227,16 +228,26 @@ export default async function ProfessionDetailPage({
               <div className="space-y-1">
                 <div className="text-xs font-medium text-[var(--color-muted)]">{t("matchedMbti")}</div>
                 <div className="flex flex-wrap gap-2 pt-1">
-                  {profession.matched_mbti.map((m) => (
-                    <Link
-                      key={m.code}
-                      href={`/${locale}/mbti/result/${m.code}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-purple-200 bg-purple-50/70 hover:bg-teal-700 hover:text-white hover:border-teal-700 text-purple-700 text-xs font-mono font-bold transition-colors"
-                    >
-                      <span>{m.code}</span>
-                      <ArrowRight className="w-3 h-3 opacity-60" aria-hidden="true" />
-                    </Link>
-                  ))}
+                  {profession.matched_mbti.map((m) => {
+                    const badgeStyle = getMbtiBadgeStyle(m.code);
+                    const roleName = getMbtiRoleName(m.code, locale);
+                    return (
+                      <Link
+                        key={m.code}
+                        href={`/${locale}/mbti/result/${m.code}`}
+                        title={`${m.code} (${roleName})`}
+                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border text-xs font-mono font-bold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm ${badgeStyle}`}
+                      >
+                        <span>{m.code}</span>
+                        {roleName && (
+                          <span className="text-[10px] font-sans font-medium opacity-75">
+                            • {roleName}
+                          </span>
+                        )}
+                        <ArrowRight className="w-3 h-3 opacity-60" aria-hidden="true" />
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             </article>

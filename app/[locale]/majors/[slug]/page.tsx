@@ -3,7 +3,8 @@ import { fetchProfessions } from "@/services/professions";
 import ProfessionCard from "@/components/profession/ProfessionCard";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, BookOpen, Clock, TrendingUp, Sparkles } from "lucide-react";
+import { ArrowLeft, BookOpen, Clock, TrendingUp, Sparkles, ArrowUpRight } from "lucide-react";
+import { getMbtiBadgeStyle, getMbtiRoleName } from "@/lib/mbti";
 
 export default async function MajorDetailPage({
   params,
@@ -36,12 +37,30 @@ export default async function MajorDetailPage({
       {/* Hero Header */}
       <header className="space-y-6 border-y border-[var(--color-line)] py-8 sm:py-12">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <span className="px-3.5 py-1.5 rounded-md text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
-            Kelompok: {major.category}
-          </span>
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="px-3.5 py-1.5 rounded-md text-[11px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/40">
+              {locale === "id" ? `Kelompok: ${major.category}` : `Cluster: ${major.category}`}
+            </span>
+            {major.cip_code && (
+              <span
+                title="O*NET Classification of Instructional Programs"
+                className="px-3 py-1.5 rounded-md text-[11px] font-mono font-medium bg-[var(--color-soft)] text-[var(--color-muted)] border border-[var(--color-line)]"
+              >
+                O*NET CIP: {major.cip_code}
+              </span>
+            )}
+            {major.riasec_code && (
+              <span
+                title="Holland RIASEC Vocational Code"
+                className="px-3 py-1.5 rounded-md text-[11px] font-mono font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30"
+              >
+                RIASEC: {major.riasec_code}
+              </span>
+            )}
+          </div>
           <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--color-muted)]">
             <TrendingUp className="w-4 h-4 text-emerald-600" />
-            Prospek Karir: {major.career_prospect}
+            {locale === "id" ? `Prospek Karir: ${major.career_prospect}` : `Career Outlook: ${major.career_prospect}`}
           </span>
         </div>
 
@@ -88,21 +107,33 @@ export default async function MajorDetailPage({
           </div>
         </section>
 
-        {/* Compatible MBTI Types */}
-        <section className="space-y-4 border-t-2 border-purple-500 py-6">
+        {/* Compatible MBTI Types with Role Identity Colors */}
+        <section className="space-y-4 border-t-2 border-[var(--color-line)] py-6">
           <h2 className="text-lg font-bold text-[var(--color-ink)] flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-teal-600" />
+            <Sparkles className="w-5 h-5 text-amber-500" />
             {locale === "id" ? "Tipe MBTI Paling Cocok" : "Compatible MBTI Types"}
           </h2>
-          <div className="flex flex-wrap gap-2 pt-2">
-            {major.matched_mbti.map((mbtiCode) => (
-              <span
-                key={mbtiCode}
-                className="px-3.5 py-1.5 rounded-xl text-xs font-extrabold bg-purple-100 text-purple-700 border border-purple-200"
-              >
-                {mbtiCode}
-              </span>
-            ))}
+          <div className="flex flex-wrap gap-2.5 pt-2">
+            {major.matched_mbti.map((mbtiCode) => {
+              const badgeStyle = getMbtiBadgeStyle(mbtiCode);
+              const roleName = getMbtiRoleName(mbtiCode, locale);
+              return (
+                <Link
+                  key={mbtiCode}
+                  href={`/${locale}/mbti/result/${mbtiCode}`}
+                  title={`${mbtiCode} (${roleName})`}
+                  className={`group/mbti inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold border transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${badgeStyle}`}
+                >
+                  <span className="font-extrabold">{mbtiCode}</span>
+                  {roleName && (
+                    <span className="text-[11px] font-sans font-medium opacity-80">
+                      • {roleName}
+                    </span>
+                  )}
+                  <ArrowUpRight className="w-3 h-3 opacity-50 group-hover/mbti:opacity-100 transition-opacity" />
+                </Link>
+              );
+            })}
           </div>
         </section>
       </div>

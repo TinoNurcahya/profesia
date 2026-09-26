@@ -1,11 +1,13 @@
 import majorsSeed from "@/data/majors.json";
+import { createClient } from "@/lib/supabase/server";
 
 export interface Major {
   id: string;
   slug: string;
+  cip_code: string;
   name_id: string;
   name_en: string;
-  category: string;
+  category: "Saintek" | "Soshum" | "Seni" | string;
   description_id: string;
   description_en: string;
   typical_subjects_id: string[];
@@ -13,48 +15,46 @@ export interface Major {
   min_education_level: string;
   avg_duration_years: number;
   career_prospect: "High" | "Medium" | "Low";
+  riasec_code?: string;
   matched_mbti: string[];
   matched_professions_slugs: string[];
 }
 
-export interface MajorFilter {
-  search?: string;
-  category?: string;
-  mbti?: string;
-  prospects?: string;
+export { type MajorFilter, filterMajors } from "./majorFilter";
+import { type MajorFilter, filterMajors } from "./majorFilter";
+
+async function readFromSupabase(): Promise<Major[] | null> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("majors")
+      .select("*")
+      .order("name_id");
+
+    if (error || !data || data.length === 0) {
+      return null;
+    }
+
+    return data as unknown as Major[];
+  } catch (error) {
+    // Graceful degradation when Supabase is unconfigured or unavailable
+    return null;
+  }
 }
 
 export async function fetchMajors(filter?: MajorFilter): Promise<Major[]> {
-  let list = [...(majorsSeed as Major[])];
-
-  if (filter?.search) {
-    const q = filter.search.toLowerCase();
-    list = list.filter(
-      (m) =>
-        m.name_id.toLowerCase().includes(q) ||
-        m.name_en.toLowerCase().includes(q) ||
-        m.description_id.toLowerCase().includes(q) ||
-        m.description_en.toLowerCase().includes(q)
-    );
-  }
-
-  if (filter?.category && filter.category !== "all") {
-    list = list.filter((m) => m.category.toLowerCase() === filter.category?.toLowerCase());
-  }
-
-  if (filter?.prospects && filter.prospects !== "all") {
-    list = list.filter((m) => m.career_prospect.toLowerCase() === filter.prospects?.toLowerCase());
-  }
-
-  if (filter?.mbti && filter.mbti !== "all") {
-    const mbtiCode = filter.mbti.toUpperCase();
-    list = list.filter((m) => m.matched_mbti.some((code) => mbtiCode.startsWith(code)));
-  }
-
-  return list;
+  const fromDb = await readFromSupabase();
+  const source = fromDb && fromDb.length > 0 ? fromDb : (majorsSeed as Major[]);
+  return filterMajors(source, filter);
 }
 
 export async function fetchMajorBySlug(slug: string): Promise<Major | null> {
-  const found = (majorsSeed as Major[]).find((m) => m.slug === slug);
-  return found || null;
+  const fromDb = await readFromSupabase();
+  if (fromDb && fromDb.length > 0) {
+    const foundInDb = fromDb.find((m) => m.slug === slug);
+    if (foundInDb) return foundInDb;
+  }
+
+  const foundInSeed = (majorsSeed as Major[]).find((m) => m.slug === slug);
+  return foundInSeed || null;
 }

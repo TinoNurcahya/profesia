@@ -1,98 +1,2444 @@
 [
   {
-    "id": "m1-teknik-informatika",
+    "id": "m-teknik-informatika",
     "slug": "teknik-informatika",
+    "cip_code": "11.0701",
     "name_id": "Teknik Informatika & Ilmu Komputer",
     "name_en": "Computer Science & Software Engineering",
     "category": "Saintek",
-    "description_id": "Jurusan yang mempelajari pemrograman, struktur data, algoritma, rekayasa perangkat lunak, kecerdasan buatan (AI), dan sistem komputasi modern.",
-    "description_en": "Field of study focused on programming, data structures, algorithms, software engineering, AI, and modern computing systems.",
-    "typical_subjects_id": ["Algoritma & Pemrograman", "Struktur Data", "Rekayasa Perangkat Lunak", "Basis Data", "Kecerdasan Buatan"],
-    "typical_subjects_en": ["Algorithms & Programming", "Data Structures", "Software Engineering", "Databases", "Artificial Intelligence"],
+    "description_id": "Program studi yang mendalami komputasi algoritmik, rekayasa perangkat lunak skala besar, kecerdasan buatan, dan arsitektur komputasi awan berkinerja tinggi.",
+    "description_en": "Academic field studying algorithmic computation, enterprise software engineering, artificial intelligence, and high-performance cloud architecture.",
+    "typical_subjects_id": [
+      "Struktur Data & Algoritma",
+      "Rekayasa Perangkat Lunak",
+      "Arsitektur Komputer",
+      "Basis Data Lanjutan",
+      "Kecerdasan Buatan & ML"
+    ],
+    "typical_subjects_en": [
+      "Data Structures & Algorithms",
+      "Software Engineering",
+      "Computer Architecture",
+      "Advanced Databases",
+      "Artificial Intelligence & ML"
+    ],
     "min_education_level": "S1",
     "avg_duration_years": 4,
     "career_prospect": "High",
-    "matched_mbti": ["INTJ", "INTP", "ENTJ", "ISTP"],
-    "matched_professions_slugs": ["software-engineer", "data-scientist", "cyber-security-analyst"]
+    "riasec_code": "IRC",
+    "matched_mbti": [
+      "INTJ",
+      "INTP",
+      "ENTJ",
+      "ISTP"
+    ],
+    "matched_professions_slugs": [
+      "software-engineer",
+      "devops-engineer",
+      "cloud-solutions-architect",
+      "qa-automation-engineer"
+    ]
   },
   {
-    "id": "m2-kedokteran",
+    "id": "m-sains-data",
+    "slug": "sains-data",
+    "cip_code": "30.7001",
+    "name_id": "Sains Data & Analitika Tingkat Lanjut",
+    "name_en": "Data Science & Advanced Analytics",
+    "category": "Saintek",
+    "description_id": "Pendidikan interdisipliner menggabungkan statistik inferensial, machine learning, data mining, dan visualisasi prediktif untuk menyelesaikan masalah bisnis kompleks.",
+    "description_en": "Interdisciplinary study combining inferential statistics, machine learning, data mining, and predictive visualization for complex business problems.",
+    "typical_subjects_id": [
+      "Statistika Terapan & Probabilitas",
+      "Machine Learning & Deep Learning",
+      "Big Data Engineering",
+      "Data Wrangling & SQL",
+      "Visualisasi Data & BI"
+    ],
+    "typical_subjects_en": [
+      "Applied Statistics & Probability",
+      "Machine Learning & Deep Learning",
+      "Big Data Engineering",
+      "Data Wrangling & SQL",
+      "Data Visualization & BI"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "IRC",
+    "matched_mbti": [
+      "INTP",
+      "INTJ",
+      "ENTP",
+      "ISTJ"
+    ],
+    "matched_professions_slugs": [
+      "data-scientist",
+      "ai-machine-learning-engineer",
+      "database-administrator"
+    ]
+  },
+  {
+    "id": "m-keamanan-siber",
+    "slug": "keamanan-siber",
+    "cip_code": "11.1003",
+    "name_id": "Keamanan Siber & Forensik Digital",
+    "name_en": "Cybersecurity & Digital Forensics",
+    "category": "Saintek",
+    "description_id": "Mempelajari pertahanan infrastruktur jaringan, kriptografi modern, ethical hacking, deteksi ancaman siber, dan audit kepatuhan keamanan informasi.",
+    "description_en": "Focuses on network defense, modern cryptography, ethical hacking, threat detection, and information security regulatory compliance.",
+    "typical_subjects_id": [
+      "Kriptografi & Keamanan Jaringan",
+      "Ethical Hacking & Penetration Testing",
+      "Forensik Digital",
+      "Manajemen Resiko Siber",
+      "Keamanan Cloud & OS"
+    ],
+    "typical_subjects_en": [
+      "Cryptography & Network Security",
+      "Ethical Hacking & Penetration Testing",
+      "Digital Forensics",
+      "Cyber Risk Management",
+      "Cloud & OS Security"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "RIC",
+    "matched_mbti": [
+      "INTJ",
+      "ISTJ",
+      "INTP",
+      "ISTP"
+    ],
+    "matched_professions_slugs": [
+      "cybersecurity-specialist",
+      "devops-engineer",
+      "cloud-solutions-architect"
+    ]
+  },
+  {
+    "id": "m-sistem-informasi",
+    "slug": "sistem-informasi",
+    "cip_code": "11.0401",
+    "name_id": "Sistem Informasi & Manajemen TI",
+    "name_en": "Information Systems & IT Management",
+    "category": "Saintek",
+    "description_id": "Menjembatani kapabilitas teknologi komputasi dengan strategi operasional bisnis, tata kelola TI perusahaan, dan manajemen transformasi digital.",
+    "description_en": "Bridges computing technology capabilities with operational business strategy, enterprise IT governance, and digital transformation management.",
+    "typical_subjects_id": [
+      "Analisis & Perancangan Sistem",
+      "Tata Kelola TI (IT Governance)",
+      "Arsitektur Enterprise",
+      "Manajemen Proyek TI",
+      "E-Business & CRM"
+    ],
+    "typical_subjects_en": [
+      "Systems Analysis & Design",
+      "IT Governance",
+      "Enterprise Architecture",
+      "IT Project Management",
+      "E-Business & CRM"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "ECS",
+    "matched_mbti": [
+      "ENTJ",
+      "ESTJ",
+      "INTJ",
+      "ENFJ"
+    ],
+    "matched_professions_slugs": [
+      "product-manager",
+      "database-administrator",
+      "digital-marketer"
+    ]
+  },
+  {
+    "id": "m-rekayasa-perangkat-lunak",
+    "slug": "rekayasa-perangkat-lunak",
+    "cip_code": "14.0903",
+    "name_id": "Rekayasa Perangkat Lunak (Software Engineering)",
+    "name_en": "Software Engineering & Architecture",
+    "category": "Saintek",
+    "description_id": "Fokus mendalam pada metodologi siklus hidup perangkat lunak (SDLC), pengujian otomatis (QA), desain mikrosistem, dan skalabilitas arsitektur.",
+    "description_en": "Deep dive into SDLC methodologies, automated software quality assurance (QA), microservices design, and architectural scalability.",
+    "typical_subjects_id": [
+      "Clean Code & Design Patterns",
+      "Metodologi Agile & Scrum",
+      "Automated Testing & QA",
+      "DevOps & Pipeline CI/CD",
+      "Arsitektur Mikroservis"
+    ],
+    "typical_subjects_en": [
+      "Clean Code & Design Patterns",
+      "Agile & Scrum Methodologies",
+      "Automated Testing & QA",
+      "DevOps & CI/CD Pipelines",
+      "Microservices Architecture"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "IRC",
+    "matched_mbti": [
+      "INTJ",
+      "INTP",
+      "ISTJ",
+      "ENTJ"
+    ],
+    "matched_professions_slugs": [
+      "software-engineer",
+      "qa-automation-engineer",
+      "mobile-app-developer"
+    ]
+  },
+  {
+    "id": "m-teknologi-game",
+    "slug": "teknologi-game",
+    "cip_code": "11.0804",
+    "name_id": "Teknologi Game & Media Interaktif",
+    "name_en": "Game Development & Interactive Media",
+    "category": "Saintek",
+    "description_id": "Mempelajari rekayasa engine game, pemodelan fisika komputasi, gameplay scripting, grafika komputer realtime, dan sistem realitas tertambah (AR/VR).",
+    "description_en": "Studies game engine engineering, physics computation, gameplay scripting, realtime computer graphics, and augmented/virtual reality (AR/VR).",
+    "typical_subjects_id": [
+      "Fisika & Matematika Game",
+      "Pemrograman Game 3D (Unity/Unreal)",
+      "Grafika Komputer Real-time",
+      "Desain Mekanik Game",
+      "VR/AR Development"
+    ],
+    "typical_subjects_en": [
+      "Game Physics & Math",
+      "3D Game Programming (Unity/Unreal)",
+      "Real-time Computer Graphics",
+      "Game Mechanics Design",
+      "VR/AR Development"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "AIR",
+    "matched_mbti": [
+      "INTP",
+      "ISTP",
+      "ENTP",
+      "ENFP"
+    ],
+    "matched_professions_slugs": [
+      "game-designer",
+      "animator-3d-artist",
+      "software-engineer"
+    ]
+  },
+  {
+    "id": "m-arsitektur",
+    "slug": "arsitektur",
+    "cip_code": "04.0201",
+    "name_id": "Arsitektur & Perancangan Kota",
+    "name_en": "Architecture & Urban Design",
+    "category": "Saintek",
+    "description_id": "Perpaduan estetika seni, fungsi spasial, dan teknologi struktur bangunan berkelanjutan dengan pemanfaatan Building Information Modeling (BIM).",
+    "description_en": "Synthesis of artistic aesthetics, spatial functionality, and sustainable structural technology utilizing Building Information Modeling (BIM).",
+    "typical_subjects_id": [
+      "Studio Perancangan Arsitektur",
+      "Teknologi Bangunan & Struktur",
+      "Arsitektur Berkelanjutan",
+      "BIM & Pemodelan Komputasional",
+      "Sejarah & Teori Arsitektur"
+    ],
+    "typical_subjects_en": [
+      "Architectural Design Studio",
+      "Building Technology & Structure",
+      "Sustainable Architecture",
+      "BIM & Computational Modeling",
+      "History & Theory of Architecture"
+    ],
+    "min_education_level": "S1 + Profesi",
+    "avg_duration_years": 5,
+    "career_prospect": "High",
+    "riasec_code": "AIR",
+    "matched_mbti": [
+      "INTJ",
+      "INFJ",
+      "ENTP",
+      "ISTP"
+    ],
+    "matched_professions_slugs": [
+      "architect",
+      "interior-designer"
+    ]
+  },
+  {
+    "id": "m-teknik-sipil",
+    "slug": "teknik-sipil",
+    "cip_code": "14.0801",
+    "name_id": "Teknik Sipil & Infrastruktur",
+    "name_en": "Civil & Infrastructure Engineering",
+    "category": "Saintek",
+    "description_id": "Perancangan, kalkulasi kekuatan, konstruksi, dan pemeliharaan infrastruktur strategis seperti jembatan, jalan tol, pelabuhan, gedung bertingkat, dan bendungan.",
+    "description_en": "Design, structural analysis, construction, and maintenance of strategic civil infrastructures including bridges, highways, ports, high-rises, and dams.",
+    "typical_subjects_id": [
+      "Mekanika Tanah & Geoteknik",
+      "Analisis Struktur Beton & Baja",
+      "Teknik Transportasi",
+      "Hidrologi & Sumber Daya Air",
+      "Manajemen Konstruksi"
+    ],
+    "typical_subjects_en": [
+      "Soil Mechanics & Geotechnics",
+      "Concrete & Steel Structural Analysis",
+      "Transportation Engineering",
+      "Hydrology & Water Resources",
+      "Construction Management"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "RIC",
+    "matched_mbti": [
+      "ISTJ",
+      "ESTJ",
+      "INTJ",
+      "ISTP"
+    ],
+    "matched_professions_slugs": [
+      "civil-engineer",
+      "architect"
+    ]
+  },
+  {
+    "id": "m-teknik-mesin",
+    "slug": "teknik-mesin",
+    "cip_code": "14.1901",
+    "name_id": "Teknik Mesin & Manufaktur",
+    "name_en": "Mechanical & Manufacturing Engineering",
+    "category": "Saintek",
+    "description_id": "Penerapan prinsip termodinamika, mekanika fluida, kinematika material, dan sistem otomasi manufaktur dalam perancangan mesin industri canggih.",
+    "description_en": "Application of thermodynamics, fluid dynamics, material kinematics, and manufacturing automation in designing advanced industrial machinery.",
+    "typical_subjects_id": [
+      "Termodinamika & Perpindahan Panas",
+      "Mekanika Fluida",
+      "Elemen Mesin & CAD/CAM",
+      "Kinematika & Dinamika",
+      "Otomasi & Robotika Industri"
+    ],
+    "typical_subjects_en": [
+      "Thermodynamics & Heat Transfer",
+      "Fluid Mechanics",
+      "Machine Elements & CAD/CAM",
+      "Kinematics & Dynamics",
+      "Industrial Automation & Robotics"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "RIE",
+    "matched_mbti": [
+      "ISTP",
+      "INTJ",
+      "INTP",
+      "ESTJ"
+    ],
+    "matched_professions_slugs": [
+      "mechanical-engineer",
+      "civil-engineer"
+    ]
+  },
+  {
+    "id": "m-teknik-elektro",
+    "slug": "teknik-elektro",
+    "cip_code": "14.1001",
+    "name_id": "Teknik Elektro & Sistem Tenaga",
+    "name_en": "Electrical & Power Systems Engineering",
+    "category": "Saintek",
+    "description_id": "Mempelajari transmisi energi listrik tegangan tinggi, sistem kendali otomasi industri, mikroelektronika semikonduktor, dan sistem tenaga baru terbarukan.",
+    "description_en": "Focuses on high-voltage power transmission, industrial control automation, semiconductor microelectronics, and renewable energy systems.",
+    "typical_subjects_id": [
+      "Rangkaian Listrik & Elektromagnetika",
+      "Sistem Tenaga Listrik",
+      "Sistem Kendali & Instrumentasi",
+      "Elektronika Daya",
+      "Energi Terbarukan"
+    ],
+    "typical_subjects_en": [
+      "Electric Circuits & Electromagnetics",
+      "Electric Power Systems",
+      "Control Systems & Instrumentation",
+      "Power Electronics",
+      "Renewable Energy"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "RIE",
+    "matched_mbti": [
+      "INTJ",
+      "INTP",
+      "ISTJ",
+      "ISTP"
+    ],
+    "matched_professions_slugs": [
+      "electrical-engineer",
+      "mechanical-engineer"
+    ]
+  },
+  {
+    "id": "m-teknik-biomedis",
+    "slug": "teknik-biomedis",
+    "cip_code": "14.0501",
+    "name_id": "Teknik Biomedis (Biomedical Engineering)",
+    "name_en": "Biomedical Engineering & Bio-Instrumentation",
+    "category": "Saintek",
+    "description_id": "Integrasi ilmu rekayasa teknik dengan biologi medis untuk merancang perangkat diagnostik, implan prostetik, dan instrumentasi rumah sakit modern.",
+    "description_en": "Integrates engineering sciences with medical biology to develop diagnostic equipment, prosthetic implants, and modern healthcare instrumentation.",
+    "typical_subjects_id": [
+      "Fisiologi Komputasi",
+      "Biomaterial & Implan",
+      "Instrumentasi Medis",
+      "Pengolahan Sinyal Biomedis",
+      "Rekayasa Jaringan"
+    ],
+    "typical_subjects_en": [
+      "Computational Physiology",
+      "Biomaterials & Implants",
+      "Medical Instrumentation",
+      "Biomedical Signal Processing",
+      "Tissue Engineering"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "IRC",
+    "matched_mbti": [
+      "INTJ",
+      "INTP",
+      "INFJ",
+      "ISTP"
+    ],
+    "matched_professions_slugs": [
+      "research-scientist",
+      "radiologic-technologist"
+    ]
+  },
+  {
+    "id": "m-teknik-industri",
+    "slug": "teknik-industri",
+    "cip_code": "14.3501",
+    "name_id": "Teknik Industri & Manajemen Operasi",
+    "name_en": "Industrial Engineering & Operations Research",
+    "category": "Saintek",
+    "description_id": "Optimalisasi sistem terintegrasi yang melibatkan manusia, material, informasi, peralatan, dan energi untuk efisiensi produksi dan rantai pasok global.",
+    "description_en": "Optimization of integrated systems involving people, materials, information, equipment, and energy for lean manufacturing and supply chain efficiency.",
+    "typical_subjects_id": [
+      "Riset Operasional & Optimasi",
+      "Ergonomi & Perancangan Sistem Kerja",
+      "Manajemen Rantai Pasok (SCM)",
+      "Pengendalian Kualitas (Six Sigma)",
+      "Simulasi Sistem Industri"
+    ],
+    "typical_subjects_en": [
+      "Operations Research & Optimization",
+      "Ergonomics & Work System Design",
+      "Supply Chain Management (SCM)",
+      "Quality Control (Six Sigma)",
+      "Industrial System Simulation"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "EIR",
+    "matched_mbti": [
+      "ENTJ",
+      "ESTJ",
+      "INTJ",
+      "ISTJ"
+    ],
+    "matched_professions_slugs": [
+      "product-manager",
+      "business-development-manager"
+    ]
+  },
+  {
+    "id": "m-teknik-lingkungan",
+    "slug": "teknik-lingkungan",
+    "cip_code": "14.1401",
+    "name_id": "Teknik Lingkungan & Rekayasa Air",
+    "name_en": "Environmental Engineering & Water Resources",
+    "category": "Saintek",
+    "description_id": "Pengembangan solusi teknis untuk perlindungan lingkungan hidup, pengolahan air bersih dan limbah, mitigasi polusi udara, dan audit lingkungan.",
+    "description_en": "Development of engineering solutions for ecological conservation, clean water & wastewater treatment, air pollution mitigation, and environmental auditing.",
+    "typical_subjects_id": [
+      "Pengolahan Air Minum & Air Buangan",
+      "Pengendalian Pencemaran Udara",
+      "Pengelolaan Sampah Terpadu",
+      "AMDAL & Audit Lingkungan",
+      "Kimia Lingkungan"
+    ],
+    "typical_subjects_en": [
+      "Water & Wastewater Treatment",
+      "Air Pollution Control",
+      "Integrated Solid Waste Management",
+      "EIA & Environmental Audit",
+      "Environmental Chemistry"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "RIC",
+    "matched_mbti": [
+      "INFJ",
+      "INTJ",
+      "ISTJ",
+      "INFP"
+    ],
+    "matched_professions_slugs": [
+      "research-scientist",
+      "civil-engineer"
+    ]
+  },
+  {
+    "id": "m-kedokteran",
     "slug": "kedokteran",
-    "name_id": "Kedokteran & Profesi Dokter",
+    "cip_code": "51.1201",
+    "name_id": "Pendidikan Kedokteran & Profesi Dokter",
     "name_en": "Medicine & Clinical Healthcare",
     "category": "Saintek",
-    "description_id": "Jurusan yang mempelajari anatomi manusia, patologi, farmakologi, dan diagnosa medis klinis untuk menjaga serta memulihkan kesehatan manusia.",
-    "description_en": "Field of study focused on human anatomy, pathology, pharmacology, and clinical diagnosis to restore and maintain human health.",
-    "typical_subjects_id": ["Anatomi Manusia", "Farmakologi Klinis", "Patologi Anatomi", "Etika Kedokteran", "Ilmu Bedah Dasar"],
-    "typical_subjects_en": ["Human Anatomy", "Clinical Pharmacology", "Anatomical Pathology", "Medical Ethics", "Basic Surgery"],
+    "description_id": "Pendidikan komprehensif sains biomedis, patofisiologi organ, farmakoterapi, diagnosa klinis, dan ketrampilan prosedur medis untuk menyembuhkan pasien.",
+    "description_en": "Comprehensive education in biomedical sciences, pathophysiology, pharmacotherapy, clinical diagnosis, and procedural medical skills to heal patients.",
+    "typical_subjects_id": [
+      "Anatomi Klinis & Fisiologi",
+      "Patologi Anatomi & Klinik",
+      "Farmakologi Kedokteran",
+      "Kepaniteraan Klinik (Koas)",
+      "Etika & Hukum Kedokteran"
+    ],
+    "typical_subjects_en": [
+      "Clinical Anatomy & Physiology",
+      "Anatomical & Clinical Pathology",
+      "Medical Pharmacology",
+      "Clinical Clerkship",
+      "Medical Ethics & Jurisprudence"
+    ],
     "min_education_level": "S1 + Profesi",
     "avg_duration_years": 5.5,
     "career_prospect": "High",
-    "matched_mbti": ["ISTJ", "ISFJ", "INTJ", "INFJ"],
-    "matched_professions_slugs": ["dokter-spesialis", "biomedical-engineer"]
+    "riasec_code": "ISR",
+    "matched_mbti": [
+      "ISTJ",
+      "ISFJ",
+      "INTJ",
+      "INFJ"
+    ],
+    "matched_professions_slugs": [
+      "dokter-umum",
+      "pediatrician",
+      "psychiatrist"
+    ]
   },
   {
-    "id": "m3-psikologi",
-    "slug": "psikologi",
-    "name_id": "Psikologi",
-    "name_en": "Psychology",
-    "category": "Soshum",
-    "description_id": "Studi ilmiah mengenai mental manusia, perilaku individu dan kelompok, dinamika emosi, serta metode konseling dan asesmen psikometri.",
-    "description_en": "Scientific study of the human mind, individual and group behavior, emotional dynamics, counseling, and psychometric assessments.",
-    "typical_subjects_id": ["Psikologi Perkembangan", "Psikokonseling", "Psikologi Industri & Organisasi", "Psikodiagnostika"],
-    "typical_subjects_en": ["Developmental Psychology", "Psychocounseling", "Industrial & Organizational Psychology", "Psychodiagnostics"],
+    "id": "m-kedokteran-gigi",
+    "slug": "kedokteran-gigi",
+    "cip_code": "51.0401",
+    "name_id": "Kedokteran Gigi & Bedah Mulut",
+    "name_en": "Dentistry & Oral Health Sciences",
+    "category": "Saintek",
+    "description_id": "Studi preventif, kuratif, dan rehabilitatif untuk kesehatan gigi, rahang, rongga mulut, serta prosedur bedah mulut dan estetika ortodonsia.",
+    "description_en": "Preventive, curative, and restorative study for dental health, jaws, oral cavity, oral surgery, and aesthetic orthodontics.",
+    "typical_subjects_id": [
+      "Biologi Oral & Morfologi Gigi",
+      "Konservasi Gigi & Endodonsia",
+      "Bedah Mulut & Maksilofasial",
+      "Ortodonsia & Prostodonsia",
+      "Radiologi Kedokteran Gigi"
+    ],
+    "typical_subjects_en": [
+      "Oral Biology & Dental Morphology",
+      "Operative Dentistry & Endodontics",
+      "Oral & Maxillofacial Surgery",
+      "Orthodontics & Prosthodontics",
+      "Dental Radiology"
+    ],
+    "min_education_level": "S1 + Profesi",
+    "avg_duration_years": 5,
+    "career_prospect": "High",
+    "riasec_code": "ISR",
+    "matched_mbti": [
+      "ISFJ",
+      "ISTJ",
+      "ESFJ",
+      "ESTJ"
+    ],
+    "matched_professions_slugs": [
+      "dokter-gigi"
+    ]
+  },
+  {
+    "id": "m-farmasi",
+    "slug": "farmasi",
+    "cip_code": "51.2001",
+    "name_id": "Farmasi Klinis & Sains Obat",
+    "name_en": "Pharmacy & Pharmaceutical Sciences",
+    "category": "Saintek",
+    "description_id": "Mempelajari sintesis senyawa obat, formulasi sediaan farmasi, uji klinis, farmakokinetika, dan dispensing obat dalam sistem pelayanan kesehatan.",
+    "description_en": "Studies pharmaceutical drug synthesis, dosage formulation, clinical trials, pharmacokinetics, and healthcare therapeutic dispensing.",
+    "typical_subjects_id": [
+      "Kimia Farmasi & Sintesis Obat",
+      "Farmakologi & Toksikologi",
+      "Teknologi Formulasi Sediaan",
+      "Farmasi Klinis & Komunitas",
+      "Biofarmasetika"
+    ],
+    "typical_subjects_en": [
+      "Pharmaceutical Chemistry",
+      "Pharmacology & Toxicology",
+      "Formulation Technology",
+      "Clinical & Community Pharmacy",
+      "Biopharmaceutics"
+    ],
+    "min_education_level": "S1 + Profesi",
+    "avg_duration_years": 5,
+    "career_prospect": "High",
+    "riasec_code": "ICR",
+    "matched_mbti": [
+      "ISTJ",
+      "INTJ",
+      "ISFJ",
+      "INTP"
+    ],
+    "matched_professions_slugs": [
+      "apoteker",
+      "research-scientist"
+    ]
+  },
+  {
+    "id": "m-ilmu-keperawatan",
+    "slug": "ilmu-keperawatan",
+    "cip_code": "51.3801",
+    "name_id": "Ilmu Keperawatan (Nursing)",
+    "name_en": "Nursing & Patient Care Management",
+    "category": "Saintek",
+    "description_id": "Pelayanan holistik bio-psiko-sosio-spiritual bagi pasien, manajemen keperawatan kritis, perawatan pascaoperasi, dan promotif kesehatan masyarakat.",
+    "description_en": "Holistic patient care, critical care nursing management, post-operative rehabilitation, and community health promotion.",
+    "typical_subjects_id": [
+      "Keperawatan Medikal Bedah",
+      "Keperawatan Kritis & Gawat Darurat",
+      "Keperawatan Anak & Maternitas",
+      "Farmakologi Keperawatan",
+      "Manajemen Patient Safety"
+    ],
+    "typical_subjects_en": [
+      "Medical-Surgical Nursing",
+      "Critical & Emergency Care",
+      "Pediatric & Maternal Nursing",
+      "Nursing Pharmacology",
+      "Patient Safety Management"
+    ],
+    "min_education_level": "S1 + Profesi",
+    "avg_duration_years": 5,
+    "career_prospect": "High",
+    "riasec_code": "SIC",
+    "matched_mbti": [
+      "ISFJ",
+      "ESFJ",
+      "INFJ",
+      "ENFJ"
+    ],
+    "matched_professions_slugs": [
+      "perawat",
+      "nurse-midwife"
+    ]
+  },
+  {
+    "id": "m-ilmu-gizi",
+    "slug": "ilmu-gizi",
+    "cip_code": "51.3101",
+    "name_id": "Ilmu Gizi & Dietetika Klinis",
+    "name_en": "Nutritional Sciences & Clinical Dietetics",
+    "category": "Saintek",
+    "description_id": "Korelasi zat gizi pangan dengan metabolisme manusia, terapi dietetik penyakit degeneratif, dan manajemen gizi institusi perhotelan/rumah sakit.",
+    "description_en": "Correlation of food nutrients with human metabolism, therapeutic medical nutrition for chronic illnesses, and institutional catering management.",
+    "typical_subjects_id": [
+      "Biokimia Gizi Manusia",
+      "Dietetika Penyakit Infeksi & Degeneratif",
+      "Penilaian Status Gizi",
+      "Manajemen Pelayanan Makanan",
+      "Gizi Olahraga & Kebugaran"
+    ],
+    "typical_subjects_en": [
+      "Human Nutritional Biochemistry",
+      "Clinical Dietetics",
+      "Nutritional Assessment",
+      "Food Service Management",
+      "Sports & Fitness Nutrition"
+    ],
     "min_education_level": "S1",
     "avg_duration_years": 4,
     "career_prospect": "High",
-    "matched_mbti": ["INFJ", "INFP", "ENFJ", "ENFP"],
-    "matched_professions_slugs": ["hr-specialist", "ux-researcher", "konselor-karir"]
+    "riasec_code": "ISR",
+    "matched_mbti": [
+      "ISFJ",
+      "INFJ",
+      "ESFJ",
+      "ISTJ"
+    ],
+    "matched_professions_slugs": [
+      "clinical-dietitian"
+    ]
   },
   {
-    "id": "m4-hukum",
-    "slug": "hukum",
-    "name_id": "Ilmu Hukum",
-    "name_en": "Law & Jurisprudence",
-    "category": "Soshum",
-    "description_id": "Jurusan yang mempelajari sistem tata hukum, penyusunan kontrak, analisis perundang-undangan, litigasi korporat, dan hak asasi manusia.",
-    "description_en": "Study of legal systems, contract drafting, legislative analysis, corporate litigation, and human rights law.",
-    "typical_subjects_id": ["Hukum Perdata", "Hukum Pidana", "Hukum Tata Negara", "Hukum Bisnis & Internasional", "Penyusunan Kontrak"],
-    "typical_subjects_en": ["Civil Law", "Criminal Law", "Constitutional Law", "Business & International Law", "Contract Drafting"],
-    "min_education_level": "S1",
+    "id": "m-fisioterapi",
+    "slug": "fisioterapi",
+    "cip_code": "51.2308",
+    "name_id": "Fisioterapi & Rehabilitasi Fisik",
+    "name_en": "Physical Therapy & Movement Rehabilitation",
+    "category": "Saintek",
+    "description_id": "Pengembangan, pemeliharaan, dan pemulihan gerak fungsional tubuh akibat cedera olahraga, trauma stroke, maupun kelainan neuromuskular.",
+    "description_en": "Development, preservation, and restoration of physical mobility caused by sports injuries, stroke trauma, or neuromuscular disorders.",
+    "typical_subjects_id": [
+      "Anatomi Muskuloskeletal & Kinesiologi",
+      "Fisioterapi Neuromuskular",
+      "Fisioterapi Olahraga & Kebugaran",
+      "Elektroterapi & Manual Therapy",
+      "Biomekanik Gerak Tubuh"
+    ],
+    "typical_subjects_en": [
+      "Musculoskeletal Anatomy & Kinesiology",
+      "Neuromuscular Physical Therapy",
+      "Sports Physical Therapy",
+      "Electrotherapy & Manual Therapy",
+      "Body Biomechanics"
+    ],
+    "min_education_level": "D4 / S1",
     "avg_duration_years": 4,
     "career_prospect": "High",
-    "matched_mbti": ["ENTJ", "ESTJ", "INTJ", "ENFJ"],
-    "matched_professions_slugs": ["legal-counsel", "corporate-lawyer"]
+    "riasec_code": "SRE",
+    "matched_mbti": [
+      "ISFP",
+      "ESFP",
+      "ISFJ",
+      "ISTP"
+    ],
+    "matched_professions_slugs": [
+      "fisioterapis"
+    ]
   },
   {
-    "id": "m5-desain-komunikasi-visual",
-    "slug": "desain-komunikasi-visual",
-    "name_id": "Desain Komunikasi Visual (DKV)",
-    "name_en": "Visual Communication Design (Graphic & UI/UX)",
-    "category": "Seni",
-    "description_id": "Jurusan seni terapan yang mengombinasikan kreativitas estetika visual, ilustrasi, komunikasi merek, tipografi, dan desain antarmuka produk digital.",
-    "description_en": "Applied arts degree combining visual aesthetic creativity, illustration, brand communication, typography, and digital product interface design.",
-    "typical_subjects_id": ["Tipografi", "Desain Identitas Merek", "Ilustrasi Digital", "Desain UI/UX", "Animasi & Motion Graphics"],
-    "typical_subjects_en": ["Typography", "Brand Identity Design", "Digital Illustration", "UI/UX Design", "Animation & Motion Graphics"],
-    "min_education_level": "S1",
+    "id": "m-teknologi-laboratorium-medik",
+    "slug": "teknologi-laboratorium-medik",
+    "cip_code": "51.1005",
+    "name_id": "Teknologi Laboratorium Medik (Analis Kesehatan)",
+    "name_en": "Medical Laboratory Technology",
+    "category": "Saintek",
+    "description_id": "Pemeriksaan spesimen biologis (darah, jaringan, cairan tubuh) menggunakan teknik hematologi, serologi, dan biologi molekuler untuk menegakkan diagnosis.",
+    "description_en": "Testing biological specimens (blood, tissue, body fluids) using hematology, serology, and molecular diagnostics to validate clinical treatments.",
+    "typical_subjects_id": [
+      "Hematologi & Koagulasi",
+      "Kimia Klinik Lanjutan",
+      "Imunologi & Serologi",
+      "Mikrobiologi Medis",
+      "Biologi Molekuler Diagnostik"
+    ],
+    "typical_subjects_en": [
+      "Hematology & Coagulation",
+      "Advanced Clinical Chemistry",
+      "Immunology & Serology",
+      "Medical Microbiology",
+      "Diagnostic Molecular Biology"
+    ],
+    "min_education_level": "D4 / S1",
+    "avg_duration_years": 4,
+    "career_prospect": "Medium",
+    "riasec_code": "IRC",
+    "matched_mbti": [
+      "ISTJ",
+      "ISFJ",
+      "INTP",
+      "ISTP"
+    ],
+    "matched_professions_slugs": [
+      "medical-lab-technologist",
+      "research-scientist"
+    ]
+  },
+  {
+    "id": "m-radiologi-medis",
+    "slug": "radiologi-medis",
+    "cip_code": "51.0911",
+    "name_id": "Radiologi & Teknik Pencitraan Medis",
+    "name_en": "Radiologic Technology & Medical Imaging",
+    "category": "Saintek",
+    "description_id": "Pengoperasian modalitas pencitraan canggih seperti X-Ray, CT-Scan, MRI, dan Kedokteran Nuklir dengan kalkulasi keselamatan radiasi yang ketat.",
+    "description_en": "Operation of advanced diagnostic imaging modalities including X-Ray, CT-Scan, MRI, and Nuclear Medicine under strict radiation safety guidelines.",
+    "typical_subjects_id": [
+      "Fisika Radiasi & Proteksi Radiasi",
+      "Teknik Radiografi Kontras & Non-Kontras",
+      "Prosedur CT-Scan & MRI",
+      "Anatomi Radiologis",
+      "Kendali Mutu Peralatan Radiasi"
+    ],
+    "typical_subjects_en": [
+      "Radiation Physics & Protection",
+      "Contrast Radiography",
+      "CT-Scan & MRI Procedures",
+      "Radiological Anatomy",
+      "Quality Assurance in Radiography"
+    ],
+    "min_education_level": "D4 / S1",
     "avg_duration_years": 4,
     "career_prospect": "High",
-    "matched_mbti": ["INFP", "ENFP", "ISFP", "INTP"],
-    "matched_professions_slugs": ["product-designer", "art-director", "graphic-designer"]
+    "riasec_code": "RIC",
+    "matched_mbti": [
+      "ISTJ",
+      "ISTP",
+      "ISFJ",
+      "INTJ"
+    ],
+    "matched_professions_slugs": [
+      "radiologic-technologist"
+    ]
   },
   {
-    "id": "m6-manajemen-bisnis",
+    "id": "m-manajemen-bisnis",
     "slug": "manajemen-bisnis",
-    "name_id": "Manajemen & Bisnis",
-    "name_en": "Business Management & Entrepreneurship",
+    "cip_code": "52.0201",
+    "name_id": "Manajemen Bisnis & Kewirausahaan",
+    "name_en": "Business Administration & Entrepreneurship",
     "category": "Soshum",
-    "description_id": "Studi strategi pengelolaan bisnis, operasional, pemasaran digital, kepemimpinan organisasi, dan inovasi kewirausahaan.",
-    "description_en": "Study of business management strategy, operations, digital marketing, organizational leadership, and entrepreneurial innovation.",
-    "typical_subjects_id": ["Manajemen Strategis", "Pemasaran Digital", "Perilaku Organisasi", "Manajemen Operasional", "Kewirausahaan"],
-    "typical_subjects_en": ["Strategic Management", "Digital Marketing", "Organizational Behavior", "Operations Management", "Entrepreneurship"],
+    "description_id": "Pengelolaan strategi organisasi, alokasi sumber daya perusahaan, pengembangan produk baru, dan kepemimpinan bisnis di era ekonomi global.",
+    "description_en": "Managing organizational strategy, enterprise resource allocation, product innovation, and business leadership in the global digital economy.",
+    "typical_subjects_id": [
+      "Manajemen Strategik",
+      "Perilaku Organisasi",
+      "Manajemen Operasi & Rantai Pasok",
+      "Inovasi & Model Bisnis Digital",
+      "Kepemimpinan Perusahaan"
+    ],
+    "typical_subjects_en": [
+      "Strategic Management",
+      "Organizational Behavior",
+      "Operations & Supply Chain Management",
+      "Digital Business Innovation",
+      "Corporate Leadership"
+    ],
     "min_education_level": "S1",
     "avg_duration_years": 4,
     "career_prospect": "High",
-    "matched_mbti": ["ENTJ", "ESTJ", "ENFP", "ENTP"],
-    "matched_professions_slugs": ["product-manager", "business-analyst", "digital-marketer"]
+    "riasec_code": "ECS",
+    "matched_mbti": [
+      "ENTJ",
+      "ESTJ",
+      "ENFJ",
+      "ENTP"
+    ],
+    "matched_professions_slugs": [
+      "business-development-manager",
+      "product-manager",
+      "brand-manager"
+    ]
+  },
+  {
+    "id": "m-akuntansi",
+    "slug": "akuntansi",
+    "cip_code": "52.0301",
+    "name_id": "Akuntansi & Tata Kelola Keuangan",
+    "name_en": "Accounting & Auditing Standards",
+    "category": "Soshum",
+    "description_id": "Penyusunan laporan keuangan standar PSAK/IFRS, audit kepatuhan eksternal, akuntansi manajemen biaya, dan perencanaan strategi perpajakan.",
+    "description_en": "Financial statement preparation under PSAK/IFRS, independent auditing, cost management accounting, and strategic corporate taxation planning.",
+    "typical_subjects_id": [
+      "Akuntansi Keuangan Menengah & Lanjutan",
+      "Pengauditan & Assurance (Audit)",
+      "Akuntansi Manajemen & Biaya",
+      "Hukum Perpajakan Perusahaan",
+      "Sistem Informasi Akuntansi"
+    ],
+    "typical_subjects_en": [
+      "Intermediate & Advanced Financial Accounting",
+      "Auditing & Assurance",
+      "Managerial & Cost Accounting",
+      "Corporate Taxation Law",
+      "Accounting Information Systems"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "CEI",
+    "matched_mbti": [
+      "ISTJ",
+      "ESTJ",
+      "INTJ",
+      "ISFJ"
+    ],
+    "matched_professions_slugs": [
+      "public-accountant",
+      "financial-analyst"
+    ]
+  },
+  {
+    "id": "m-keuangan-investasi",
+    "slug": "keuangan-investasi",
+    "cip_code": "52.0801",
+    "name_id": "Keuangan Perbankan & Manajemen Investasi",
+    "name_en": "Finance & Investment Management",
+    "category": "Soshum",
+    "description_id": "Analisis pasar modal, valuasi sekuritas, manajemen portofolio aset, rekayasa finansial, dan mitigasi resiko investasi korporasi global.",
+    "description_en": "Capital market analysis, securities valuation, asset portfolio management, financial engineering, and corporate investment risk mitigation.",
+    "typical_subjects_id": [
+      "Analisis Laporan Keuangan",
+      "Pasar Modal & Instrumen Derivatif",
+      "Manajemen Portofolio & Investasi",
+      "Keuangan Korporasi Lanjutan",
+      "Fintech & Algorithmic Trading"
+    ],
+    "typical_subjects_en": [
+      "Financial Statement Analysis",
+      "Capital Markets & Derivatives",
+      "Portfolio & Investment Management",
+      "Advanced Corporate Finance",
+      "Fintech & Algorithmic Trading"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "ECI",
+    "matched_mbti": [
+      "ENTJ",
+      "INTJ",
+      "ESTJ",
+      "INTP"
+    ],
+    "matched_professions_slugs": [
+      "financial-analyst",
+      "business-development-manager"
+    ]
+  },
+  {
+    "id": "m-pemasaran-digital",
+    "slug": "pemasaran-digital",
+    "cip_code": "52.1401",
+    "name_id": "Pemasaran & Strategi Merek Digital",
+    "name_en": "Marketing Management & Digital Strategy",
+    "category": "Soshum",
+    "description_id": "Mempelajari segmentasi pasar, psikologi konsumen, strategi penetapan harga, retensi pelanggan, dan kampanye digital performance marketing.",
+    "description_en": "Studies market segmentation, consumer psychology, pricing strategies, customer retention, and digital performance marketing campaigns.",
+    "typical_subjects_id": [
+      "Perilaku Konsumen Modern",
+      "Digital Marketing Analytics & SEO",
+      "Manajemen Merek (Brand Management)",
+      "Riset Pasar & Analisis Tren",
+      "Komunikasi Pemasaran Terpadu"
+    ],
+    "typical_subjects_en": [
+      "Consumer Behavior",
+      "Digital Marketing Analytics & SEO",
+      "Brand Management",
+      "Market Research & Trends",
+      "Integrated Marketing Communications"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "EAS",
+    "matched_mbti": [
+      "ENFP",
+      "ENTP",
+      "ESFP",
+      "ENFJ"
+    ],
+    "matched_professions_slugs": [
+      "digital-marketer",
+      "brand-manager",
+      "seo-specialist",
+      "social-media-manager"
+    ]
+  },
+  {
+    "id": "m-manajemen-sdm",
+    "slug": "manajemen-sdm",
+    "cip_code": "52.1001",
+    "name_id": "Manajemen Sumber Daya Manusia (SDM)",
+    "name_en": "Human Resources Management",
+    "category": "Soshum",
+    "description_id": "Fokus pada rekrutmen talenta strategis, manajemen kinerja karyawan, kompensasi & benefit, pelatihan talenta, dan hukum ketenagakerjaan.",
+    "description_en": "Focuses on strategic talent acquisition, performance appraisals, compensation & benefits, employee development, and labor laws.",
+    "typical_subjects_id": [
+      "Perencanaan & Rekrutmen Talenta",
+      "Kompensasi & Manajemen Kinerja",
+      "Pelatihan & Pengembangan Organisasi",
+      "Hukum Ketenagakerjaan & Hubungan Industrial",
+      "HR Analytics"
+    ],
+    "typical_subjects_en": [
+      "Talent Planning & Recruitment",
+      "Compensation & Performance Management",
+      "Training & Organizational Development",
+      "Labor Law & Industrial Relations",
+      "HR Analytics"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "SEC",
+    "matched_mbti": [
+      "ENFJ",
+      "ESFJ",
+      "INFJ",
+      "ENTJ"
+    ],
+    "matched_professions_slugs": [
+      "human-resources-manager",
+      "career-counselor"
+    ]
+  },
+  {
+    "id": "m-psikologi",
+    "slug": "psikologi",
+    "cip_code": "42.0101",
+    "name_id": "Psikologi & Perilaku Manusia",
+    "name_en": "Psychology & Behavioral Sciences",
+    "category": "Soshum",
+    "description_id": "Studi ilmiah mengenai proses kognitif, dinamika emosi, kepribadian individu, asesmen psikometri, dan intervensi konseling psikologis.",
+    "description_en": "Scientific study of cognitive processes, emotional dynamics, individual personality, psychometric assessments, and psychological counseling interventions.",
+    "typical_subjects_id": [
+      "Psikologi Perkembangan",
+      "Psikodiagnostika & Asesmen",
+      "Psikologi Klinis & Konseling",
+      "Psikologi Industri & Organisasi (PIO)",
+      "Metodologi Penelitian Psikologi"
+    ],
+    "typical_subjects_en": [
+      "Developmental Psychology",
+      "Psychodiagnostics & Assessment",
+      "Clinical & Counseling Psychology",
+      "Industrial & Organizational Psychology",
+      "Psychological Research Methods"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "SIA",
+    "matched_mbti": [
+      "INFJ",
+      "INFP",
+      "ENFJ",
+      "ENFP"
+    ],
+    "matched_professions_slugs": [
+      "psikolog-klinis",
+      "career-counselor",
+      "human-resources-manager"
+    ]
+  },
+  {
+    "id": "m-hukum",
+    "slug": "hukum",
+    "cip_code": "22.0101",
+    "name_id": "Ilmu Hukum & Advokasi Korporat",
+    "name_en": "Law & Corporate Jurisprudence",
+    "category": "Soshum",
+    "description_id": "Penguasaan tata hukum konstitusi, hukum perdata bisnis, litigasi peradilan, penyusunan kontrak korporasi, dan perlindungan hak asasi manusia.",
+    "description_en": "Mastery of constitutional law, commercial civil law, court litigation, corporate contract drafting, and human rights jurisprudence.",
+    "typical_subjects_id": [
+      "Hukum Perdata & Bisnis",
+      "Hukum Pidana & Acara Pidana",
+      "Hukum Tata Negara & Administrasi",
+      "Legal Drafting & Penyusunan Kontrak",
+      "Hukum Internasional & Perdagangan"
+    ],
+    "typical_subjects_en": [
+      "Civil & Commercial Law",
+      "Criminal Law & Procedure",
+      "Constitutional & Administrative Law",
+      "Legal Contract Drafting",
+      "International & Trade Law"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "ESI",
+    "matched_mbti": [
+      "ENTJ",
+      "INTJ",
+      "ESTJ",
+      "INFJ"
+    ],
+    "matched_professions_slugs": [
+      "public-relations-specialist",
+      "business-development-manager"
+    ]
+  },
+  {
+    "id": "m-ilmu-komunikasi",
+    "slug": "ilmu-komunikasi",
+    "cip_code": "09.0101",
+    "name_id": "Ilmu Komunikasi & Media Massa",
+    "name_en": "Communication Studies & Mass Media",
+    "category": "Soshum",
+    "description_id": "Mempelajari transmisi pesan verbal dan visual, komunikasi massa, jurnalisme investigatif, produksi konten penyiaran, dan literasi media digital.",
+    "description_en": "Studies verbal and visual messaging, mass communications, investigative journalism, broadcast production, and digital media literacy.",
+    "typical_subjects_id": [
+      "Teori Komunikasi Kontemporer",
+      "Jurnalistik Multimedia",
+      "Produksi Media Siar & Podcast",
+      "Komunikasi Antarpribadi",
+      "Etika & Regulasi Media"
+    ],
+    "typical_subjects_en": [
+      "Contemporary Communication Theory",
+      "Multimedia Journalism",
+      "Broadcast & Podcast Production",
+      "Interpersonal Communication",
+      "Media Ethics & Regulation"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "ASE",
+    "matched_mbti": [
+      "ENFP",
+      "ENFJ",
+      "ENTP",
+      "ESFP"
+    ],
+    "matched_professions_slugs": [
+      "social-media-manager",
+      "copywriter",
+      "public-relations-specialist"
+    ]
+  },
+  {
+    "id": "m-hubungan-masyarakat",
+    "slug": "hubungan-masyarakat",
+    "cip_code": "09.0902",
+    "name_id": "Hubungan Masyarakat (Public Relations)",
+    "name_en": "Public Relations & Corporate Reputation",
+    "category": "Soshum",
+    "description_id": "Manajemen reputasi institusi, penanganan krisis media, relasi pers, strategi CSR berkelanjutan, dan komunikasi pemangku kepentingan.",
+    "description_en": "Institutional reputation management, crisis communication, press relations, sustainable CSR strategy, and stakeholder alignment.",
+    "typical_subjects_id": [
+      "Manajemen Krisis & Reputasi",
+      "Strategi Public Relations",
+      "Penulisan PR & Rilis Media",
+      "Protokoler & Manajemen Event",
+      "Media Relations & Konferensi"
+    ],
+    "typical_subjects_en": [
+      "Crisis & Reputation Management",
+      "PR Strategic Management",
+      "PR Writing & Press Releases",
+      "Protocol & Event Management",
+      "Media Relations"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "EAS",
+    "matched_mbti": [
+      "ENFJ",
+      "ESFJ",
+      "ENTJ",
+      "ENFP"
+    ],
+    "matched_professions_slugs": [
+      "public-relations-specialist",
+      "brand-manager"
+    ]
+  },
+  {
+    "id": "m-hubungan-internasional",
+    "slug": "hubungan-internasional",
+    "cip_code": "45.0901",
+    "name_id": "Hubungan Internasional & Diplomasi",
+    "name_en": "International Relations & Global Diplomacy",
+    "category": "Soshum",
+    "description_id": "Analisis geopolitik global, diplomasi bilateral dan multilateral, ekonomi politik internasional, serta resolusi konflik lintas batas negara.",
+    "description_en": "Analysis of global geopolitics, bilateral and multilateral diplomacy, international political economy, and cross-border conflict resolution.",
+    "typical_subjects_id": [
+      "Teori Hubungan Internasional",
+      "Diplomasi & Negosiasi Global",
+      "Organisasi Internasional & PBB",
+      "Ekonomi Politik Internasional",
+      "Hukum & Keamanan Global"
+    ],
+    "typical_subjects_en": [
+      "International Relations Theory",
+      "Global Diplomacy & Negotiation",
+      "International Organizations & UN",
+      "International Political Economy",
+      "Global Law & Security"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "ASE",
+    "matched_mbti": [
+      "ENTJ",
+      "ENFJ",
+      "INTJ",
+      "ENTP"
+    ],
+    "matched_professions_slugs": [
+      "public-relations-specialist",
+      "research-scientist"
+    ]
+  },
+  {
+    "id": "m-pendidikan-guru-sekolah-menengah",
+    "slug": "pendidikan-guru-sekolah-menengah",
+    "cip_code": "13.1205",
+    "name_id": "Pendidikan Guru & Pedagogi Menengah",
+    "name_en": "Secondary Teacher Education & Pedagogy",
+    "category": "Soshum",
+    "description_id": "Pengembangan metodologi pengajaran berbasis kompetensi, manajemen kelas kondusif, asesmen hasil belajar, dan pemanfaatan media instruksional interaktif.",
+    "description_en": "Development of competence-based teaching methodologies, classroom management, learning assessments, and interactive educational media.",
+    "typical_subjects_id": [
+      "Strategi Pembelajaran Efektif",
+      "Pengembangan Kurikulum Merdeka",
+      "Evaluasi & Asesmen Pembelajaran",
+      "Psikologi Pendidikan Anak",
+      "Teknologi Media Pembelajaran"
+    ],
+    "typical_subjects_en": [
+      "Effective Teaching Strategies",
+      "Curriculum Development",
+      "Learning Evaluation & Assessment",
+      "Educational Psychology",
+      "Educational Technology Media"
+    ],
+    "min_education_level": "S1 + PPG",
+    "avg_duration_years": 5,
+    "career_prospect": "Medium",
+    "riasec_code": "SAE",
+    "matched_mbti": [
+      "ENFJ",
+      "ESFJ",
+      "INFJ",
+      "ISFJ"
+    ],
+    "matched_professions_slugs": [
+      "guru-sekolah-menengah",
+      "instructional-designer"
+    ]
+  },
+  {
+    "id": "m-teknologi-pendidikan",
+    "slug": "teknologi-pendidikan",
+    "cip_code": "13.0301",
+    "name_id": "Teknologi Pendidikan & Desain Instruksional",
+    "name_en": "Educational Technology & Instructional Design",
+    "category": "Soshum",
+    "description_id": "Merancang kurikulum e-learning modern, modul pelatihan korporat, arsitektur LMS, dan pedagogi interaktif berbasis multimedia.",
+    "description_en": "Designing modern e-learning curricula, corporate training frameworks, LMS architectures, and interactive multimedia pedagogy.",
+    "typical_subjects_id": [
+      "Desain Instruksional (ADDIE Framework)",
+      "Pengembangan Konten E-Learning",
+      "Arsitektur Learning Management System (LMS)",
+      "Evaluasi Program Pelatihan",
+      "Gamifikasi Pembelajaran"
+    ],
+    "typical_subjects_en": [
+      "Instructional Design (ADDIE Framework)",
+      "E-Learning Content Development",
+      "LMS Architecture",
+      "Training Program Evaluation",
+      "Gamification in Learning"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "ASI",
+    "matched_mbti": [
+      "INFJ",
+      "INTJ",
+      "ENFP",
+      "INFP"
+    ],
+    "matched_professions_slugs": [
+      "instructional-designer",
+      "dosen-universitas"
+    ]
+  },
+  {
+    "id": "m-bimbingan-konseling",
+    "slug": "bimbingan-konseling",
+    "cip_code": "13.1101",
+    "name_id": "Bimbingan & Konseling Karir",
+    "name_en": "Counselor Education & Guidance Services",
+    "category": "Soshum",
+    "description_id": "Penyelenggaraan layanan bimbingan karir, pemahaman bakat dan minat remaja, konseling akademik, serta penanganan masalah psikososial sekolah.",
+    "description_en": "Providing career guidance, adolescent aptitude assessment, academic counseling, and school psychosocial conflict resolution.",
+    "typical_subjects_id": [
+      "Teknik & Praktik Konseling Individual",
+      "Bimbingan Karir & Perencanaan Masa Depan",
+      "Asesmen Psikologis Non-Tes",
+      "Konseling Kelompok",
+      "Kesehatan Mental Remaja"
+    ],
+    "typical_subjects_en": [
+      "Individual Counseling Techniques",
+      "Career Guidance & Future Planning",
+      "Non-Test Psychological Assessment",
+      "Group Counseling",
+      "Adolescent Mental Health"
+    ],
+    "min_education_level": "S1 + Profesi",
+    "avg_duration_years": 5,
+    "career_prospect": "High",
+    "riasec_code": "SEC",
+    "matched_mbti": [
+      "ENFJ",
+      "INFJ",
+      "ENFP",
+      "ISFJ"
+    ],
+    "matched_professions_slugs": [
+      "career-counselor",
+      "psikolog-klinis"
+    ]
+  },
+  {
+    "id": "m-pendidikan-anak-usia-dini",
+    "slug": "pendidikan-anak-usia-dini",
+    "cip_code": "13.1210",
+    "name_id": "Pendidikan Guru PAUD & Tumbuh Kembang",
+    "name_en": "Early Childhood Education & Child Development",
+    "category": "Soshum",
+    "description_id": "Metodologi stimulasi sensori motorik, perkembangan bahasa, kecerdasan majemuk, dan pembelajaran eksploratif berbasis bermain untuk balita.",
+    "description_en": "Methodologies for sensory-motor stimulation, language acquisition, multiple intelligences, and play-based explorative early childhood learning.",
+    "typical_subjects_id": [
+      "Tumbuh Kembang Anak Usia Dini",
+      "Pendidikan Berbasis Bermain (Play-based)",
+      "Nutrisi & Kesehatan Balita",
+      "Media Pembelajaran Sensori",
+      "Manajemen Kelas Prasekolah"
+    ],
+    "typical_subjects_en": [
+      "Early Child Growth & Development",
+      "Play-Based Learning Pedagogy",
+      "Toddler Nutrition & Health",
+      "Sensory Learning Media",
+      "Preschool Management"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "Medium",
+    "riasec_code": "SAE",
+    "matched_mbti": [
+      "ESFJ",
+      "ENFJ",
+      "ISFJ",
+      "ENFP"
+    ],
+    "matched_professions_slugs": [
+      "kindergarten-teacher"
+    ]
+  },
+  {
+    "id": "m-pendidikan-luar-biasa",
+    "slug": "pendidikan-luar-biasa",
+    "cip_code": "13.1001",
+    "name_id": "Pendidikan Khusus & Luar Biasa (Inklusi)",
+    "name_en": "Special Education & Inclusive Teaching",
+    "category": "Soshum",
+    "description_id": "Penyusunan Program Pembelajaran Individual (PPI), braille, bahasa isyarat, dan intervensi edukatif khusus untuk anak berkebutuhan khusus.",
+    "description_en": "Individualized Education Programs (IEP), braille, sign language, and adaptive educational interventions for students with special needs.",
+    "typical_subjects_id": [
+      "Ortopedagogik Umum",
+      "Bahasa Isyarat & Huruf Braille",
+      "Desain Program Pembelajaran Individual (PPI)",
+      "Modifikasi Perilaku & Sensori",
+      "Pendidikan Inklusif Modern"
+    ],
+    "typical_subjects_en": [
+      "General Orthopedagogy",
+      "Sign Language & Braille",
+      "Individualized Education Program (IEP)",
+      "Behavior & Sensory Modification",
+      "Modern Inclusive Education"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "Medium",
+    "riasec_code": "SIC",
+    "matched_mbti": [
+      "INFJ",
+      "ISFJ",
+      "ENFJ",
+      "INFP"
+    ],
+    "matched_professions_slugs": [
+      "special-education-teacher"
+    ]
+  },
+  {
+    "id": "m-desain-komunikasi-visual",
+    "slug": "desain-komunikasi-visual",
+    "cip_code": "50.0409",
+    "name_id": "Desain Komunikasi Visual (DKV)",
+    "name_en": "Visual Communication Design (Graphic Design)",
+    "category": "Seni",
+    "description_id": "Penciptaan identitas visual merek, tipografi eksperimental, ilustrasi digital, desain kemasan, dan komunikasi grafis lintas media cetak dan layar.",
+    "description_en": "Creation of brand visual identities, experimental typography, digital illustration, packaging design, and cross-media graphic communications.",
+    "typical_subjects_id": [
+      "Tipografi & Nirmana",
+      "Desain Identitas Visual (Branding)",
+      "Ilustrasi Digital & Vektor",
+      "Desain Kemasan & Promosi",
+      "Desain Pengalaman Grafis"
+    ],
+    "typical_subjects_en": [
+      "Typography & Color Form Principles",
+      "Visual Identity & Branding",
+      "Digital Vector Illustration",
+      "Packaging & Promotional Design",
+      "Graphic Experience Design"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "AES",
+    "matched_mbti": [
+      "INFP",
+      "ISFP",
+      "ENFP",
+      "INFJ"
+    ],
+    "matched_professions_slugs": [
+      "graphic-designer",
+      "ui-ux-designer",
+      "motion-graphic-designer"
+    ]
+  },
+  {
+    "id": "m-desain-produk",
+    "slug": "desain-produk",
+    "cip_code": "50.0404",
+    "name_id": "Desain Produk Industri & Ergonomi",
+    "name_en": "Industrial & Product Design",
+    "category": "Seni",
+    "description_id": "Perancangan produk fisik inovatif, alat elektronik konsumen, furnitur ergonomis, pemodelan 3D CAD, dan prototyping cepat berorientasi pengguna.",
+    "description_en": "Design of innovative consumer physical goods, ergonomics furniture, 3D CAD modeling, and user-centric rapid product prototyping.",
+    "typical_subjects_id": [
+      "Ergonomi & Desain Produk Fisik",
+      "Studio Desain Produk",
+      "Pemodelan 3D CAD & Rendering",
+      "Material & Proses Manufaktur",
+      "Rapid Prototyping & 3D Printing"
+    ],
+    "typical_subjects_en": [
+      "Ergonomics & Physical Product Design",
+      "Product Design Studio",
+      "3D CAD Modeling & Rendering",
+      "Materials & Manufacturing Processes",
+      "Rapid Prototyping & 3D Printing"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "AIR",
+    "matched_mbti": [
+      "INTJ",
+      "ENTP",
+      "ISTP",
+      "ISFP"
+    ],
+    "matched_professions_slugs": [
+      "ui-ux-designer",
+      "interior-designer"
+    ]
+  },
+  {
+    "id": "m-desain-interior",
+    "slug": "desain-interior",
+    "cip_code": "50.0408",
+    "name_id": "Desain Interior & Tata Ruang",
+    "name_en": "Interior Architecture & Spatial Design",
+    "category": "Seni",
+    "description_id": "Perancangan atmosfer ruang dalam bangunan, tata pencahayaan (lighting), pemilihan material tekstur, akustik ruang, dan furnitur kustom.",
+    "description_en": "Design of indoor spatial ambiance, architectural lighting, material finishes, room acoustics, and bespoke built-in furniture.",
+    "typical_subjects_id": [
+      "Studio Perancangan Ruang Hunian & Komersial",
+      "Tata Cahaya & Akustik Ruang",
+      "Material Finishing & Furnitur",
+      "Gambar Kerja & Estimasi Biaya (RAB)",
+      "Rendering 3D Realistis"
+    ],
+    "typical_subjects_en": [
+      "Residential & Commercial Interior Studio",
+      "Lighting & Spatial Acoustics",
+      "Finishing Materials & Furniture",
+      "Construction Drawings & BOQ",
+      "Realistic 3D Rendering"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "AES",
+    "matched_mbti": [
+      "ISFP",
+      "INFJ",
+      "INTJ",
+      "ESFP"
+    ],
+    "matched_professions_slugs": [
+      "interior-designer",
+      "architect"
+    ]
+  },
+  {
+    "id": "m-animasi-dan-efek-visual",
+    "slug": "animasi-dan-efek-visual",
+    "cip_code": "50.0102",
+    "name_id": "Animasi 3D & Efek Visual (VFX)",
+    "name_en": "Animation, 3D Arts & Visual Effects (VFX)",
+    "category": "Seni",
+    "description_id": "Pembuatan karakter 3D bertekstur, rigging gerak, 12 prinsip animasi, simulasi partikel visual efek, dan sinematografi digital untuk film dan game.",
+    "description_en": "3D character sculpting, motion rigging, 12 animation principles, VFX particle simulations, and digital cinematography for films and games.",
+    "typical_subjects_id": [
+      "12 Prinsip Dasar Animasi",
+      "Modeling 3D & Digital Sculpting",
+      "Rigging Karakter & Siklus Jalan",
+      "Lighting, Texturing & Shading",
+      "Compositing & Visual Effects (VFX)"
+    ],
+    "typical_subjects_en": [
+      "12 Principles of Animation",
+      "3D Modeling & Digital Sculpting",
+      "Character Rigging & Walk Cycles",
+      "Lighting, Texturing & Shading",
+      "Compositing & VFX"
+    ],
+    "min_education_level": "S1 / D4",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "ARI",
+    "matched_mbti": [
+      "INFP",
+      "ISFP",
+      "INTP",
+      "ISTP"
+    ],
+    "matched_professions_slugs": [
+      "animator-3d-artist",
+      "motion-graphic-designer",
+      "video-editor"
+    ]
+  },
+  {
+    "id": "m-film-dan-televisi",
+    "slug": "film-dan-televisi",
+    "cip_code": "50.0602",
+    "name_id": "Film, Sinematografi & Televisi",
+    "name_en": "Film Production & Cinematography",
+    "category": "Seni",
+    "description_id": "Penulisan skenario dramatis, teknik directing sutradara, tata kamera sinematik, tata artistik, dan penyuntingan video pascaproduksi berstandar industri.",
+    "description_en": "Dramatic screenwriting, directing techniques, cinematic lighting & camerawork, art direction, and post-production video editing.",
+    "typical_subjects_id": [
+      "Penulisan Naskah Film",
+      "Tata Kamera & Tata Cahaya Sinematik",
+      "Penyutradaraan Fiksi & Dokumenter",
+      "Editing Video & Color Grading",
+      "Tata Suara & Sound Design"
+    ],
+    "typical_subjects_en": [
+      "Screenwriting & Narrative Design",
+      "Cinematography & Lighting",
+      "Directing Fiction & Documentary",
+      "Video Editing & Color Grading",
+      "Sound Design & Audio Mixing"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "AES",
+    "matched_mbti": [
+      "ENFP",
+      "INFP",
+      "ENTP",
+      "ISFP"
+    ],
+    "matched_professions_slugs": [
+      "video-editor",
+      "motion-graphic-designer"
+    ]
+  },
+  {
+    "id": "m-fotografi-komersial",
+    "slug": "fotografi-komersial",
+    "cip_code": "50.0605",
+    "name_id": "Fotografi & Seni Media Digital",
+    "name_en": "Commercial Photography & Digital Media Arts",
+    "category": "Seni",
+    "description_id": "Penguasaan pencahayaan studio, fotografi produk komersial, editorial fesyen, jurnalisme foto, dan teknik olah digital retus foto profesional.",
+    "description_en": "Mastery of studio lighting, commercial product photography, fashion editorials, photojournalism, and high-end digital retouching techniques.",
+    "typical_subjects_id": [
+      "Teknik Tata Cahaya Studio",
+      "Fotografi Produk & Makanan Komersial",
+      "Fotografi Mode & Potret",
+      "Digital Retouching & Manajemen Warna",
+      "Bisnis & Hak Cipta Fotografi"
+    ],
+    "typical_subjects_en": [
+      "Studio Lighting Techniques",
+      "Commercial Product & Food Photography",
+      "Fashion & Portrait Photography",
+      "Digital Retouching & Color Management",
+      "Photography Business & Copyright"
+    ],
+    "min_education_level": "S1 / D4",
+    "avg_duration_years": 4,
+    "career_prospect": "Medium",
+    "riasec_code": "AER",
+    "matched_mbti": [
+      "ISFP",
+      "ESFP",
+      "ISTP",
+      "INFP"
+    ],
+    "matched_professions_slugs": [
+      "commercial-photographer",
+      "graphic-designer"
+    ]
+  },
+  {
+    "id": "m-desain-mode",
+    "slug": "desain-mode",
+    "cip_code": "50.0407",
+    "name_id": "Desain Mode & Bisnis Busana",
+    "name_en": "Fashion Design & Apparel Merchandising",
+    "category": "Seni",
+    "description_id": "Perancangan koleksi busana tematik, pembuatan pola presisi (pattern making), teknologi tekstil, draping haute couture, dan bisnis fesyen berkelanjutan.",
+    "description_en": "Thematic apparel collection design, pattern making precision, textile technology, haute couture draping, and sustainable fashion entrepreneurship.",
+    "typical_subjects_id": [
+      "Ilustrasi Mode & Konsep Koleksi",
+      "Pembuatan Pola Datar & Draping",
+      "Teknologi Tekstil & Bahan Busana",
+      "Konstruksi Garmen & Jahit Tingkat Lanjut",
+      "Manajemen Bisnis & Ritel Mode"
+    ],
+    "typical_subjects_en": [
+      "Fashion Illustration & Collection Concepts",
+      "Flat Pattern Drafting & Draping",
+      "Textile Science & Fabrics",
+      "Advanced Garment Construction",
+      "Fashion Merchandising & Retail"
+    ],
+    "min_education_level": "S1 / D4",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "AES",
+    "matched_mbti": [
+      "ISFP",
+      "ESFP",
+      "ENFP",
+      "INFP"
+    ],
+    "matched_professions_slugs": [
+      "fashion-designer"
+    ]
+  },
+  {
+    "id": "m-bioteknologi",
+    "slug": "bioteknologi",
+    "cip_code": "26.1201",
+    "name_id": "Bioteknologi Molekuler & Rekayasa Hayati",
+    "name_en": "Molecular Biotechnology & Bioengineering",
+    "category": "Saintek",
+    "description_id": "Pemanfaatan mikroorganisme, rekayasa genetika DNA rekombinan, kultur sel, dan bioinformatika untuk obat-obatan baru serta ketahanan pangan.",
+    "description_en": "Utilization of microorganisms, recombinant DNA genetic engineering, cell cultures, and bioinformatics for novel pharmaceuticals and food security.",
+    "typical_subjects_id": [
+      "Biologi Sel & Molekuler",
+      "Rekayasa Genetika & Kloning",
+      "Bioinformatika & Genomika",
+      "Teknologi Fermentasi Industri",
+      "Imunobiologi Terapan"
+    ],
+    "typical_subjects_en": [
+      "Cell & Molecular Biology",
+      "Genetic Engineering & Cloning",
+      "Bioinformatics & Genomics",
+      "Industrial Fermentation Technology",
+      "Applied Immunobiology"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "IRC",
+    "matched_mbti": [
+      "INTP",
+      "INTJ",
+      "INFJ",
+      "ISTJ"
+    ],
+    "matched_professions_slugs": [
+      "research-scientist",
+      "medical-lab-technologist"
+    ]
+  },
+  {
+    "id": "m-matematika-aktuaria",
+    "slug": "matematika-aktuaria",
+    "cip_code": "27.0101",
+    "name_id": "Matematika Terapan & Sains Aktuaria",
+    "name_en": "Applied Mathematics & Actuarial Science",
+    "category": "Saintek",
+    "description_id": "Pemodelan kalkulus diferensial, probabilitas stokastik, teori resiko finansial asuransi, dan kalkulasi premi dana pensiun berakurasi tinggi.",
+    "description_en": "Differential calculus modeling, stochastic probability, actuarial financial risk theory, and high-accuracy pension & insurance calculations.",
+    "typical_subjects_id": [
+      "Matematika Keuangan",
+      "Teori Probabilitas & Proses Stokastik",
+      "Matematika Aktuaria & Premi Asuransi",
+      "Pemodelan Matematika Komputasi",
+      "Analisis Regresi Deret Waktu"
+    ],
+    "typical_subjects_en": [
+      "Financial Mathematics",
+      "Probability Theory & Stochastic Processes",
+      "Actuarial Mathematics & Premiums",
+      "Computational Mathematical Modeling",
+      "Time Series Regression Analysis"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "ICE",
+    "matched_mbti": [
+      "INTJ",
+      "INTP",
+      "ISTJ",
+      "ENTJ"
+    ],
+    "matched_professions_slugs": [
+      "financial-analyst",
+      "data-scientist"
+    ]
+  },
+  {
+    "id": "m-fisika-terapan",
+    "slug": "fisika-terapan",
+    "cip_code": "40.0801",
+    "name_id": "Fisika Terapan & Instrumentasi Sensor",
+    "name_en": "Applied Physics & Sensor Instrumentation",
+    "category": "Saintek",
+    "description_id": "Penyelidikan mekanika kuantum, optika laser modern, fisika zat padat (semikonduktor), dan perancangan sensor cerdas berpresisi tinggi.",
+    "description_en": "Investigation of quantum mechanics, modern laser optics, solid-state semiconductor physics, and high-precision smart sensor instrumentation.",
+    "typical_subjects_id": [
+      "Mekanika Kuantum Terapan",
+      "Fisika Semikonduktor & Nanomaterial",
+      "Optoelektronika & Laser",
+      "Sistem Akuisisi Data Sensor",
+      "Fisika Komputasi"
+    ],
+    "typical_subjects_en": [
+      "Applied Quantum Mechanics",
+      "Semiconductor & Nanomaterial Physics",
+      "Optoelectronics & Lasers",
+      "Sensor Data Acquisition Systems",
+      "Computational Physics"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "IRE",
+    "matched_mbti": [
+      "INTP",
+      "INTJ",
+      "ISTP",
+      "ISTJ"
+    ],
+    "matched_professions_slugs": [
+      "research-scientist",
+      "radiologic-technologist"
+    ]
+  },
+  {
+    "id": "m-kimia-industri",
+    "slug": "kimia-industri",
+    "cip_code": "40.0501",
+    "name_id": "Ilmu Kimia Murni & Material Maju",
+    "name_en": "Pure Chemistry & Advanced Materials",
+    "category": "Saintek",
+    "description_id": "Eksplorasi ikatan molekuler kimia organik dan anorganik, spektroskopi analitik, sintesis polimer maju, dan nanoteknologi berkelanjutan.",
+    "description_en": "Exploration of organic and inorganic molecular bonding, analytical spectroscopy, advanced polymer synthesis, and sustainable nanotechnology.",
+    "typical_subjects_id": [
+      "Kimia Organik & Anorganik Sintesis",
+      "Kimia Analitik Spektroskopi (NMR/FTIR)",
+      "Termodinamika Kimia Fisik",
+      "Kimia Polimer & Material Komposit",
+      "Kimia Hijau (Green Chemistry)"
+    ],
+    "typical_subjects_en": [
+      "Synthetic Organic & Inorganic Chemistry",
+      "Spectroscopic Analytical Chemistry",
+      "Physical Chemical Thermodynamics",
+      "Polymer Chemistry & Composites",
+      "Green Chemistry"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "IRC",
+    "matched_mbti": [
+      "INTP",
+      "INTJ",
+      "ISTJ",
+      "INFJ"
+    ],
+    "matched_professions_slugs": [
+      "research-scientist",
+      "medical-lab-technologist"
+    ]
+  },
+  {
+    "id": "m-teknik-kimia",
+    "slug": "teknik-kimia",
+    "cip_code": "14.0701",
+    "name_id": "Teknik Kimia & Perancangan Pabrik",
+    "name_en": "Chemical & Process Engineering",
+    "category": "Saintek",
+    "description_id": "Transformasi bahan mentah menjadi produk bernilai tinggi secara ekonomis melalui rekayasa reaksi kimia, pemisahan distilasi, dan perancangan reaktor industri.",
+    "description_en": "Converting raw materials into valuable commercial goods through chemical reaction engineering, distillation separation, and industrial reactor design.",
+    "typical_subjects_id": [
+      "Neraca Massa & Energi",
+      "Operasi Teknik Kimia (Distilasi/Filtrasi)",
+      "Kinetika Reaksi & Perancangan Reaktor",
+      "Perancangan Pabrik Kimia",
+      "Keselamatan Proses Pabrik (K3)"
+    ],
+    "typical_subjects_en": [
+      "Mass & Energy Balances",
+      "Chemical Unit Operations",
+      "Reaction Kinetics & Reactor Design",
+      "Chemical Plant Design",
+      "Process Plant Safety"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "RIE",
+    "matched_mbti": [
+      "INTJ",
+      "ISTJ",
+      "ENTJ",
+      "INTP"
+    ],
+    "matched_professions_slugs": [
+      "research-scientist",
+      "mechanical-engineer"
+    ]
+  },
+  {
+    "id": "m-teknik-telekomunikasi",
+    "slug": "teknik-telekomunikasi",
+    "cip_code": "14.1004",
+    "name_id": "Teknik Telekomunikasi & Jaringan Nirkabel",
+    "name_en": "Telecommunications & Wireless Engineering",
+    "category": "Saintek",
+    "description_id": "Mempelajari propagasi gelombang elektromagnetik, arsitektur seluler 5G/6G, transmisi fiber optik pita lebar, dan infrastruktur satelit komunikasi.",
+    "description_en": "Studies electromagnetic wave propagation, 5G/6G cellular architecture, broadband optical fiber transmission, and satellite communications.",
+    "typical_subjects_id": [
+      "Propagasi Gelombang Mikro & Antena",
+      "Sistem Komunikasi Nirkabel 5G",
+      "Komunikasi Serat Optik",
+      "Jaringan Protokol IP Lanjutan",
+      "Pengolahan Sinyal Digital (DSP)"
+    ],
+    "typical_subjects_en": [
+      "Microwave Propagation & Antennas",
+      "5G Wireless Communications",
+      "Optical Fiber Communications",
+      "Advanced IP Network Protocols",
+      "Digital Signal Processing (DSP)"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "RIE",
+    "matched_mbti": [
+      "INTJ",
+      "INTP",
+      "ISTP",
+      "ISTJ"
+    ],
+    "matched_professions_slugs": [
+      "electrical-engineer",
+      "devops-engineer"
+    ]
+  },
+  {
+    "id": "m-teknik-penerbangan",
+    "slug": "teknik-penerbangan",
+    "cip_code": "14.0201",
+    "name_id": "Teknik Dirgantara & Penerbangan (Aerospace)",
+    "name_en": "Aerospace & Aeronautical Engineering",
+    "category": "Saintek",
+    "description_id": "Perancangan aerodinamika pesawat terbang, struktur bodi pesawat tahan beban g, sistem propulsi jet turbofan, dan instrumen avionik modern.",
+    "description_en": "Design of aircraft aerodynamics, g-force resistant fuselage structures, turbofan jet propulsion, and modern avionics navigation instruments.",
+    "typical_subjects_id": [
+      "Aerodinamika Kecepatan Tinggi (Supersonik)",
+      "Struktur Pesawat Terbang & Komposit",
+      "Mekanika Terbang & Dinamika Kendali",
+      "Propulsi Jet Pesawat",
+      "Avionik & Navigasi Penerbangan"
+    ],
+    "typical_subjects_en": [
+      "High-Speed Aerodynamics",
+      "Aircraft Structures & Composites",
+      "Flight Mechanics & Control Dynamics",
+      "Aircraft Jet Propulsion",
+      "Avionics & Flight Navigation"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "RIE",
+    "matched_mbti": [
+      "INTJ",
+      "INTP",
+      "ISTP",
+      "ENTJ"
+    ],
+    "matched_professions_slugs": [
+      "mechanical-engineer",
+      "research-scientist"
+    ]
+  },
+  {
+    "id": "m-teknik-geologi",
+    "slug": "teknik-geologi",
+    "cip_code": "14.3901",
+    "name_id": "Teknik Geologi & Eksplorasi Sumber Daya",
+    "name_en": "Geological Engineering & Exploration",
+    "category": "Saintek",
+    "description_id": "Pemetaan struktur batuan bumi, eksplorasi cebakan mineral dan energi panas bumi, mitigasi bencana vulkanologi/gempa bumi, dan hidrogeologi tanah.",
+    "description_en": "Mapping subterranean rock structures, exploring geothermal energy and mineral deposits, mitigations for seismic hazards, and soil hydrogeology.",
+    "typical_subjects_id": [
+      "Petrologi & Mineralogi",
+      "Geologi Struktur & Tektonik",
+      "Eksplorasi Geokimia & Geofisika",
+      "Geologi Rekayasa & Mitigasi Bencana",
+      "Hidrogeologi & Air Tanah"
+    ],
+    "typical_subjects_en": [
+      "Petrology & Mineralogy",
+      "Structural Geology & Tectonics",
+      "Geochemical & Geophysical Exploration",
+      "Engineering Geology & Hazard Mitigation",
+      "Hydrogeology & Groundwater"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "RIC",
+    "matched_mbti": [
+      "ISTP",
+      "ISTJ",
+      "INTJ",
+      "INTP"
+    ],
+    "matched_professions_slugs": [
+      "civil-engineer",
+      "research-scientist"
+    ]
+  },
+  {
+    "id": "m-teknologi-blockchain",
+    "slug": "teknologi-blockchain",
+    "cip_code": "11.0104",
+    "name_id": "Teknologi Blockchain & Komputasi Terdistribusi",
+    "name_en": "Blockchain Technology & Distributed Systems",
+    "category": "Saintek",
+    "description_id": "Mempelajari protokol konsensus terdistribusi, perancangan smart contract aman, arsitektur DeFi, Web3, dan kriptografi zero-knowledge proof.",
+    "description_en": "Studies distributed consensus protocols, secure smart contract engineering, DeFi frameworks, Web3 architectures, and zero-knowledge cryptography.",
+    "typical_subjects_id": [
+      "Algoritma Konsensus Terdistribusi",
+      "Pemrograman Smart Contract (Solidity/Rust)",
+      "Kriptografi Terapan & ZK-Proofs",
+      "Audit Keamanan Web3 & Smart Contracts",
+      "Arsitektur Tokenomika"
+    ],
+    "typical_subjects_en": [
+      "Distributed Consensus Algorithms",
+      "Smart Contract Programming (Solidity/Rust)",
+      "Applied Cryptography & ZK-Proofs",
+      "Web3 Security Auditing",
+      "Tokenomics Architecture"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "IRC",
+    "matched_mbti": [
+      "INTJ",
+      "INTP",
+      "ENTP",
+      "ISTP"
+    ],
+    "matched_professions_slugs": [
+      "blockchain-developer",
+      "software-engineer",
+      "cybersecurity-specialist"
+    ]
+  },
+  {
+    "id": "m-rekayasa-kecerdasan-buatan",
+    "slug": "rekayasa-kecerdasan-buatan",
+    "cip_code": "11.0102",
+    "name_id": "Rekayasa Kecerdasan Buatan (Artificial Intelligence)",
+    "name_en": "Artificial Intelligence Systems Engineering",
+    "category": "Saintek",
+    "description_id": "Fokus spesifik pada arsitektur Deep Learning (Transformer), Large Language Models (LLM), Computer Vision, Pemrosesan Bahasa Alami (NLP), dan AI Agent.",
+    "description_en": "Dedicated focus on Deep Learning architectures (Transformers), Large Language Models (LLMs), Computer Vision, NLP, and Autonomous AI Agents.",
+    "typical_subjects_id": [
+      "Jaringan Saraf Tiruan Lanjutan",
+      "Natural Language Processing & LLMs",
+      "Computer Vision & Generative AI",
+      "Optimasi Hardware AI (CUDA/GPU)",
+      "Etika & Keamanan AI"
+    ],
+    "typical_subjects_en": [
+      "Advanced Neural Networks",
+      "Natural Language Processing & LLMs",
+      "Computer Vision & Generative AI",
+      "AI Hardware Optimization (CUDA/GPU)",
+      "AI Ethics & Safety"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "IRC",
+    "matched_mbti": [
+      "INTJ",
+      "INTP",
+      "ENTP",
+      "ENTJ"
+    ],
+    "matched_professions_slugs": [
+      "ai-machine-learning-engineer",
+      "data-scientist",
+      "software-engineer"
+    ]
+  },
+  {
+    "id": "m-kesehatan-masyarakat",
+    "slug": "kesehatan-masyarakat",
+    "cip_code": "51.2201",
+    "name_id": "Kesehatan Masyarakat & Epidemiologi",
+    "name_en": "Public Health & Global Epidemiology",
+    "category": "Saintek",
+    "description_id": "Surveilans penyakit menular dan kronis, analisis biostatistika populasi, promosi gaya hidup sehat, dan perumusan kebijakan kesehatan preventif.",
+    "description_en": "Surveillance of infectious and chronic diseases, biostatistical population analysis, healthy lifestyle promotion, and preventive healthcare policies.",
+    "typical_subjects_id": [
+      "Epidemiologi Penyakit Menular & Kronis",
+      "Biostatistika Kesehatan Masyarakat",
+      "Kebijakan & Manajemen Kesehatan",
+      "Kesehatan Lingkungan & Kerja",
+      "Promosi Kesehatan & Perilaku"
+    ],
+    "typical_subjects_en": [
+      "Epidemiology of Infectious & Chronic Diseases",
+      "Public Health Biostatistics",
+      "Health Policy & Management",
+      "Environmental & Occupational Health",
+      "Health Promotion & Behavior"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "SIC",
+    "matched_mbti": [
+      "ENFJ",
+      "INFJ",
+      "ESFJ",
+      "ISTJ"
+    ],
+    "matched_professions_slugs": [
+      "perawat",
+      "research-scientist"
+    ]
+  },
+  {
+    "id": "m-kebidanan",
+    "slug": "kebidanan",
+    "cip_code": "51.3807",
+    "name_id": "Kebidanan & Kesehatan Reproduksi",
+    "name_en": "Midwifery & Maternal Health Sciences",
+    "category": "Saintek",
+    "description_id": "Pelayanan asuhan kebidanan pada masa prakonsepsi, kehamilan, persalinan normal, nifas, bayi baru lahir, serta pelayanan kontrasepsi keluarga berencana.",
+    "description_en": "Midwifery care across preconception, antenatal stages, normal deliveries, postpartum recovery, neonatal care, and family planning contraception.",
+    "typical_subjects_id": [
+      "Asuhan Kebidanan Kehamilan Normal",
+      "Asuhan Persalinan & Bayi Baru Lahir",
+      "Kegawatdaruratan Maternal & Neonatal",
+      "Kesehatan Reproduksi & KB",
+      "Komunikasi Terapeutik Kebidanan"
+    ],
+    "typical_subjects_en": [
+      "Antenatal Midwifery Care",
+      "Labor & Neonatal Delivery Care",
+      "Maternal & Neonatal Emergencies",
+      "Reproductive Health & Family Planning",
+      "Therapeutic Midwifery Communication"
+    ],
+    "min_education_level": "D4 / S1 + Profesi",
+    "avg_duration_years": 5,
+    "career_prospect": "High",
+    "riasec_code": "SIR",
+    "matched_mbti": [
+      "ISFJ",
+      "ESFJ",
+      "INFJ",
+      "ENFJ"
+    ],
+    "matched_professions_slugs": [
+      "nurse-midwife",
+      "perawat"
+    ]
+  },
+  {
+    "id": "m-kedokteran-hewan",
+    "slug": "kedokteran-hewan",
+    "cip_code": "51.2501",
+    "name_id": "Kedokteran Hewan & Kesehatan Ternak",
+    "name_en": "Veterinary Medicine & Animal Health",
+    "category": "Saintek",
+    "description_id": "Diagnosa dan penanganan medis satwa peliharaan, satwa liar, dan ternak, pencegahan penyakit zoonosis yang menular ke manusia, dan keamanan pangan asal hewan.",
+    "description_en": "Medical diagnosis and surgical treatment of companion pets, wildlife, and livestock, prevention of zoonotic diseases, and animal food safety.",
+    "typical_subjects_id": [
+      "Anatomi & Fisiologi Hewan Komparatif",
+      "Patologi & Parasitologi Veteriner",
+      "Farmakologi & Terapi Veteriner",
+      "Ilmu Bedah Satwa Kecil & Besar",
+      "Kesehatan Masyarakat Veteriner (Zoonosis)"
+    ],
+    "typical_subjects_en": [
+      "Comparative Animal Anatomy & Physiology",
+      "Veterinary Pathology & Parasitology",
+      "Veterinary Pharmacology & Therapy",
+      "Small & Large Animal Surgery",
+      "Veterinary Public Health (Zoonoses)"
+    ],
+    "min_education_level": "S1 + Profesi",
+    "avg_duration_years": 5,
+    "career_prospect": "High",
+    "riasec_code": "IRS",
+    "matched_mbti": [
+      "ISFJ",
+      "ISTJ",
+      "INFJ",
+      "ISTP"
+    ],
+    "matched_professions_slugs": [
+      "dokter-umum",
+      "research-scientist"
+    ]
+  },
+  {
+    "id": "m-ilmu-ekonomi",
+    "slug": "ilmu-ekonomi",
+    "cip_code": "45.0601",
+    "name_id": "Ilmu Ekonomi & Ekonometrika Terapan",
+    "name_en": "Economics & Applied Econometrics",
+    "category": "Soshum",
+    "description_id": "Analisis perilaku pasar mikroekonomi, kebijakan moneter dan fiskal makroekonomi, teori pertumbuhan ekonomi, dan pemodelan statistik ekonometrika.",
+    "description_en": "Analysis of microeconomic market behaviors, macroeconomic monetary and fiscal policies, growth theories, and econometric statistical modeling.",
+    "typical_subjects_id": [
+      "Mikroekonomi & Makroekonomi Menengah",
+      "Ekonometrika Terapan & Regresi",
+      "Ekonomi Moneter & Kebijakan Fiskal",
+      "Ekonomi Pembangunan & Perdagangan Internasional",
+      "Ekonomi Publik & Regulasi"
+    ],
+    "typical_subjects_en": [
+      "Intermediate Micro & Macroeconomics",
+      "Applied Econometrics & Regression",
+      "Monetary Economics & Fiscal Policy",
+      "Development & International Trade Economics",
+      "Public Economics & Regulation"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "ICE",
+    "matched_mbti": [
+      "INTJ",
+      "ENTJ",
+      "INTP",
+      "ESTJ"
+    ],
+    "matched_professions_slugs": [
+      "financial-analyst",
+      "research-scientist"
+    ]
+  },
+  {
+    "id": "m-bisnis-internasional",
+    "slug": "bisnis-internasional",
+    "cip_code": "52.1101",
+    "name_id": "Bisnis Internasional & Ekspor-Impor",
+    "name_en": "International Business & Global Trade",
+    "category": "Soshum",
+    "description_id": "Strategi penetrasi pasar luar negeri, kepatuhan bea cukai ekspor-impor, manajemen risiko nilai tukar valas, dan etika negosiasi multikultural.",
+    "description_en": "Foreign market entry strategies, customs compliance, foreign exchange risk hedging, and multicultural business negotiation frameworks.",
+    "typical_subjects_id": [
+      "Strategi Perdagangan & Bisnis Global",
+      "Hukum & Prosedur Ekspor Impor",
+      "Manajemen Keuangan Multinasional",
+      "Pemasaran Global Lintas Budaya",
+      "Negosiasi Bisnis Internasional"
+    ],
+    "typical_subjects_en": [
+      "Global Business Strategy & Trade",
+      "Export-Import Law & Procedures",
+      "Multinational Financial Management",
+      "Cross-Cultural Global Marketing",
+      "International Business Negotiation"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "ECS",
+    "matched_mbti": [
+      "ENTJ",
+      "ENTP",
+      "ESTJ",
+      "ENFJ"
+    ],
+    "matched_professions_slugs": [
+      "business-development-manager",
+      "brand-manager"
+    ]
+  },
+  {
+    "id": "m-manajemen-logistik",
+    "slug": "manajemen-logistik",
+    "cip_code": "52.0203",
+    "name_id": "Manajemen Logistik & Rantai Pasok Global",
+    "name_en": "Logistics & Global Supply Chain Management",
+    "category": "Soshum",
+    "description_id": "Manajemen pergudangan otomatis, jaringan rute distribusi transportasi darat-laut-udara, pengelolaan inventaris just-in-time, dan logistik e-commerce.",
+    "description_en": "Automated warehouse management, multi-modal transport route planning, just-in-time inventory control, and omni-channel e-commerce fulfillment.",
+    "typical_subjects_id": [
+      "Manajemen Pengadaan (Procurement)",
+      "Sistem Pergudangan & Inventaris",
+      "Manajemen Transportasi & Distribusi",
+      "Supply Chain Analytics",
+      "Logistik Pelabuhan & Multimoda"
+    ],
+    "typical_subjects_en": [
+      "Procurement Management",
+      "Warehousing & Inventory Systems",
+      "Transportation & Distribution Management",
+      "Supply Chain Analytics",
+      "Port & Multimodal Logistics"
+    ],
+    "min_education_level": "S1 / D4",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "ECS",
+    "matched_mbti": [
+      "ESTJ",
+      "ISTJ",
+      "ENTJ",
+      "INTJ"
+    ],
+    "matched_professions_slugs": [
+      "business-development-manager",
+      "product-manager"
+    ]
+  },
+  {
+    "id": "m-ilmu-perpustakaan",
+    "slug": "ilmu-perpustakaan",
+    "cip_code": "25.0101",
+    "name_id": "Ilmu Informasi & Manajemen Arsip Digital",
+    "name_en": "Library & Digital Archival Information Science",
+    "category": "Soshum",
+    "description_id": "Klasifikasi taksonomi metadata (DDC/LCC), preservasi arsip dokumen digital, manajemen repositori institusi, dan literasi pencarian informasi ilmiah.",
+    "description_en": "Metadata taxonomy classification (DDC/LCC), preservation of digital archives, institutional repositories, and advanced scholarly information retrieval.",
+    "typical_subjects_id": [
+      "Organisasi Informasi & Katalogisasi",
+      "Preservasi & Konservasi Dokumen Digital",
+      "Sistem Temu Kembali Informasi (Search)",
+      "Manajemen Repositori & Basis Data Terbuka",
+      "Literasi Informasi & Hak Cipta"
+    ],
+    "typical_subjects_en": [
+      "Information Organization & Cataloging",
+      "Digital Document Preservation",
+      "Information Retrieval Systems",
+      "Repository & Open Access Management",
+      "Information Literacy & Copyright"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "Medium",
+    "riasec_code": "CSI",
+    "matched_mbti": [
+      "ISTJ",
+      "INFJ",
+      "INTJ",
+      "ISFJ"
+    ],
+    "matched_professions_slugs": [
+      "digital-archivist-librarian"
+    ]
+  },
+  {
+    "id": "m-sastra-inggris",
+    "slug": "sastra-inggris",
+    "cip_code": "23.0101",
+    "name_id": "Sastra Inggris & Komunikasi Global",
+    "name_en": "English Literature & Global Linguistics",
+    "category": "Soshum",
+    "description_id": "Analisis wacana linguistik kritis, teori sastra komparatif, penulisan narasi kreatif berbahasa Inggris, penerjemahan profesional, dan lokalisasi konten.",
+    "description_en": "Critical linguistic discourse analysis, comparative literary theory, creative narrative writing, professional translation, and content localization.",
+    "typical_subjects_id": [
+      "Linguistik Struktural & Fonologi",
+      "Analisis Wacana Kritis (Discourse)",
+      "Kritik Sastra & Kajian Budaya",
+      "Penerjemahan Teks & Subtitling",
+      "Penulisan Kreatif & Copywriting"
+    ],
+    "typical_subjects_en": [
+      "Structural Linguistics & Phonology",
+      "Critical Discourse Analysis",
+      "Literary Criticism & Cultural Studies",
+      "Professional Translation & Subtitling",
+      "Creative Writing & Copywriting"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "Medium",
+    "riasec_code": "ASI",
+    "matched_mbti": [
+      "INFP",
+      "INFJ",
+      "ENFP",
+      "ENTP"
+    ],
+    "matched_professions_slugs": [
+      "copywriter",
+      "social-media-manager"
+    ]
+  },
+  {
+    "id": "m-seni-rupa-murni",
+    "slug": "seni-rupa-murni",
+    "cip_code": "50.0701",
+    "name_id": "Seni Rupa Murni & Kurasi Pameran",
+    "name_en": "Fine Arts, Painting & Curatorial Studies",
+    "category": "Seni",
+    "description_id": "Eksplorasi artistik seni lukis, seni patung 3D, seni instalasi konseptual, estetika seni kontemporer, dan tata kelola kurasi galeri seni.",
+    "description_en": "Artistic explorations in painting, sculpture, conceptual installations, contemporary art aesthetics, and art gallery curatorial management.",
+    "typical_subjects_id": [
+      "Studio Seni Lukis & Gambar Sketsa",
+      "Seni Patung & Konstruksi 3D",
+      "Sejarah & Filsafat Estetika Seni",
+      "Kritik Seni & Manajemen Pameran (Kurasi)",
+      "Seni Instalasi & Intermedia"
+    ],
+    "typical_subjects_en": [
+      "Painting Studio & Drawing",
+      "Sculpture & 3D Construction",
+      "History & Aesthetics Philosophy",
+      "Art Criticism & Exhibition Curating",
+      "Installation Art & Intermedia"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "Medium",
+    "riasec_code": "AES",
+    "matched_mbti": [
+      "ISFP",
+      "INFP",
+      "INTP",
+      "INFJ"
+    ],
+    "matched_professions_slugs": [
+      "graphic-designer",
+      "commercial-photographer"
+    ]
+  },
+  {
+    "id": "m-seni-musik",
+    "slug": "seni-musik",
+    "cip_code": "50.0901",
+    "name_id": "Seni Musik & Rekayasa Audio",
+    "name_en": "Music Performance & Audio Engineering",
+    "category": "Seni",
+    "description_id": "Teori harmoni musik barat, aransemen orkestrasi, penguasaan instrumen virtuoso, perekaman multi-track DAW, dan tata mixing audio profesional.",
+    "description_en": "Western harmony theory, orchestral arrangements, instrument virtuosity, multi-track DAW recording, and professional audio mixing & mastering.",
+    "typical_subjects_id": [
+      "Harmoni Musik & Solfeggio",
+      "Komposisi & Aransemen Musik",
+      "Produksi Audio Digital (DAW)",
+      "Teknik Mixing & Mastering Audio",
+      "Manajemen Bisnis Musik & Hak Cipta"
+    ],
+    "typical_subjects_en": [
+      "Harmony Theory & Solfege",
+      "Music Composition & Arrangement",
+      "Digital Audio Production (DAW)",
+      "Audio Mixing & Mastering",
+      "Music Business & Royalties"
+    ],
+    "min_education_level": "S1",
+    "avg_duration_years": 4,
+    "career_prospect": "Medium",
+    "riasec_code": "AES",
+    "matched_mbti": [
+      "ISFP",
+      "INFP",
+      "ESFP",
+      "ENTP"
+    ],
+    "matched_professions_slugs": [
+      "video-editor",
+      "animator-3d-artist"
+    ]
+  },
+  {
+    "id": "m-desain-game-interaksi",
+    "slug": "desain-game-interaksi",
+    "cip_code": "50.0411",
+    "name_id": "Desain Game & Interaksi Pengguna (Game UI/UX)",
+    "name_en": "Game Design & Interactive Experience",
+    "category": "Seni",
+    "description_id": "Penciptaan game loop yang memikat, desain level interaktif, antarmuka game diegetik (UI/UX), penulisan narasi lore, dan psikologi keterikatan pemain.",
+    "description_en": "Crafting engaging core game loops, level design, diegetic gaming UI/UX, immersive narrative lore, and player engagement psychology.",
+    "typical_subjects_id": [
+      "Prinsip Desain Game & Game Loop",
+      "Desain Level & Puzzle Interaktif",
+      "Game UI/UX & Antarmuka Spasial",
+      "Storytelling & Penulisan Lore Game",
+      "Prototyping Game Cepat"
+    ],
+    "typical_subjects_en": [
+      "Game Design & Core Loops",
+      "Interactive Level & Puzzle Design",
+      "Spatial Game UI/UX",
+      "Game Lore Storytelling",
+      "Rapid Game Prototyping"
+    ],
+    "min_education_level": "S1 / D4",
+    "avg_duration_years": 4,
+    "career_prospect": "High",
+    "riasec_code": "AIE",
+    "matched_mbti": [
+      "INTP",
+      "INTJ",
+      "ENTP",
+      "ENFP"
+    ],
+    "matched_professions_slugs": [
+      "game-designer",
+      "ui-ux-designer",
+      "animator-3d-artist"
+    ]
   }
 ]

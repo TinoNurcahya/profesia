@@ -84,9 +84,12 @@ Komponen `ShareCard` yang memungkinkan pengguna mengekspor kartu visual ringkasa
 - Halaman eksplorasi 12 Zodiak (`/zodiac` dan `/zodiac/[slug]`).
 - Visualisasi elemen Zodiak (Api, Tanah, Udara, Air), tanggal, dan rekomendasi profesi yang paling cocok dengan energi Zodiak tersebut.
 
-### F-12: Modul Jurusan Kuliah (Majors & Study Programs Module)
-- Katalog jurusan kuliah (Saintek, Soshum, Seni) lengkap dengan mata kuliah inti, jenjang pendidikan, durasi, prospek karir, dan relasi *many-to-many* ke katalog profesi (`major_professions`).
-- Pemetaan tingkat kecocokan jurusan terhadap 16 tipe MBTI (`major_mbti_fit`) dan 6 dimensi RIASEC (`major_riasec_fit`).
+### F-12: Modul Jurusan Kuliah (O*NET CIP Majors & Study Programs Module)
+- Katalog 64 jurusan kuliah terstandarisasi taksonomi resmi **O*NET CIP (*Classification of Instructional Programs*)** mencakup 3 rumpun keilmuan: Saintek, Soshum, dan Seni & Desain.
+- Informasi mendalam per jurusan: kode resmi CIP (misal `11.0701`), Holland Code RIASEC (`riasec_code`), silabus 5 mata kuliah inti bilingual, jenjang (S1/D4/Profesi), estimasi durasi, dan prospek karir.
+- Paginasi kompak 12 kartu per halaman dengan penomoran elipsis (`1, 2, 3 ... 6`), sinkronisasi URL (`?page=N`), auto-scroll ke atas grid, dan status bar jumlah hasil.
+- Penyelarasan warna identitas MBTI 4 kelompok peran (Analis ungu, Diplomat hijau zamrud, Sentinel biru langit, Penjelajah kuning amber) sesuai standar `DESIGN.md`.
+- Relasi dua arah (*bidirectional cross-link*) dengan 54 profesi O*NET terdaftar (`matched_professions_slugs`).
 
 ### F-13: Integrasi Psikometri RIASEC (Holland Code Model)
 - Kuis vokasional terpisah (36 pernyataan Likert Scale) mengukur 6 dimensi: *Realistic*, *Investigative*, *Artistic*, *Social*, *Enterprising*, *Conventional*.

@@ -308,7 +308,12 @@
     "resetFilter": "Reset Filter",
     "saintek": "Science & Technology",
     "soshum": "Social Sciences & Humanities",
-    "seni": "Art & Design"
+    "seni": "Art & Design",
+    "sortDefault": "Sort: Default",
+    "sortNameAsc": "Name: A - Z",
+    "sortProspectDesc": "Highest Prospects",
+    "sortDurationAsc": "Shortest Duration",
+    "clearFilters": "Reset Filters"
   },
   "Zodiac": {
     "eyebrow": "Reflective exploration",
@@ -702,5 +707,30 @@
     "dataTitle": "Data controls",
     "exportAction": "Export my data",
     "dataDescription": "Assessment and recommendation data is retained until you delete your account data. Deletion remains available through secure account controls."
+  },
+  "Majors": {
+    "catalogTitle": "University Majors & Programs",
+    "catalogSubtitle": "Explore higher education academic disciplines anchored on O*NET CIP taxonomy, MBTI personality alignment, and forward-looking career prospects.",
+    "searchPlaceholder": "Search majors, subjects, or CIP codes...",
+    "allCategories": "All Clusters",
+    "saintek": "Science & Technology (Saintek)",
+    "soshum": "Social & Humanities (Soshum)",
+    "seni": "Arts & Design",
+    "allMbti": "All MBTI Types",
+    "sortDefault": "Default Order",
+    "sortNameAsc": "Major Name (A–Z)",
+    "sortProspectDesc": "Highest Prospects",
+    "sortDurationAsc": "Shortest Duration",
+    "resetFilter": "Reset Filters",
+    "notFound": "No majors found",
+    "notFoundDescription": "No academic programs matched your current filter criteria and search query.",
+    "duration": "Years",
+    "detail": "View Curriculum & Prospects",
+    "prospectLabel": "Career Outlook",
+    "matchedMbti": "Compatible MBTI Types",
+    "paginationPrev": "Previous",
+    "paginationNext": "Next",
+    "paginationPageNumber": "Page",
+    "showingCount": "Showing {start}–{end} of {total} majors"
   }
 }

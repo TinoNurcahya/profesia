@@ -308,7 +308,12 @@
     "resetFilter": "Reset Filter",
     "saintek": "Saintek (Sains & Teknologi)",
     "soshum": "Soshum (Sosial & Humaniora)",
-    "seni": "Seni & Desain"
+    "seni": "Seni & Desain",
+    "sortDefault": "Urutkan: Default",
+    "sortNameAsc": "Nama: A - Z",
+    "sortProspectDesc": "Prospek Tertinggi",
+    "sortDurationAsc": "Durasi Tercepat",
+    "clearFilters": "Reset Filter"
   },
   "Zodiac": {
     "eyebrow": "Eksplorasi reflektif",
@@ -702,5 +707,30 @@
     "dataTitle": "Kontrol data",
     "exportAction": "Ekspor data saya",
     "dataDescription": "Data asesmen dan rekomendasi disimpan hingga kamu menghapus data akun. Penghapusan tersedia melalui kontrol akun yang aman."
+  },
+  "Majors": {
+    "catalogTitle": "Katalog Jurusan & Program Studi",
+    "catalogSubtitle": "Eksplorasi rumpun keilmuan perguruan tinggi berbasis taksonomi O*NET CIP, keselarasan kepribadian MBTI, dan proyeksi karier masa depan.",
+    "searchPlaceholder": "Cari nama jurusan, mata kuliah, atau kode CIP...",
+    "allCategories": "Semua Kelompok",
+    "saintek": "Sains & Teknologi (Saintek)",
+    "soshum": "Sosial & Humaniora (Soshum)",
+    "seni": "Seni & Desain",
+    "allMbti": "Semua Tipe MBTI",
+    "sortDefault": "Urutan Standar",
+    "sortNameAsc": "Nama Jurusan (A–Z)",
+    "sortProspectDesc": "Prospek Tertinggi",
+    "sortDurationAsc": "Durasi Tercepat",
+    "resetFilter": "Reset Filter",
+    "notFound": "Jurusan tidak ditemukan",
+    "notFoundDescription": "Tidak ada program studi yang cocok dengan kombinasi filter dan kata kunci pencarian Anda.",
+    "duration": "Tahun",
+    "detail": "Lihat Kurikulum & Prospek",
+    "prospectLabel": "Prospek Karier",
+    "matchedMbti": "Kesesuaian Tipe MBTI",
+    "paginationPrev": "Sebelumnya",
+    "paginationNext": "Selanjutnya",
+    "paginationPageNumber": "Halaman",
+    "showingCount": "Menampilkan {start}–{end} dari {total} jurusan"
   }
 }

@@ -89,8 +89,17 @@ Modul astrologi karir mutakhir (`/zodiac`) yang dilengkapi:
 - **Constellation Observatory Modal**: Modal planetarium layar penuh untuk mengamati rasi bintang dalam skala besar, dilengkapi toggle siluet arketipe mitologis, cincin koordinat kubah langit, serta inspektur bintang interaktif untuk melihat peran anatomis setiap bintang.
 - **Dossier Blueprint Karir**: Rekomendasi profesi terpilih yang selaras dengan kecenderungan alami dan energi masing-masing zodiak.
 
-### 13. Modul Jurusan Kuliah (Majors & Study Programs Explorer)
-Halaman katalog jurusan kuliah (`/majors`) lengkap dengan mata kuliah inti, durasi, jenjang pendidikan, prospek industri, serta relasi *cross-link* ke katalog profesi yang relevan dan tingkat kecocokan MBTI/RIASEC.
+### 13. Modul Jurusan Kuliah (O*NET CIP Majors & Study Programs Explorer)
+Halaman katalog jurusan kuliah (`/majors`) berstandar global dengan klasifikasi resmi **O*NET CIP (*Classification of Instructional Programs*)** dari U.S. National Center for Education Statistics (NCES):
+- **Katalog 64 Program Studi Komprehensif**: Terbagi rapi ke dalam 3 rumpun keilmuan perguruan tinggi Indonesia:
+  - **Saintek (Sains & Teknologi)**: Informatika, Rekayasa AI, Sains Data, Keamanan Siber, Blockchain, Teknik Sipil, Mesin, Elektro, Biomedis, Kedokteran, Farmasi, Keperawatan, Gizi, Bioteknologi, Aktuaria, dll.
+  - **Soshum (Sosial & Humaniora)**: Bisnis Internasional, Manajemen, Akuntansi, Keuangan, Pemasaran Digital, SDM, Psikologi, Hukum, Komunikasi, Hubungan Internasional, Hubungan Masyarakat (PR), Pendidikan Guru, dll.
+  - **Seni & Desain**: Desain Komunikasi Visual (DKV), Desain Produk, Desain Interior, Animasi 3D & VFX, Sinematografi, Fotografi Komersial, Desain Mode, Desain Game UI/UX, Seni Musik, dll.
+- **Paginasi Kompak 12 Kartu per Halaman**: Navigasi halaman ringan dan cepat dengan penomoran elipsis (`1, 2, 3 ... 6`), sinkronisasi URL (`?page=2`), status bar jumlah hasil (*"Menampilkan 1–12 dari 64 jurusan"*), serta auto-scroll kembali ke atas grid.
+- **Provenance Akademik & Minat Vokasional**: Setiap kartu jurusan menampilkan badge kode resmi **CIP Code** (misal `CIP 11.0701`) dan badge **Holland RIASEC Code** (misal `IRC`).
+- **Penyelarasan Warna Identitas MBTI**: Chip MBTI pada kartu dan halaman detail secara dinamis mengikuti palet resmi 4 kelompok peran (Analis ungu, Diplomat hijau zamrud, Sentinel biru langit, Penjelajah kuning amber) sesuai standar `DESIGN.md`.
+- **Relasi Dua Arah (Bidirectional Cross-link)**: Setiap jurusan terhubung langsung dengan profesi O*NET yang relevan (`matched_professions_slugs`) dan sebaliknya.
+- **Halaman Detail Jurusan (`/majors/[slug]`)**: Menampilkan silabus 5 mata kuliah inti bilingual (ID/EN), jenjang pendidikan (S1/D4/Profesi), estimasi durasi studi, dan kartu profesi terkait yang dapat langsung dieksplorasi.
 
 ### 14. Integrasi Psikometri RIASEC (Holland Code 6 Dimensions)
 Modul tes psikometri vokasional terpisah (36 pernyataan Likert) yang mengukur 6 dimensi Holland (*Realistic, Investigative, Artistic, Social, Enterprising, Conventional*) untuk kalkulasi rekomendasi karir yang presisi.
@@ -165,30 +174,33 @@ npm run start
 
 ### 4. Manajemen Data & Pipeline Otomasi O*NET
 
-Profesia dilengkapi pipeline CLI otomatis untuk memvalidasi, menstandarisasi, dan memperbarui data profesi O*NET:
+Profesia dilengkapi pipeline CLI otomatis untuk memvalidasi, menstandarisasi, dan memperbarui data profesi O*NET serta program studi perguruan tinggi O*NET CIP:
 
 ```bash
-# Menjalankan standarisasi & update data/professions-seed.json + migrasi SQL
+# 1. Menjalankan standarisasi & update data/professions-seed.json + migrasi SQL profesi
 node scripts/import-onet-professions.mjs
 
-# Mengimpor dataset kustom dari file eksternal
+# 2. Menjalankan standarisasi & update 64 jurusan data/majors.json + migrasi SQL 0009_majors_schema.sql
+node scripts/import-onet-majors.mjs
+
+# 3. Mengimpor dataset kustom dari file eksternal
 node scripts/import-onet-professions.mjs --input=path/to/custom-professions.json
 
-# Dry-run untuk simulasi validasi tanpa menulis file
+# 4. Dry-run untuk simulasi validasi tanpa menulis file
 node scripts/import-onet-professions.mjs --dry-run
 
-# Menjalankan uji integritas domain & skema data
+# 5. Menjalankan uji integritas domain & skema data
 node scripts/domain-tests.mjs
 
-# Memeriksa keselarasan kamus i18n bilingual (ID / EN)
+# 6. Memeriksa keselarasan kamus i18n bilingual (ID / EN)
 node scripts/check-i18n.mjs
 ```
 
 **Alur Kerja Otomasi:**
-1. **Validasi Skema**: Memastikan setiap profesi memiliki kode O*NET-SOC, kode RIASEC valid (R/I/A/S/E/C), serta relasi MBTI yang presisi.
+1. **Validasi Skema**: Memastikan setiap profesi dan jurusan memiliki kode klasifikasi baku (O*NET-SOC & O*NET-CIP), kode Holland RIASEC valid (R/I/A/S/E/C), serta relasi MBTI yang presisi.
 2. **Auto-Backup**: Membuat salinan cadangan instan ke `data/professions-seed.json.backup.json`.
-3. **Pembaruan JSON Lokal**: Menyimpan dataset terverifikasi ke `data/professions-seed.json` untuk rendering offline/lokal.
-4. **Auto-Generate SQL Migration**: Menghasilkan script SQL `supabase/migrations/0008_onet_seed.sql` berisi perintah `insert ... on conflict (slug) do nothing` yang siap disinkronkan ke Supabase PostgreSQL.
+3. **Pembaruan JSON Lokal**: Menyimpan dataset terverifikasi ke `data/professions-seed.json` dan `data/majors.json` untuk rendering offline/lokal (*zero-cost resilience*).
+4. **Auto-Generate SQL Migration**: Menghasilkan script SQL `supabase/migrations/0008_onet_seed.sql` dan `supabase/migrations/0009_majors_schema.sql` lengkap dengan Row-Level Security (RLS) dan query upsert yang siap disinkronkan ke Supabase PostgreSQL.
 
 ---
 
@@ -214,7 +226,7 @@ profesia/
 │       │   └── result/               # Halaman Hasil & Kode Holland
 │       ├── zodiac/                   # Landing 12 Zodiak
 │       │   └── [slug]/               # Detail Zodiak & Profesi Cocok
-│       ├── majors/                   # Katalog Jurusan Kuliah
+│       ├── majors/                   # Katalog 64 Jurusan Kuliah O*NET CIP (Paginasi 12 kartu)
 │       │   └── [slug]/               # Detail Jurusan & Cross-Link Profesi
 │       ├── profile/                  # Dashboard Profil User & Bookmark
 │       ├── admin/                    # Admin Panel CMS (protected is_admin())
@@ -223,7 +235,8 @@ profesia/
 │       └── page.tsx                  # Landing Page utama
 ├── components/
 │   ├── layout/                       # Navbar, Footer, LanguageSwitcher, ThemeScript
-│   ├── motion/                       # DimensionCanvas3D, KineticSplitText, ScrollTextReveal, TextReveal
+│   ├── motion/                       # DimensionCanvas3D, KineticSplitText, ScrollProgressBar, TextReveal
+│   ├── major/                        # MajorCard (glassmorphic, CIP badge, RIASEC & MBTI role colors)
 │   ├── profession/                   # ProfessionCard, FilterBar, PractitionerSpotlightCard, SalaryChart, CareerPathTimeline
 │   ├── mbti/                         # ShareCard, DimensionChart, QuizCard, ProgressBar, ResultCard, StoryChapters
 │   ├── riasec/                       # HollandHexagonRadar, HollandHexagonStoryboard, HollandSynergyExplorer
@@ -231,13 +244,15 @@ profesia/
 │   └── ui/                           # Button, Modal, Skeleton, Toast, Badge primitives
 ├── scripts/                          # Otomasi & Pipeline Data
 │   ├── import-onet-professions.mjs   # O*NET taxonomy importer, validator & SQL migration generator
+│   ├── import-onet-majors.mjs        # O*NET CIP 64 majors importer & SQL migration generator
 │   ├── generate-profession-seed.mjs  # SQL seed generator fallback
 │   ├── domain-tests.mjs              # Integrity & domain test runner
 │   └── check-i18n.mjs                # Bilingual dictionary parity validator
 ├── services/                         # Data access and business logic
 │   ├── professions.ts                # Profession queries, hybrid Supabase/Seed & filters
 │   ├── riasecService.ts              # RIASEC scoring & Holland Code
-│   ├── majorService.ts               # Majors catalog queries
+│   ├── majorService.ts               # Majors catalog queries (Supabase + fallback)
+│   ├── majorFilter.ts                # Client-safe pure major filtering logic
 │   ├── recommendationService.ts      # Layer 1 deterministic scoring
 │   └── aiService.ts                  # Layer 2 Gemini LLM personalizer
 ├── data/                             # Static seed JSON & Constellations (fallback & dev)
@@ -248,14 +263,15 @@ profesia/
 │   ├── mbti-types.json
 │   ├── riasec-questions.json
 │   ├── zodiacs.json
-│   └── majors.json
+│   └── majors.json                   # Master 64 O*NET CIP standardized majors
 ├── messages/                         # Translation files (id.json, en.json)
 ├── lib/
+│   ├── mbti.ts                       # Unified MBTI role group palettes & badge helpers
 │   └── supabase/                     # Supabase server and middleware clients
 ├── app/api/auth/                     # Login, register, logout API routes
 ├── supabase/
 │   ├── schema.sql                    # PostgreSQL schema, RLS, dan auth trigger
-│   └── migrations/                   # Database migrations (0001 - 0008_onet_seed.sql)
+│   └── migrations/                   # Database migrations (0001 - 0009_majors_schema.sql)
 ├── i18n/                             # next-intl request handler
 ├── PRD.md                            # Technical PRD & SQL Schema Spec
 └── README.md                         # Developer Guide & Feature Info (file ini)

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
@@ -57,6 +57,7 @@ export default function MbtiCharacterGrid({
   labels,
 }: MbtiCharacterGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const activeRoleRef = useRef<number>(0);
   const triggerRef = useRef<ScrollTrigger | null>(null);
   const [activeRoleIndex, setActiveRoleIndex] = useState<number>(0);
@@ -213,12 +214,32 @@ export default function MbtiCharacterGrid({
   );
 
 
+  // Reset mobile carousel scroll when changing active role group
+  useEffect(() => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollTo({ left: 0, behavior: "instant" });
+    }
+    setActiveMobileCardIndex(0);
+  }, [activeRoleIndex]);
+
   const handleMobileScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget;
-    const cardWidth = 280;
+    if (!container || !container.firstElementChild) return;
+    const cardWidth = container.firstElementChild.getBoundingClientRect().width + 12;
     const scrollPos = container.scrollLeft;
-    const idx = Math.min(3, Math.round(scrollPos / cardWidth));
+    const idx = Math.min(3, Math.max(0, Math.round(scrollPos / cardWidth)));
     setActiveMobileCardIndex(idx);
+  };
+
+  const scrollToCard = (index: number) => {
+    if (carouselRef.current && carouselRef.current.firstElementChild) {
+      const cardWidth = carouselRef.current.firstElementChild.getBoundingClientRect().width + 12;
+      carouselRef.current.scrollTo({
+        left: index * cardWidth,
+        behavior: "smooth",
+      });
+      setActiveMobileCardIndex(index);
+    }
   };
 
   return (
@@ -256,13 +277,13 @@ export default function MbtiCharacterGrid({
         />
       </div>
 
-      <div className="page-shell py-8 sm:py-12 w-full max-w-7xl mx-auto flex flex-col justify-center">
+      <div className="page-shell py-8 sm:py-12 w-full max-w-7xl mx-auto flex flex-col justify-center min-w-0">
         {/* Main Split Stage Layout: Left (Role Identity) & Right (Character Cards) */}
-        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12 items-center">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12 items-center w-full min-w-0">
           
           {/* Left Column: Role Details & Strengths */}
-          <div className="lg:col-span-4 space-y-6">
-            <div className="space-y-3">
+          <div className="lg:col-span-4 space-y-5 sm:space-y-6 w-full min-w-0">
+            <div className="space-y-2 sm:space-y-3">
               <span
                 className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase border ${currentTheme.badge}`}
               >
@@ -275,19 +296,19 @@ export default function MbtiCharacterGrid({
               </h3>
             </div>
 
-            <p className="text-[var(--color-muted)] text-base sm:text-lg leading-relaxed text-pretty">
+            <p className="text-[var(--color-muted)] text-sm sm:text-base lg:text-lg leading-relaxed text-pretty break-words">
               {currentTheme.philosophy}
             </p>
 
-            <div className="pt-2">
-              <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--color-muted)] mb-3">
+            <div className="pt-1 sm:pt-2">
+              <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--color-muted)] mb-2.5 sm:mb-3">
                 {labels.strengthsTitle || "Karakteristik Kunci"}
               </p>
               <div className="flex flex-wrap gap-2">
                 {currentTheme.traits.map((trait) => (
                   <span
                     key={trait}
-                    className="px-3 py-1.5 rounded-lg text-xs font-medium bg-[var(--color-surface)] border border-[var(--color-line)] text-[var(--color-ink)] shadow-sm"
+                    className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-medium bg-[var(--color-surface)] border border-[var(--color-line)] text-[var(--color-ink)] shadow-sm"
                   >
                     {trait}
                   </span>
@@ -297,7 +318,7 @@ export default function MbtiCharacterGrid({
           </div>
 
           {/* Right Column: 4 Types in Active Role */}
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-8 w-full min-w-0">
             
             {/* Desktop View: 2x2 Grid with 3D Tilt */}
             <div className="hidden sm:grid sm:grid-cols-2 gap-4">
@@ -373,16 +394,21 @@ export default function MbtiCharacterGrid({
             </div>
 
             {/* Mobile View: Horizontal Snap Swipe Carousel */}
-            <div className="sm:hidden space-y-4">
+            <div className="sm:hidden w-full min-w-0 space-y-3">
               <div
+                ref={carouselRef}
                 onScroll={handleMobileScroll}
-                className="flex gap-3 overflow-x-auto snap-x snap-mandatory py-2 px-1 no-scrollbar"
-                style={{ scrollbarWidth: "none" }}
+                className="flex gap-3.5 overflow-x-auto snap-x snap-mandatory py-2 px-4 -mx-4 scroll-smooth no-scrollbar"
+                style={{
+                  scrollbarWidth: "none",
+                  WebkitOverflowScrolling: "touch",
+                  touchAction: "pan-x",
+                }}
               >
                 {typesByRole[activeRoleIndex].types.map((type) => (
                   <div
                     key={type.code}
-                    className={`w-[270px] shrink-0 snap-center p-5 rounded-2xl bg-[var(--color-surface)]/90 backdrop-blur-md border ${currentTheme.cardBorder} flex flex-col justify-between`}
+                    className={`w-[82vw] max-w-[295px] shrink-0 snap-start p-5 rounded-2xl bg-[var(--color-surface)]/95 backdrop-blur-md border ${currentTheme.cardBorder} flex flex-col justify-between shadow-md transition-all`}
                   >
                     <div>
                       <div className="flex items-start justify-between gap-3">
@@ -419,7 +445,7 @@ export default function MbtiCharacterGrid({
                     <div className="mt-4 pt-3 border-t border-[var(--color-line)] flex items-center justify-between text-xs font-semibold">
                       <Link
                         href={`/${locale}/mbti/result/${type.code}`}
-                        className="inline-flex items-center gap-1 text-[var(--color-brand)]"
+                        className="inline-flex items-center gap-1 text-[var(--color-brand)] font-semibold"
                       >
                         <span>{labels.viewProfile}</span>
                         <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
@@ -427,7 +453,7 @@ export default function MbtiCharacterGrid({
 
                       <Link
                         href={`/${locale}/professions?mbti=${type.code}`}
-                        className="inline-flex items-center gap-1 text-[var(--color-muted)]"
+                        className="inline-flex items-center gap-1 text-[var(--color-muted)] hover:text-[var(--color-ink)]"
                       >
                         <span>{labels.matchedCareers}</span>
                         <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
@@ -438,15 +464,19 @@ export default function MbtiCharacterGrid({
               </div>
 
               {/* Mobile Carousel Pagination Dots */}
-              <div className="flex justify-center gap-1.5 pt-1">
-                {typesByRole[activeRoleIndex].types.map((_, idx) => (
-                  <div
-                    key={idx}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
+              <div className="flex justify-center items-center gap-2 pt-1">
+                {typesByRole[activeRoleIndex].types.map((type, idx) => (
+                  <button
+                    key={type.code}
+                    type="button"
+                    onClick={() => scrollToCard(idx)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
                       activeMobileCardIndex === idx
-                        ? "w-5 bg-[var(--color-brand)]"
-                        : "w-1.5 bg-[var(--color-line)]"
+                        ? "w-6 bg-[var(--color-brand)] shadow-sm shadow-[var(--color-brand)]/40"
+                        : "w-2 bg-[var(--color-line)]/60 hover:bg-[var(--color-line)]"
                     }`}
+                    aria-label={`Kartu ${type.code}`}
+                    aria-current={activeMobileCardIndex === idx ? "true" : undefined}
                   />
                 ))}
               </div>
